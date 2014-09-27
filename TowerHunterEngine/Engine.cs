@@ -1,6 +1,4 @@
-﻿//#define DEBUG
-
-#region Using Statements
+﻿#region Using Statements
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
@@ -16,9 +14,18 @@ namespace TowerHunterEngine
     public class Engine : Game
     {
         private readonly Point GAMERES = new Point(1024, 600);
-        private readonly Point FIELDSIZE = new Point(10, 5);
+        /*
+         * Field sizes affect framerates
+         * 40, 20 = 10-16 fps
+         * 30, 15 = 30 fps max
+         * 25, 12 = 40 fps max
+         * 20, 10 = 60 fps max
+         * (tested on THOMAS-LAPTOP)
+         * 
+         */
+        private readonly Point FIELDSIZE = new Point(40, 20);
         private const int TOWERS = 4;
-        private const bool FULLSCREEN = true;
+        private const bool FULLSCREEN = false;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -85,11 +92,6 @@ namespace TowerHunterEngine
 
             oldState = newState;
 
-#if DEBUG
-            //frameRate = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
-            //DebugLine[2] = frameRate.ToString();
-#endif
-
             base.Update(gameTime);
         }
 
@@ -98,11 +100,11 @@ namespace TowerHunterEngine
             GraphicsDevice.Clear(Color.White);
 
             spriteBatch.Begin(
-                        SpriteSortMode.Deferred,
-                        BlendState.NonPremultiplied,
-                        SamplerState.PointClamp,
-                        DepthStencilState.Default,
-                        RasterizerState.CullNone);
+                SpriteSortMode.Deferred,
+                BlendState.NonPremultiplied,
+                SamplerState.PointClamp,
+                DepthStencilState.Default,
+                RasterizerState.CullNone);
 
             for (int x = 0; x < playField.Grid.GetLength(0); x++)
             {
@@ -118,7 +120,6 @@ namespace TowerHunterEngine
 #if DEBUG
             spriteBatch.DrawString(font, DebugLine[0] + " v" + DebugLine[1], new Vector2(10, 10), Color.Red);
 #endif
-
             spriteBatch.End();
 
             base.Draw(gameTime);
