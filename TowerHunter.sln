@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TowerHunterEngine", "TowerH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecursiveBacktracking", "RecursiveBacktracking\RecursiveBacktracking.csproj", "{8122B8F2-742F-4740-9E71-EB6616285A9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNAContentCompiler", "XNAContentCompiler\XNAContentCompiler.csproj", "{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,16 @@ Global
 		{8122B8F2-742F-4740-9E71-EB6616285A9D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{8122B8F2-742F-4740-9E71-EB6616285A9D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{8122B8F2-742F-4740-9E71-EB6616285A9D}.Release|x86.ActiveCfg = Release|Any CPU
+		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Debug|x86.ActiveCfg = Debug|x86
+		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Debug|x86.Build.0 = Debug|x86
+		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Release|Any CPU.ActiveCfg = Release|x86
+		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Release|Mixed Platforms.Build.0 = Release|x86
+		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Release|x86.ActiveCfg = Release|x86
+		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
