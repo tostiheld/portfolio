@@ -1,10 +1,14 @@
-﻿#region Using Statements
+﻿//#define DEBUG
+
+#region Using Statements
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+
+using System.Reflection;
 #endregion
 
 namespace TowerHunterEngine
@@ -24,6 +28,7 @@ namespace TowerHunterEngine
         private Playfield.Field playField;
 
         float frameRate;
+        private List<string> DebugLine;
         SpriteFont font;
 
         public Engine()
@@ -34,6 +39,11 @@ namespace TowerHunterEngine
             graphics.PreferredBackBufferHeight = GAMERES.Y;
             graphics.PreferredBackBufferWidth = GAMERES.X;
             graphics.ApplyChanges();
+
+#if DEBUG
+            Components.Add(new Utils.FrameCounter(this));
+#endif
+
             Content.RootDirectory = "Content";
         }
 
@@ -41,13 +51,19 @@ namespace TowerHunterEngine
         {
             SetupPlayfield(GAMERES, FIELDSIZE, TOWERS, ref playField);
 
+#if DEBUG
+            DebugLine = new List<string>(2);
+            DebugLine.Add("DEBUGGING");
+            DebugLine.Add(Assembly.GetExecutingAssembly().GetName().Version.ToString());
+#endif
+
             base.Initialize();
         }
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //font = Content.Load<SpriteFont>("default")
+            font = Content.Load<SpriteFont>("font");
         }
         protected override void UnloadContent()
         {
@@ -69,7 +85,10 @@ namespace TowerHunterEngine
 
             oldState = newState;
 
-            frameRate = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
+#if DEBUG
+            //frameRate = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //DebugLine[2] = frameRate.ToString();
+#endif
 
             base.Update(gameTime);
         }
@@ -96,7 +115,9 @@ namespace TowerHunterEngine
                 }
             }
 
-            //spriteBatch.DrawString(font, frameRate.ToString(), new Point(10, 10), Color.Red);
+#if DEBUG
+            spriteBatch.DrawString(font, DebugLine[0] + " v" + DebugLine[1], new Vector2(10, 10), Color.Red);
+#endif
 
             spriteBatch.End();
 
