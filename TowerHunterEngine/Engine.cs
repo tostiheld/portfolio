@@ -13,8 +13,8 @@ namespace TowerHunterEngine
 {
     public class Engine : Game
     {
-        private readonly Point GAMERES = new Point(1024, 600);
         /*
+         * 
          * Field sizes affect framerates
          * 40, 20 = 10-16 fps
          * 30, 15 = 30 fps max
@@ -23,7 +23,8 @@ namespace TowerHunterEngine
          * (tested on THOMAS-LAPTOP)
          * 
          */
-        private readonly Point FIELDSIZE = new Point(40, 20);
+        private readonly Point GAMERES = new Point(1024, 600);
+        private readonly Point FIELDSIZE = new Point(20, 10);
         private const int TOWERS = 4;
         private const bool FULLSCREEN = false;
 
@@ -34,7 +35,6 @@ namespace TowerHunterEngine
 
         private Playfield.Field playField;
 
-        float frameRate;
         private List<string> DebugLine;
         SpriteFont font;
 

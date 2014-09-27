@@ -19,7 +19,7 @@ namespace TowerHunterEngine.Playfield
 
         public int Value { get; set; }
         public Rectangle Bounds { get; private set; }
-        public SquareType Type { get; private set; }
+        public SquareType Type { get; set; }
         public bool[] Borders { get; set; }
         public Texture2D Texture { get; set; }
 
