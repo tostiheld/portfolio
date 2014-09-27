@@ -23,3 +23,5 @@ C:\Users\Thomas\Dropbox\A15 Game Design\Proftaak\OIS\TowerHunter\TowerHunterEngi
 C:\Users\Thomas\Dropbox\A15 Game Design\Proftaak\OIS\TowerHunter\TowerHunterEngine\obj\x86\Debug\TowerHunterEngine.csprojResolveAssemblyReference.cache
 C:\Users\Thomas\Dropbox\A15 Game Design\Proftaak\OIS\TowerHunter\TowerHunterEngine\obj\x86\Debug\TowerHunterEngine.exe
 C:\Users\Thomas\Dropbox\A15 Game Design\Proftaak\OIS\TowerHunter\TowerHunterEngine\obj\x86\Debug\TowerHunterEngine.pdb
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\obj\x86\Debug\TowerHunterEngine.exe
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\obj\x86\Debug\TowerHunterEngine.pdb

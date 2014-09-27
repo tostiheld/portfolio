@@ -1,14 +1,4 @@
-﻿/*
- *
- * File created by: Thomas Schraven
- * Creation date: 26-09-2014
- * 
- * Last modified by: Thomas Schraven
- * Last modification date: 26-09-2014
- * 
- */
-
-#region Using Statements
+﻿#region Using Statements
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;

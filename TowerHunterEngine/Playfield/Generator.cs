@@ -1,11 +1,5 @@
 ﻿/*
  *
- * File created by: Thomas Schraven
- * Creation date: 27-09-2014
- * 
- * Last modified by: Thomas Schraven
- * Last modification date: 27-09-2014
- * 
  * algorithm: (recursive backtracking)
  * http://weblog.jamisbuck.org/2010/12/27/maze-generation-recursive-backtracking
  * 

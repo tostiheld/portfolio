@@ -1,14 +1,4 @@
-﻿/*
- *
- * File created by: Thomas Schraven
- * Creation date: 27-09-2014
- * 
- * Last modified by: Thomas Schraven
- * Last modification date: 27-09-2014
- * 
- */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
