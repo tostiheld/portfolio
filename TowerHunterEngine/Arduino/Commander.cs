@@ -6,8 +6,18 @@ namespace TowerHunterEngine.Arduino
 {
     public class Commander : IDisposable
     {
+        // recognized commands
+        private enum Command
+        {
+            SetLed,
+            Status
+        }
+
         private SerialTransport Transport;
         private CmdMessenger Messenger;
+        private TowerState receivedState;
+        private TowerState newState;
+        private bool refresh = false;
 
         public Commander(String portname, int baudrate, BoardType boardtype)
         {
@@ -27,39 +37,35 @@ namespace TowerHunterEngine.Arduino
             };
 
             AttachCommandCallBacks();
-            Messenger.NewLineReceived += Messenger_NewLineReceived;
-            Messenger.NewLineSent += Messenger_NewLineSent;
             Messenger.StartListening();
-        }
-
-        private void Messenger_NewLineSent(object sender, NewLineEvent.NewLineArgs e)
-        {
-            // TODO: handle event
-            throw new NotImplementedException();
-        }
-
-        private void Messenger_NewLineReceived(object sender, NewLineEvent.NewLineArgs e)
-        {
-            // TODO: handle event
-            throw new NotImplementedException();
         }
 
         private void AttachCommandCallBacks()
         {
-            // TODO: attach commands to methods
-            throw new NotImplementedException();
+            Messenger.Attach(UnknownCommand);
+            // TODO: attach more commands!
         }
 
-        public TowerState GetTowerState()
+        private void UnknownCommand(ReceivedCommand args)
         {
-            TowerState state = new TowerState();
-            // TODO: receive and store state of the towers
-            return state;
+            throw new NotSupportedException(Utils.Messages.UnknownCommand);
+        }
+
+        public bool GetTowerState(ref TowerState state)
+        {
+            if (state == null)
+                throw new ArgumentNullException();
+            if (receivedState == null)
+                throw new NullReferenceException();
+
+            state = receivedState;
+            return true;
         }
 
         public bool SetTowerState(TowerState state)
         {
-            // TODO: set state of the towers
+            newState = state;
+            refresh = true;
             return true;
         }
 
