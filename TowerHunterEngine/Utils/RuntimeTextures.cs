@@ -28,7 +28,7 @@ namespace TowerHunterEngine.Utils
         static public Texture2D BasicBordered(GraphicsDevice device, Color fill, bool[] borders)
         {
             // texture size and adjusted int for use in arrays
-            int size = 10;
+            int size = 5;
             int arraysize = size - 1;
 
             Drawing.Color usedColor = ConvertXNAColor(fill);

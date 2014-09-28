@@ -74,7 +74,10 @@ namespace TowerHunterEngine.Playfield
                 { Directions.W, Directions.E }
             };
 
-            CarvePassages(0, 0, ref tempgrid);
+            Point randomPos = new Point();
+            randomPos.X = new Random(DateTime.Now.Millisecond).Next(0, field.Size.X);
+            randomPos.Y = new Random(DateTime.Now.Millisecond).Next(0, field.Size.Y);
+            CarvePassages(randomPos.X, randomPos.Y, ref tempgrid);
 
             field.Generated = true;
             field.Grid = tempgrid;

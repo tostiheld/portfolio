@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using System.Reflection;
-using MonoBrick.EV3;
 #endregion
 
 namespace TowerHunterEngine
@@ -24,8 +23,8 @@ namespace TowerHunterEngine
          * (tested on THOMAS-LAPTOP)
          * 
          */
-        private readonly Point GAMERES = new Point(1024, 600);
-        private readonly Point FIELDSIZE = new Point(20, 10);
+        private readonly Point GAMERES = new Point(800, 600);
+        private readonly Point FIELDSIZE = new Point(8, 6);
         private const int TOWERS = 4;
         private const bool FULLSCREEN = false;
 
@@ -47,6 +46,8 @@ namespace TowerHunterEngine
             graphics.PreferredBackBufferHeight = GAMERES.Y;
             graphics.PreferredBackBufferWidth = GAMERES.X;
             graphics.ApplyChanges();
+
+            //Window.IsBorderless = true;
 
 #if DEBUG
             Components.Add(new Utils.FrameCounter(this));
