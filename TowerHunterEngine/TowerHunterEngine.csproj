@@ -77,7 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
-    <Content Include="Libraries\CmdMessenger\CommandMessenger.dll" />
+    <Content Include="Libraries\CommandMessenger\CommandMessenger.dll" />
     <Content Include="Libraries\MonoBrick\hidapi.dll" />
     <Content Include="Libraries\MonoBrick\LibUsbDotNet.dll" />
     <Content Include="Libraries\MonoBrick\MonoBrick.dll" />
