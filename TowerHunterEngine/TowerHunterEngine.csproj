@@ -48,6 +48,8 @@
     <Compile Include="Arduino\Commander.cs" />
     <Compile Include="Arduino\TowerState.cs" />
     <Compile Include="Engine.cs" />
+    <Compile Include="Player\PlayerData.cs" />
+    <Compile Include="Player\PlayerInput.cs" />
     <Compile Include="Playfield\Field.cs" />
     <Compile Include="Playfield\Generator.cs" />
     <Compile Include="Playfield\Square.cs" />
@@ -90,9 +92,7 @@
     <None Include="Libraries\MonoBrick\MonoBrick.xml" />
     <None Include="Libraries\MonoBrick\usbHowTo.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Player\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Content\font.spritefont" />
   </ItemGroup>
