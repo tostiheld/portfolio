@@ -69,6 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
+    <Content Include="Libraries\CommandMessenger\CommandMessenger.dll" />
+    <Content Include="Libraries\MonoBrick\hidapi.dll" />
+    <Content Include="Libraries\MonoBrick\LibUsbDotNet.dll" />
+    <Content Include="Libraries\MonoBrick\MonoBrick.dll" />
+    <Content Include="Libraries\MonoBrick\MonoBrick.xml" />
+    <Content Include="Libraries\MonoBrick\usbHowTo.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
@@ -86,6 +92,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Documentatie\documentatie.docx" />
+    <None Include="Libraries\MonoBrick\hidapi.dylib" />
+    <None Include="Libraries\MonoBrick\libusb-1.0.0.dylib" />
+    <None Include="Libraries\MonoBrick\libusb-1.0.a" />
+    <None Include="Libraries\MonoBrick\libusb-1.0.dylib" />
+    <None Include="Libraries\MonoBrick\libusb-1.0.la" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
