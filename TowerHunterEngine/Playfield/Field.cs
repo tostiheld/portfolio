@@ -8,7 +8,6 @@ namespace TowerHunterEngine.Playfield
     public class Field : IDisposable
     {
         private int towerCount;
-
         public Point squareSize;
 
         public Field(Point resolution, Point numSquares, int numTowers)
@@ -24,35 +23,11 @@ namespace TowerHunterEngine.Playfield
             this.Generated = false;
         }
 
-        public Point Resolution
-        {
-            get;
-            private set;
-        }
-
-        public Point Size
-        {
-            get;
-            private set;
-        }
-
-        public Square[,] Grid
-        {
-            get;
-            set;
-        }
-
-        public List<Tower> Towers
-        {
-            get;
-            private set;
-        }
-
-        public bool Generated
-        {
-            get;
-            set;
-        }
+        public Point Resolution { get; private set; }
+        public Point Size { get; private set; }
+        public Square[,] Grid { get; set; }
+        public List<Tower> Towers { get; private set; }
+        public bool Generated { get; set; }
 
         public void Dispose()
         {
