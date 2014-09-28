@@ -60,6 +60,14 @@
     <Compile Include="Utils\RuntimeTextures.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CommandMessenger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\CmdMessenger\CommandMessenger.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoBrick, Version=1.0.5032.37015, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\MonoBrick\MonoBrick.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
@@ -69,6 +77,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
+    <Content Include="Libraries\CmdMessenger\CommandMessenger.dll" />
+    <Content Include="Libraries\MonoBrick\hidapi.dll" />
+    <Content Include="Libraries\MonoBrick\LibUsbDotNet.dll" />
+    <Content Include="Libraries\MonoBrick\MonoBrick.dll" />
+    <Content Include="Libraries\MonoBrick\MonoBrick.xml" />
+    <Content Include="Libraries\MonoBrick\usbHowTo.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
@@ -86,6 +100,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Documentatie\documentatie.docx" />
+    <None Include="Libraries\MonoBrick\hidapi.dylib" />
+    <None Include="Libraries\MonoBrick\libusb-1.0.0.dylib" />
+    <None Include="Libraries\MonoBrick\libusb-1.0.a" />
+    <None Include="Libraries\MonoBrick\libusb-1.0.dylib" />
+    <None Include="Libraries\MonoBrick\libusb-1.0.la" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
