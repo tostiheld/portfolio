@@ -50,7 +50,7 @@
     <Compile Include="Playfield\Field.cs" />
     <Compile Include="Playfield\Generator.cs" />
     <Compile Include="Playfield\Square.cs" />
-    <Compile Include="Playfield\SquareTypeEnum.cs" />
+    <Compile Include="Playfield\SquareType.cs" />
     <Compile Include="Playfield\Tower.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,16 +60,18 @@
     <Compile Include="Utils\RuntimeTextures.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="CommandMessenger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libraries\CmdMessenger\CommandMessenger.dll</HintPath>
+    <Reference Include="CommandMessenger">
+      <HintPath>Libraries\CommandMessenger\CommandMessenger.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MonoBrick, Version=1.0.5032.37015, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\MonoBrick\MonoBrick.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
@@ -77,21 +79,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
-    <Content Include="Libraries\CommandMessenger\CommandMessenger.dll" />
-    <Content Include="Libraries\MonoBrick\hidapi.dll" />
-    <Content Include="Libraries\MonoBrick\LibUsbDotNet.dll" />
-    <Content Include="Libraries\MonoBrick\MonoBrick.dll" />
-    <Content Include="Libraries\MonoBrick\MonoBrick.xml" />
-    <Content Include="Libraries\MonoBrick\usbHowTo.txt" />
+    <None Include="Libraries\CommandMessenger\CommandMessenger.dll" />
+    <None Include="Libraries\MonoBrick\hidapi.dll" />
+    <None Include="Libraries\MonoBrick\LibUsbDotNet.dll" />
+    <None Include="Libraries\MonoBrick\MonoBrick.dll" />
+    <None Include="Libraries\MonoBrick\MonoBrick.xml" />
+    <None Include="Libraries\MonoBrick\usbHowTo.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
     <Folder Include="Score\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\font1.spritefont">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="Content\font.spritefont" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\font.xnb">

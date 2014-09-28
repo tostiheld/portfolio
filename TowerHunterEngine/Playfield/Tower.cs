@@ -22,13 +22,13 @@ namespace TowerHunterEngine.Playfield
         public void Activate(ref Field field)
         {
             this.Active = true;
-            field.Grid[Target.X, Target.Y].Type = SquareType.Forbidden;
+            field.Grid[Target.X, Target.Y].ChangeType(SquareType.Forbidden);
         }
 
         public void Deactivate(ref Field field)
         {
             this.Active = false;
-            field.Grid[Target.X, Target.Y].Type = SquareType.Safe;
+            field.Grid[Target.X, Target.Y].ChangeType(SquareType.Safe);
         }
     }
 }

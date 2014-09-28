@@ -13,16 +13,8 @@ namespace TowerHunterEngine
 {
     public class Engine : Game
     {
-        /*
-         * 
-         * Field sizes affect framerates
-         * 40, 20 = 10-16 fps
-         * 30, 15 = 30 fps max
-         * 25, 12 = 40 fps max
-         * 20, 10 = 60 fps max
-         * (tested on THOMAS-LAPTOP)
-         * 
-         */
+        // Field sizes affect framerates
+        // Safe size = max (25, 15)
         private readonly Point GAMERES = new Point(800, 600);
         private readonly Point FIELDSIZE = new Point(8, 6);
         private const int TOWERS = 4;
@@ -145,7 +137,7 @@ namespace TowerHunterEngine
                     field.Grid[x, y].Texture =
                         Utils.RuntimeTextures.BasicBordered(
                             GraphicsDevice,
-                            Color.Green,
+                            field.Grid[x, y].Fill,
                             field.Grid[x, y].Borders);
                 }
             }

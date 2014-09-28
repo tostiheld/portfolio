@@ -10,7 +10,7 @@ namespace TowerHunterEngine.Playfield
         public Square(Point position, Point size, SquareType type)
         {
             this.Value = 0;
-            this.Type = type;
+            this.ChangeType(type);
 
             this.Bounds = new Rectangle(position.X * size.X, position.Y * size.Y, size.X, size.Y);
 
@@ -19,9 +19,34 @@ namespace TowerHunterEngine.Playfield
 
         public int Value { get; set; }
         public Rectangle Bounds { get; private set; }
-        public SquareType Type { get; set; }
+        public SquareType Type { get; private set; }
         public bool[] Borders { get; set; }
         public Texture2D Texture { get; set; }
+        public Color Fill { get; private set; }
+
+        public void ChangeType(SquareType type)
+        {
+            this.Type = type;
+
+            switch (type)
+            {
+                case SquareType.Safe:
+                    this.Fill = Color.Green;
+                    break;
+                case SquareType.Forbidden:
+                    this.Fill = Color.Red;
+                    break;
+                case SquareType.Powerup:
+                    this.Fill = Color.Orange;
+                    break;
+                case SquareType.Coin:
+                    this.Fill = Color.Yellow;
+                    break;
+                case SquareType.Goal:
+                    this.Fill = Color.Blue;
+                    break;
+            }
+        }
 
 
         public void Dispose()
