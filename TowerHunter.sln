@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TowerHunterEngine", "TowerHunterEngine\TowerHunterEngine.csproj", "{597C93E8-EF3E-4E31-BAD8-BB9CCC9BBBBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecursiveBacktracking", "RecursiveBacktracking\RecursiveBacktracking.csproj", "{8122B8F2-742F-4740-9E71-EB6616285A9D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNAContentCompiler", "XNAContentCompiler\XNAContentCompiler.csproj", "{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}"
 EndProject
 Global
@@ -29,16 +27,6 @@ Global
 		{597C93E8-EF3E-4E31-BAD8-BB9CCC9BBBBE}.Release|Mixed Platforms.Build.0 = Release|x86
 		{597C93E8-EF3E-4E31-BAD8-BB9CCC9BBBBE}.Release|x86.ActiveCfg = Release|x86
 		{597C93E8-EF3E-4E31-BAD8-BB9CCC9BBBBE}.Release|x86.Build.0 = Release|x86
-		{8122B8F2-742F-4740-9E71-EB6616285A9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8122B8F2-742F-4740-9E71-EB6616285A9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8122B8F2-742F-4740-9E71-EB6616285A9D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{8122B8F2-742F-4740-9E71-EB6616285A9D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{8122B8F2-742F-4740-9E71-EB6616285A9D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{8122B8F2-742F-4740-9E71-EB6616285A9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8122B8F2-742F-4740-9E71-EB6616285A9D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8122B8F2-742F-4740-9E71-EB6616285A9D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{8122B8F2-742F-4740-9E71-EB6616285A9D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{8122B8F2-742F-4740-9E71-EB6616285A9D}.Release|x86.ActiveCfg = Release|Any CPU
 		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -54,8 +42,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_AssemblyInfoFilename = TowerHunterEngine\Properties\AssemblyInfo.cs
-		BuildVersion_UseGlobalSettings = True
 		BuildVersion_ConfigurationName = Release
+		BuildVersion_UseGlobalSettings = True
+		BuildVersion_AssemblyInfoFilename = TowerHunterEngine\Properties\AssemblyInfo.cs
 	EndGlobalSection
 EndGlobal
