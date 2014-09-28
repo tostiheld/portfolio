@@ -56,6 +56,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Robot\Communicator.cs" />
+    <Compile Include="Score\Scoreboard.cs" />
+    <Compile Include="Score\ScoreSyncAdapter.cs" />
+    <Compile Include="Score\ScoreView.cs" />
     <Compile Include="Utils\FrameCounter.cs" />
     <Compile Include="Utils\Messages.cs" />
     <Compile Include="Utils\RuntimeTextures.cs" />
@@ -88,8 +91,7 @@
     <None Include="Libraries\MonoBrick\usbHowTo.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controls\" />
-    <Folder Include="Score\" />
+    <Folder Include="Player\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\font.spritefont" />
