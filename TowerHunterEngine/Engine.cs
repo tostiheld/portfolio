@@ -52,23 +52,16 @@ namespace TowerHunterEngine
 
         protected override void Initialize()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            SetupPlayfield(GAMERES, FIELDSIZE, TOWERS, ref playField);
-
+            bool debugging = false;
+            spriteBatch = new SpriteBatch(GraphicsDevice);            
 #if DEBUG
+            debugging = true;
             DebugLine = new List<string>(2);
             DebugLine.Add("DEBUGGING");
             DebugLine.Add(Assembly.GetExecutingAssembly().GetName().Version.ToString());
 #endif
-            console = new GameConsole(this, spriteBatch);
-            var commands = new IConsoleCommand[]
-            {
-                new Utils.ConsoleCommands.RandomizeField(this, GAMERES, FIELDSIZE, TOWERS)
-            };
-            console.Options.Prompt = ">";
-            console.Options.BackgroundColor = new Color(0, 0, 0, 190);
-            console.AddCommand(commands);
+            SetupPlayfield(GAMERES, FIELDSIZE, TOWERS, ref playField);
+            SetupConsole(debugging);
 
             base.Initialize();
         }
@@ -89,6 +82,7 @@ namespace TowerHunterEngine
             {
                 KeyboardState newState = Keyboard.GetState();
 
+                /*
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                     Exit();
 
@@ -96,7 +90,7 @@ namespace TowerHunterEngine
                 {
                     if (!oldState.IsKeyDown(Keys.R))
                         SetupPlayfield(GAMERES, FIELDSIZE, TOWERS, ref playField);
-                }
+                }*/
 
                 oldState = newState;
             }
@@ -156,6 +150,30 @@ namespace TowerHunterEngine
                             field.Grid[x, y].Borders);
                 }
             }
+        }
+
+        private void SetupConsole(bool debugging)
+        {
+            console = new GameConsole(this, spriteBatch);
+            IConsoleCommand[] commands;
+            if (debugging)
+            {
+                commands = new IConsoleCommand[]
+                {
+                    new Utils.ConsoleCommands.RandomizeField(this, GAMERES, FIELDSIZE, TOWERS)
+                };
+            }
+            else
+            {
+                commands = new IConsoleCommand[]
+                {
+                    //new Utils.ConsoleCommands.()
+                };
+            }
+
+            console.Options.Prompt = ">";
+            console.Options.BackgroundColor = new Color(0, 0, 0, 190);
+            console.AddCommand(commands);
         }
     }
 }
