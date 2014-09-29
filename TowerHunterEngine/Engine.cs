@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using System.Reflection;
+using MonoGameConsole;
 #endregion
 
 namespace TowerHunterEngine
@@ -57,6 +58,7 @@ namespace TowerHunterEngine
             DebugLine.Add("DEBUGGING");
             DebugLine.Add(Assembly.GetExecutingAssembly().GetName().Version.ToString());
 #endif
+            //GameConsole console = new GameConsole(this, spriteBatch);
 
             base.Initialize();
         }
