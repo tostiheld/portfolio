@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Collections;
 
@@ -28,6 +29,24 @@ namespace TowerHunterEngine.Playfield
         public Square[,] Grid { get; set; }
         public List<Tower> Towers { get; private set; }
         public bool Generated { get; set; }
+        //public Texture2D Texture { get; set; }
+
+        public void ApplyTowerStates(Arduino.TowerState state)
+        {
+            int i = 0;
+            foreach (Tower t in Towers)
+            {
+                t.SetState(state.Activated[i]);
+
+                Point pos = new Point(
+                    t.Target.Bounds.X, 
+                    t.Target.Bounds.Y);
+
+                Grid[pos.X, pos.Y].ChangeType(t.Target.Type);
+
+                i++;
+            }
+        }
 
         public void Dispose()
         {

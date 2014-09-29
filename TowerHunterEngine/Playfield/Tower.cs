@@ -8,27 +8,27 @@ namespace TowerHunterEngine.Playfield
 {
     public class Tower
     {
-        public Tower(int lastID, Point target)
+        public Tower(Square target)
         {
-            this.ID = lastID + 1;
             this.Active = true;
             this.Target = target;
         }
 
-        public int ID { get; private set; }
-        public bool Active { get; set; }
-        public Point Target { get; private set; }
-        
-        public void Activate(ref Field field)
-        {
-            this.Active = true;
-            field.Grid[Target.X, Target.Y].ChangeType(SquareType.Forbidden);
-        }
+        public bool Active { get; private set; }
+        public Square Target { get; private set; }
 
-        public void Deactivate(ref Field field)
+        public void SetState(bool state)
         {
-            this.Active = false;
-            field.Grid[Target.X, Target.Y].ChangeType(SquareType.Safe);
+            if (state)
+            {
+                this.Active = true;
+                Target.ChangeType(SquareType.Forbidden);
+            }
+            else if (!state)
+            {
+                this.Active = false;
+                Target.ChangeType(SquareType.Safe);
+            }
         }
     }
 }
