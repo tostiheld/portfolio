@@ -66,6 +66,8 @@ namespace TowerHunterEngine
             {
                 new Utils.ConsoleCommands.RandomizeField(this, GAMERES, FIELDSIZE, TOWERS)
             };
+            console.Options.Prompt = ">";
+            console.Options.BackgroundColor = new Color(0, 0, 0, 190);
             console.AddCommand(commands);
 
             base.Initialize();
