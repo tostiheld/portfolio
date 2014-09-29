@@ -30,6 +30,7 @@ namespace TowerHunterEngine
 
         private List<string> DebugLine;
         SpriteFont font;
+        GameConsole console;
 
         public Engine()
             : base()
@@ -51,6 +52,8 @@ namespace TowerHunterEngine
 
         protected override void Initialize()
         {
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
             SetupPlayfield(GAMERES, FIELDSIZE, TOWERS, ref playField);
 
 #if DEBUG
@@ -58,14 +61,12 @@ namespace TowerHunterEngine
             DebugLine.Add("DEBUGGING");
             DebugLine.Add(Assembly.GetExecutingAssembly().GetName().Version.ToString());
 #endif
-            //GameConsole console = new GameConsole(this, spriteBatch);
+            console = new GameConsole(this, spriteBatch);
 
             base.Initialize();
         }
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
             font = Content.Load<SpriteFont>("font");
         }
         protected override void UnloadContent()
@@ -75,18 +76,21 @@ namespace TowerHunterEngine
 
         protected override void Update(GameTime gameTime)
         {
-            KeyboardState newState = Keyboard.GetState();
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            if (newState.IsKeyDown(Keys.R))
+            if (!console.Opened)
             {
-                if (!oldState.IsKeyDown(Keys.R))
-                    SetupPlayfield(GAMERES, FIELDSIZE, TOWERS, ref playField);
-            }
+                KeyboardState newState = Keyboard.GetState();
 
-            oldState = newState;
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    Exit();
+
+                if (newState.IsKeyDown(Keys.R))
+                {
+                    if (!oldState.IsKeyDown(Keys.R))
+                        SetupPlayfield(GAMERES, FIELDSIZE, TOWERS, ref playField);
+                }
+
+                oldState = newState;
+            }
 
             base.Update(gameTime);
         }
