@@ -61,6 +61,7 @@
     <Compile Include="Score\Scoreboard.cs" />
     <Compile Include="Score\ScoreSyncAdapter.cs" />
     <Compile Include="Score\ScoreView.cs" />
+    <Compile Include="Utils\ConsoleCommands\RandomizeField.cs" />
     <Compile Include="Utils\FrameCounter.cs" />
     <Compile Include="Utils\Messages.cs" />
     <Compile Include="Utils\RuntimeTextures.cs" />

@@ -26,7 +26,7 @@ namespace TowerHunterEngine
 
         KeyboardState oldState;
 
-        private Playfield.Field playField;
+        public Playfield.Field playField;
 
         private List<string> DebugLine;
         SpriteFont font;
@@ -62,13 +62,20 @@ namespace TowerHunterEngine
             DebugLine.Add(Assembly.GetExecutingAssembly().GetName().Version.ToString());
 #endif
             console = new GameConsole(this, spriteBatch);
+            var commands = new IConsoleCommand[]
+            {
+                new Utils.ConsoleCommands.RandomizeField(this, GAMERES, FIELDSIZE, TOWERS)
+            };
+            console.AddCommand(commands);
 
             base.Initialize();
         }
+
         protected override void LoadContent()
         {
             font = Content.Load<SpriteFont>("font");
         }
+
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
