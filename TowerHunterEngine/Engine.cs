@@ -52,16 +52,14 @@ namespace TowerHunterEngine
 
         protected override void Initialize()
         {
-            bool debugging = false;
             spriteBatch = new SpriteBatch(GraphicsDevice);            
 #if DEBUG
-            debugging = true;
             DebugLine = new List<string>(2);
             DebugLine.Add("DEBUGGING");
             DebugLine.Add(Assembly.GetExecutingAssembly().GetName().Version.ToString());
 #endif
             SetupPlayfield(GAMERES, FIELDSIZE, TOWERS, ref playField);
-            SetupConsole(debugging);
+            SetupConsole();
 
             base.Initialize();
         }
@@ -152,28 +150,25 @@ namespace TowerHunterEngine
             }
         }
 
-        private void SetupConsole(bool debugging)
+        private void SetupConsole()
         {
             console = new GameConsole(this, spriteBatch);
-            IConsoleCommand[] commands;
-            if (debugging)
+            IConsoleCommand[] commands = new IConsoleCommand[]
             {
-                commands = new IConsoleCommand[]
-                {
-                    new Utils.ConsoleCommands.RandomizeField(this, GAMERES, FIELDSIZE, TOWERS)
-                };
-            }
-            else
+                new Utils.ConsoleCommands.RunFullTest()
+            };
+            console.AddCommand(commands);
+
+#if DEBUG
+            IConsoleCommand[] debugcommands = new IConsoleCommand[]
             {
-                commands = new IConsoleCommand[]
-                {
-                    //new Utils.ConsoleCommands.()
-                };
-            }
+                new Utils.ConsoleCommands.RandomizeField(this, GAMERES, FIELDSIZE, TOWERS)
+            };
+            console.AddCommand(debugcommands);
+#endif
 
             console.Options.Prompt = ">";
             console.Options.BackgroundColor = new Color(0, 0, 0, 190);
-            console.AddCommand(commands);
         }
     }
 }
