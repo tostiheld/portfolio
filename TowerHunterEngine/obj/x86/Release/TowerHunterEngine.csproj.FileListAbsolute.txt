@@ -22,3 +22,34 @@ C:\Users\Thomas\Dropbox\A15 Game Design\Proftaak\OIS\TowerHunter\TowerHunterEngi
 C:\Users\Thomas\Dropbox\A15 Game Design\Proftaak\OIS\TowerHunter\TowerHunterEngine\bin\Windows\Release\SharpDX.Direct3D9.xml
 C:\Users\Thomas\Dropbox\A15 Game Design\Proftaak\OIS\TowerHunter\TowerHunterEngine\obj\x86\Release\TowerHunterEngine.exe
 C:\Users\Thomas\Dropbox\A15 Game Design\Proftaak\OIS\TowerHunter\TowerHunterEngine\obj\x86\Release\TowerHunterEngine.pdb
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\TowerHunterEngine.exe
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\TowerHunterEngine.pdb
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\obj\x86\Release\TowerHunterEngine.csprojResolveAssemblyReference.cache
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\obj\x86\Release\TowerHunterEngine.exe
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\obj\x86\Release\TowerHunterEngine.pdb
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\Content\font.xnb
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\CommandMessenger.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\MonoBrick.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\MonoGame.Framework.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\MonoGameConsole.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\LibUsbDotNet.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.MediaFoundation.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.XAudio2.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.Direct3D11.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.DXGI.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.Direct2D1.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\Lidgren.Network.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.XInput.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.RawInput.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.Direct3D9.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\MonoBrick.xml
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.MediaFoundation.xml
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.xml
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.XAudio2.xml
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.Direct3D11.xml
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.DXGI.xml
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.Direct2D1.xml
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.XInput.xml
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.RawInput.xml
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Release\SharpDX.Direct3D9.xml

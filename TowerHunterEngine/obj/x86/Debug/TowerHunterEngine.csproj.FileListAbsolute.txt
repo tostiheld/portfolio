@@ -25,14 +25,10 @@ C:\Users\Thomas\Dropbox\A15 Game Design\Proftaak\OIS\TowerHunter\TowerHunterEngi
 C:\Users\Thomas\Dropbox\A15 Game Design\Proftaak\OIS\TowerHunter\TowerHunterEngine\obj\x86\Debug\TowerHunterEngine.pdb
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\obj\x86\Debug\TowerHunterEngine.exe
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\obj\x86\Debug\TowerHunterEngine.pdb
-C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\Content\font1.spritefont
-C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\Content\font.xnb
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\TowerHunterEngine.exe
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\TowerHunterEngine.pdb
-C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\CommandMessenger.dll
-C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\MonoBrick.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\obj\x86\Debug\TowerHunterEngine.csprojResolveAssemblyReference.cache
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\MonoGame.Framework.dll
-C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\LibUsbDotNet.dll
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.MediaFoundation.dll
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.dll
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.XAudio2.dll
@@ -43,7 +39,6 @@ C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\Lid
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.XInput.dll
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.RawInput.dll
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.Direct3D9.dll
-C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\MonoBrick.xml
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.MediaFoundation.xml
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.xml
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.XAudio2.xml
@@ -53,4 +48,9 @@ C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\Sha
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.XInput.xml
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.RawInput.xml
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.Direct3D9.xml
-C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\obj\x86\Debug\TowerHunterEngine.csprojResolveAssemblyReference.cache
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\Content\font.xnb
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\CommandMessenger.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\MonoBrick.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\LibUsbDotNet.dll
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\MonoBrick.xml
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\MonoGameConsole.dll
