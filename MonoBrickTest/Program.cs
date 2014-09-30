@@ -9,7 +9,7 @@ namespace Application
         {
             try
             {
-                var brick = new Brick<Sensor, Sensor, Sensor, Sensor>("com7");
+                var brick = new Brick<Sensor, Sensor, Sensor, Sensor>("com8");
                 sbyte speed = 0;
                 brick.Connection.Open();
                 ConsoleKeyInfo cki;
