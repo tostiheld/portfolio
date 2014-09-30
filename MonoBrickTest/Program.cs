@@ -22,23 +22,28 @@ namespace Application
                         case ConsoleKey.R:
                             Console.WriteLine("Motor A reverse direction");
                             brick.MotorA.Reverse = !brick.MotorA.Reverse;
+                            brick.MotorB.Reverse = !brick.MotorB.Reverse;
                             break;
                         case ConsoleKey.UpArrow:
                             if (speed < 100)
                                 speed = (sbyte)(speed + 10);
                             Console.WriteLine("Motor A speed set to " + speed);
                             brick.MotorA.On(speed);
+                            brick.MotorB.On(speed);
+
                             break;
                         case ConsoleKey.DownArrow:
                             if (speed > -100)
                                 speed = (sbyte)(speed - 10);
                             Console.WriteLine("Motor A speed set to " + speed);
                             brick.MotorA.On(speed);
+                            brick.MotorB.On(speed);
                             break;
                         case ConsoleKey.S:
                             Console.WriteLine("Motor A off");
                             speed = 0;
                             brick.MotorA.Off();
+                            brick.MotorB.Off();
                             break;
                         case ConsoleKey.B:
                             Console.WriteLine("Motor A break");
