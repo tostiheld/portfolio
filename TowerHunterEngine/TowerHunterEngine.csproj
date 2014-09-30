@@ -113,6 +113,7 @@
     <None Include="Libraries\MonoBrick\MonoBrick.dll" />
     <None Include="Libraries\MonoBrick\MonoBrick.xml" />
     <None Include="Libraries\MonoBrick\usbHowTo.txt" />
+    <None Include="Documentatie\memory-usage-v2014-9-29-42.diagsession" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
