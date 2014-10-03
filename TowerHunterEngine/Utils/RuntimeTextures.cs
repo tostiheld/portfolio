@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+
 using Drawing = System.Drawing;
+using Imaging = System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
 namespace TowerHunterEngine.Utils
@@ -88,10 +90,10 @@ namespace TowerHunterEngine.Utils
             Texture2D texture = new Texture2D(device, size, size);
 
             // lockbits improve performance
-            Drawing.Imaging.BitmapData data;
+            Imaging.BitmapData data;
             data = bmp.LockBits(
                 new Drawing.Rectangle(0, 0, size, size), 
-                Drawing.Imaging.ImageLockMode.ReadOnly,
+                Imaging.ImageLockMode.ReadOnly,
                 bmp.PixelFormat);
 
             int bufferSize = data.Height * data.Stride;
@@ -99,6 +101,19 @@ namespace TowerHunterEngine.Utils
             Marshal.Copy(data.Scan0, bytes, 0, bytes.Length);
             
             texture.SetData<byte>(bytes);
+
+            return texture;
+        }
+
+        static public Texture2D CombineToTexture(GraphicsDevice device, Dictionary<Point, Drawing.Bitmap> bitmaps, Point resolution)
+        {
+            Drawing.Bitmap bmp = new Drawing.Bitmap(resolution.X, resolution.Y);
+            Texture2D texture = new Texture2D(device, resolution.X, resolution.Y);
+
+            foreach (KeyValuePair<Point, Drawing.Bitmap> p in bitmaps)
+            {
+
+            }
 
             return texture;
         }

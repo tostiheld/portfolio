@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MonoBrickTest")]
+[assembly: AssemblyTitle("Controller-EV3-Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MonoBrickTest")]
+[assembly: AssemblyProduct("Controller-EV3-Test")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5fa2c501-af7c-4746-a666-bd284fdc3876")]
+[assembly: Guid("c381c43f-4e55-48d0-b980-2f90979e947f")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2014.10.2.6")]
-[assembly: AssemblyFileVersion("2014.10.2.6")]
+[assembly: AssemblyVersion("2014.10.2.21")]
+[assembly: AssemblyFileVersion("2014.10.2.21")]

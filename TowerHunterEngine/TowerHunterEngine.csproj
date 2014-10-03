@@ -107,6 +107,7 @@
   <ItemGroup>
     <Content Include="Icon.ico" />
     <Content Include="Libraries\MonoGameConsole\MonoGameConsole.dll" />
+    <Content Include="todo.txt" />
     <None Include="Libraries\CommandMessenger\CommandMessenger.dll" />
     <None Include="Libraries\MonoBrick\hidapi.dll" />
     <None Include="Libraries\MonoBrick\LibUsbDotNet.dll" />

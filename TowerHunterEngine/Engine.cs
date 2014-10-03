@@ -17,7 +17,7 @@ namespace TowerHunterEngine
         // Field sizes affect framerates
         // Safe size = max (25, 15)
         private readonly Point GAMERES = new Point(800, 600);
-        private readonly Point FIELDSIZE = new Point(8, 6);
+        private readonly Point FIELDSIZE = new Point(40, 30);
         private const int TOWERS = 4;
         private const bool FULLSCREEN = false;
 
