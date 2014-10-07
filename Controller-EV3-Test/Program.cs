@@ -22,7 +22,7 @@ namespace Controller_EV3_Test
             {
                 EV3Messenger messenger = new EV3Messenger();
 
-                if (messenger.Connect("com7"))
+                if (messenger.Connect("com40"))
                 {
                     Console.WriteLine("Connected.");
                     ctop = Console.CursorTop;
@@ -63,7 +63,13 @@ namespace Controller_EV3_Test
                     messenger.SendMessage("sturen", (float)message);
                     messenger.SendMessage("turret", (float)turretspeed);
 
-                    Thread.Sleep(new TimeSpan(1000));
+                    //Thread.Sleep(new TimeSpan(1000));
+                    Thread.Sleep(50);
+                    /* Brick can be slow processing bluetooth commands and queues them,
+                     * so simply add a delay of 50ms in each loop in the sender and the
+                     * brick can handle messages fine, brick has been tested without
+                     * any noticable delay and brick 'code' doesn't need waits.
+                     */
                 }
             }
             catch (Exception ex)
