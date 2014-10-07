@@ -53,12 +53,15 @@ namespace Controller_EV3_Test
                     if (state.Buttons.A == ButtonState.Pressed)
                         message = -1;
 
-                    Console.SetCursorPosition(cleft, ctop);
-                    Console.Write("    ");
-                    Console.SetCursorPosition(cleft, ctop);
-                    Console.Write(message.ToString());
+                    int turretspeed = (int)(state.ThumbSticks.Right.X * 20);
 
-                    messenger.SendMessage("default", (float)message);
+                    Console.SetCursorPosition(cleft, ctop);
+                    Console.Write("                           ");
+                    Console.SetCursorPosition(cleft, ctop);
+                    Console.Write(message.ToString() + " " + turretspeed.ToString());
+
+                    messenger.SendMessage("sturen", (float)message);
+                    messenger.SendMessage("turret", (float)turretspeed);
 
                     Thread.Sleep(new TimeSpan(1000));
                 }
