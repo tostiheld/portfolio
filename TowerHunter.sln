@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TowerHunterEngine", "TowerH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNAContentCompiler", "XNAContentCompiler\XNAContentCompiler.csproj", "{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoBrickTest", "MonoBrickTest\MonoBrickTest.csproj", "{844B319C-9693-4E27-8DD3-2107D472DCDF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6-ArduinoController", "ArduinoController\6-ArduinoController.csproj", "{F994C186-EB6F-4E71-B274-DBF46F3534BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller-EV3-Test", "Controller-EV3-Test\Controller-EV3-Test.csproj", "{36D0D259-CDFA-4B0D-A606-486E13B1083C}"
@@ -43,16 +41,6 @@ Global
 		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Release|Mixed Platforms.Build.0 = Release|x86
 		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Release|x86.ActiveCfg = Release|x86
 		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Release|x86.Build.0 = Release|x86
-		{844B319C-9693-4E27-8DD3-2107D472DCDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{844B319C-9693-4E27-8DD3-2107D472DCDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{844B319C-9693-4E27-8DD3-2107D472DCDF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{844B319C-9693-4E27-8DD3-2107D472DCDF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{844B319C-9693-4E27-8DD3-2107D472DCDF}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{844B319C-9693-4E27-8DD3-2107D472DCDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{844B319C-9693-4E27-8DD3-2107D472DCDF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{844B319C-9693-4E27-8DD3-2107D472DCDF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{844B319C-9693-4E27-8DD3-2107D472DCDF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{844B319C-9693-4E27-8DD3-2107D472DCDF}.Release|x86.ActiveCfg = Release|Any CPU
 		{F994C186-EB6F-4E71-B274-DBF46F3534BB}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{F994C186-EB6F-4E71-B274-DBF46F3534BB}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{F994C186-EB6F-4E71-B274-DBF46F3534BB}.Debug|Mixed Platforms.Build.0 = Debug|x86

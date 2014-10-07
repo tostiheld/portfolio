@@ -22,7 +22,7 @@ namespace Controller_EV3_Test
             {
                 EV3Messenger messenger = new EV3Messenger();
 
-                if (messenger.Connect("com8"))
+                if (messenger.Connect("com7"))
                 {
                     Console.WriteLine("Connected.");
                     ctop = Console.CursorTop;
