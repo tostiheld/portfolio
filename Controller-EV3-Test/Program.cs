@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using MonoBrick.EV3;
+using EV3MessengerLib;
+using System.Threading;
 
 namespace Controller_EV3_Test
 {
@@ -14,38 +15,53 @@ namespace Controller_EV3_Test
     {
         static void Main(string[] args)
         {
-            ConsoleKeyInfo cki;
-            byte[] left = new byte[1]{(byte)'L'};
-            byte[] right = new byte[1]{(byte)'R'};
-            byte[] niks = new byte[1] { (byte)'X' };
+            int ctop;
+            int cleft;
 
             try
             {
-                var brick = new Brick<Sensor, Sensor, Sensor, Sensor>("usb");
-                brick.Connection.Open();
-                Console.WriteLine("Connected");
+                EV3Messenger messenger = new EV3Messenger();
 
-                do
+                if (messenger.Connect("com8"))
+                {
+                    Console.WriteLine("Connected.");
+                    ctop = Console.CursorTop;
+                    cleft = Console.CursorLeft;
+                }
+                else
+                    throw new InvalidOperationException("Connection error.");
+
+                while (true)
                 {
                     GamePadState state = GamePad.GetState(PlayerIndex.One);
-                    //cki = Console.ReadKey(true);
+                    int left = 0;
+                    int right = 0;
 
-                    if (state.Buttons.LeftShoulder == ButtonState.Pressed)
-                    {
-                        brick.Mailbox.Send("mailbox1", left);
-                    }
-                    else if (state.Buttons.RightShoulder == ButtonState.Pressed)
-                    {
-                        brick.Mailbox.Send("mailbox1", right);
-                    }
-                    else
-                    {
-                        brick.Mailbox.Send("mailbox1", niks);
-                    }
+                    int baseSpeed = (int)(state.Triggers.Left * 40);                    
+                    int message = baseSpeed * 100;
+                    message += baseSpeed;
 
-                } while (true); //while (cki.Key != ConsoleKey.Q);
+                    if (state.ThumbSticks.Left.X >= 0)
+                        right = (int)(state.ThumbSticks.Left.X * 50);
+                    else if (state.ThumbSticks.Left.X <= 0)
+                        left = (int)Math.Abs(state.ThumbSticks.Left.X * 50);
 
-                brick.Connection.Close();
+                    right *= 100;
+                    message += left;
+                    message += right;
+
+                    if (state.Buttons.A == ButtonState.Pressed)
+                        message = -1;
+
+                    Console.SetCursorPosition(cleft, ctop);
+                    Console.Write("    ");
+                    Console.SetCursorPosition(cleft, ctop);
+                    Console.Write(message.ToString());
+
+                    messenger.SendMessage("default", (float)message);
+
+                    Thread.Sleep(new TimeSpan(1000));
+                }
             }
             catch (Exception ex)
             {

@@ -32,9 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MonoBrick, Version=1.0.5032.37015, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\TowerHunterEngine\Libraries\MonoBrick\MonoBrick.dll</HintPath>
+    <Reference Include="EV3MessengerLib">
+      <HintPath>.\EV3MessengerLib.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Framework, Version=3.1.2.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
