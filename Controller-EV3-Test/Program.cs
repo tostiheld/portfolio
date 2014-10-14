@@ -33,6 +33,7 @@ namespace Controller_EV3_Test
 
                 while (true)
                 {
+                    EV3Message licht = messenger.ReadMessage();
                     GamePadState state = GamePad.GetState(PlayerIndex.One);
                     int left = 0;
                     int right = 0;
@@ -58,7 +59,7 @@ namespace Controller_EV3_Test
                     Console.SetCursorPosition(cleft, ctop);
                     Console.Write("                           ");
                     Console.SetCursorPosition(cleft, ctop);
-                    Console.Write(message.ToString() + " " + turretspeed.ToString());
+                    Console.Write(message.ToString() + " " + turretspeed.ToString() + " " + licht.ToString());
 
                     messenger.SendMessage("sturen", (float)message);
                     messenger.SendMessage("turret", (float)turretspeed);
