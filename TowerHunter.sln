@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TowerHunterEngine", "TowerHunterEngine\TowerHunterEngine.csproj", "{597C93E8-EF3E-4E31-BAD8-BB9CCC9BBBBE}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6-ArduinoController", "ArduinoController\6-ArduinoController.csproj", "{F994C186-EB6F-4E71-B274-DBF46F3534BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller-EV3-Test", "Controller-EV3-Test\Controller-EV3-Test.csproj", "{36D0D259-CDFA-4B0D-A606-486E13B1083C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2-SendAndReceive", "SendAndReceive\2-SendAndReceive.csproj", "{37286642-47EE-44D8-87D9-3CFAFC8D68BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,13 +63,23 @@ Global
 		{36D0D259-CDFA-4B0D-A606-486E13B1083C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{36D0D259-CDFA-4B0D-A606-486E13B1083C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{36D0D259-CDFA-4B0D-A606-486E13B1083C}.Release|x86.ActiveCfg = Release|Any CPU
+		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Debug|x86.ActiveCfg = Debug|x86
+		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Debug|x86.Build.0 = Debug|x86
+		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Release|Any CPU.ActiveCfg = Release|x86
+		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Release|Mixed Platforms.Build.0 = Release|x86
+		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Release|x86.ActiveCfg = Release|x86
+		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_AssemblyInfoFilename = TowerHunterEngine\Properties\AssemblyInfo.cs
-		BuildVersion_UseGlobalSettings = True
 		BuildVersion_ConfigurationName = Release
+		BuildVersion_UseGlobalSettings = True
+		BuildVersion_AssemblyInfoFilename = TowerHunterEngine\Properties\AssemblyInfo.cs
 	EndGlobalSection
 EndGlobal

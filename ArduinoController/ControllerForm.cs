@@ -22,6 +22,7 @@ namespace ArduinoController
             _arduinoController.Setup(this);
         }
 
+        /*
         // Update arduinoController on value checkbox checked/unchecked
         private void EnableLedCheckBoxCheckedChanged(object sender, EventArgs e)
         {
@@ -52,7 +53,7 @@ namespace ArduinoController
         private void LedFrequencyLabelTrackBarValueChanged(object sender, EventArgs e)
         {
             LedFrequencyTrackBarScroll(sender,e);
-        }
+        }*/
 
         /// <summary>
         /// Clean up any resources being used.
@@ -68,5 +69,31 @@ namespace ArduinoController
             }
             base.Dispose(disposing);
         }
+
+        //TurnOnLed
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _arduinoController.SetOnLed(1);
+        }
+
+        //TurnOffLed
+        private void button2_Click(object sender, EventArgs e)
+        {
+            _arduinoController.SetOffLed(1);
+        }
+
+        //Read Towers
+        private void Read_Click(object sender, EventArgs e)
+        {
+            _arduinoController.ReadSensors();
+            towerstate.Text = "";
+        }
+
+        //Reset
+        private void reset_Click(object sender, EventArgs e)
+        {
+            _arduinoController.ResetTower(1);
+        }
+
     }
 }
