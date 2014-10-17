@@ -18,11 +18,8 @@ namespace Controller_EV3_Test
             int ctop;
             int cleft;
 
-<<<<<<< HEAD
             //Timer readTimer = new Timer(new TimerCallback(Timer);
 
-=======
->>>>>>> dbba844a4192ea0f84d26d34e7eede8528f532d2
             try
             {
                 EV3Messenger messenger = new EV3Messenger();
@@ -38,32 +35,23 @@ namespace Controller_EV3_Test
 
                 while (true)
                 {
-<<<<<<< HEAD
-=======
                     EV3Message licht = messenger.ReadMessage();
->>>>>>> dbba844a4192ea0f84d26d34e7eede8528f532d2
                     GamePadState state = GamePad.GetState(PlayerIndex.One);
                     int left = 0;
                     int right = 0;
 
-<<<<<<< HEAD
-                    int baseSpeed = (int)(state.Triggers.Left * 60);                    
-=======
-                    int baseSpeed = (int)(state.Triggers.Left * 40);                    
->>>>>>> dbba844a4192ea0f84d26d34e7eede8528f532d2
+                    int baseSpeed = (int)(state.Triggers.Left * 60);
+                    int baseSpeed = (int)(state.Triggers.Left * 40);
                     int message = baseSpeed * 100;
                     message += baseSpeed;
 
                     if (state.ThumbSticks.Left.X >= 0)
-<<<<<<< HEAD
                         right = (int)(state.ThumbSticks.Left.X * 30);
                     else if (state.ThumbSticks.Left.X <= 0)
                         left = (int)Math.Abs(state.ThumbSticks.Left.X * 30);
-=======
                         right = (int)(state.ThumbSticks.Left.X * 50);
                     else if (state.ThumbSticks.Left.X <= 0)
                         left = (int)Math.Abs(state.ThumbSticks.Left.X * 50);
->>>>>>> dbba844a4192ea0f84d26d34e7eede8528f532d2
 
                     right *= 100;
                     message += left;
@@ -77,11 +65,8 @@ namespace Controller_EV3_Test
                     Console.SetCursorPosition(cleft, ctop);
                     Console.Write("                           ");
                     Console.SetCursorPosition(cleft, ctop);
-<<<<<<< HEAD
                     Console.Write(message.ToString() + " " + turretspeed.ToString());
-=======
                     Console.Write(message.ToString() + " " + turretspeed.ToString() + " " + licht.ToString());
->>>>>>> dbba844a4192ea0f84d26d34e7eede8528f532d2
 
                     messenger.SendMessage("sturen", (float)message);
                     messenger.SendMessage("turret", (float)turretspeed);
@@ -105,13 +90,10 @@ namespace Controller_EV3_Test
                 Console.ReadKey();
             }
         }
-<<<<<<< HEAD
 
         private void TimerOperation(object state)
         {
 
         }
-=======
->>>>>>> dbba844a4192ea0f84d26d34e7eede8528f532d2
     }
 }
