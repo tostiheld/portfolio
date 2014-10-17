@@ -44,6 +44,7 @@ namespace TowerHunterEngine
             //Window.IsBorderless = true;
 
 #if DEBUG
+            
             Components.Add(new Utils.FrameCounter(this));
 #endif
 

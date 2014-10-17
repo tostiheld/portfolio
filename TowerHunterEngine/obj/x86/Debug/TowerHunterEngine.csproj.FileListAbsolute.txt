@@ -89,3 +89,5 @@ C:\Users\MT\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX
 C:\Users\MT\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.RawInput.xml
 C:\Users\MT\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.Direct3D9.xml
 C:\Users\MT\Source\Repos\towerhunter\TowerHunterEngine\obj\x86\Debug\TowerHunterEngine.csprojResolveAssemblyReference.cache
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\obj\x86\Debug\TowerHunterEngine.Properties.Resources.resources
+C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\obj\x86\Debug\TowerHunterEngine.csproj.GenerateResource.Cache

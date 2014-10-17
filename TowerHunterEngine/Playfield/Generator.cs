@@ -33,7 +33,7 @@ namespace TowerHunterEngine.Playfield
         {
             // don't touch an empty or already generated field
             if (field == null)
-                throw new InvalidOperationException(Utils.Messages.FieldEmpty);
+                throw new InvalidOperationException(Properties.Resources.FieldEmpty);
             /*else if (field.Generated)
                 throw new InvalidOperationException(Utils.Messages.FieldGenerated);*/
             

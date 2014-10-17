@@ -48,7 +48,7 @@ namespace TowerHunterEngine.Arduino
 
         private void UnknownCommand(ReceivedCommand args)
         {
-            throw new NotSupportedException(Utils.Messages.UnknownCommand);
+            throw new NotSupportedException(Properties.Resources.UnknownCommand);
         }
 
         public bool GetTowerState(ref TowerState state)
