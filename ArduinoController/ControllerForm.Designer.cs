@@ -17,69 +17,74 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.EnableLedCheckBox = new System.Windows.Forms.CheckBox();
-            this.LedFrequencyLabelTrackBar = new System.Windows.Forms.TrackBar();
-            this.LedFrequencyLabel = new System.Windows.Forms.Label();
-            this.LedFrequencyValue = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.LedFrequencyLabelTrackBar)).BeginInit();
+            this.TurnOnLed = new System.Windows.Forms.Button();
+            this.TurnOffLed = new System.Windows.Forms.Button();
+            this.Read = new System.Windows.Forms.Button();
+            this.towerstate = new System.Windows.Forms.Label();
+            this.reset = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // EnableLedCheckBox
+            // TurnOnLed
             // 
-            this.EnableLedCheckBox.AutoSize = true;
-            this.EnableLedCheckBox.Checked = true;
-            this.EnableLedCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.EnableLedCheckBox.Location = new System.Drawing.Point(30, 12);
-            this.EnableLedCheckBox.Name = "EnableLedCheckBox";
-            this.EnableLedCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.EnableLedCheckBox.Size = new System.Drawing.Size(80, 17);
-            this.EnableLedCheckBox.TabIndex = 0;
-            this.EnableLedCheckBox.Text = "Enable Led";
-            this.EnableLedCheckBox.UseVisualStyleBackColor = true;
-            this.EnableLedCheckBox.CheckedChanged += new System.EventHandler(this.EnableLedCheckBoxCheckedChanged);
+            this.TurnOnLed.Location = new System.Drawing.Point(13, 13);
+            this.TurnOnLed.Name = "TurnOnLed";
+            this.TurnOnLed.Size = new System.Drawing.Size(88, 23);
+            this.TurnOnLed.TabIndex = 0;
+            this.TurnOnLed.Text = "Turn on LED1";
+            this.TurnOnLed.UseVisualStyleBackColor = true;
+            this.TurnOnLed.Click += new System.EventHandler(this.button1_Click);
             // 
-            // LedFrequencyLabelTrackBar
+            // TurnOffLed
             // 
-            this.LedFrequencyLabelTrackBar.Location = new System.Drawing.Point(90, 35);
-            this.LedFrequencyLabelTrackBar.Maximum = 240;
-            this.LedFrequencyLabelTrackBar.Name = "LedFrequencyLabelTrackBar";
-            this.LedFrequencyLabelTrackBar.Size = new System.Drawing.Size(208, 45);
-            this.LedFrequencyLabelTrackBar.TabIndex = 1;
-            this.LedFrequencyLabelTrackBar.Tag = "";
-            this.LedFrequencyLabelTrackBar.TickFrequency = 10;
-            this.LedFrequencyLabelTrackBar.Scroll += new System.EventHandler(this.LedFrequencyTrackBarScroll);
-            this.LedFrequencyLabelTrackBar.ValueChanged += new System.EventHandler(this.LedFrequencyLabelTrackBarValueChanged);
+            this.TurnOffLed.Location = new System.Drawing.Point(13, 43);
+            this.TurnOffLed.Name = "TurnOffLed";
+            this.TurnOffLed.Size = new System.Drawing.Size(88, 23);
+            this.TurnOffLed.TabIndex = 1;
+            this.TurnOffLed.Text = "Turn off LED1";
+            this.TurnOffLed.UseVisualStyleBackColor = true;
+            this.TurnOffLed.Click += new System.EventHandler(this.button2_Click);
             // 
-            // LedFrequencyLabel
+            // Read
             // 
-            this.LedFrequencyLabel.AutoSize = true;
-            this.LedFrequencyLabel.Location = new System.Drawing.Point(14, 36);
-            this.LedFrequencyLabel.Name = "LedFrequencyLabel";
-            this.LedFrequencyLabel.Size = new System.Drawing.Size(78, 13);
-            this.LedFrequencyLabel.TabIndex = 2;
-            this.LedFrequencyLabel.Text = "Led Frequency";
+            this.Read.Location = new System.Drawing.Point(13, 73);
+            this.Read.Name = "Read";
+            this.Read.Size = new System.Drawing.Size(88, 23);
+            this.Read.TabIndex = 2;
+            this.Read.Text = "Read towers";
+            this.Read.UseVisualStyleBackColor = true;
+            this.Read.Click += new System.EventHandler(this.Read_Click);
             // 
-            // LedFrequencyValue
+            // towerstate
             // 
-            this.LedFrequencyValue.AutoSize = true;
-            this.LedFrequencyValue.Location = new System.Drawing.Point(304, 38);
-            this.LedFrequencyValue.Name = "LedFrequencyValue";
-            this.LedFrequencyValue.Size = new System.Drawing.Size(13, 13);
-            this.LedFrequencyValue.TabIndex = 3;
-            this.LedFrequencyValue.Text = "0";
+            this.towerstate.AutoSize = true;
+            this.towerstate.Location = new System.Drawing.Point(107, 78);
+            this.towerstate.Name = "towerstate";
+            this.towerstate.Size = new System.Drawing.Size(65, 13);
+            this.towerstate.TabIndex = 3;
+            this.towerstate.Text = "Tower State";
+            // 
+            // reset
+            // 
+            this.reset.Location = new System.Drawing.Point(13, 103);
+            this.reset.Name = "reset";
+            this.reset.Size = new System.Drawing.Size(88, 23);
+            this.reset.TabIndex = 4;
+            this.reset.Text = "Reset";
+            this.reset.UseVisualStyleBackColor = true;
+            this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
             // ControllerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 85);
-            this.Controls.Add(this.LedFrequencyValue);
-            this.Controls.Add(this.LedFrequencyLabel);
-            this.Controls.Add(this.LedFrequencyLabelTrackBar);
-            this.Controls.Add(this.EnableLedCheckBox);
+            this.ClientSize = new System.Drawing.Size(352, 275);
+            this.Controls.Add(this.reset);
+            this.Controls.Add(this.towerstate);
+            this.Controls.Add(this.Read);
+            this.Controls.Add(this.TurnOffLed);
+            this.Controls.Add(this.TurnOnLed);
             this.Name = "ControllerForm";
             this.Text = "Arduino Controller";
-            ((System.ComponentModel.ISupportInitialize)(this.LedFrequencyLabelTrackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -87,10 +92,13 @@
 
         #endregion
 
-        private System.Windows.Forms.CheckBox EnableLedCheckBox;
-        private System.Windows.Forms.TrackBar LedFrequencyLabelTrackBar;
-        private System.Windows.Forms.Label LedFrequencyLabel;
-        private System.Windows.Forms.Label LedFrequencyValue;
+        private System.Windows.Forms.Button TurnOnLed;
+        private System.Windows.Forms.Button TurnOffLed;
+        private System.Windows.Forms.Button Read;
+        private System.Windows.Forms.Label towerstate;
+        private System.Windows.Forms.Button reset;
+
+
     }
 }
 

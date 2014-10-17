@@ -20,8 +20,12 @@ namespace ArduinoController
     {
         Acknowledge,            // Command to acknowledge a received command
         Error,                  // Command to message that an error has occurred
-        SetLed,                 // Command to turn led ON or OFF
-        SetLedFrequency,        // Command to set led blink frequency
+        //SetLed,                 // Command to turn led ON or OFF
+        //SetLedFrequency,        // Command to set led blink frequency
+        OnLed,
+        OffLed,
+        ReadSensors,
+        ResetTower,
     };
 
     public class ArduinoController
@@ -69,8 +73,8 @@ namespace ArduinoController
             // Start listening
             _cmdMessenger.StartListening();
 
-            _controllerForm.SetLedState(true);
-            _controllerForm.SetFrequency(2);
+            //_controllerForm.SetLedState(true);
+            //_controllerForm.SetFrequency(2);
         }
 
         // Exit function
@@ -128,7 +132,7 @@ namespace ArduinoController
         }
 
         // Sent command to change led blinking frequency
-        public void SetLedFrequency(double ledFrequency)
+        /*public void SetLedFrequency(double ledFrequency)
         {
             // Create command to start sending data
             var command = new SendCommand((int)Command.SetLedFrequency,ledFrequency);
@@ -143,7 +147,6 @@ namespace ArduinoController
             _cmdMessenger.QueueCommand(new CollapseCommandStrategy(command));
         }
 
-
         // Sent command to change led on/of state
         public void SetLedState(bool ledState)
         {
@@ -152,6 +155,33 @@ namespace ArduinoController
 
             // Send command
             _cmdMessenger.SendCommand(new SendCommand((int)Command.SetLed, ledState));         
+        }*/
+        
+        
+        public void SetOffLed(int ledindex)
+        {
+            var command = new SendCommand((int)Command.OffLed, ledindex);
+            _cmdMessenger.SendCommand(new SendCommand((int)command.OffLed, ledindex));
+        }
+
+        public void SetOnLed(int ledindex)
+        {
+            var command = new SendCommand((int)Command.OnLed, ledindex);
+            _cmdMessenger.SendCommand(new SendCommand((int)command.OnLed, ledindex));
+        }
+
+        public int[] ReadSensors()
+        {
+            var command = new SendCommand((int)Command.ReadSensors);
+            _cmdMessenger.SendCommand(new SendCommand((int)command.ReadSensors));
+
+            return array;
+        }
+
+        public void ResetTower(int towerindex)
+        {
+            var command = new SendCommand((int)Command.ReadSensors);
+            _cmdMessenger.SendCommand(new SendCommand((int)command.ResetTower));
         }
     }
 }
