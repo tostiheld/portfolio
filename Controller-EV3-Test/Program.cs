@@ -18,6 +18,8 @@ namespace Controller_EV3_Test
             int ctop;
             int cleft;
 
+            //Timer readTimer = new Timer(new TimerCallback(Timer);
+
             try
             {
                 EV3Messenger messenger = new EV3Messenger();
@@ -37,14 +39,14 @@ namespace Controller_EV3_Test
                     int left = 0;
                     int right = 0;
 
-                    int baseSpeed = (int)(state.Triggers.Left * 40);                    
+                    int baseSpeed = (int)(state.Triggers.Left * 60);                    
                     int message = baseSpeed * 100;
                     message += baseSpeed;
 
                     if (state.ThumbSticks.Left.X >= 0)
-                        right = (int)(state.ThumbSticks.Left.X * 50);
+                        right = (int)(state.ThumbSticks.Left.X * 30);
                     else if (state.ThumbSticks.Left.X <= 0)
-                        left = (int)Math.Abs(state.ThumbSticks.Left.X * 50);
+                        left = (int)Math.Abs(state.ThumbSticks.Left.X * 30);
 
                     right *= 100;
                     message += left;
@@ -81,6 +83,11 @@ namespace Controller_EV3_Test
                 Console.WriteLine("Connection closed.");
                 Console.ReadKey();
             }
+        }
+
+        private void TimerOperation(object state)
+        {
+
         }
     }
 }
