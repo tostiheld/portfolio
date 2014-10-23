@@ -90,6 +90,10 @@
     <Compile Include="Utils\RuntimeTextures.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CommandMessenger, Version=2014.9.28.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\CommandMessenger\CommandMessenger.dll</HintPath>
+    </Reference>
     <Reference Include="EV3MessengerLib">
       <HintPath>Libraries\EV3MessengerLib.dll</HintPath>
     </Reference>
