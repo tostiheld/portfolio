@@ -45,6 +45,9 @@ namespace TowerHunterEngine.Playfield
                 case SquareType.Goal:
                     this.Fill = Color.Blue;
                     break;
+                case SquareType.Test:
+                    this.Fill = Color.White;
+                    break;
             }
         }
 

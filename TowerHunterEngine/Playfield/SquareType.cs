@@ -6,6 +6,7 @@
         Forbidden,
         Powerup,
         Coin,
-        Goal
+        Goal,
+        Test
     }
 }

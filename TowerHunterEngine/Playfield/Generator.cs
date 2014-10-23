@@ -45,7 +45,7 @@ namespace TowerHunterEngine.Playfield
                     Square s = new Square(
                         new Point(x, y),
                         field.squareSize,
-                        SquareType.Safe);
+                        SquareType.Test);
                     tempgrid.SetValue(s, x, y);
                 }
             }
