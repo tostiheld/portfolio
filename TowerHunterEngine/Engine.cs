@@ -20,6 +20,9 @@ namespace TowerHunterEngine
         private readonly Point FIELDSIZE = new Point(8, 6);
         private const int TOWERS = 4;
         private const bool FULLSCREEN = true;
+        private const int SCALE = 40;
+        private const int CORRECTION_SCALE = 20;
+        private const string PORT = "com40";
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -31,6 +34,8 @@ namespace TowerHunterEngine
         private List<string> DebugLine;
         SpriteFont font;
         GameConsole console;
+
+        Robot.Connection EV3Connection;
 
         public Engine()
             : base()
@@ -61,6 +66,8 @@ namespace TowerHunterEngine
 #endif
             SetupPlayfield(GAMERES, FIELDSIZE, TOWERS, ref playField);
             SetupConsole();
+
+            EV3Connection = new Robot.Connection(PORT);
 
             base.Initialize();
         }
@@ -93,6 +100,9 @@ namespace TowerHunterEngine
 
                 oldState = newState;
             }
+
+            Point directions = Player.PlayerInput.GetDirections(SCALE, CORRECTION_SCALE);
+            EV3Connection.SendWheelData(directions.X, directions.Y);
 
             base.Update(gameTime);
         }
