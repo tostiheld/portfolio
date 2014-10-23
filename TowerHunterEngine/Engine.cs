@@ -163,7 +163,8 @@ namespace TowerHunterEngine
 #if DEBUG
             IConsoleCommand[] debugcommands = new IConsoleCommand[]
             {
-                new Utils.ConsoleCommands.RandomizeField(this, GAMERES, FIELDSIZE, TOWERS)
+                new Utils.ConsoleCommands.RandomizeField(this, GAMERES, FIELDSIZE, TOWERS),
+                new Utils.ConsoleCommands.ChangeSquareType(this, GAMERES, FIELDSIZE, TOWERS)
             };
             console.AddCommand(debugcommands);
 #endif

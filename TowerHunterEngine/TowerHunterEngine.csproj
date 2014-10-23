@@ -81,6 +81,7 @@
     <Compile Include="Score\Scoreboard.cs" />
     <Compile Include="Score\ScoreSyncAdapter.cs" />
     <Compile Include="Score\ScoreView.cs" />
+    <Compile Include="Utils\ConsoleCommands\ChangeSquareType.cs" />
     <Compile Include="Utils\ConsoleCommands\RunFullTest.cs" />
     <Compile Include="Utils\ConsoleCommands\RandomizeField.cs" />
     <Compile Include="Utils\FrameCounter.cs" />
