@@ -84,23 +84,6 @@ namespace TowerHunterEngine
 
         protected override void Update(GameTime gameTime)
         {
-            if (!console.Opened)
-            {
-                KeyboardState newState = Keyboard.GetState();
-
-                /*
-                if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                    Exit();
-
-                if (newState.IsKeyDown(Keys.R))
-                {
-                    if (!oldState.IsKeyDown(Keys.R))
-                        SetupPlayfield(GAMERES, FIELDSIZE, TOWERS, ref playField);
-                }*/
-
-                oldState = newState;
-            }
-
             Point directions = Player.PlayerInput.GetDirections(SCALE, CORRECTION_SCALE);
             EV3Connection.SendWheelData(directions.X, directions.Y);
 
@@ -116,7 +99,7 @@ namespace TowerHunterEngine
                 BlendState.NonPremultiplied,
                 SamplerState.PointClamp,
                 DepthStencilState.Default,
-                RasterizerState.CullNone);
+                RasterizerState.CullNone); // settings to scale up without blurring the edges
 
             for (int x = 0; x < playField.Grid.GetLength(0); x++)
             {

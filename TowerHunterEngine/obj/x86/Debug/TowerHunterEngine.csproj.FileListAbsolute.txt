@@ -2,10 +2,8 @@ C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\Con
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\TowerHunterEngine.exe
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\TowerHunterEngine.pdb
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\CommandMessenger.dll
-C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\MonoBrick.dll
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\MonoGame.Framework.dll
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\MonoGameConsole.dll
-C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\LibUsbDotNet.dll
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.MediaFoundation.dll
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.dll
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.XAudio2.dll
@@ -16,7 +14,6 @@ C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\Lid
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.XInput.dll
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.RawInput.dll
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.Direct3D9.dll
-C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\MonoBrick.xml
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.MediaFoundation.xml
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.xml
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\bin\Windows\Debug\SharpDX.XAudio2.xml
@@ -31,3 +28,4 @@ C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\obj\x86\Debug\TowerHu
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\obj\x86\Debug\TowerHunterEngine.exe
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\obj\x86\Debug\TowerHunterEngine.pdb
 C:\Users\Thomas\Source\Repos\towerhunter\TowerHunterEngine\obj\x86\Debug\TowerHunterEngine.csprojResolveAssemblyReference.cache
+C:\Users\Thomas\Source\Repos\TowerHunter\TowerHunterEngine\bin\Windows\Debug\EV3MessengerLib.dll
