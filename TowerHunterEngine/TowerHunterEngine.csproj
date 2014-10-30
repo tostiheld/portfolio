@@ -81,6 +81,7 @@
     <Compile Include="Score\Scoreboard.cs" />
     <Compile Include="Score\ScoreSyncAdapter.cs" />
     <Compile Include="Score\ScoreView.cs" />
+    <Compile Include="Score\Timer.cs" />
     <Compile Include="Utils\AnimatedTexture.cs" />
     <Compile Include="Utils\ConsoleCommands\ChangeSquareType.cs" />
     <Compile Include="Utils\ConsoleCommands\SetPosition.cs" />
@@ -115,6 +116,10 @@
     <Content Include="Icon.ico" />
     <Content Include="Libraries\MonoGameConsole\MonoGameConsole.dll" />
     <Content Include="todo.txt" />
+    <None Include="Content\timerFont.spritefont" />
+    <Content Include="Content\timerFont.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Libraries\CommandMessenger\CommandMessenger.dll" />
     <None Include="Libraries\MonoBrick\hidapi.dll" />
     <None Include="Libraries\MonoBrick\LibUsbDotNet.dll" />

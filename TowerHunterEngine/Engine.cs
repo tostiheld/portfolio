@@ -29,6 +29,7 @@ namespace TowerHunterEngine
         SpriteBatch spriteBatch;
 
         public Playfield.Field playField;
+        private Score.Timer Timer;
 
         private List<string> DebugLine;
         SpriteFont font;
@@ -49,6 +50,14 @@ namespace TowerHunterEngine
 
             this.playField = new Playfield.Field(this, GAMERES, FIELDSIZE);
             Components.Add(playField);
+
+            Vector2 TimerPosition = new Vector2();
+            TimerPosition.X = (float)(GAMERES.X - 115);
+            TimerPosition.Y = (float)(GAMERES.Y - 55);
+            this.Timer = new Score.Timer(this, 60, TimerPosition);
+            Components.Add(Timer);
+
+            Timer.IsEnabled = true;
 
 #if DEBUG
             Components.Add(new Utils.FrameCounter(this));
