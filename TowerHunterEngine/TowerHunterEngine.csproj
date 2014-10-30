@@ -83,6 +83,7 @@
     <Compile Include="Score\ScoreSyncAdapter.cs" />
     <Compile Include="Score\ScoreView.cs" />
     <Compile Include="Utils\ConsoleCommands\ChangeSquareType.cs" />
+    <Compile Include="Utils\ConsoleCommands\SetPosition.cs" />
     <Compile Include="Utils\ConsoleCommands\RunFullTest.cs" />
     <Compile Include="Utils\ConsoleCommands\RandomizeField.cs" />
     <Compile Include="Utils\Exceptions\EV3CommunicationException.cs" />
@@ -107,6 +108,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>

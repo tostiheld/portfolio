@@ -3,7 +3,7 @@
     public enum SquareType
     {
         Safe,
-        Forbidden,
+        Bomb,
         Powerup,
         Coin,
         Goal,

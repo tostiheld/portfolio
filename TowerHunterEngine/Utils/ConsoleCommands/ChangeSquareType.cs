@@ -46,7 +46,7 @@ namespace TowerHunterEngine.Utils.ConsoleCommands
                     type = Playfield.SquareType.Safe;
                     break;
                 case "Forbidden":
-                    type = Playfield.SquareType.Forbidden;
+                    type = Playfield.SquareType.Bomb;
                     break;
                 case "Powerup":
                     type = Playfield.SquareType.Powerup;

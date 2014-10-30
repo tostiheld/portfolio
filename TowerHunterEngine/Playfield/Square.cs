@@ -31,9 +31,10 @@ namespace TowerHunterEngine.Playfield
             switch (type)
             {
                 case SquareType.Safe:
+                    //this.Fill = new Color(0, 255, 0, 200);
                     this.Fill = Color.Green;
                     break;
-                case SquareType.Forbidden:
+                case SquareType.Bomb:
                     this.Fill = Color.Red;
                     break;
                 case SquareType.Powerup:
@@ -43,7 +44,8 @@ namespace TowerHunterEngine.Playfield
                     this.Fill = Color.Yellow;
                     break;
                 case SquareType.Goal:
-                    this.Fill = Color.Blue;
+                    this.Fill = new Color(0, 0, 255);
+                    //this.Fill = Color.Blue;
                     break;
                 case SquareType.Test:
                     this.Fill = Color.White;

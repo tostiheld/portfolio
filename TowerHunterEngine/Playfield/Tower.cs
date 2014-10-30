@@ -22,7 +22,7 @@ namespace TowerHunterEngine.Playfield
             if (state)
             {
                 this.Active = true;
-                Target.ChangeType(SquareType.Forbidden);
+                Target.ChangeType(SquareType.Bomb);
             }
             else if (!state)
             {

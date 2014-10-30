@@ -13,7 +13,7 @@ namespace TowerHunterEngine.Utils
     {
         static private Drawing.Color ConvertXNAColor(Color color)
         {
-            return Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);;
+            return Drawing.Color.FromArgb(color.A, color.B, color.G, color.R);;
         }
 
         // method to create basic colored square

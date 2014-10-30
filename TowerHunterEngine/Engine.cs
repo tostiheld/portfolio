@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 using System.Reflection;
 using MonoGameConsole;
+using System.Windows.Forms;
 #endregion
 
 namespace TowerHunterEngine
@@ -40,6 +41,8 @@ namespace TowerHunterEngine
         public Engine()
             : base()
         {
+            Window.IsBorderless = true;
+            Window.Position = new Point(0, 0);
             graphics = new GraphicsDeviceManager(this);
             graphics.IsFullScreen = FULLSCREEN;
             graphics.PreferredBackBufferHeight = GAMERES.Y;
@@ -58,7 +61,7 @@ namespace TowerHunterEngine
 
         protected override void Initialize()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);            
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 #if DEBUG
             DebugLine = new List<string>(2);
             DebugLine.Add("DEBUGGING");
@@ -98,7 +101,7 @@ namespace TowerHunterEngine
                 SpriteSortMode.Deferred,
                 BlendState.NonPremultiplied,
                 SamplerState.PointClamp,
-                DepthStencilState.Default,
+                DepthStencilState.None,
                 RasterizerState.CullNone); // settings to scale up without blurring the edges
 
             for (int x = 0; x < playField.Grid.GetLength(0); x++)
