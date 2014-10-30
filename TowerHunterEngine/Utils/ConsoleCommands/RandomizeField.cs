@@ -11,17 +11,11 @@ namespace TowerHunterEngine.Utils.ConsoleCommands
 {
     public class RandomizeField : IConsoleCommand
     {
-        private Engine Game;
-        private Point Resolution;
-        private Point Size;
-        private int TowerAmount;
+        private Playfield.Field Field;
 
-        public RandomizeField(Engine game, Point resolution, Point size, int towerAmount)
+        public RandomizeField(Playfield.Field field)
         {
-            this.Game = game;
-            this.Resolution = resolution;
-            this.Size = size;
-            this.TowerAmount = towerAmount;
+            this.Field = field;
         }
 
         public string Description
@@ -31,25 +25,7 @@ namespace TowerHunterEngine.Utils.ConsoleCommands
 
         public string Execute(string[] arguments)
         {
-            Playfield.Field tempfield = new Playfield.Field(Resolution, Size, TowerAmount);
-            if (Game.playField != null)
-                Game.playField.Dispose();
-
-            Playfield.Generator.Generate(tempfield);
-
-            for (int x = 0; x < tempfield.Grid.GetLength(0); x++)
-            {
-                for (int y = 0; y < tempfield.Grid.GetLength(1); y++)
-                {
-                    tempfield.Grid[x, y].Texture =
-                        Utils.RuntimeTextures.BasicBordered(
-                            Game.GraphicsDevice,
-                            tempfield.Grid[x, y].Fill,
-                            tempfield.Grid[x, y].Borders);
-                }
-            }
-
-            Game.playField = tempfield;
+            Field.GenerateRandom();
 
             return "Randomized the field";
         }

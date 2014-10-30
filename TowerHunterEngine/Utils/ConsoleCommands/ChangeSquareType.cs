@@ -8,85 +8,60 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TowerHunterEngine.Utils.ConsoleCommands
 {
-    class ChangeSquareType : IConsoleCommand
+    class ChangeCellType : IConsoleCommand
     {
-        private Engine Game;
-        private Point Resolution;
-        private Point Size;
-        private int TowerAmount;
+        private Playfield.Field Field;
 
-        public ChangeSquareType(Engine game, Point resolution, Point size, int towerAmount)
+        public ChangeCellType(Playfield.Field field)
         {
-            this.Game = game;
-            this.Resolution = resolution;
-            this.Size = size;
-            this.TowerAmount = towerAmount;
+            this.Field = field;
         }
         public string Description
         {
-            get { return "Change the type of a square at (x,y)"; }
+            get { return "Change the type of a cell at (x,y)"; }
         }
 
         public string Execute(string[] arguments)
         {
-            Playfield.Field tempfield = new Playfield.Field(Resolution, Size, TowerAmount);
-            if (Game.playField != null)
-                Game.playField.Dispose();
-
-            Playfield.Generator.Generate(tempfield);
-
             int ax = Convert.ToInt32(arguments[0]);
             int ay = Convert.ToInt32(arguments[1]);
 
-            Playfield.SquareType type = Playfield.SquareType.Safe;
+            Playfield.CellType type = Playfield.CellType.Safe;
 
             switch (arguments[2])
             {
                 case "Safe":
-                    type = Playfield.SquareType.Safe;
+                    type = Playfield.CellType.Safe;
                     break;
                 case "Forbidden":
-                    type = Playfield.SquareType.Bomb;
+                    type = Playfield.CellType.Bomb;
                     break;
                 case "Powerup":
-                    type = Playfield.SquareType.Powerup;
+                    type = Playfield.CellType.Powerup;
                     break;
                 case "Coin":
-                    type = Playfield.SquareType.Coin;
+                    type = Playfield.CellType.Coin;
                     break;
                 case "Goal":
-                    type = Playfield.SquareType.Goal;
+                    type = Playfield.CellType.Goal;
                     break;
                 case "Test":
-                    type = Playfield.SquareType.Test;
+                    type = Playfield.CellType.Test;
                     break;
                 default:
                     return "Unknown type";
 
             }
 
-            tempfield.Grid[ax, ay].ChangeType(type);
-
-            for (int x = 0; x < tempfield.Grid.GetLength(0); x++)
-            {
-                for (int y = 0; y < tempfield.Grid.GetLength(1); y++)
-                {
-                    tempfield.Grid[x, y].Texture =
-                        Utils.RuntimeTextures.BasicBordered(
-                            Game.GraphicsDevice,
-                            tempfield.Grid[x, y].Fill,
-                            tempfield.Grid[x, y].Borders);
-                }
-            }
-
-            Game.playField = tempfield;
+            Field.Cells[ax, ay].ChangeType(type);
+            Field.MustUpdate = true;
 
             return "Changed a Square";
         }
 
         public string Name
         {
-            get { return "SquareType"; }
+            get { return "ChangeCellType"; }
         }
     }
 }

@@ -28,8 +28,6 @@ namespace TowerHunterEngine
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        KeyboardState oldState;
-
         public Playfield.Field playField;
 
         private List<string> DebugLine;
@@ -49,10 +47,10 @@ namespace TowerHunterEngine
             graphics.PreferredBackBufferWidth = GAMERES.X;
             graphics.ApplyChanges();
 
-            //Window.IsBorderless = true;
+            this.playField = new Playfield.Field(this, GAMERES, FIELDSIZE);
+            Components.Add(playField);
 
 #if DEBUG
-            
             Components.Add(new Utils.FrameCounter(this));
 #endif
 
@@ -67,10 +65,9 @@ namespace TowerHunterEngine
             DebugLine.Add("DEBUGGING");
             DebugLine.Add(Assembly.GetExecutingAssembly().GetName().Version.ToString());
 #endif
-            SetupPlayfield(GAMERES, FIELDSIZE, TOWERS, ref playField);
             SetupConsole();
 
-            EV3Connection = new Robot.Connection(PORT);
+            //EV3Connection = new Robot.Connection(PORT);
 
             base.Initialize();
         }
@@ -88,7 +85,7 @@ namespace TowerHunterEngine
         protected override void Update(GameTime gameTime)
         {
             Point directions = Player.PlayerInput.GetDirections(SCALE, CORRECTION_SCALE);
-            EV3Connection.SendWheelData(directions.X, directions.Y);
+            //EV3Connection.SendWheelData(directions.X, directions.Y);
 
             base.Update(gameTime);
         }
@@ -97,54 +94,13 @@ namespace TowerHunterEngine
         {
             GraphicsDevice.Clear(Color.White);
 
-            spriteBatch.Begin(
-                SpriteSortMode.Deferred,
-                BlendState.NonPremultiplied,
-                SamplerState.PointClamp,
-                DepthStencilState.None,
-                RasterizerState.CullNone); // settings to scale up without blurring the edges
+            base.Draw(gameTime);
 
-            for (int x = 0; x < playField.Grid.GetLength(0); x++)
-            {
-                for (int y = 0; y < playField.Grid.GetLength(1); y++)
-                {
-                    spriteBatch.Draw(
-                        playField.Grid[x, y].Texture,
-                        playField.Grid[x, y].Bounds,
-                        Color.White);
-                }
-            }
-
+            spriteBatch.Begin();
 #if DEBUG
             spriteBatch.DrawString(font, DebugLine[0] + " v" + DebugLine[1], new Vector2(10, 10), Color.Red);
 #endif
-            spriteBatch.End();
-
-            base.Draw(gameTime);
-        }
-
-        private void SetupPlayfield(Point resolution, Point size, int towerAmount, ref Playfield.Field field)
-        {
-            // dispose of the old field because we would otherwise
-            // get a memory leak
-            if (field != null)
-                field.Dispose();
-
-            field = new Playfield.Field(resolution, size, towerAmount);
-
-            Playfield.Generator.Generate(field);
-
-            for (int x = 0; x < field.Grid.GetLength(0); x++)
-            {
-                for (int y = 0; y < field.Grid.GetLength(1); y++)
-                {
-                    field.Grid[x, y].Texture =
-                        Utils.RuntimeTextures.BasicBordered(
-                            GraphicsDevice,
-                            field.Grid[x, y].Fill,
-                            field.Grid[x, y].Borders);
-                }
-            }
+            spriteBatch.End();            
         }
 
         private void SetupConsole()
@@ -159,8 +115,8 @@ namespace TowerHunterEngine
 #if DEBUG
             IConsoleCommand[] debugcommands = new IConsoleCommand[]
             {
-                new Utils.ConsoleCommands.RandomizeField(this, GAMERES, FIELDSIZE, TOWERS),
-                new Utils.ConsoleCommands.ChangeSquareType(this, GAMERES, FIELDSIZE, TOWERS)
+                new Utils.ConsoleCommands.RandomizeField(playField),
+                new Utils.ConsoleCommands.ChangeCellType(playField)
             };
             console.AddCommand(debugcommands);
 #endif

@@ -1,51 +1,123 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
-using System.Collections;
 
 namespace TowerHunterEngine.Playfield
 {
-    public class Field : IDisposable
+    public class Field : DrawableGameComponent, IDisposable
     {
-        private int towerCount;
-        public Point squareSize;
-
-        public Field(Point resolution, Point numSquares, int numTowers)
-        {
-            this.Resolution = resolution;
-            towerCount = numTowers;
-
-            squareSize.X = resolution.X / numSquares.X;
-            squareSize.Y = resolution.Y / numSquares.Y;
-
-            this.Size = numSquares;
-
-            this.Generated = false;
-        }
+        SpriteBatch spriteBatch;
+        private Point CellSize;
 
         public Point Resolution { get; private set; }
         public Point Size { get; private set; }
-        public Square[,] Grid { get; set; }
-        public List<Tower> Towers { get; private set; }
-        public bool Generated { get; set; }
-        //public Texture2D Texture { get; set; }
+        public Cell[,] Cells { get; set; }
+        public bool MustUpdate { get; set; }
 
-        public void ApplyTowerStates(Arduino.TowerState state)
+        public Field(Game game, Point resolution, Point cellAmount) : base(game)
         {
-            int i = 0;
-            foreach (Tower t in Towers)
+            this.Resolution = resolution;
+            this.Size = cellAmount;
+            CellSize.X = resolution.X / cellAmount.X;
+            CellSize.Y = resolution.Y / cellAmount.Y;
+            this.MustUpdate = false;
+
+            // init field
+            GenerateRandom();            
+        }
+
+        public void GenerateRandom()
+        {
+            this.Cells = new Cell[this.Size.X, this.Size.Y];
+
+            for (int x = 0; x < this.Size.X; x++)
             {
-                t.SetState(state.Activated[i]);
+                for (int y = 0; y < this.Size.Y; y++)
+                {
+                    Rectangle Bounds = new Rectangle(
+                        x * CellSize.X, y * CellSize.Y,
+                        CellSize.X, CellSize.Y);
 
-                Point pos = new Point(
-                    t.Target.Bounds.X, 
-                    t.Target.Bounds.Y);
-
-                Grid[pos.X, pos.Y].ChangeType(t.Target.Type);
-
-                i++;
+                    Cell c = new Cell(Bounds, CellType.Safe);
+                    Cells.SetValue(c, x, y);
+                }
             }
+
+            MazeGenerator.Do(this);
+            this.MustUpdate = true;
+        }
+
+        public override void Initialize()
+        {
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            base.Initialize();
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            if (this.MustUpdate)
+            {
+                for (int x = 0; x < Cells.GetLength(0); x++)
+                {
+                    for (int y = 0; y < Cells.GetLength(1); y++)
+                    {
+                        Cell newCell = new Cell(Cells[x, y].Bounds, Cells[x, y].Type);
+                        newCell.Borders = Cells[x, y].Borders;
+
+                        Cells[x, y] = null;
+
+                        Cells[x, y] = newCell;
+                        Cells[x, y].Texture =
+                            Utils.RuntimeTextures.BasicBordered(
+                                GraphicsDevice,
+                                Cells[x, y].Fill,
+                                Cells[x, y].Borders);
+                    }
+                }
+
+                this.MustUpdate = false;
+            }
+
+            for (int x = 0; x < Cells.GetLength(0); x++)
+            {
+                for (int y = 0; y < Cells.GetLength(1); y++)
+                {
+                    Cells[x, y].UpdateAnimation(gameTime);
+                }
+            }
+            
+            base.Update(gameTime);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            spriteBatch.Begin(
+                SpriteSortMode.Deferred,
+                BlendState.NonPremultiplied,
+                SamplerState.PointClamp,
+                DepthStencilState.None,
+                RasterizerState.CullNone); // these are settings to scale up textures without blurring them
+
+            for (int x = 0; x < Cells.GetLength(0); x++)
+            {
+                for (int y = 0; y < Cells.GetLength(1); y++)
+                {
+                    spriteBatch.Draw(
+                        Cells[x, y].Texture,
+                        Cells[x, y].Bounds,
+                        Color.White);
+
+                    Cells[x, y].DrawAnimation(spriteBatch);
+                }
+            }
+
+            spriteBatch.End();
+            base.Draw(gameTime);
         }
 
         public void Dispose()
@@ -58,11 +130,11 @@ namespace TowerHunterEngine.Playfield
         {
             if (disposing)
             {
-                foreach (Square s in Grid)
+                foreach (Cell c in Cells)
                 {
-                    if (s != null)
+                    if (c != null)
                     {
-                        s.Dispose();
+                        c.Dispose();
                     }
                 }
             }

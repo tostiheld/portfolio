@@ -1,6 +1,6 @@
 ﻿namespace TowerHunterEngine.Playfield
 {
-    public enum SquareType
+    public enum CellType
     {
         Safe,
         Bomb,
