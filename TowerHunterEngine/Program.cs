@@ -23,7 +23,7 @@ namespace TowerHunterEngine
             
             int x;
             int y;
-            System.Drawing.Point p = new System.Drawing.Point(0, 0);
+            System.Drawing.Point p = new System.Drawing.Point(1280, 0);
 
             if (args.Length > 0)
             {

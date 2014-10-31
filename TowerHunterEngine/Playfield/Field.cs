@@ -152,7 +152,7 @@ namespace TowerHunterEngine.Playfield
                                                                 0.5f,
                                                                 new Point(100, 100)));
 
-            this.AnimatedTextures["bomb"].Load(Engine.Content, "bomb", 20, 15);
+            this.AnimatedTextures["bomb"].Load(Engine.Content, "bomb", 20, 10);
 
             base.LoadContent();
         }

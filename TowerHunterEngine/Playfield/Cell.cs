@@ -66,7 +66,7 @@ namespace TowerHunterEngine.Playfield
         public void ChangeType(CellType type)
         {
             this.Type = type;
-            this.Fill = Color.Khaki;
+            this.Fill = new Color(242, 180, 82);
             this.Animation = null;
         }
 

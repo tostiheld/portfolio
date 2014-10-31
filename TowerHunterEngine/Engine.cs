@@ -76,7 +76,7 @@ namespace TowerHunterEngine
 #endif
             SetupConsole();
 
-            //EV3Connection = new Robot.Connection(PORT);
+            EV3Connection = new Robot.Connection(PORT);
 
             base.Initialize();
         }
@@ -94,7 +94,7 @@ namespace TowerHunterEngine
         protected override void Update(GameTime gameTime)
         {
             Point directions = Player.PlayerInput.GetDirections(SCALE, CORRECTION_SCALE);
-            //EV3Connection.SendWheelData(directions.X, directions.Y);
+            EV3Connection.SendWheelData(directions.X, directions.Y);
 
             base.Update(gameTime);
         }
