@@ -58,6 +58,24 @@ namespace TowerHunterEngine.Playfield
             throw new IndexOutOfRangeException("No more available colors.");
         }
 
+        public void ResetCell(Color color)
+        {
+            foreach (Cell c in this.Cells)
+            {
+                if (c.Fill == color)
+                {
+                    c.ChangeType(CellType.Safe);
+                    foreach (Utils.AvailableColor ac in AvailableColors.Values)
+                    {
+                        if (ac.Value == color)
+                        {
+                            ac.Available = true;
+                        }
+                    }
+                }
+            }
+        }
+
         public void AddBomb()
         {
             Color usedColor = GetFirstAvailableColor();

@@ -54,9 +54,8 @@ namespace TowerHunterEngine
             Vector2 TimerPosition = new Vector2();
             TimerPosition.X = (float)(GAMERES.X - 115);
             TimerPosition.Y = (float)(GAMERES.Y - 55);
-            this.Timer = new Score.Timer(this, 60, TimerPosition);
+            this.Timer = new Score.Timer(this, 10, TimerPosition);
             Components.Add(Timer);
-
             Timer.IsEnabled = true;
 
 #if DEBUG
@@ -93,10 +92,15 @@ namespace TowerHunterEngine
 
         protected override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
+
             Point directions = Player.PlayerInput.GetDirections(SCALE, CORRECTION_SCALE);
             EV3Connection.SendWheelData(directions.X, directions.Y);
 
-            base.Update(gameTime);
+            if (Timer.Elapsed)
+            {
+                // game over
+            }
         }
 
         protected override void Draw(GameTime gameTime)
@@ -117,18 +121,11 @@ namespace TowerHunterEngine
             console = new GameConsole(this, spriteBatch);
             IConsoleCommand[] commands = new IConsoleCommand[]
             {
-                //new Utils.ConsoleCommands.RunFullTest()
+                new Utils.ConsoleCommands.RandomizeField(playField),
+                new Utils.ConsoleCommands.ChangeCellType(playField),
+                new Utils.ConsoleCommands.ResetCell(playField)
             };
             console.AddCommand(commands);
-
-#if DEBUG
-            IConsoleCommand[] debugcommands = new IConsoleCommand[]
-            {
-                new Utils.ConsoleCommands.RandomizeField(playField),
-                new Utils.ConsoleCommands.ChangeCellType(playField)
-            };
-            console.AddCommand(debugcommands);
-#endif
 
             console.Options.Prompt = ">";
             console.Options.BackgroundColor = new Color(0, 0, 0, 190);

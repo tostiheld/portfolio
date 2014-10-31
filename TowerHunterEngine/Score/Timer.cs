@@ -54,7 +54,7 @@ namespace TowerHunterEngine.Score
         {
             if (this.IsEnabled)
             {
-                if (this.TimeLeft != TimeSpan.Zero)
+                if (this.TimeLeft >= TimeSpan.Zero)
                 {
                     this.TimeLeft -= gameTime.ElapsedGameTime;
                 }

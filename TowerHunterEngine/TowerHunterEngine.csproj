@@ -84,7 +84,8 @@
     <Compile Include="Score\Timer.cs" />
     <Compile Include="Utils\AnimatedTexture.cs" />
     <Compile Include="Utils\AvailableColor.cs" />
-    <Compile Include="Utils\ConsoleCommands\ChangeSquareType.cs" />
+    <Compile Include="Utils\ConsoleCommands\ResetCell.cs" />
+    <Compile Include="Utils\ConsoleCommands\ChangeCellType.cs" />
     <Compile Include="Utils\ConsoleCommands\SetPosition.cs" />
     <Compile Include="Utils\ConsoleCommands\RandomizeField.cs" />
     <Compile Include="Utils\Exceptions\EV3CommunicationException.cs" />
