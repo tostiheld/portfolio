@@ -65,9 +65,8 @@
     <Compile Include="Engine.cs" />
     <Compile Include="Player\PlayerData.cs" />
     <Compile Include="Player\PlayerInput.cs" />
-    <Compile Include="Playfield\CellType.cs" />
     <Compile Include="Playfield\Cell.cs" />
-    <Compile Include="Playfield\CellVariants.cs" />
+    <Compile Include="Playfield\CellType.cs" />
     <Compile Include="Playfield\Field.cs" />
     <Compile Include="Playfield\MazeGenerator.cs" />
     <Compile Include="Program.cs" />
@@ -84,6 +83,7 @@
     <Compile Include="Score\ScoreView.cs" />
     <Compile Include="Score\Timer.cs" />
     <Compile Include="Utils\AnimatedTexture.cs" />
+    <Compile Include="Utils\AvailableColor.cs" />
     <Compile Include="Utils\ConsoleCommands\ChangeSquareType.cs" />
     <Compile Include="Utils\ConsoleCommands\SetPosition.cs" />
     <Compile Include="Utils\ConsoleCommands\RunFullTest.cs" />

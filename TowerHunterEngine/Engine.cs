@@ -125,7 +125,7 @@ namespace TowerHunterEngine
             IConsoleCommand[] debugcommands = new IConsoleCommand[]
             {
                 new Utils.ConsoleCommands.RandomizeField(playField),
-                new Utils.ConsoleCommands.ChangeCellType(playField)
+                //new Utils.ConsoleCommands.ChangeCellType(playField)
             };
             console.AddCommand(debugcommands);
 #endif

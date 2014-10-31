@@ -17,45 +17,23 @@ namespace TowerHunterEngine.Playfield
         public int Value { get; set; }
         public CellType Type { get; private set; }
         public bool[] Borders { get; set; }
-        /*
-        public bool[] Borders
-        {
-            get
-            {
-                return this._borders;
-            }
-            set
-            {
-                this._borders = value;
-                if (_borders[1]) // east border
-                {
-                    // 20% naar links
-                    float y = this.AnimationPosition.Y;
-                    float x = this.AnimationPosition.X;
-                    this.AnimationPosition = new Vector2(x - (float)(Bounds.Width * 0.1), y);
-                    
-                }
-                else if (_borders[2]) // south border
-                {
-                    // 20% naar boven
-                    float y = this.AnimationPosition.Y;
-                    float x = this.AnimationPosition.X;
-                    this.AnimationPosition = new Vector2(x, y - (float)(Bounds.Height * 0.1));
-                }
-            }
-        }*/
         public Texture2D Texture { get; set; }
         public Utils.AnimatedTexture Animation { get; private set; }
         public Vector2 AnimationPosition { get; private set; }
         public Color Fill { get; private set; }
 
-
-        public Cell(Rectangle bounds, CellVariants type, Utils.AnimatedTexture anim)
+        public Cell(Rectangle bounds)
         {
             this.Bounds = bounds;
-            this.ChangeType(type, anim);
-            this._borders = new bool[4] { false, false, false, false };
-            this.Borders = _borders;
+            this.ChangeType(CellType.Safe);
+            this.Borders = new bool[4] { false, false, false, false };
+        }
+
+        public Cell(Rectangle bounds, CellType type, Color fill, Utils.AnimatedTexture anim)
+        {
+            this.Bounds = bounds;
+            this.ChangeType(type, fill, anim);
+            this.Borders = new bool[4] { false, false, false, false };
 
             Point animSize = new Point(0, 0);
             if (anim != null)
@@ -85,11 +63,18 @@ namespace TowerHunterEngine.Playfield
             //spriteBatch.End();
         }
 
-        public void ChangeType(CellType type, Utils.AnimatedTexture anim)
+        public void ChangeType(CellType type)
         {
             this.Type = type;
+            this.Fill = Color.Khaki;
+            this.Animation = null;
+        }
+
+        public void ChangeType(CellType type, Color fill, Utils.AnimatedTexture anim)
+        {
+            this.Type = type;
+            this.Fill = fill;
             this.Animation = anim;
-            this.Fill = type.Fill;
         }
 
         public void Dispose()
