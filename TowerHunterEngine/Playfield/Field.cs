@@ -11,6 +11,16 @@ namespace TowerHunterEngine.Playfield
 {
     public class Field : DrawableGameComponent, IDisposable
     {
+        public Dictionary<string, bool> availableColors = new Dictionary<string, bool>
+        {
+            {"red", true},
+            {"green", true},
+            {"blue", true},
+            {"cyan", true},
+            {"yellow", true},
+            {"magenta", true}
+        };
+
         SpriteBatch spriteBatch;
         private Point CellSize;
         private Game Engine;
@@ -18,7 +28,7 @@ namespace TowerHunterEngine.Playfield
         public Point Resolution { get; private set; }
         public Point Size { get; private set; }
         public Cell[,] Cells { get; set; }
-        public List<Bomb> Bombs { get; private set; }
+        public List<CellType> CellTypes { get; private set; }
         public bool MustUpdate { get; set; }
         public Dictionary<string, Utils.AnimatedTexture> AnimatedTextures { get; set; }
 
@@ -29,28 +39,43 @@ namespace TowerHunterEngine.Playfield
             CellSize.X = resolution.X / cellAmount.X;
             CellSize.Y = resolution.Y / cellAmount.Y;
             this.MustUpdate = false;
-            this.Bombs = new List<Bomb>(initialBombs);
+            this.CellTypes = new List<CellType>(initialBombs);
             this.Engine = game;
             this.AnimatedTextures = new Dictionary<string, Utils.AnimatedTexture>();
         }
 
+        private string GetFirstAvailableColor()
+        {
+            foreach (string s in availableColors.Keys)
+            {
+                if (availableColors[s])
+                    availableColors[s] = false;
+                    return s;
+            }
+            return "";
+        }
+
         public void AddBomb()
         {
-            Bomb b = new Bomb();
+            string usedColor = GetFirstAvailableColor();
+            if (usedColor == "")
+                throw new IndexOutOfRangeException("No more colors available.");
+            
             Point RandomPos = new Point();
 
             RandomPos.X = new Random(Guid.NewGuid().GetHashCode()).Next(Size.X);
             RandomPos.Y = new Random(Guid.NewGuid().GetHashCode()).Next(Size.Y);
             
-            while (Cells[RandomPos.X, RandomPos.Y].Type == CellType.Bomb ||
+            while (Cells[RandomPos.X, RandomPos.Y].Type == CellVariants.Bomb ||
                    IsNextToBomb(RandomPos))
             {
                 RandomPos.X = new Random(Guid.NewGuid().GetHashCode()).Next(Size.X);
                 RandomPos.Y = new Random(Guid.NewGuid().GetHashCode()).Next(Size.Y);
             }
 
-            Cells[RandomPos.X, RandomPos.Y].ChangeType(CellType.Bomb, AnimatedTextures["bomb"]);
-            this.Bombs.Add(b);
+            CellType c = new CellType(usedColor, RandomPos);
+            Cells[RandomPos.X, RandomPos.Y].ChangeType(CellVariants.Bomb, AnimatedTextures["bomb"]);
+            this.CellTypes.Add(c);
 
             this.MustUpdate = true;
         }
@@ -59,11 +84,11 @@ namespace TowerHunterEngine.Playfield
         {
             if (position.X - 1 > 0 && position.X + 1 < Cells.GetLength(0))
             {
-                if (Cells[position.X + 1, position.Y].Type == CellType.Bomb)
+                if (Cells[position.X + 1, position.Y].Type == CellVariants.Bomb)
                 {
                     return true;
                 }
-                else if (Cells[position.X - 1, position.Y].Type == CellType.Bomb)
+                else if (Cells[position.X - 1, position.Y].Type == CellVariants.Bomb)
                 {
                     return true;
                 }
@@ -71,11 +96,11 @@ namespace TowerHunterEngine.Playfield
 
             if (position.Y - 1 > 0 && position.Y + 1 < Cells.GetLength(1))
             {
-                if (Cells[position.X, position.Y + 1].Type == CellType.Bomb)
+                if (Cells[position.X, position.Y + 1].Type == CellVariants.Bomb)
                 {
                     return true;
                 }
-                else if (Cells[position.X, position.Y - 1].Type == CellType.Bomb)
+                else if (Cells[position.X, position.Y - 1].Type == CellVariants.Bomb)
                 {
                     return true;
                 }
@@ -96,14 +121,14 @@ namespace TowerHunterEngine.Playfield
                         x * CellSize.X, y * CellSize.Y,
                         CellSize.X, CellSize.Y);
 
-                    Cell c = new Cell(Bounds, CellType.Safe, null);
+                    Cell c = new Cell(Bounds, CellVariants.Safe, null);
                     Cells.SetValue(c, x, y);
                 }
             }
 
             MazeGenerator.Do(this);
-            if (this.Bombs.Count != 0)
-                this.Bombs.Clear();
+            if (this.CellTypes.Count != 0)
+                this.CellTypes.Clear();
             this.MustUpdate = true;
         }
 
@@ -114,7 +139,7 @@ namespace TowerHunterEngine.Playfield
             // init field
             GenerateRandom();
 
-            for (int i = 0; i < this.Bombs.Count; i++)
+            for (int i = 0; i < this.CellTypes.Count; i++)
             {
                 AddBomb();
             }

@@ -50,7 +50,7 @@ namespace TowerHunterEngine.Playfield
         public Color Fill { get; private set; }
 
 
-        public Cell(Rectangle bounds, CellType type, Utils.AnimatedTexture anim)
+        public Cell(Rectangle bounds, CellVariants type, Utils.AnimatedTexture anim)
         {
             this.Bounds = bounds;
             this.ChangeType(type, anim);
@@ -88,34 +88,8 @@ namespace TowerHunterEngine.Playfield
         public void ChangeType(CellType type, Utils.AnimatedTexture anim)
         {
             this.Type = type;
-
-            switch (type)
-            {
-                case CellType.Bomb:
-                    this.Animation = anim;
-                    this.Fill = Color.Red;
-                    break;
-                case CellType.Coin:
-                    this.Animation = null;
-                    this.Fill = Color.Yellow;
-                    break;
-                case CellType.Goal:
-                    this.Animation = null;
-                    this.Fill = Color.Blue;
-                    break;
-                case CellType.Powerup:
-                    this.Animation = null;
-                    this.Fill = Color.Orange;
-                    break;
-                case CellType.Safe:
-                    this.Animation = null;
-                    this.Fill = Color.Green;
-                    break;
-                case CellType.Test:
-                    this.Animation = null;
-                    this.Fill = Color.White;
-                    break;
-            }
+            this.Animation = anim;
+            this.Fill = type.Fill;
         }
 
         public void Dispose()

@@ -17,7 +17,7 @@ namespace TowerHunterEngine.Utils.ConsoleCommands
         public RandomizeField(Playfield.Field field)
         {
             this.Field = field;
-            this.Bombs = field.Bombs.Count;
+            this.Bombs = field.CellTypes.Count;
         }
 
         public string Description
