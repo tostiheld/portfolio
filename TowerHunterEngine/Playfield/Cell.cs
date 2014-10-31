@@ -5,11 +5,13 @@ using System.Text;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
 namespace TowerHunterEngine.Playfield
 {
     public class Cell : IDisposable
     {
+
         public Rectangle Bounds { get; private set; }
         public int Value { get; set; }
         public CellType Type { get; private set; }
@@ -19,10 +21,10 @@ namespace TowerHunterEngine.Playfield
         public Color Fill { get; private set; }
 
 
-        public Cell(Rectangle bounds, CellType type)
+        public Cell(Rectangle bounds, CellType type, Utils.AnimatedTexture anim)
         {
             this.Bounds = bounds;
-            this.ChangeType(type);
+            this.ChangeType(type, anim);
             this.Borders = new bool[4] { false, false, false, false };
         }
 
@@ -47,23 +49,27 @@ namespace TowerHunterEngine.Playfield
             //spriteBatch.End();
         }
 
-        public void ChangeType(CellType type)
+        public void ChangeType(CellType type, Utils.AnimatedTexture anim)
         {
             this.Type = type;
 
             switch (type)
             {
                 case CellType.Bomb:
-                    // TODO: add animation and fill
+                    this.Animation = anim;
+                    this.Fill = Color.Red;
                     break;
                 case CellType.Coin:
-                    // TODO: add animation and fill
+                    this.Animation = null;
+                    this.Fill = Color.Yellow;
                     break;
                 case CellType.Goal:
-                    // TODO: add animation and fill
+                    this.Animation = null;
+                    this.Fill = Color.Blue;
                     break;
                 case CellType.Powerup:
-                    // TODO: add animation and fill
+                    this.Animation = null;
+                    this.Fill = Color.Orange;
                     break;
                 case CellType.Safe:
                     this.Animation = null;

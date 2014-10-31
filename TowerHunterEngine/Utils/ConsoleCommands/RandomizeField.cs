@@ -12,10 +12,12 @@ namespace TowerHunterEngine.Utils.ConsoleCommands
     public class RandomizeField : IConsoleCommand
     {
         private Playfield.Field Field;
+        private int Bombs;
 
         public RandomizeField(Playfield.Field field)
         {
             this.Field = field;
+            this.Bombs = field.Bombs.Count;
         }
 
         public string Description
@@ -26,6 +28,10 @@ namespace TowerHunterEngine.Utils.ConsoleCommands
         public string Execute(string[] arguments)
         {
             Field.GenerateRandom();
+            for (int i = 0; i < Bombs; i++)
+            {
+                Field.AddBomb();
+            }
 
             return "Randomized the field";
         }

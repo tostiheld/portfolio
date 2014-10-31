@@ -19,7 +19,7 @@ namespace TowerHunterEngine
         // Safe size = max (25, 15)
         private readonly Point GAMERES = new Point(1024, 768);
         private readonly Point FIELDSIZE = new Point(8, 6);
-        private const int TOWERS = 4;
+        private const int BOMBS = 5;
         private const bool FULLSCREEN = true;
         private const int SCALE = 40;
         private const int CORRECTION_SCALE = 20;
@@ -48,7 +48,7 @@ namespace TowerHunterEngine
             graphics.PreferredBackBufferWidth = GAMERES.X;
             graphics.ApplyChanges();
 
-            this.playField = new Playfield.Field(this, GAMERES, FIELDSIZE);
+            this.playField = new Playfield.Field(this, GAMERES, FIELDSIZE, BOMBS);
             Components.Add(playField);
 
             Vector2 TimerPosition = new Vector2();
@@ -83,12 +83,14 @@ namespace TowerHunterEngine
 
         protected override void LoadContent()
         {
+            playField.AnimatedTextures.Add("bomb", new Utils.AnimatedTexture(Vector2.Zero, 0f, 1f, 0.5f));
+            playField.AnimatedTextures["bomb"].Load(Content, "bomb", 13, 13);
             font = Content.Load<SpriteFont>("font");
         }
 
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            Content.Unload();
         }
 
         protected override void Update(GameTime gameTime)

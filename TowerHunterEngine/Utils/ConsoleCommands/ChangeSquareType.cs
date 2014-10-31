@@ -53,7 +53,7 @@ namespace TowerHunterEngine.Utils.ConsoleCommands
 
             }
 
-            Field.Cells[ax, ay].ChangeType(type);
+            Field.Cells[ax, ay].ChangeType(type, Field.AnimatedTextures["bomb"]);
             Field.MustUpdate = true;
 
             return "Changed a Square";

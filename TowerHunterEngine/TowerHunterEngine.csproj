@@ -65,6 +65,7 @@
     <Compile Include="Engine.cs" />
     <Compile Include="Player\PlayerData.cs" />
     <Compile Include="Player\PlayerInput.cs" />
+    <Compile Include="Playfield\Bomb.cs" />
     <Compile Include="Playfield\Cell.cs" />
     <Compile Include="Playfield\CellType.cs" />
     <Compile Include="Playfield\Field.cs" />
@@ -113,6 +114,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bomb.dds">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\bomb.xnb" />
     <Content Include="Icon.ico" />
     <Content Include="Libraries\MonoGameConsole\MonoGameConsole.dll" />
     <Content Include="todo.txt" />
