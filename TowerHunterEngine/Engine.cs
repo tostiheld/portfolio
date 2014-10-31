@@ -117,7 +117,7 @@ namespace TowerHunterEngine
             console = new GameConsole(this, spriteBatch);
             IConsoleCommand[] commands = new IConsoleCommand[]
             {
-                new Utils.ConsoleCommands.RunFullTest()
+                //new Utils.ConsoleCommands.RunFullTest()
             };
             console.AddCommand(commands);
 
@@ -125,7 +125,7 @@ namespace TowerHunterEngine
             IConsoleCommand[] debugcommands = new IConsoleCommand[]
             {
                 new Utils.ConsoleCommands.RandomizeField(playField),
-                //new Utils.ConsoleCommands.ChangeCellType(playField)
+                new Utils.ConsoleCommands.ChangeCellType(playField)
             };
             console.AddCommand(debugcommands);
 #endif

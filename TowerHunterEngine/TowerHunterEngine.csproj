@@ -86,7 +86,6 @@
     <Compile Include="Utils\AvailableColor.cs" />
     <Compile Include="Utils\ConsoleCommands\ChangeSquareType.cs" />
     <Compile Include="Utils\ConsoleCommands\SetPosition.cs" />
-    <Compile Include="Utils\ConsoleCommands\RunFullTest.cs" />
     <Compile Include="Utils\ConsoleCommands\RandomizeField.cs" />
     <Compile Include="Utils\Exceptions\EV3CommunicationException.cs" />
     <Compile Include="Utils\FrameCounter.cs" />

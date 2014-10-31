@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,38 +26,44 @@ namespace TowerHunterEngine.Utils.ConsoleCommands
             int ax = Convert.ToInt32(arguments[0]);
             int ay = Convert.ToInt32(arguments[1]);
 
-            Playfield.CellVariants type = Playfield.CellVariants.Safe;
+            Playfield.CellType type = Playfield.CellType.Safe;
             AnimatedTexture anim = null;
 
             string sType = arguments[2].ToLower();
+            Color color = Color.White;
 
-            switch (sType)
+            if (sType == "safe")
             {
-                case "safe":
-                    type = Playfield.CellVariants.Safe;
-                    break;
-                case "bomb":
-                    anim = Field.AnimatedTextures["bomb"];
-                    type = Playfield.CellVariants.Bomb;
-                    break;
-                case "powerup":
-                    type = Playfield.CellVariants.Powerup;
-                    break;
-                case "coin":
-                    type = Playfield.CellVariants.Coin;
-                    break;
-                case "goal":
-                    type = Playfield.CellVariants.Goal;
-                    break;
-                case "test":
-                    type = Playfield.CellVariants.Test;
-                    break;
-                default:
+                type = Playfield.CellType.Safe;
+                color = new Color(242, 180, 82);
+            }
+            else
+            {
+                switch (sType)
+                {
+                    case "bomb":
+                        anim = Field.AnimatedTextures["bomb"];
+                        type = Playfield.CellType.Bomb;
+                        break;
+                    case "powerup":
+                        type = Playfield.CellType.Powerup;
+                        break;
+                    case "coin":
+                        type = Playfield.CellType.Coin;
+                        break;
+                    case "goal":
+                        type = Playfield.CellType.Goal;
+                        break;
+                    case "test":
+                        type = Playfield.CellType.Test;
+                        break;
+                    default:
                     return "Unknown type";
-
+                }
+                color = Field.GetFirstAvailableColor();
             }
 
-            Field.Cells[ax, ay].ChangeType(type, anim);
+            Field.Cells[ax, ay].ChangeType(type, color, anim);
             Field.MustUpdate = true;
 
             return "Changed a Cell";
@@ -68,4 +74,4 @@ namespace TowerHunterEngine.Utils.ConsoleCommands
             get { return "ChangeCellType"; }
         }
     }
-}*/
+}
