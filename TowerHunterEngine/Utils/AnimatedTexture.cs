@@ -12,21 +12,23 @@ namespace TowerHunterEngine.Utils
     public class AnimatedTexture
     {
         private int framecount;
-        private Texture2D myTexture;
         private float TimePerFrame;
         private int Frame;
         private float TotalElapsed;
         private bool Paused;
+        private  Texture2D myTexture;
 
+        public Point Size;
         public float Rotation, Scale, Depth;
         public Vector2 Origin;
         public AnimatedTexture(Vector2 origin, float rotation,
-            float scale, float depth)
+            float scale, float depth, Point size)
         {
             this.Origin = origin;
             this.Rotation = rotation;
             this.Scale = scale;
             this.Depth = depth;
+            this.Size = size;
         }
         public void Load(ContentManager content, string asset,
             int frameCount, int framesPerSec)

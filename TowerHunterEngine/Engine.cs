@@ -83,8 +83,6 @@ namespace TowerHunterEngine
 
         protected override void LoadContent()
         {
-            playField.AnimatedTextures.Add("bomb", new Utils.AnimatedTexture(Vector2.Zero, 0f, 1f, 0.5f));
-            playField.AnimatedTextures["bomb"].Load(Content, "bomb", 13, 13);
             font = Content.Load<SpriteFont>("font");
         }
 

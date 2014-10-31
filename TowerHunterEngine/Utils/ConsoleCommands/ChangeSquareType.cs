@@ -27,25 +27,29 @@ namespace TowerHunterEngine.Utils.ConsoleCommands
             int ay = Convert.ToInt32(arguments[1]);
 
             Playfield.CellType type = Playfield.CellType.Safe;
+            AnimatedTexture anim = null;
 
-            switch (arguments[2])
+            string sType = arguments[2].ToLower();
+
+            switch (sType)
             {
-                case "Safe":
+                case "safe":
                     type = Playfield.CellType.Safe;
                     break;
-                case "Forbidden":
+                case "bomb":
+                    anim = Field.AnimatedTextures["bomb"];
                     type = Playfield.CellType.Bomb;
                     break;
-                case "Powerup":
+                case "powerup":
                     type = Playfield.CellType.Powerup;
                     break;
-                case "Coin":
+                case "coin":
                     type = Playfield.CellType.Coin;
                     break;
-                case "Goal":
+                case "goal":
                     type = Playfield.CellType.Goal;
                     break;
-                case "Test":
+                case "test":
                     type = Playfield.CellType.Test;
                     break;
                 default:
@@ -53,10 +57,10 @@ namespace TowerHunterEngine.Utils.ConsoleCommands
 
             }
 
-            Field.Cells[ax, ay].ChangeType(type, Field.AnimatedTextures["bomb"]);
+            Field.Cells[ax, ay].ChangeType(type, anim);
             Field.MustUpdate = true;
 
-            return "Changed a Square";
+            return "Changed a Cell";
         }
 
         public string Name

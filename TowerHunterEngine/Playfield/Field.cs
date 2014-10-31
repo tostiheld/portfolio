@@ -5,6 +5,7 @@ using System.Text;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
 namespace TowerHunterEngine.Playfield
 {
@@ -12,7 +13,7 @@ namespace TowerHunterEngine.Playfield
     {
         SpriteBatch spriteBatch;
         private Point CellSize;
-        private Game Game;
+        private Game Engine;
 
         public Point Resolution { get; private set; }
         public Point Size { get; private set; }
@@ -28,16 +29,9 @@ namespace TowerHunterEngine.Playfield
             CellSize.X = resolution.X / cellAmount.X;
             CellSize.Y = resolution.Y / cellAmount.Y;
             this.MustUpdate = false;
-            this.Bombs = new List<Bomb>();
-            this.Game = game;
-
-            // init field
-            GenerateRandom();
-
-            for (int i = 0; i < initialBombs; i++)
-            {
-                AddBomb();
-            }
+            this.Bombs = new List<Bomb>(initialBombs);
+            this.Engine = game;
+            this.AnimatedTextures = new Dictionary<string, Utils.AnimatedTexture>();
         }
 
         public void AddBomb()
@@ -116,8 +110,30 @@ namespace TowerHunterEngine.Playfield
         public override void Initialize()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            
+            // init field
+            GenerateRandom();
+
+            for (int i = 0; i < this.Bombs.Count; i++)
+            {
+                AddBomb();
+            }
 
             base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {
+            this.AnimatedTextures.Add("bomb", 
+                                      new Utils.AnimatedTexture(Vector2.Zero, 
+                                                                0f, 
+                                                                1f,
+                                                                0.5f,
+                                                                new Point(100, 100)));
+
+            this.AnimatedTextures["bomb"].Load(Engine.Content, "bomb", 20, 15);
+
+            base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
@@ -128,7 +144,7 @@ namespace TowerHunterEngine.Playfield
                 {
                     for (int y = 0; y < Cells.GetLength(1); y++)
                     {
-                        Cell newCell = new Cell(Cells[x, y].Bounds, Cells[x, y].Type, null);
+                        Cell newCell = new Cell(Cells[x, y].Bounds, Cells[x, y].Type, Cells[x, y].Animation);
                         newCell.Borders = Cells[x, y].Borders;
 
                         Cells[x, y] = null;

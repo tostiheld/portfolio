@@ -11,13 +11,42 @@ namespace TowerHunterEngine.Playfield
 {
     public class Cell : IDisposable
     {
+        private bool[] _borders;
 
         public Rectangle Bounds { get; private set; }
         public int Value { get; set; }
         public CellType Type { get; private set; }
         public bool[] Borders { get; set; }
+        /*
+        public bool[] Borders
+        {
+            get
+            {
+                return this._borders;
+            }
+            set
+            {
+                this._borders = value;
+                if (_borders[1]) // east border
+                {
+                    // 20% naar links
+                    float y = this.AnimationPosition.Y;
+                    float x = this.AnimationPosition.X;
+                    this.AnimationPosition = new Vector2(x - (float)(Bounds.Width * 0.1), y);
+                    
+                }
+                else if (_borders[2]) // south border
+                {
+                    // 20% naar boven
+                    float y = this.AnimationPosition.Y;
+                    float x = this.AnimationPosition.X;
+                    this.AnimationPosition = new Vector2(x, y - (float)(Bounds.Height * 0.1));
+                }
+            }
+        }*/
         public Texture2D Texture { get; set; }
         public Utils.AnimatedTexture Animation { get; private set; }
+        public Vector2 AnimationPosition { get; private set; }
         public Color Fill { get; private set; }
 
 
@@ -25,7 +54,16 @@ namespace TowerHunterEngine.Playfield
         {
             this.Bounds = bounds;
             this.ChangeType(type, anim);
-            this.Borders = new bool[4] { false, false, false, false };
+            this._borders = new bool[4] { false, false, false, false };
+            this.Borders = _borders;
+
+            Point animSize = new Point(0, 0);
+            if (anim != null)
+                animSize = anim.Size;
+
+            AnimationPosition = new Vector2((float)(Bounds.X + (Bounds.Width / 2) - (animSize.X / 2)),
+                                            (float)(Bounds.Y + (Bounds.Height / 2) - (animSize.Y / 2)));
+
         }
 
         public void UpdateAnimation(GameTime gameTime)
@@ -42,9 +80,7 @@ namespace TowerHunterEngine.Playfield
             //spriteBatch.Begin();
             if (this.Animation != null)
             {
-                this.Animation.DrawFrame(spriteBatch,
-                    new Vector2((float)this.Bounds.X,
-                                (float)this.Bounds.Y));
+                this.Animation.DrawFrame(spriteBatch, AnimationPosition);
             }
             //spriteBatch.End();
         }
