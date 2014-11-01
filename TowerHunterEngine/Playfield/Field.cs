@@ -7,19 +7,21 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
+using TowerHunterEngine.Utils;
+
 namespace TowerHunterEngine.Playfield
 {
     public class Field : DrawableGameComponent, IDisposable
     {
         public Dictionary<string, Utils.AvailableColor> AvailableColors = new Dictionary<string, Utils.AvailableColor>
         {
-            {"red",     new Utils.AvailableColor(new Color(255, 0, 0), true)},
-            {"green",   new Utils.AvailableColor(new Color(0, 255, 0), true)},
-            {"blue",    new Utils.AvailableColor(new Color(0, 0, 255), true)},
-            {"cyan",    new Utils.AvailableColor(new Color(0, 255, 255), true)},
-            {"magenta", new Utils.AvailableColor(new Color(255, 0, 255), true)},
-            {"yellow",  new Utils.AvailableColor(new Color(255, 255, 0), true)},
-            {"orange",  new Utils.AvailableColor(new Color(255, 127, 0), true)},
+            {"red",     new AvailableColor(RobotColors.Red, true)},
+            {"green",   new AvailableColor(RobotColors.Green, true)},
+            {"blue",    new AvailableColor(RobotColors.Blue, true)},
+            {"cyan",    new AvailableColor(RobotColors.Cyan, true)},
+            {"magenta", new AvailableColor(RobotColors.Magenta, true)},
+            {"yellow",  new AvailableColor(RobotColors.Yellow, true)},
+            {"orange",  new AvailableColor(RobotColors.Orange, true)},
         };
 
         SpriteBatch spriteBatch;

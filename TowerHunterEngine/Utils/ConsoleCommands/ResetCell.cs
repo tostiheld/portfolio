@@ -30,34 +30,34 @@ namespace TowerHunterEngine.Utils.ConsoleCommands
             switch (arg)
             {
                 case "red":
-                    color = new Color(255, 0, 0);
+                    color = RobotColors.Red;
                     break;
                 case "green":
-                    color = new Color(0, 255, 0);
+                    color = RobotColors.Green;
                     break;
                 case "blue":
-                    color = new Color(0, 0, 255);
+                    color = RobotColors.Blue;
                     break;
                 case "cyan":
-                    color = new Color(0, 255, 255);
+                    color = RobotColors.Cyan;
                     break;
                 case "yellow":
-                    color = new Color(255, 255, 0);
+                    color = RobotColors.Yellow;
                     break;
                 case "magenta":
-                    color = new Color(255, 0, 255);
+                    color = RobotColors.Magenta;
                     break;
                 case "orange":
-                    color = new Color(255, 127, 0);
+                    color = RobotColors.Orange;
                     break;
                 default:
-                    break;
+                    return "Unknown color";
             }
 
             Field.ResetCell(color);
             Field.MustUpdate = true;
 
-            return "Bomb removed";
+            return "Cell reset";
         }
 
         public string Name

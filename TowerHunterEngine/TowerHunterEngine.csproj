@@ -85,14 +85,17 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Robot\RobotStatus.cs" />
     <Compile Include="Utils\AnimatedTexture.cs" />
     <Compile Include="Utils\AvailableColor.cs" />
+    <Compile Include="Utils\ConsoleCommands\GetLastMessage.cs" />
     <Compile Include="Utils\ConsoleCommands\ResetCell.cs" />
     <Compile Include="Utils\ConsoleCommands\ChangeCellType.cs" />
     <Compile Include="Utils\ConsoleCommands\Reset.cs" />
     <Compile Include="Utils\ConsoleCommands\RandomizeField.cs" />
     <Compile Include="Utils\Exceptions\EV3CommunicationException.cs" />
     <Compile Include="Utils\FrameCounter.cs" />
+    <Compile Include="Utils\RobotColors.cs" />
     <Compile Include="Utils\RuntimeTextures.cs" />
   </ItemGroup>
   <ItemGroup>
