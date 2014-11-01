@@ -11,7 +11,6 @@ namespace TowerHunterEngine.PlayerFeedback
 {
     public class Timer : DrawableGameComponent
     {
-        private Vector2 Position;
         private Vector2 PositionUp;
         private Vector2 PositionDown;
         private Vector2 PositionLeft;
@@ -19,6 +18,8 @@ namespace TowerHunterEngine.PlayerFeedback
         private SpriteBatch spriteBatch;
         ContentManager content;
         SpriteFont spriteFont;
+
+        public Vector2 Position { get; set; }
 
         public bool IsEnabled { get; set; }
         public bool Elapsed { get; private set; }

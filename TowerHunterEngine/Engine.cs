@@ -28,6 +28,7 @@ namespace TowerHunterEngine
         private Playfield.Field playField;
         private PlayerFeedback.Timer Timer;
         private PlayerFeedback.InfoView Info;
+        private Player.Data PlayerData;
         private GameConsole console;
 
         private List<string> DebugLine;
@@ -65,7 +66,7 @@ namespace TowerHunterEngine
             Components.Add(Timer);
             Timer.IsEnabled = true;
 
-            this.Info = new PlayerFeedback.InfoView(this);
+            this.Info = new PlayerFeedback.InfoView(this, PlayerData);
             Components.Add(Info);
 
 #if DEBUG

@@ -2,7 +2,8 @@
 {
     public struct Data
     {
-        public int Score;
-        public int HitPoints;
+        public int Score { get; set; }
+        public int HitPoints { get; set; }
+        public int MaxHitPoints { get { return 100; } }
     }
 }
