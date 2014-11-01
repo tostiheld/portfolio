@@ -8,27 +8,29 @@ using MonoGameConsole;
 
 namespace TowerHunterEngine.Utils.ConsoleCommands
 {
-    public class SetPosition : IConsoleCommand
+    public class Reset : IConsoleCommand
     {
-        public SetPosition()
-        {
+        private Game Parent;
 
+        public Reset(Game game)
+        {
+            Parent = game;
         }
 
         public string Description
         {
-            get { return "Restarts the game at a new position"; }
+            get { return "Resets the game"; }
         }
 
         public string Execute(string[] arguments)
         {
             
-            return "";
+            return "Game reset.";
         }
 
         public string Name
         {
-            get { return "RunFullTest"; }
+            get { return "Reset"; }
         }
     }
 }

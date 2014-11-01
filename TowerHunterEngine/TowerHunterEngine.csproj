@@ -63,8 +63,9 @@
     <Compile Include="Arduino\Commander.cs" />
     <Compile Include="Arduino\TowerState.cs" />
     <Compile Include="Engine.cs" />
-    <Compile Include="Player\PlayerData.cs" />
-    <Compile Include="Player\PlayerInput.cs" />
+    <Compile Include="PlayerFeedback\InfoView.cs" />
+    <Compile Include="Player\Data.cs" />
+    <Compile Include="Player\Input.cs" />
     <Compile Include="Playfield\Cell.cs" />
     <Compile Include="Playfield\CellType.cs" />
     <Compile Include="Playfield\Field.cs" />
@@ -77,16 +78,18 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Robot\Connection.cs" />
-    <Compile Include="Robot\RobotStatus.cs" />
-    <Compile Include="Score\Scoreboard.cs" />
-    <Compile Include="Score\ScoreSyncAdapter.cs" />
-    <Compile Include="Score\ScoreView.cs" />
-    <Compile Include="Score\Timer.cs" />
+    <Compile Include="PlayerFeedback\ScoreSyncAdapter.cs" />
+    <Compile Include="PlayerFeedback\Timer.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Utils\AnimatedTexture.cs" />
     <Compile Include="Utils\AvailableColor.cs" />
     <Compile Include="Utils\ConsoleCommands\ResetCell.cs" />
     <Compile Include="Utils\ConsoleCommands\ChangeCellType.cs" />
-    <Compile Include="Utils\ConsoleCommands\SetPosition.cs" />
+    <Compile Include="Utils\ConsoleCommands\Reset.cs" />
     <Compile Include="Utils\ConsoleCommands\RandomizeField.cs" />
     <Compile Include="Utils\Exceptions\EV3CommunicationException.cs" />
     <Compile Include="Utils\FrameCounter.cs" />
@@ -114,6 +117,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Content\bomb.dds" />
     <Content Include="Content\bomb.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -132,6 +136,10 @@
     <None Include="Libraries\MonoBrick\MonoBrick.xml" />
     <None Include="Libraries\MonoBrick\usbHowTo.txt" />
     <None Include="Documentatie\memory-usage-v2014-9-29-42.diagsession" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

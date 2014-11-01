@@ -24,7 +24,7 @@ namespace TowerHunterEngine.Playfield
 
         SpriteBatch spriteBatch;
         private Point CellSize;
-        private Game Engine;
+        private Game Parent;
 
         public Point Resolution { get; private set; }
         public Point Size { get; private set; }
@@ -40,7 +40,7 @@ namespace TowerHunterEngine.Playfield
             CellSize.X = resolution.X / cellAmount.X;
             CellSize.Y = resolution.Y / cellAmount.Y;
             this.MustUpdate = false;
-            this.Engine = game;
+            this.Parent = game;
             this.AnimatedTextures = new Dictionary<string, Utils.AnimatedTexture>();
             this.BombAmount = initialBombs;
         }
@@ -170,7 +170,7 @@ namespace TowerHunterEngine.Playfield
                                                                 0.5f,
                                                                 new Point(100, 100)));
 
-            this.AnimatedTextures["bomb"].Load(Engine.Content, "bomb", 20, 10);
+            this.AnimatedTextures["bomb"].Load(Parent.Content, "bomb", 20, 10);
 
             base.LoadContent();
         }
@@ -183,7 +183,11 @@ namespace TowerHunterEngine.Playfield
                 {
                     for (int y = 0; y < Cells.GetLength(1); y++)
                     {
-                        Cell newCell = new Cell(Cells[x, y].Bounds, Cells[x, y].Type, Cells[x, y].Fill, Cells[x, y].Animation);
+                        Cell newCell = new Cell(Cells[x, y].Bounds, 
+                                                Cells[x, y].Type, 
+                                                Cells[x, y].Fill, 
+                                                Cells[x, y].Animation);
+
                         newCell.Borders = Cells[x, y].Borders;
 
                         Cells[x, y] = null;

@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace TowerHunterEngine.Player
 {
-    public static class PlayerInput
+    public static class Input
     {
         public static Point GetDirections(int scale, int correctionScale)
         {
