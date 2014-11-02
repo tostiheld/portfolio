@@ -24,7 +24,7 @@ namespace BombDefuserEngine.PlayerFeedback
         private Point MaxPositions;
 
         private int currentExplosion = 0;
-        private int textOpacity = 0;
+        private int textOpacity = 1;
 
         private FontRenderer fontRenderer;
         private FontFile fontFile;
@@ -37,7 +37,7 @@ namespace BombDefuserEngine.PlayerFeedback
             this.Parent = game;
             Explosions = new List<KeyValuePair<Vector2, Utils.AnimatedTexture>>();
 
-            ExplosionTimer = new Timer(300);
+            ExplosionTimer = new Timer(100);
             ExplosionTimer.Elapsed += new ElapsedEventHandler(ExplosionTimer_Elapsed);
         }
 
@@ -53,11 +53,11 @@ namespace BombDefuserEngine.PlayerFeedback
             {
                 Explosions[currentExplosion].Value.Play();
                 currentExplosion++;
-                textOpacity += 5;
+                textOpacity += 10;
             }
             else if (textOpacity < 255)
             {
-                textOpacity += 5;
+                textOpacity += 10;
             }
             else
             {
@@ -69,8 +69,8 @@ namespace BombDefuserEngine.PlayerFeedback
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            MaxPositions = new Point(Parent.GraphicsDevice.Viewport.Width - 100,
-                                     Parent.GraphicsDevice.Viewport.Height - 100);
+            MaxPositions = new Point(Parent.GraphicsDevice.Viewport.Width - 200,
+                                     Parent.GraphicsDevice.Viewport.Height - 200);
 
             base.Initialize();
         }
@@ -79,7 +79,10 @@ namespace BombDefuserEngine.PlayerFeedback
         {
             base.LoadContent();
 
-            string path = System.IO.Path.Combine(Parent.Content.RootDirectory, "Fonts/octin-stencil-gameover.fnt");
+            string path = System.IO.Path.Combine(
+                Parent.Content.RootDirectory, 
+                "Fonts/octin-stencil-gameover.fnt");
+
             fontTexture = Parent.Content.Load<Texture2D>("Fonts/octin-stencil-gameover_0.png");
             fontFile = FontLoader.Load(path);
             fontRenderer = new FontRenderer(fontFile, fontTexture);
@@ -91,10 +94,19 @@ namespace BombDefuserEngine.PlayerFeedback
                 Vector2 pos = new Vector2(rand.Next(MaxPositions.X),
                                           rand.Next(MaxPositions.Y));
 
-                Utils.AnimatedTexture anim = new Utils.AnimatedTexture(Vector2.Zero, 0f, 1f, 0f, new Point(192, 192));
+                Utils.AnimatedTexture anim = 
+                    new Utils.AnimatedTexture(
+                        Vector2.Zero, 
+                        0f, 
+                        1f,
+                        0f, 
+                        new Point(192, 192));
+
                 anim.Load(Parent.Content, "explosion.png", 8, 15);
                 anim.Pause();
-                KeyValuePair<Vector2, Utils.AnimatedTexture> pair = new KeyValuePair<Vector2, Utils.AnimatedTexture>(pos, anim);
+                KeyValuePair<Vector2, Utils.AnimatedTexture> pair = 
+                    new KeyValuePair<Vector2, Utils.AnimatedTexture>(pos, anim);
+
                 Explosions.Add(pair);
             }
         }
@@ -114,15 +126,18 @@ namespace BombDefuserEngine.PlayerFeedback
         {
             base.Draw(gameTime);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied);
 
             foreach (KeyValuePair<Vector2, Utils.AnimatedTexture> pair in Explosions)
             {
                 pair.Value.DrawFrame(spriteBatch, pair.Key);
             }
 
-            fontRenderer.DrawText(spriteBatch, 50, 50, "GAME");
-            fontRenderer.DrawText(spriteBatch, 50, 250, "OVER");
+            if (this.Playing)
+            {
+                fontRenderer.DrawText(spriteBatch, 300, 100, "GAME", textOpacity);
+                fontRenderer.DrawText(spriteBatch, 320, 300, "OVER", textOpacity);
+            }
 
             spriteBatch.End();
         }

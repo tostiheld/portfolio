@@ -11,8 +11,8 @@
     <char id="71" x="398" y="0" width="127" height="186" xoffset="-6" yoffset="32" xadvance="115" page="0" chnl="15" />
     <char id="77" x="0" y="0" width="136" height="186" xoffset="-4" yoffset="32" xadvance="128" page="0" chnl="15" />
     <char id="79" x="525" y="0" width="127" height="186" xoffset="-6" yoffset="32" xadvance="115" page="0" chnl="15" />
-    <char id="114" x="652" y="0" width="120" height="186" xoffset="-4" yoffset="32" xadvance="110" page="0" chnl="15" />
-    <char id="118" x="267" y="0" width="131" height="186" xoffset="-12" yoffset="32" xadvance="107" page="0" chnl="15" />
+    <char id="82" x="652" y="0" width="120" height="186" xoffset="-4" yoffset="32" xadvance="110" page="0" chnl="15" />
+    <char id="86" x="267" y="0" width="131" height="186" xoffset="-12" yoffset="32" xadvance="107" page="0" chnl="15" />
   </chars>
   <kernings count="4">
     <kerning first="118" second="79" amount="-6" />

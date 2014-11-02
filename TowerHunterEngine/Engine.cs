@@ -174,7 +174,8 @@ namespace BombDefuserEngine
                 new Utils.ConsoleCommands.ResetCell(playField),
                 new Utils.ConsoleCommands.Reset(this),
                 new Utils.ConsoleCommands.SetHP(PlayerData),
-                new Utils.ConsoleCommands.ToggleFrameCounter(this)
+                new Utils.ConsoleCommands.ToggleFrameCounter(this),
+                new Utils.ConsoleCommands.AddTime(Timer)
                 //new Utils.ConsoleCommands.GetLastMessage(EV3Connection)
             };
             console.AddCommand(commands);

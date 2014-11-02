@@ -96,6 +96,7 @@
     <Compile Include="Utils\BMFont\FontLoader.cs" />
     <Compile Include="Utils\BMFont\FontPage.cs" />
     <Compile Include="Utils\BMFont\FontRenderer.cs" />
+    <Compile Include="Utils\ConsoleCommands\AddTime.cs" />
     <Compile Include="Utils\ConsoleCommands\GetLastMessage.cs" />
     <Compile Include="Utils\ConsoleCommands\ResetCell.cs" />
     <Compile Include="Utils\ConsoleCommands\ChangeCellType.cs" />
