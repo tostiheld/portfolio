@@ -12,18 +12,5 @@
             HitPoints = 0;
             MaxHitPoints = maxHP;
         }
-
-        /*
-        public void SetHP(int HP)
-        {
-            if (HP > MaxHitPoints)
-            {
-                return;
-            }
-            else
-            {
-                HitPoints = HP;
-            }
-        }*/
     }
 }
