@@ -31,7 +31,7 @@ namespace TowerHunterEngine.Utils
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            spriteFont = content.Load<SpriteFont>("font");
+            spriteFont = content.Load<SpriteFont>("Fonts/font");
         }
 
 

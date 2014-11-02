@@ -5,72 +5,88 @@ using System.Text;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
+
+using TowerHunterEngine.Utils.BMFont;
 
 namespace TowerHunterEngine.PlayerFeedback
 {
     public class InfoView : DrawableGameComponent
     {
-        private const int WIDTH = 250;
-        private const int HEIGHT = 30;
-        private const int CHAR_POINTS = 36;
+        public const int WIDTH = 300;
+        public const int HEIGHT = 60;
         private const int CHAR_HEIGHT = 48;
 
         private Game Parent;
-        private Player.Data Data;
+        private SpriteBatch spriteBatch;
+        private ContentManager Content;
 
         private Rectangle Bounds;
-        private Rectangle HPBarFill;
+        private Texture2D Background;
+
+        private HPBar HitPointBar;
         private string Score;
         private Point ScorePosition;
+        private Texture2D ScoreFontTexture;
+
+        private FontRenderer fontRenderer;
+        private FontFile fontFile;
+
+        private Point _Position;
 
         public Point Position
         {
-            get;
+            get { return _Position; }
             set
             {
-                Position = value;
+                _Position = value;
                 Bounds = new Rectangle(value.X, value.Y, WIDTH, HEIGHT);
-
-                // make hpbar depend on own bounds
-                int barWidth = (int)(Bounds.Width * 0.7);
-                int barHeight = (int)(Bounds.Height * 0.3);
-                int barX = (int)(Position.X + (Bounds.Width * 0.04));
-                int barY = (Bounds.Height / 2) - (barHeight / 2);
-                HPBar = new Rectangle(barX, barY, barWidth, barHeight);
 
                 // make score position depend on same bounds
                 ScorePosition.X = (int)(Position.X + (Bounds.Width * 0.8));
-                ScorePosition.Y = 
+                ScorePosition.Y = Position.Y + (Bounds.Height / 2) - (CHAR_HEIGHT / 2);
             }
         }
 
-        private Rectangle HPBar
-        {
-            get;
-            set
-            {
-                HPBar = value;
-                HPBarFill.Location = HPBar.Location;
-                HPBarFill.Height = HPBar.Height;
-                HPBarFill.Width = (Data.HitPoints / Data.MaxHitPoints) * HPBar.Width;
-            }
-        }
+        public Player.Data Data { get; set; }
 
         public InfoView(Game game, Player.Data data, Point position) : base(game)
         {
             this.Parent = game;
             this.Data = data;
             this.Position = position;
+            this.Content = game.Content;
+
+            Rectangle HPBarBounds = new Rectangle(
+                (int)(Position.X + (Bounds.Width * 0.1f)),
+                (int)(Position.Y  + ((Bounds.Height / 2) - ((Bounds.Height * 0.9f) / 2))),
+                (int)(Bounds.Width * 0.7f),
+                (int)(Bounds.Height * 0.9f));
+            HitPointBar = new HPBar(Parent, HPBarBounds);
         }
 
         public override void Initialize()
         {
             base.Initialize();
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            
+            Background = 
+                Utils.RuntimeTextures.ShadowedBackground(
+                GraphicsDevice,
+                Color.CornflowerBlue, 
+                new Point(Bounds.Width, Bounds.Height));
         }
 
         protected override void LoadContent()
         {
             base.LoadContent();
+
+            string path = System.IO.Path.Combine(Parent.Content.RootDirectory, "Fonts/octin-stencil-60.fnt");
+            ScoreFontTexture = Parent.Content.Load<Texture2D>("Fonts/octin-stencil-60_0.png");
+            fontFile = FontLoader.Load(path);
+            fontRenderer = new FontRenderer(fontFile, ScoreFontTexture);
+
+            HitPointBar.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
@@ -78,11 +94,25 @@ namespace TowerHunterEngine.PlayerFeedback
             base.Update(gameTime);
 
             this.Score = Data.Score.ToString();
+
+            float percentage = ((float)Data.HitPoints / (float)Data.MaxHitPoints);
+            HitPointBar.Percentage = percentage;
+            HitPointBar.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
+            spriteBatch.Begin();
+
+            spriteBatch.Draw(Background, Bounds, Color.White);
+            fontRenderer.DrawText(spriteBatch, ScorePosition.X, ScorePosition.Y, Score);
+
+            spriteBatch.End();
+
+            HitPointBar.Draw(gameTime);
+
             base.Draw(gameTime);
+            
         }
     }
 }

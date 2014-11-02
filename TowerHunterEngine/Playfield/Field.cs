@@ -11,7 +11,7 @@ using TowerHunterEngine.Utils;
 
 namespace TowerHunterEngine.Playfield
 {
-    public class Field : DrawableGameComponent, IDisposable
+    public class Field : DrawableGameComponent
     {
         public Dictionary<string, Utils.AvailableColor> AvailableColors = new Dictionary<string, Utils.AvailableColor>
         {
@@ -221,7 +221,7 @@ namespace TowerHunterEngine.Playfield
         {
             spriteBatch.Begin(
                 SpriteSortMode.Deferred,
-                BlendState.NonPremultiplied,
+                BlendState.AlphaBlend,
                 SamplerState.PointClamp,
                 DepthStencilState.None,
                 RasterizerState.CullNone); // these are settings to scale up textures without blurring them

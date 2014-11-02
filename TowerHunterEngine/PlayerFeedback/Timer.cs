@@ -7,34 +7,31 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
+using TowerHunterEngine.Utils.BMFont;
+
 namespace TowerHunterEngine.PlayerFeedback
 {
     public class Timer : DrawableGameComponent
     {
-        private Vector2 PositionUp;
-        private Vector2 PositionDown;
-        private Vector2 PositionLeft;
-        private Vector2 PositionRight;
         private SpriteBatch spriteBatch;
         ContentManager content;
-        SpriteFont spriteFont;
 
-        public Vector2 Position { get; set; }
+        private FontRenderer fontRenderer;
+        private FontFile fontFile;
+        private Texture2D fontTexture;
+
+        public Point Position { get; set; }
 
         public bool IsEnabled { get; set; }
         public bool Elapsed { get; private set; }
         public TimeSpan TimeLeft { get; set; }
 
-        public Timer(Game game, int initialSeconds, Vector2 position) : base(game)
+        public Timer(Game game, int initialSeconds, Point position) : base(game)
         {
             this.IsEnabled = false;
             this.TimeLeft = TimeSpan.FromSeconds(initialSeconds);
             
             this.Position = position;
-            this.PositionUp = new Vector2(Position.X, Position.Y + 2);
-            this.PositionDown = new Vector2(Position.X, Position.Y - 2);
-            this.PositionLeft = new Vector2(Position.X - 2, Position.Y);
-            this.PositionRight = new Vector2(Position.X + 2, Position.Y);
 
             content = new ContentManager(game.Services);
             content.RootDirectory = "Content";
@@ -43,7 +40,11 @@ namespace TowerHunterEngine.PlayerFeedback
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            spriteFont = content.Load<SpriteFont>("timerFont");
+
+            string path = System.IO.Path.Combine(content.RootDirectory, "Fonts/octin-stencil-100.fnt");
+            fontTexture = content.Load<Texture2D>("Fonts/octin-stencil-100_0.png");
+            fontFile = FontLoader.Load(path);
+            fontRenderer = new FontRenderer(fontFile, fontTexture);
         }
 
         protected override void UnloadContent()
@@ -74,11 +75,7 @@ namespace TowerHunterEngine.PlayerFeedback
             string time = TimeLeft.ToString(@"mm\:ss");
 
             spriteBatch.Begin();
-            spriteBatch.DrawString(spriteFont, time, this.PositionUp, Color.Orange);
-            spriteBatch.DrawString(spriteFont, time, this.PositionDown, Color.Orange);
-            spriteBatch.DrawString(spriteFont, time, this.PositionLeft, Color.Orange);
-            spriteBatch.DrawString(spriteFont, time, this.PositionRight, Color.Orange);
-            spriteBatch.DrawString(spriteFont, time, this.Position, Color.DarkRed);
+            fontRenderer.DrawText(spriteBatch, Position.X, Position.Y, time);
             spriteBatch.End();
             
             base.Draw(gameTime);

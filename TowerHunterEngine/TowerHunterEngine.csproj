@@ -60,9 +60,8 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Arduino\Commander.cs" />
-    <Compile Include="Arduino\TowerState.cs" />
     <Compile Include="Engine.cs" />
+    <Compile Include="PlayerFeedback\HPBar.cs" />
     <Compile Include="PlayerFeedback\InfoView.cs" />
     <Compile Include="Player\Data.cs" />
     <Compile Include="Player\Input.cs" />
@@ -88,11 +87,20 @@
     <Compile Include="Robot\RobotStatus.cs" />
     <Compile Include="Utils\AnimatedTexture.cs" />
     <Compile Include="Utils\AvailableColor.cs" />
+    <Compile Include="Utils\BMFont\FontChar.cs" />
+    <Compile Include="Utils\BMFont\FontCommon.cs" />
+    <Compile Include="Utils\BMFont\FontFile.cs" />
+    <Compile Include="Utils\BMFont\FontInfo.cs" />
+    <Compile Include="Utils\BMFont\FontKerning.cs" />
+    <Compile Include="Utils\BMFont\FontLoader.cs" />
+    <Compile Include="Utils\BMFont\FontPage.cs" />
+    <Compile Include="Utils\BMFont\FontRenderer.cs" />
     <Compile Include="Utils\ConsoleCommands\GetLastMessage.cs" />
     <Compile Include="Utils\ConsoleCommands\ResetCell.cs" />
     <Compile Include="Utils\ConsoleCommands\ChangeCellType.cs" />
     <Compile Include="Utils\ConsoleCommands\Reset.cs" />
     <Compile Include="Utils\ConsoleCommands\RandomizeField.cs" />
+    <Compile Include="Utils\ConsoleCommands\SetHP.cs" />
     <Compile Include="Utils\Exceptions\EV3CommunicationException.cs" />
     <Compile Include="Utils\FrameCounter.cs" />
     <Compile Include="Utils\RobotColors.cs" />
@@ -125,11 +133,37 @@
     <Content Include="Content\bomb.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Fonts\octin-stencil-60_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\ground-texture.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\ground-texture2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\octin-stencil-100_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\octin-stencil-150_0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\HPBar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\HPBarFill.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon.ico" />
     <Content Include="Libraries\MonoGameConsole\MonoGameConsole.dll" />
     <Content Include="todo.txt" />
-    <None Include="Content\timerFont.spritefont" />
-    <Content Include="Content\timerFont.xnb">
+    <Content Include="Content\Fonts\octin-stencil-150.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\octin-stencil-100.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\octin-stencil-60.fnt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Libraries\CommandMessenger\CommandMessenger.dll" />
@@ -167,10 +201,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\font.spritefont" />
+    <None Include="Content\Fonts\font.spritefont" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\font.xnb">
+    <Content Include="Content\Fonts\font.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

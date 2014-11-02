@@ -34,7 +34,9 @@ namespace TowerHunterEngine
         private List<string> DebugLine;
         private SpriteFont font;
 
-        private Robot.Connection EV3Connection;
+        private Texture2D GroundTexture;
+
+        //private Robot.Connection EV3Connection;
 
         public Engine()
             : base()
@@ -59,14 +61,17 @@ namespace TowerHunterEngine
             this.playField = new Playfield.Field(this, Resolution, Fieldsize, BombAmount);
             Components.Add(playField);
 
-            Vector2 TimerPosition = new Vector2();
-            TimerPosition.X = (float)(Resolution.X - 115);
-            TimerPosition.Y = (float)(Resolution.Y - 55);
-            this.Timer = new PlayerFeedback.Timer(this, 10, TimerPosition);
+            Point TimerPosition = new Point();
+            TimerPosition.X = 5;
+            TimerPosition.Y = (Resolution.Y - 83);
+            this.Timer = new PlayerFeedback.Timer(this, 70, TimerPosition);
             Components.Add(Timer);
             Timer.IsEnabled = true;
 
-            this.Info = new PlayerFeedback.InfoView(this, PlayerData);
+            PlayerData = new Player.Data(100);
+            PlayerData.HitPoints = 50;
+
+            this.Info = new PlayerFeedback.InfoView(this, PlayerData, new Point(220, Resolution.Y - 60));
             Components.Add(Info);
 
 #if DEBUG
@@ -86,14 +91,15 @@ namespace TowerHunterEngine
 #endif
             SetupConsole();
 
-            EV3Connection = new Robot.Connection(Port);
+            //EV3Connection = new Robot.Connection(Port);
 
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            font = Content.Load<SpriteFont>("font");
+            font = Content.Load<SpriteFont>("Fonts/font");
+            GroundTexture = Content.Load<Texture2D>("ground-texture2.png");
         }
 
         protected override void UnloadContent()
@@ -105,11 +111,14 @@ namespace TowerHunterEngine
         {
             base.Update(gameTime);
 
+            Info.Data = PlayerData;
+
             if (Timer.Elapsed)
             {
                 // game over
             }
 
+            /*
             if (EV3Connection.LastStatus == Robot.RobotStatus.Dismantling)
             {
                 foreach (Utils.AvailableColor ac in playField.AvailableColors.Values)
@@ -126,12 +135,16 @@ namespace TowerHunterEngine
             {
                 Point directions = Player.Input.GetDirections(Scale, CorrectionScale);
                 EV3Connection.SendWheelData(directions.X, directions.Y);
-            }
+            }*/
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.LimeGreen);
+            spriteBatch.Begin();
+            spriteBatch.Draw(GroundTexture, new Rectangle(0, 0, 1024, 768), Color.White);
+            spriteBatch.End();
+
             base.Draw(gameTime);
             spriteBatch.Begin();
 #if DEBUG
@@ -153,7 +166,8 @@ namespace TowerHunterEngine
                 new Utils.ConsoleCommands.ChangeCellType(playField),
                 new Utils.ConsoleCommands.ResetCell(playField),
                 new Utils.ConsoleCommands.Reset(this),
-                new Utils.ConsoleCommands.GetLastMessage(EV3Connection)
+                new Utils.ConsoleCommands.SetHP(PlayerData)
+                //new Utils.ConsoleCommands.GetLastMessage(EV3Connection)
             };
             console.AddCommand(commands);
 

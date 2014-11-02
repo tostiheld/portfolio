@@ -26,6 +26,11 @@ namespace TowerHunterEngine.Utils.ConsoleCommands
 
         public string Execute(string[] arguments)
         {
+            foreach (Utils.AvailableColor ac in Field.AvailableColors.Values)
+            {
+                ac.Available = true;
+            }
+
             Field.GenerateRandom();
             for (int i = 0; i < Bombs; i++)
             {

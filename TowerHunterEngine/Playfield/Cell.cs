@@ -11,8 +11,6 @@ namespace TowerHunterEngine.Playfield
 {
     public class Cell : IDisposable
     {
-        private bool[] _borders;
-
         public Rectangle Bounds { get; private set; }
         public int Value { get; set; }
         public CellType Type { get; private set; }
@@ -66,7 +64,7 @@ namespace TowerHunterEngine.Playfield
         public void ChangeType(CellType type)
         {
             this.Type = type;
-            this.Fill = new Color(242, 180, 82);
+            this.Fill = new Color(0, 0, 0, 0);
             this.Animation = null;
         }
 
