@@ -61,6 +61,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Engine.cs" />
+    <Compile Include="PlayerFeedback\GameOverView.cs" />
     <Compile Include="PlayerFeedback\HPBar.cs" />
     <Compile Include="PlayerFeedback\InfoView.cs" />
     <Compile Include="Player\Data.cs" />
@@ -132,6 +133,9 @@
     <None Include="app.config" />
     <None Include="Content\bomb.dds" />
     <Content Include="Content\bomb.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\explosion.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Fonts\octin-stencil-60_0.png">
