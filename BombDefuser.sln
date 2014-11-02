@@ -7,11 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BombDefuserEngine", "TowerH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNAContentCompiler", "XNAContentCompiler\XNAContentCompiler.csproj", "{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6-ArduinoController", "ArduinoController\6-ArduinoController.csproj", "{F994C186-EB6F-4E71-B274-DBF46F3534BB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller-EV3-Test", "Controller-EV3-Test\Controller-EV3-Test.csproj", "{36D0D259-CDFA-4B0D-A606-486E13B1083C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2-SendAndReceive", "SendAndReceive\2-SendAndReceive.csproj", "{37286642-47EE-44D8-87D9-3CFAFC8D68BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,16 +39,6 @@ Global
 		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Release|Mixed Platforms.Build.0 = Release|x86
 		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Release|x86.ActiveCfg = Release|x86
 		{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}.Release|x86.Build.0 = Release|x86
-		{F994C186-EB6F-4E71-B274-DBF46F3534BB}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{F994C186-EB6F-4E71-B274-DBF46F3534BB}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{F994C186-EB6F-4E71-B274-DBF46F3534BB}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{F994C186-EB6F-4E71-B274-DBF46F3534BB}.Debug|x86.ActiveCfg = Debug|x86
-		{F994C186-EB6F-4E71-B274-DBF46F3534BB}.Debug|x86.Build.0 = Debug|x86
-		{F994C186-EB6F-4E71-B274-DBF46F3534BB}.Release|Any CPU.ActiveCfg = Release|x86
-		{F994C186-EB6F-4E71-B274-DBF46F3534BB}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{F994C186-EB6F-4E71-B274-DBF46F3534BB}.Release|Mixed Platforms.Build.0 = Release|x86
-		{F994C186-EB6F-4E71-B274-DBF46F3534BB}.Release|x86.ActiveCfg = Release|x86
-		{F994C186-EB6F-4E71-B274-DBF46F3534BB}.Release|x86.Build.0 = Release|x86
 		{36D0D259-CDFA-4B0D-A606-486E13B1083C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{36D0D259-CDFA-4B0D-A606-486E13B1083C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36D0D259-CDFA-4B0D-A606-486E13B1083C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -63,16 +49,6 @@ Global
 		{36D0D259-CDFA-4B0D-A606-486E13B1083C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{36D0D259-CDFA-4B0D-A606-486E13B1083C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{36D0D259-CDFA-4B0D-A606-486E13B1083C}.Release|x86.ActiveCfg = Release|Any CPU
-		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Debug|x86.ActiveCfg = Debug|x86
-		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Debug|x86.Build.0 = Debug|x86
-		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Release|Any CPU.ActiveCfg = Release|x86
-		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Release|Mixed Platforms.Build.0 = Release|x86
-		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Release|x86.ActiveCfg = Release|x86
-		{37286642-47EE-44D8-87D9-3CFAFC8D68BD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
