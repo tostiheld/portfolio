@@ -6,7 +6,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace TowerHunterEngine.Player
+namespace BombDefuserEngine.Player
 {
     public static class Input
     {

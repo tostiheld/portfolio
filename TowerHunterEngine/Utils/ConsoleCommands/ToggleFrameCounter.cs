@@ -6,7 +6,7 @@ using System.Text;
 using MonoGameConsole;
 using Microsoft.Xna.Framework;
 
-namespace TowerHunterEngine.Utils.ConsoleCommands
+namespace BombDefuserEngine.Utils.ConsoleCommands
 {
     class ToggleFrameCounter : IConsoleCommand
     {

@@ -6,7 +6,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TowerHunterEngine.Utils.BMFont
+namespace BombDefuserEngine.Utils.BMFont
 {
     public class FontRenderer
     {

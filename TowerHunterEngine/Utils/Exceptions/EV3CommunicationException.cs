@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TowerHunterEngine.Utils.Exceptions
+namespace BombDefuserEngine.Utils.Exceptions
 {
     class EV3CommunicationException : Exception
     {

@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace TowerHunterEngine.Utils.BMFont
+namespace BombDefuserEngine.Utils.BMFont
 {
     [Serializable]
     public class FontInfo

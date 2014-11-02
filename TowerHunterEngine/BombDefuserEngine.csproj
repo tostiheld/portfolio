@@ -8,8 +8,8 @@
     <ProjectGuid>{597C93E8-EF3E-4E31-BAD8-BB9CCC9BBBBE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TowerHunterEngine</RootNamespace>
-    <AssemblyName>TowerHunterEngine</AssemblyName>
+    <RootNamespace>BombDefuserEngine</RootNamespace>
+    <AssemblyName>BombDefuserEngine</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>

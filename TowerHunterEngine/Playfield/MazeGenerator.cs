@@ -12,7 +12,7 @@ using System.Text;
 
 using Microsoft.Xna.Framework;
 
-namespace TowerHunterEngine.Playfield
+namespace BombDefuserEngine.Playfield
 {
     public static class MazeGenerator
     {

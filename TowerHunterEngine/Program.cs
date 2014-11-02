@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 #endregion
 
-namespace TowerHunterEngine
+namespace BombDefuserEngine
 {
 #if WINDOWS || LINUX
     /// <summary>

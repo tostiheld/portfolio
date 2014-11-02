@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Reflection;
 using MonoGameConsole;
 
-namespace TowerHunterEngine
+namespace BombDefuserEngine
 {
     public class Engine : Game
     {

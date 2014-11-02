@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TowerHunterEngine.PlayerFeedback
+namespace BombDefuserEngine.PlayerFeedback
 {
     public class ScoreSyncAdapter
     {

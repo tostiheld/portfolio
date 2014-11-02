@@ -7,10 +7,10 @@ using System.Timers;
 using EV3MessengerLib;
 using Microsoft.Xna.Framework;
 
-using TowerHunterEngine.Utils;
-using TowerHunterEngine.Utils.Exceptions;
+using BombDefuserEngine.Utils;
+using BombDefuserEngine.Utils.Exceptions;
 
-namespace TowerHunterEngine.Robot
+namespace BombDefuserEngine.Robot
 {
     public class Connection
     {

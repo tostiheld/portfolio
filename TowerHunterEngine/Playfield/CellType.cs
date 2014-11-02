@@ -1,4 +1,4 @@
-﻿namespace TowerHunterEngine.Playfield
+﻿namespace BombDefuserEngine.Playfield
 {
     public enum CellType
     {

@@ -1,4 +1,4 @@
-﻿namespace TowerHunterEngine.Player
+﻿namespace BombDefuserEngine.Player
 {
     public class Data
     {

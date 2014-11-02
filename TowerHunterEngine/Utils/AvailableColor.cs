@@ -5,7 +5,7 @@ using System.Text;
 
 using Microsoft.Xna.Framework;
 
-namespace TowerHunterEngine.Utils
+namespace BombDefuserEngine.Utils
 {
     public class AvailableColor
     {

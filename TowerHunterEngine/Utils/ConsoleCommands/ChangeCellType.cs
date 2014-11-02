@@ -6,7 +6,7 @@ using MonoGameConsole;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TowerHunterEngine.Utils.ConsoleCommands
+namespace BombDefuserEngine.Utils.ConsoleCommands
 {
     class ChangeCellType : IConsoleCommand
     {

@@ -5,7 +5,7 @@ using System.Text;
 
 using MonoGameConsole;
 
-namespace TowerHunterEngine.Utils.ConsoleCommands
+namespace BombDefuserEngine.Utils.ConsoleCommands
 {
     public class GetLastMessage : IConsoleCommand
     {

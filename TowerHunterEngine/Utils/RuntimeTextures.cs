@@ -7,7 +7,7 @@ using Drawing = System.Drawing;
 using Imaging = System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
-namespace TowerHunterEngine.Utils
+namespace BombDefuserEngine.Utils
 {
     static class RuntimeTextures
     {

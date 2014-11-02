@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
-namespace TowerHunterEngine.PlayerFeedback
+namespace BombDefuserEngine.PlayerFeedback
 {
     public class HPBar
     {

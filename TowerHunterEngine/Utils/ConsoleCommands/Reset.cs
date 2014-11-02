@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameConsole;
 
-namespace TowerHunterEngine.Utils.ConsoleCommands
+namespace BombDefuserEngine.Utils.ConsoleCommands
 {
     public class Reset : IConsoleCommand
     {

@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TowerHunterEngine", "TowerHunterEngine\TowerHunterEngine.csproj", "{597C93E8-EF3E-4E31-BAD8-BB9CCC9BBBBE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BombDefuserEngine", "TowerHunterEngine\BombDefuserEngine.csproj", "{597C93E8-EF3E-4E31-BAD8-BB9CCC9BBBBE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNAContentCompiler", "XNAContentCompiler\XNAContentCompiler.csproj", "{36FF2ED9-1494-42C3-A3D3-60C7EF6FAA12}"
 EndProject
@@ -78,8 +78,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_ConfigurationName = Release
-		BuildVersion_UseGlobalSettings = True
 		BuildVersion_AssemblyInfoFilename = TowerHunterEngine\Properties\AssemblyInfo.cs
+		BuildVersion_UseGlobalSettings = True
+		BuildVersion_ConfigurationName = Release
 	EndGlobalSection
 EndGlobal

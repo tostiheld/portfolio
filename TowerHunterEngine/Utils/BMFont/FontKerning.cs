@@ -8,7 +8,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 
-namespace TowerHunterEngine.Utils.BMFont
+namespace BombDefuserEngine.Utils.BMFont
 {
     [Serializable]
     public class FontKerning
