@@ -28,7 +28,7 @@ namespace BombDefuserEngine
         SpriteBatch spriteBatch;
 
         private Playfield.Field playField;
-        private PlayerFeedback.Timer Timer;
+        private PlayerFeedback.CountdownTimer Timer;
         private PlayerFeedback.InfoView Info;
         private Player.Data PlayerData;
         private GameConsole console;
@@ -66,7 +66,7 @@ namespace BombDefuserEngine
             Point TimerPosition = new Point();
             TimerPosition.X = 5;
             TimerPosition.Y = (Resolution.Y - 83);
-            this.Timer = new PlayerFeedback.Timer(this, 70, TimerPosition);
+            this.Timer = new PlayerFeedback.CountdownTimer(this, 70, TimerPosition);
             Components.Add(Timer);
             Timer.IsEnabled = true;
 

@@ -11,7 +11,7 @@ using BombDefuserEngine.Utils.BMFont;
 
 namespace BombDefuserEngine.PlayerFeedback
 {
-    public class Timer : DrawableGameComponent
+    public class CountdownTimer : DrawableGameComponent
     {
         private SpriteBatch spriteBatch;
         ContentManager content;
@@ -26,7 +26,7 @@ namespace BombDefuserEngine.PlayerFeedback
         public bool Elapsed { get; private set; }
         public TimeSpan TimeLeft { get; set; }
 
-        public Timer(Game game, int initialSeconds, Point position) : base(game)
+        public CountdownTimer(Game game, int initialSeconds, Point position) : base(game)
         {
             this.IsEnabled = false;
             this.TimeLeft = TimeSpan.FromSeconds(initialSeconds);

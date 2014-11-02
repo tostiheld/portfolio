@@ -78,7 +78,7 @@
     </Compile>
     <Compile Include="Robot\Connection.cs" />
     <Compile Include="PlayerFeedback\ScoreSyncAdapter.cs" />
-    <Compile Include="PlayerFeedback\Timer.cs" />
+    <Compile Include="PlayerFeedback\CountdownTimer.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
