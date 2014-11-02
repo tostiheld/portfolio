@@ -1,0 +1,982 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SequenceDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" dslVersion="1.0.0.0" Id="f1b68ac0-0779-4fd5-9947-fec6c70a2dfa" name="MazeGenerator_Do" mode="DotNet" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner">
+  <packagedElements>
+    <packageHasNamedElement>
+      <interaction Id="9a239aac-8f68-449a-9283-53fb3b97bbf3" name="MazeGenerator_Do" collapseFragmentsFlag="false" isActiveClass="false" isAbstract="false" isLeaf="false" isReentrant="false">
+        <fragments>
+          <behaviorExecutionSpecification Id="4cc427c8-369d-4ae2-9074-b174d62ca649" name="BehaviorExecutionSpecification">
+            <coveredLifelines>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="55f8bd3c-cac0-4054-811c-f308e0d2df01" LastKnownName="ExecutionOccurrenceSpecification" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="fff79d09-2089-4a85-bbcb-1ac8bbde0398" LastKnownName="ExecutionOccurrenceSpecification" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="ab980b32-d6da-4724-883a-44ede5199f06" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="b4867c9f-d321-42f3-8149-6d2f2ee2bee5" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="3b620419-c26b-4b6e-b718-9ae999d88a08" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="a8adbc8d-09e2-4fd0-8f61-e1a7dfc98ca2" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="b1e5b2a6-9232-4efb-ad4c-7abc97eeddcd" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="6aa06345-0fed-4087-ae70-27c75fedb725" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="aa3159df-cb35-4832-8d37-8b966c9c0adc" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="fd4135be-87fc-4c72-b66f-c4e4c196d389" LastKnownName="MessageOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="0a0cb162-c8cc-4008-b37a-f9cf66547393" LastKnownName="ExecutionOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="dda38197-2112-4ca5-a4fa-3e3e80259446" LastKnownName="ExecutionOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="c277c182-9b77-4934-942f-81d23dc7402d" LastKnownName="MessageOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="d8112cdf-966e-4c82-8ba5-ad402793f312" LastKnownName="ExecutionOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="ab7a366a-9dc6-4f9a-bd1b-ab75752b1095" LastKnownName="ExecutionOccurrenceSpecification" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="fff79d09-2089-4a85-bbcb-1ac8bbde0398" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="0fb4f5a8-35ec-4da6-8917-e5a76aed6357" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <lostFoundTarget Id="58183eea-f059-465e-b9e5-c55d84635c7b" name="LostFoundTarget" />
+          <messageOccurrenceSpecification Id="ab980b32-d6da-4724-883a-44ede5199f06" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification Id="5fb8346b-de6f-4898-b1dc-bcb2af79b298" name="BehaviorExecutionSpecification">
+            <coveredLifelines>
+              <lifelineMoniker Id="04373e76-34be-4d2b-add5-f772b82fd00d" LastKnownName="MazeGenerator.DX : Dictionary&lt;MazeGenerator.Directions, Int32&gt;" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="2992cac3-5c11-4309-97d3-5b8409d8f36c" LastKnownName="ExecutionOccurrenceSpecification" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="ddd0b035-e117-4ae1-aeb5-4000d4660504" LastKnownName="ExecutionOccurrenceSpecification" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="91eaf9b9-fe4d-48de-8c92-71b0b644c659" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="b3d3ae70-1ee4-4dd3-b6eb-9b484506e50f" LastKnownName="MessageOccurrenceSpecification" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="ddd0b035-e117-4ae1-aeb5-4000d4660504" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="1f9486de-5d55-4373-8493-30a29920fe5f" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="04373e76-34be-4d2b-add5-f772b82fd00d" LastKnownName="MazeGenerator.DX : Dictionary&lt;MazeGenerator.Directions, Int32&gt;" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="b4867c9f-d321-42f3-8149-6d2f2ee2bee5" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="91eaf9b9-fe4d-48de-8c92-71b0b644c659" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="04373e76-34be-4d2b-add5-f772b82fd00d" LastKnownName="MazeGenerator.DX : Dictionary&lt;MazeGenerator.Directions, Int32&gt;" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="3b620419-c26b-4b6e-b718-9ae999d88a08" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="b3d3ae70-1ee4-4dd3-b6eb-9b484506e50f" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="04373e76-34be-4d2b-add5-f772b82fd00d" LastKnownName="MazeGenerator.DX : Dictionary&lt;MazeGenerator.Directions, Int32&gt;" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="2992cac3-5c11-4309-97d3-5b8409d8f36c" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="74a5acb0-ebff-47a3-b775-58e2184cb412" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="04373e76-34be-4d2b-add5-f772b82fd00d" LastKnownName="MazeGenerator.DX : Dictionary&lt;MazeGenerator.Directions, Int32&gt;" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification Id="58f27a68-90d2-49ec-af8c-156d1da1a5c3" name="BehaviorExecutionSpecification">
+            <coveredLifelines>
+              <lifelineMoniker Id="2637e070-b8f5-459e-b2c3-b27e9a2fc7a1" LastKnownName="MazeGenerator.DY : Dictionary&lt;MazeGenerator.Directions, Int32&gt;" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="a9a8b6c6-661e-45ad-a194-b1c9d7091a49" LastKnownName="ExecutionOccurrenceSpecification" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="58e4feae-ac92-4d97-89c5-64cc9a017db2" LastKnownName="ExecutionOccurrenceSpecification" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="325dc61d-d0a4-4a5d-8865-bd5751a91da9" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="2ccd1031-43f3-421e-87b3-bf1bb9bc5be6" LastKnownName="MessageOccurrenceSpecification" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="58e4feae-ac92-4d97-89c5-64cc9a017db2" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="511bcfaf-f5ac-40da-8573-93883c9b4530" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="2637e070-b8f5-459e-b2c3-b27e9a2fc7a1" LastKnownName="MazeGenerator.DY : Dictionary&lt;MazeGenerator.Directions, Int32&gt;" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="a8adbc8d-09e2-4fd0-8f61-e1a7dfc98ca2" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="325dc61d-d0a4-4a5d-8865-bd5751a91da9" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="2637e070-b8f5-459e-b2c3-b27e9a2fc7a1" LastKnownName="MazeGenerator.DY : Dictionary&lt;MazeGenerator.Directions, Int32&gt;" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="2ccd1031-43f3-421e-87b3-bf1bb9bc5be6" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="2637e070-b8f5-459e-b2c3-b27e9a2fc7a1" LastKnownName="MazeGenerator.DY : Dictionary&lt;MazeGenerator.Directions, Int32&gt;" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="b1e5b2a6-9232-4efb-ad4c-7abc97eeddcd" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="a9a8b6c6-661e-45ad-a194-b1c9d7091a49" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="fb79df75-c861-4771-b33f-9457febccc2b" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="2637e070-b8f5-459e-b2c3-b27e9a2fc7a1" LastKnownName="MazeGenerator.DY : Dictionary&lt;MazeGenerator.Directions, Int32&gt;" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification Id="acb01f7f-4e35-4430-b698-6ea1bd7968d8" name="BehaviorExecutionSpecification">
+            <coveredLifelines>
+              <lifelineMoniker Id="723d9936-6e6c-4138-b1d3-5042ec7a8116" LastKnownName="MazeGenerator.OPPOSITE : Dictionary&lt;MazeGenerator.Directions, MazeGenerator.Directions&gt;" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="c9d3234e-fbbf-43a3-bc8b-74e385aec3ba" LastKnownName="ExecutionOccurrenceSpecification" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="a14f01fd-60b6-4aa9-9e22-b038884a9d2b" LastKnownName="ExecutionOccurrenceSpecification" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="3ac511e1-c06b-453d-aa40-6b8ffb5ec7c0" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="f503ec60-5e9a-422f-9180-d93a9e1bead3" LastKnownName="MessageOccurrenceSpecification" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="a14f01fd-60b6-4aa9-9e22-b038884a9d2b" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="1c26e718-6891-496d-bdb4-874f1fa71c1f" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="723d9936-6e6c-4138-b1d3-5042ec7a8116" LastKnownName="MazeGenerator.OPPOSITE : Dictionary&lt;MazeGenerator.Directions, MazeGenerator.Directions&gt;" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="6aa06345-0fed-4087-ae70-27c75fedb725" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="3ac511e1-c06b-453d-aa40-6b8ffb5ec7c0" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="723d9936-6e6c-4138-b1d3-5042ec7a8116" LastKnownName="MazeGenerator.OPPOSITE : Dictionary&lt;MazeGenerator.Directions, MazeGenerator.Directions&gt;" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="aa3159df-cb35-4832-8d37-8b966c9c0adc" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="f503ec60-5e9a-422f-9180-d93a9e1bead3" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="723d9936-6e6c-4138-b1d3-5042ec7a8116" LastKnownName="MazeGenerator.OPPOSITE : Dictionary&lt;MazeGenerator.Directions, MazeGenerator.Directions&gt;" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="c9d3234e-fbbf-43a3-bc8b-74e385aec3ba" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="314a379b-d727-4925-83ff-6eb7ede562d0" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="723d9936-6e6c-4138-b1d3-5042ec7a8116" LastKnownName="MazeGenerator.OPPOSITE : Dictionary&lt;MazeGenerator.Directions, MazeGenerator.Directions&gt;" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="fd4135be-87fc-4c72-b66f-c4e4c196d389" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification Id="4acf2b5e-6f02-432a-841b-955432c74b80" name="BehaviorExecutionSpecification">
+            <coveredLifelines>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="dda38197-2112-4ca5-a4fa-3e3e80259446" LastKnownName="ExecutionOccurrenceSpecification" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="0a0cb162-c8cc-4008-b37a-f9cf66547393" LastKnownName="ExecutionOccurrenceSpecification" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="f34952a5-98b5-449d-b445-aefaabcf2dfc" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="90512c31-9619-429a-ab68-60c511cca7aa" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="3b64efea-8c72-48f1-9c1e-42249c4f1114" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="df3fd166-4594-4346-a08a-85e085906f90" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="7548229a-7fde-478d-8c79-dc65ef50a6aa" LastKnownName="MessageOccurrenceSpecification" />
+              <operandOccurrenceSpecificationMoniker Id="f5daef68-167a-4f80-8317-87d872743573" LastKnownName="OperandOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="5ada68b8-43a5-4b86-9e8f-91ef9d260ea2" LastKnownName="MessageOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="8a912776-23e0-492a-a1bb-118cf8d1e7ee" LastKnownName="ExecutionOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="087bf5d4-e80a-49d8-a545-ddd0fb64d3c0" LastKnownName="ExecutionOccurrenceSpecification" />
+              <operandOccurrenceSpecificationMoniker Id="78163cd0-cc28-4c1f-946f-4c124936a977" LastKnownName="OperandOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="fa074998-6358-422a-beb9-16c5893ec35f" LastKnownName="MessageOccurrenceSpecification" />
+              <operandOccurrenceSpecificationMoniker Id="7c74c4f6-55a8-4287-9329-3d22cae6f98a" LastKnownName="OperandOccurrenceSpecification" />
+              <operandOccurrenceSpecificationMoniker Id="ed8dc98d-b473-4dab-94e6-a60f25f01e4a" LastKnownName="OperandOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="92e9bf1f-616a-4f6b-ac1d-b2f9dcb34dc5" LastKnownName="MessageOccurrenceSpecification" />
+              <operandOccurrenceSpecificationMoniker Id="8d97248e-1ef6-4842-bda2-1a6d6e5a56bd" LastKnownName="OperandOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="de9c0029-231d-4162-bd65-5091ef3fb8f8" LastKnownName="MessageOccurrenceSpecification" />
+              <operandOccurrenceSpecificationMoniker Id="7353be59-0ce3-442f-a9ef-8ee7de15fe21" LastKnownName="OperandOccurrenceSpecification" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="0a0cb162-c8cc-4008-b37a-f9cf66547393" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="7256a553-2757-4b6a-9d11-fe419b81f9ba" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="f34952a5-98b5-449d-b445-aefaabcf2dfc" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification Id="de5d0fff-778e-4f04-8bd8-b54295cd6453" name="BehaviorExecutionSpecification">
+            <coveredLifelines>
+              <lifelineMoniker Id="551f617b-81dc-445b-9886-9da232d3ecf6" LastKnownName="source : List&lt;MazeGenerator.Directions&gt;" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="e68153b6-4c27-47e2-848f-a1f2f971f9ae" LastKnownName="ExecutionOccurrenceSpecification" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="a350625b-415b-4845-8016-b188594501bd" LastKnownName="ExecutionOccurrenceSpecification" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="6dfc541f-c180-4427-93c9-177776d8381b" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="da784397-8986-4e9a-a02e-86509f066642" LastKnownName="MessageOccurrenceSpecification" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="a350625b-415b-4845-8016-b188594501bd" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="2c2f5ae7-d622-4c73-a96f-bc05cf355dd8" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="551f617b-81dc-445b-9886-9da232d3ecf6" LastKnownName="source : List&lt;MazeGenerator.Directions&gt;" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="6dfc541f-c180-4427-93c9-177776d8381b" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="551f617b-81dc-445b-9886-9da232d3ecf6" LastKnownName="source : List&lt;MazeGenerator.Directions&gt;" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="90512c31-9619-429a-ab68-60c511cca7aa" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="da784397-8986-4e9a-a02e-86509f066642" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="551f617b-81dc-445b-9886-9da232d3ecf6" LastKnownName="source : List&lt;MazeGenerator.Directions&gt;" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="3b64efea-8c72-48f1-9c1e-42249c4f1114" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="e68153b6-4c27-47e2-848f-a1f2f971f9ae" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="282e6a61-9130-48a8-8a52-5f5a4abdebd1" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="551f617b-81dc-445b-9886-9da232d3ecf6" LastKnownName="source : List&lt;MazeGenerator.Directions&gt;" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification Id="9af5117a-10e1-49b8-96cb-db18693661b4" name="BehaviorExecutionSpecification">
+            <coveredLifelines>
+              <lifelineMoniker Id="551f617b-81dc-445b-9886-9da232d3ecf6" LastKnownName="source : List&lt;MazeGenerator.Directions&gt;" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="3775ffa8-ad98-4b52-a70b-87f737f25e29" LastKnownName="ExecutionOccurrenceSpecification" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="a1399d76-0701-4724-b20d-2ac447baa31e" LastKnownName="ExecutionOccurrenceSpecification" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="977c16e9-64d5-4a9b-b5be-29df07a094c8" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="62cd3232-f724-457e-92a4-617792c5b91e" LastKnownName="MessageOccurrenceSpecification" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="a1399d76-0701-4724-b20d-2ac447baa31e" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="624083f7-3f49-46cf-bf7e-53eab1f085b7" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="551f617b-81dc-445b-9886-9da232d3ecf6" LastKnownName="source : List&lt;MazeGenerator.Directions&gt;" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="df3fd166-4594-4346-a08a-85e085906f90" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="977c16e9-64d5-4a9b-b5be-29df07a094c8" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="551f617b-81dc-445b-9886-9da232d3ecf6" LastKnownName="source : List&lt;MazeGenerator.Directions&gt;" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="62cd3232-f724-457e-92a4-617792c5b91e" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="551f617b-81dc-445b-9886-9da232d3ecf6" LastKnownName="source : List&lt;MazeGenerator.Directions&gt;" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="7548229a-7fde-478d-8c79-dc65ef50a6aa" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="3775ffa8-ad98-4b52-a70b-87f737f25e29" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="1635f002-67fd-4e6b-bd0e-baf6e532fb1e" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="551f617b-81dc-445b-9886-9da232d3ecf6" LastKnownName="source : List&lt;MazeGenerator.Directions&gt;" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <combinedFragment Id="b9a6e3d7-2e29-435a-813e-b73375d0df24" name="CombinedFragment1" interactionOperator="Loop" customInteractionOperator="Loop">
+            <coveredLifelines>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </coveredLifelines>
+            <operands>
+              <interactionOperand Id="b9f2e2e7-2cf2-426a-890c-c2aff17de622" name="InteractionOperand1">
+                <coveredLifelines>
+                  <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+                </coveredLifelines>
+                <fragments>
+                  <combinedFragment Id="eedc36ba-41d3-49cb-8a42-1c6b0b014c8b" name="CombinedFragment1" interactionOperator="Opt" customInteractionOperator="If">
+                    <coveredLifelines>
+                      <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+                    </coveredLifelines>
+                    <operands>
+                      <interactionOperand Id="77486801-07c6-4830-b89d-86fff634d87b" name="InteractionOperand1">
+                        <coveredLifelines>
+                          <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+                        </coveredLifelines>
+                        <guard>
+                          <interactionConstraint Id="76ba6ed6-f962-48f9-96ab-eb973362dce3" guardText="if (x &lt; 0 || x &gt; cells.GetLength(0) - 1)" />
+                        </guard>
+                        <operandOccurrenceSpecifications>
+                          <operandOccurrenceSpecificationMoniker Id="ea3e109c-e631-4100-b790-62215da99e93" LastKnownName="OperandOccurrenceSpecification" />
+                          <operandOccurrenceSpecificationMoniker Id="e67dd3aa-de51-4c61-92f4-e489ceda8e5c" LastKnownName="OperandOccurrenceSpecification" />
+                        </operandOccurrenceSpecifications>
+                      </interactionOperand>
+                    </operands>
+                  </combinedFragment>
+                  <combinedFragment Id="88036836-b723-4543-a7e9-34a95a134a64" name="CombinedFragment2" interactionOperator="Opt" customInteractionOperator="If">
+                    <coveredLifelines>
+                      <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+                    </coveredLifelines>
+                    <operands>
+                      <interactionOperand Id="029f5092-d0b8-440a-94f5-33247249756f" name="InteractionOperand1">
+                        <coveredLifelines>
+                          <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+                        </coveredLifelines>
+                        <guard>
+                          <interactionConstraint Id="5956c7e2-9542-45bd-b3ad-7fa28af0e062" guardText="if (y &lt; 0 || y &gt; cells.GetLength(1) - 1)" />
+                        </guard>
+                        <operandOccurrenceSpecifications>
+                          <operandOccurrenceSpecificationMoniker Id="1c63d494-3e9e-4305-8cbd-2ae82d614986" LastKnownName="OperandOccurrenceSpecification" />
+                          <operandOccurrenceSpecificationMoniker Id="0905d543-2c2f-49ca-9c21-2fd1a4ba7ef6" LastKnownName="OperandOccurrenceSpecification" />
+                        </operandOccurrenceSpecifications>
+                      </interactionOperand>
+                    </operands>
+                  </combinedFragment>
+                  <combinedFragment Id="2d664721-0a74-438a-9782-cf92747887ad" name="CombinedFragment3" interactionOperator="Opt" customInteractionOperator="If">
+                    <coveredLifelines>
+                      <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+                    </coveredLifelines>
+                    <operands>
+                      <interactionOperand Id="e6f536fb-f1ef-412e-ac81-f3922d182689" name="InteractionOperand1">
+                        <coveredLifelines>
+                          <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+                        </coveredLifelines>
+                        <guard>
+                          <interactionConstraint Id="eb1600f1-4dad-4fce-a08f-9e7c2686fa58" guardText="if (IsOutOfBounds(nx, ny, cells))" />
+                        </guard>
+                        <operandOccurrenceSpecifications>
+                          <operandOccurrenceSpecificationMoniker Id="78163cd0-cc28-4c1f-946f-4c124936a977" LastKnownName="OperandOccurrenceSpecification" />
+                          <operandOccurrenceSpecificationMoniker Id="7c74c4f6-55a8-4287-9329-3d22cae6f98a" LastKnownName="OperandOccurrenceSpecification" />
+                        </operandOccurrenceSpecifications>
+                      </interactionOperand>
+                    </operands>
+                  </combinedFragment>
+                  <combinedFragment Id="b71ff362-0c30-4ceb-830e-92f092c330d1" name="CombinedFragment4" interactionOperator="Opt" customInteractionOperator="If">
+                    <coveredLifelines>
+                      <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+                    </coveredLifelines>
+                    <operands>
+                      <interactionOperand Id="15815330-234b-4530-8a25-e8e74afd40a8" name="InteractionOperand1">
+                        <coveredLifelines>
+                          <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+                        </coveredLifelines>
+                        <guard>
+                          <interactionConstraint Id="3524bad7-1fcb-43ef-a5a6-46e315c99363" guardText="if (cells[nx, ny].Value != 0)" />
+                        </guard>
+                        <operandOccurrenceSpecifications>
+                          <operandOccurrenceSpecificationMoniker Id="ed8dc98d-b473-4dab-94e6-a60f25f01e4a" LastKnownName="OperandOccurrenceSpecification" />
+                          <operandOccurrenceSpecificationMoniker Id="8d97248e-1ef6-4842-bda2-1a6d6e5a56bd" LastKnownName="OperandOccurrenceSpecification" />
+                        </operandOccurrenceSpecifications>
+                      </interactionOperand>
+                    </operands>
+                  </combinedFragment>
+                </fragments>
+                <guard>
+                  <interactionConstraint Id="2baaaa5e-87e9-4c5e-b3e8-be329ad44473" guardText="foreach (directions)">
+                    <maxInt>
+                      <literalString Id="a09a78d2-acaa-4801-8697-316eb819c32f" name="LiteralString1" />
+                    </maxInt>
+                    <minInt>
+                      <literalString Id="60535cad-a2ab-4a84-9fa6-176ea10bec07" name="LiteralString2" />
+                    </minInt>
+                  </interactionConstraint>
+                </guard>
+                <operandOccurrenceSpecifications>
+                  <operandOccurrenceSpecificationMoniker Id="f5daef68-167a-4f80-8317-87d872743573" LastKnownName="OperandOccurrenceSpecification" />
+                  <operandOccurrenceSpecificationMoniker Id="7353be59-0ce3-442f-a9ef-8ee7de15fe21" LastKnownName="OperandOccurrenceSpecification" />
+                </operandOccurrenceSpecifications>
+              </interactionOperand>
+            </operands>
+          </combinedFragment>
+          <operandOccurrenceSpecification Id="f5daef68-167a-4f80-8317-87d872743573" name="OperandOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="5ada68b8-43a5-4b86-9e8f-91ef9d260ea2" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification Id="1f45b1a0-f79a-4aed-b3de-d56971c323d2" name="BehaviorExecutionSpecification">
+            <coveredLifelines>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="087bf5d4-e80a-49d8-a545-ddd0fb64d3c0" LastKnownName="ExecutionOccurrenceSpecification" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="8a912776-23e0-492a-a1bb-118cf8d1e7ee" LastKnownName="ExecutionOccurrenceSpecification" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="caeef9ab-ee86-4766-9b68-de8711415394" LastKnownName="MessageOccurrenceSpecification" />
+              <operandOccurrenceSpecificationMoniker Id="ea3e109c-e631-4100-b790-62215da99e93" LastKnownName="OperandOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="498af2a4-d7aa-481e-b63c-dc8e3f1e724b" LastKnownName="MessageOccurrenceSpecification" />
+              <operandOccurrenceSpecificationMoniker Id="e67dd3aa-de51-4c61-92f4-e489ceda8e5c" LastKnownName="OperandOccurrenceSpecification" />
+              <operandOccurrenceSpecificationMoniker Id="1c63d494-3e9e-4305-8cbd-2ae82d614986" LastKnownName="OperandOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="959ee89c-0463-4c86-81dd-b3dba1c5f63a" LastKnownName="MessageOccurrenceSpecification" />
+              <operandOccurrenceSpecificationMoniker Id="0905d543-2c2f-49ca-9c21-2fd1a4ba7ef6" LastKnownName="OperandOccurrenceSpecification" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="8a912776-23e0-492a-a1bb-118cf8d1e7ee" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="896d6bc0-e7d9-4328-bf27-89b70b9c04a9" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="caeef9ab-ee86-4766-9b68-de8711415394" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <operandOccurrenceSpecification Id="ea3e109c-e631-4100-b790-62215da99e93" name="OperandOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="498af2a4-d7aa-481e-b63c-dc8e3f1e724b" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <lostFoundTarget Id="8f844342-7446-41a3-a79d-8e36f87bb05c" name="LostFoundTarget" />
+          <operandOccurrenceSpecification Id="e67dd3aa-de51-4c61-92f4-e489ceda8e5c" name="OperandOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <operandOccurrenceSpecification Id="1c63d494-3e9e-4305-8cbd-2ae82d614986" name="OperandOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="959ee89c-0463-4c86-81dd-b3dba1c5f63a" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <lostFoundTarget Id="daa4475b-a968-4e27-8e50-78e017e48967" name="LostFoundTarget" />
+          <operandOccurrenceSpecification Id="0905d543-2c2f-49ca-9c21-2fd1a4ba7ef6" name="OperandOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="087bf5d4-e80a-49d8-a545-ddd0fb64d3c0" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="6e1acc6b-ce9a-4c7b-afd4-948e2e29fabc" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <operandOccurrenceSpecification Id="78163cd0-cc28-4c1f-946f-4c124936a977" name="OperandOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="fa074998-6358-422a-beb9-16c5893ec35f" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <lostFoundTarget Id="72d8888b-243e-4b86-96d2-66833e03f8c1" name="LostFoundTarget" />
+          <operandOccurrenceSpecification Id="7c74c4f6-55a8-4287-9329-3d22cae6f98a" name="OperandOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <operandOccurrenceSpecification Id="ed8dc98d-b473-4dab-94e6-a60f25f01e4a" name="OperandOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="92e9bf1f-616a-4f6b-ac1d-b2f9dcb34dc5" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <lostFoundTarget Id="5ec351d5-99db-4ad8-bc12-a394ad3da307" name="LostFoundTarget" />
+          <operandOccurrenceSpecification Id="8d97248e-1ef6-4842-bda2-1a6d6e5a56bd" name="OperandOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="de9c0029-231d-4162-bd65-5091ef3fb8f8" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <lostFoundTarget Id="112c5f0c-1a1c-41d2-ab4c-c844ab4f5695" name="LostFoundTarget" />
+          <operandOccurrenceSpecification Id="7353be59-0ce3-442f-a9ef-8ee7de15fe21" name="OperandOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="dda38197-2112-4ca5-a4fa-3e3e80259446" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="a05ccaad-5ba7-441d-a635-2f9d139c35ac" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="c277c182-9b77-4934-942f-81d23dc7402d" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification Id="336d1dc4-f16d-4ea2-8da2-00a1a55a53b1" name="BehaviorExecutionSpecification">
+            <coveredLifelines>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="ab7a366a-9dc6-4f9a-bd1b-ab75752b1095" LastKnownName="ExecutionOccurrenceSpecification" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="d8112cdf-966e-4c82-8ba5-ad402793f312" LastKnownName="ExecutionOccurrenceSpecification" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="b2a428d9-4112-4c41-8827-b1ec1d2ac254" LastKnownName="MessageOccurrenceSpecification" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="d8112cdf-966e-4c82-8ba5-ad402793f312" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="4324a443-fd3b-4b9b-b8cf-88cb8afb4be3" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="b2a428d9-4112-4c41-8827-b1ec1d2ac254" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="ab7a366a-9dc6-4f9a-bd1b-ab75752b1095" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="82f4350a-073d-4450-8309-2a925985d78d" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="55f8bd3c-cac0-4054-811c-f308e0d2df01" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="cc8565a8-badb-43b0-b27f-5d258f452c84" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" LastKnownName="MazeGenerator" />
+            </covered>
+          </executionOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline Id="1ae14f3c-e277-4e0b-a8b0-c0002e913a6f" name="MazeGenerator" isActor="false" lifelineDisplayName="MazeGenerator" referencedType="BombDefuserEngine‎.Playfield‎.MazeGenerator">
+            <referencesInternal>
+              <reference Id="d0662884-3c85-4cc9-9c43-0e6193c32567" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=BombDefuserEngine.Playfield)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&amp;quot; Namespace=BombDefuserEngine.Playfield Type=MazeGenerator)&quot;)" tag="DGQL" />
+              <reference Id="f671cf9d-8078-438a-90e7-945b5a3fabc2" handle="(Assembly=&quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&quot; Namespace=BombDefuserEngine.Playfield Type=MazeGenerator)" tag="DGML" />
+            </referencesInternal>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker Id="fff79d09-2089-4a85-bbcb-1ac8bbde0398" LastKnownName="ExecutionOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="55f8bd3c-cac0-4054-811c-f308e0d2df01" LastKnownName="ExecutionOccurrenceSpecification" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline Id="04373e76-34be-4d2b-add5-f772b82fd00d" name="MazeGenerator.DX : Dictionary&lt;MazeGenerator.Directions, Int32&gt;" isActor="false" lifelineDisplayName="MazeGenerator.DX : Dictionary&lt;MazeGenerator.Directions, Int32&gt;" referencedInstance="(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2 GenericArguments=[(Assembly=$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri) Namespace=BombDefuserEngine.Playfield Type=(Name=Directions ParentType=MazeGenerator)),(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System Type=Int32)]) ObjectInstance=&quot;Object instance 2&quot;)" referencedType="System‎.Collections‎.Generic‎.Dictionary‎&lt;MazeGenerator‎‎.Directions‎, Int32‎&gt;">
+            <referencesInternal>
+              <reference Id="f28c00e0-a3e7-4f03-a3d9-58cd5cf786b7" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=System.Collections.Generic)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2))&quot;)" tag="DGQL" />
+              <reference Id="bd5e8935-cf53-4155-bde2-ae6ce1b0e93a" handle="(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2))" tag="DGML" />
+            </referencesInternal>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker Id="ddd0b035-e117-4ae1-aeb5-4000d4660504" LastKnownName="ExecutionOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="2992cac3-5c11-4309-97d3-5b8409d8f36c" LastKnownName="ExecutionOccurrenceSpecification" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline Id="2637e070-b8f5-459e-b2c3-b27e9a2fc7a1" name="MazeGenerator.DY : Dictionary&lt;MazeGenerator.Directions, Int32&gt;" isActor="false" lifelineDisplayName="MazeGenerator.DY : Dictionary&lt;MazeGenerator.Directions, Int32&gt;" referencedInstance="(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2 GenericArguments=[(Assembly=$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri) Namespace=BombDefuserEngine.Playfield Type=(Name=Directions ParentType=MazeGenerator)),(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System Type=Int32)]) ObjectInstance=&quot;Object instance 13&quot;)" referencedType="System‎.Collections‎.Generic‎.Dictionary‎&lt;MazeGenerator‎‎.Directions‎, Int32‎&gt;">
+            <referencesInternal>
+              <reference Id="c4c3d20a-9701-45a2-9109-31333b400f10" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=System.Collections.Generic)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2))&quot;)" tag="DGQL" />
+              <reference Id="2f55e299-e213-41ad-9ac1-d1d1c5fd74cf" handle="(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2))" tag="DGML" />
+            </referencesInternal>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker Id="58e4feae-ac92-4d97-89c5-64cc9a017db2" LastKnownName="ExecutionOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="a9a8b6c6-661e-45ad-a194-b1c9d7091a49" LastKnownName="ExecutionOccurrenceSpecification" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline Id="723d9936-6e6c-4138-b1d3-5042ec7a8116" name="MazeGenerator.OPPOSITE : Dictionary&lt;MazeGenerator.Directions, MazeGenerator.Directions&gt;" isActor="false" lifelineDisplayName="MazeGenerator.OPPOSITE : Dictionary&lt;MazeGenerator.Directions, MazeGenerator.Directions&gt;" referencedInstance="(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2 GenericArguments=[(Assembly=$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri) Namespace=BombDefuserEngine.Playfield Type=(Name=Directions ParentType=MazeGenerator)),(Assembly=$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri) Namespace=BombDefuserEngine.Playfield Type=(Name=Directions ParentType=MazeGenerator))]) ObjectInstance=&quot;Object instance 23&quot;)" referencedType="System‎.Collections‎.Generic‎.Dictionary‎&lt;MazeGenerator‎‎.Directions‎, MazeGenerator‎‎.Directions‎&gt;">
+            <referencesInternal>
+              <reference Id="218d6291-1f59-499a-8bc7-11d1cc664daf" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=System.Collections.Generic)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2))&quot;)" tag="DGQL" />
+              <reference Id="57341201-8f9a-43db-bbc7-b2b367311b57" handle="(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2))" tag="DGML" />
+            </referencesInternal>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker Id="a14f01fd-60b6-4aa9-9e22-b038884a9d2b" LastKnownName="ExecutionOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="c9d3234e-fbbf-43a3-bc8b-74e385aec3ba" LastKnownName="ExecutionOccurrenceSpecification" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline Id="551f617b-81dc-445b-9886-9da232d3ecf6" name="source : List&lt;MazeGenerator.Directions&gt;" isActor="false" lifelineDisplayName="source : List&lt;MazeGenerator.Directions&gt;" referencedInstance="(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System.Collections.Generic Type=(Name=List GenericParameterCount=1 GenericArguments=[(Assembly=$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri) Namespace=BombDefuserEngine.Playfield Type=(Name=Directions ParentType=MazeGenerator))]) ObjectInstance=&quot;Object instance 50&quot;)" referencedType="System‎.Collections‎.Generic‎.List‎&lt;MazeGenerator‎‎.Directions‎&gt;">
+            <referencesInternal>
+              <reference Id="a4de3d26-f878-445d-bdee-e6efb44ab084" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=System.Collections.Generic)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System.Collections.Generic Type=(Name=List GenericParameterCount=1))&quot;)" tag="DGQL" />
+              <reference Id="bfeb1cf7-48d8-4a5b-8884-0d07325f96c1" handle="(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System.Collections.Generic Type=(Name=List GenericParameterCount=1))" tag="DGML" />
+            </referencesInternal>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker Id="a350625b-415b-4845-8016-b188594501bd" LastKnownName="ExecutionOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="e68153b6-4c27-47e2-848f-a1f2f971f9ae" LastKnownName="ExecutionOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="a1399d76-0701-4724-b20d-2ac447baa31e" LastKnownName="ExecutionOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="3775ffa8-ad98-4b52-a70b-87f737f25e29" LastKnownName="ExecutionOccurrenceSpecification" />
+            </topLevelOccurrences>
+          </lifeline>
+        </lifelines>
+        <messages>
+          <message Id="c38d5bb5-a29b-48ee-b2b9-025e1ba1cce6" name="Do" messageKind="Found" messageSort="AsynchCall" createSelfMessage="false">
+            <referencesInternal>
+              <reference Id="a411ea11-1626-4331-ba95-73134525bec3" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=BombDefuserEngine.Playfield)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&amp;quot; Namespace=BombDefuserEngine.Playfield Type=MazeGenerator)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&amp;quot; Namespace=BombDefuserEngine.Playfield Type=MazeGenerator Member=(Name=Do OverloadingParameters=[(Assembly=&amp;quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&amp;quot; Namespace=BombDefuserEngine.Playfield Type=Field)]))&quot;)" tag="DGQL" />
+              <reference Id="d97373ef-8a2f-4135-a1cf-3df6d83d5daa" handle="(Assembly=&quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&quot; Namespace=BombDefuserEngine.Playfield Type=MazeGenerator Member=(Name=Do OverloadingParameters=[(Assembly=&quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&quot; Namespace=BombDefuserEngine.Playfield Type=Field)]))" tag="DGML" />
+            </referencesInternal>
+            <sendEvent>
+              <lostFoundTargetMoniker Id="58183eea-f059-465e-b9e5-c55d84635c7b" LastKnownName="LostFoundTarget" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="ab980b32-d6da-4724-883a-44ede5199f06" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="7271855a-a19c-4e1c-bc21-85b330ff858e" name="Create Dictionary‎&lt;MazeGenerator‎‎.Directions‎, Int32‎&gt;" messageKind="Complete" messageSort="CreateMessage" createSelfMessage="false" signatureText="new Dictionary&lt;Directions, int&gt;...">
+            <referencesInternal>
+              <reference Id="ab02f776-023b-4ec8-833c-a8158912da24" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=System.Collections.Generic)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2))&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2) Member=.ctor)&quot;)" tag="DGQL" />
+              <reference Id="05d938fd-a190-4e29-a973-e601572bc710" handle="(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2) Member=.ctor)" tag="DGML" />
+            </referencesInternal>
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="b4867c9f-d321-42f3-8149-6d2f2ee2bee5" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="91eaf9b9-fe4d-48de-8c92-71b0b644c659" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="3031ad97-5c95-48de-8a29-febcbf38d4ca" name="&lt;&lt;return&gt;&gt;" messageKind="Complete" messageSort="Reply" createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="b3d3ae70-1ee4-4dd3-b6eb-9b484506e50f" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="3b620419-c26b-4b6e-b718-9ae999d88a08" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="bb41424f-cb87-4e41-8607-6fe7009b90ba" name="Create Dictionary‎&lt;MazeGenerator‎‎.Directions‎, Int32‎&gt;" messageKind="Complete" messageSort="CreateMessage" createSelfMessage="false" signatureText="new Dictionary&lt;Directions, int&gt;...">
+            <referencesInternal>
+              <reference Id="6e6570fc-f63b-4235-9724-6129c282a285" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=System.Collections.Generic)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2))&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2) Member=.ctor)&quot;)" tag="DGQL" />
+              <reference Id="f966ec29-712b-4870-aa58-4e9d536d432a" handle="(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2) Member=.ctor)" tag="DGML" />
+            </referencesInternal>
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="a8adbc8d-09e2-4fd0-8f61-e1a7dfc98ca2" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="325dc61d-d0a4-4a5d-8865-bd5751a91da9" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="06cd728d-a757-4353-8d1d-bcf982c30ecd" name="&lt;&lt;return&gt;&gt;" messageKind="Complete" messageSort="Reply" createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="2ccd1031-43f3-421e-87b3-bf1bb9bc5be6" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="b1e5b2a6-9232-4efb-ad4c-7abc97eeddcd" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="75c08a77-e0c2-43eb-9514-5e3fdf365a28" name="Create Dictionary‎&lt;MazeGenerator‎‎.Directions‎, MazeGenerator‎‎.Directions‎&gt;" messageKind="Complete" messageSort="CreateMessage" createSelfMessage="false" signatureText="new Dictionary&lt;Directions, Directions&gt;...">
+            <referencesInternal>
+              <reference Id="61cc6432-629a-4420-89ca-4f73b17c50b7" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=System.Collections.Generic)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2))&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2) Member=.ctor)&quot;)" tag="DGQL" />
+              <reference Id="96a648e2-74fb-4029-b2a5-865fcc3594c8" handle="(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2) Member=.ctor)" tag="DGML" />
+            </referencesInternal>
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="6aa06345-0fed-4087-ae70-27c75fedb725" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="3ac511e1-c06b-453d-aa40-6b8ffb5ec7c0" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="5f2e0fe2-827f-4e03-b5ed-5ac6b4833ed9" name="&lt;&lt;return&gt;&gt;" messageKind="Complete" messageSort="Reply" createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="f503ec60-5e9a-422f-9180-d93a9e1bead3" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="aa3159df-cb35-4832-8d37-8b966c9c0adc" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="3a0b09f9-6fd0-4ff5-a9a6-0229a663820e" name="CarvePassages" messageKind="Complete" messageSort="SynchCall" createSelfMessage="true" signatureText="CarvePassages(randomPos.X, randomPos.Y, field.Cells)">
+            <referencesInternal>
+              <reference Id="59e0c45d-1097-4898-853e-462f6fa0531f" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=BombDefuserEngine.Playfield)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&amp;quot; Namespace=BombDefuserEngine.Playfield Type=MazeGenerator)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&amp;quot; Namespace=BombDefuserEngine.Playfield Type=MazeGenerator Member=(Name=CarvePassages OverloadingParameters=[(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System Type=Int32),(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System Type=Int32),(Assembly=&amp;quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&amp;quot; Namespace=BombDefuserEngine.Playfield Type=(Name=Cell ArrayRank=2 ParentType=Cell))]))&quot;)" tag="DGQL" />
+              <reference Id="6864d4e8-3ca6-4427-be1f-413571dc71cb" handle="(Assembly=&quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&quot; Namespace=BombDefuserEngine.Playfield Type=MazeGenerator Member=(Name=CarvePassages OverloadingParameters=[(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System Type=Int32),(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System Type=Int32),(Assembly=&quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&quot; Namespace=BombDefuserEngine.Playfield Type=(Name=Cell ArrayRank=2 ParentType=Cell))]))" tag="DGML" />
+            </referencesInternal>
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="fd4135be-87fc-4c72-b66f-c4e4c196d389" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="f34952a5-98b5-449d-b445-aefaabcf2dfc" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="4854c3e5-62dc-4e3a-b07c-8d5c3ff4bb8c" name="Create List‎&lt;MazeGenerator‎‎.Directions‎&gt;" messageKind="Complete" messageSort="CreateMessage" createSelfMessage="false" signatureText="new List&lt;Directions&gt;...">
+            <referencesInternal>
+              <reference Id="7e82ec4e-14a1-44e3-9de9-cea53302a6b4" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=System.Collections.Generic)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System.Collections.Generic Type=(Name=List GenericParameterCount=1))&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System.Collections.Generic Type=(Name=List GenericParameterCount=1) Member=.ctor)&quot;)" tag="DGQL" />
+              <reference Id="a904b5b9-d32f-4df1-93f8-c7063ff9bea6" handle="(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System.Collections.Generic Type=(Name=List GenericParameterCount=1) Member=.ctor)" tag="DGML" />
+            </referencesInternal>
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="90512c31-9619-429a-ab68-60c511cca7aa" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="6dfc541f-c180-4427-93c9-177776d8381b" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="a8392a19-ef09-49cd-9e77-ac0dc46f6209" name="&lt;&lt;return&gt;&gt;" messageKind="Complete" messageSort="Reply" createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="da784397-8986-4e9a-a02e-86509f066642" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="3b64efea-8c72-48f1-9c1e-42249c4f1114" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="99234683-09c9-4923-8609-1002f70a6ff0" name="OrderBy‎&lt;MazeGenerator‎‎.Directions‎, Guid‎&gt;" messageKind="Complete" messageSort="SynchCall" createSelfMessage="false" signatureText="OrderBy (Guid.NewGuid())">
+            <referencesInternal>
+              <reference Id="88e63826-0887-4f95-952f-2a6bbd42c429" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=System.Linq)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/System.Core.dll&amp;quot; Namespace=System.Linq Type=Enumerable)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/System.Core.dll&amp;quot; Namespace=System.Linq Type=Enumerable Member=(Name=OrderBy GenericParameterCount=2 OverloadingParameters=[(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System.Collections.Generic Type=(Name=IEnumerable GenericParameterCount=1 GenericArguments=[(ParameterIdentifier=0)])),(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System Type=(Name=Func GenericParameterCount=2 GenericArguments=[(ParameterIdentifier=0),(ParameterIdentifier=1)]))]))&quot;)" tag="DGQL" />
+              <reference Id="64be51de-8263-424c-8113-a84a299da1ea" handle="(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/System.Core.dll&quot; Namespace=System.Linq Type=Enumerable Member=(Name=OrderBy GenericParameterCount=2 OverloadingParameters=[(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System.Collections.Generic Type=(Name=IEnumerable GenericParameterCount=1 GenericArguments=[(ParameterIdentifier=0)])),(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System Type=(Name=Func GenericParameterCount=2 GenericArguments=[(ParameterIdentifier=0),(ParameterIdentifier=1)]))]))" tag="DGML" />
+            </referencesInternal>
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="df3fd166-4594-4346-a08a-85e085906f90" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="977c16e9-64d5-4a9b-b5be-29df07a094c8" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="60975391-46a3-4578-9517-e700456db283" name="&lt;&lt;return&gt;&gt;" messageKind="Complete" messageSort="Reply" createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="62cd3232-f724-457e-92a4-617792c5b91e" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="7548229a-7fde-478d-8c79-dc65ef50a6aa" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="e05627cf-087f-466f-a878-93fc1fe207bc" name="IsOutOfBounds" messageKind="Complete" messageSort="SynchCall" createSelfMessage="true" signatureText="IsOutOfBounds(nx, ny, cells)">
+            <referencesInternal>
+              <reference Id="5f172730-d838-4689-b28b-cebc81ae1545" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=BombDefuserEngine.Playfield)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&amp;quot; Namespace=BombDefuserEngine.Playfield Type=MazeGenerator)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&amp;quot; Namespace=BombDefuserEngine.Playfield Type=MazeGenerator Member=(Name=IsOutOfBounds OverloadingParameters=[(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System Type=Int32),(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System Type=Int32),(Assembly=&amp;quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&amp;quot; Namespace=BombDefuserEngine.Playfield Type=(Name=Cell ArrayRank=2 ParentType=Cell))]))&quot;)" tag="DGQL" />
+              <reference Id="0dfc7281-8680-4fa5-bddc-d86de863ad81" handle="(Assembly=&quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&quot; Namespace=BombDefuserEngine.Playfield Type=MazeGenerator Member=(Name=IsOutOfBounds OverloadingParameters=[(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System Type=Int32),(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System Type=Int32),(Assembly=&quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&quot; Namespace=BombDefuserEngine.Playfield Type=(Name=Cell ArrayRank=2 ParentType=Cell))]))" tag="DGML" />
+            </referencesInternal>
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="5ada68b8-43a5-4b86-9e8f-91ef9d260ea2" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="caeef9ab-ee86-4766-9b68-de8711415394" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="3e5e0840-fdb4-4318-8cd7-b7fa60ff2494" name="Return" messageKind="Lost" messageSort="AsynchCall" createSelfMessage="false" signatureText="return true">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="498af2a4-d7aa-481e-b63c-dc8e3f1e724b" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <lostFoundTargetMoniker Id="8f844342-7446-41a3-a79d-8e36f87bb05c" LastKnownName="LostFoundTarget" />
+            </receiveEvent>
+          </message>
+          <message Id="5469c246-fb6a-44eb-aa7f-308164ad3661" name="Return" messageKind="Lost" messageSort="AsynchCall" createSelfMessage="false" signatureText="return true">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="959ee89c-0463-4c86-81dd-b3dba1c5f63a" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <lostFoundTargetMoniker Id="daa4475b-a968-4e27-8e50-78e017e48967" LastKnownName="LostFoundTarget" />
+            </receiveEvent>
+          </message>
+          <message Id="eb96d604-cdd4-4ba3-85be-28d208f7d929" name="Continue" messageKind="Lost" messageSort="AsynchCall" createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="fa074998-6358-422a-beb9-16c5893ec35f" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <lostFoundTargetMoniker Id="72d8888b-243e-4b86-96d2-66833e03f8c1" LastKnownName="LostFoundTarget" />
+            </receiveEvent>
+          </message>
+          <message Id="ec4a7680-3e21-4fc7-b9a6-49e2c6b9ecba" name="Continue" messageKind="Lost" messageSort="AsynchCall" createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="92e9bf1f-616a-4f6b-ac1d-b2f9dcb34dc5" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <lostFoundTargetMoniker Id="5ec351d5-99db-4ad8-bc12-a394ad3da307" LastKnownName="LostFoundTarget" />
+            </receiveEvent>
+          </message>
+          <message Id="f1fb4c56-d56c-4f09-8608-e47ddc8da643" name="Recurse to CarvePassages" messageKind="Lost" messageSort="AsynchCall" createSelfMessage="false">
+            <referencesInternal>
+              <reference Id="ef2493b6-0075-448a-bf8b-4f151833578d" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=BombDefuserEngine.Playfield)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&amp;quot; Namespace=BombDefuserEngine.Playfield Type=MazeGenerator)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&amp;quot; Namespace=BombDefuserEngine.Playfield Type=MazeGenerator Member=(Name=CarvePassages OverloadingParameters=[(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System Type=Int32),(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&amp;quot; Namespace=System Type=Int32),(Assembly=&amp;quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&amp;quot; Namespace=BombDefuserEngine.Playfield Type=(Name=Cell ArrayRank=2 ParentType=Cell))]))&quot;)" tag="DGQL" />
+              <reference Id="fff21c23-e41c-4b01-92c4-514b4285ec45" handle="(Assembly=&quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&quot; Namespace=BombDefuserEngine.Playfield Type=MazeGenerator Member=(Name=CarvePassages OverloadingParameters=[(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System Type=Int32),(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System Type=Int32),(Assembly=&quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&quot; Namespace=BombDefuserEngine.Playfield Type=(Name=Cell ArrayRank=2 ParentType=Cell))]))" tag="DGML" />
+            </referencesInternal>
+            <generationState>H4sIAAAAAAAEAO1da0/bQBDcnxL1QwUSwuWhQltSqQ1QUFuIGvpShSrnQUghCbUDNP31nV3HiRMCGEpim4wik/Pe3d56527Ou7bChpSkJp40xJVT/P2Ls6oU7OxUtlHjShOy17Ihn6SNT0dy/dJ71HQlL09kTt6Ij08NrcvoqdIj6DuF5KU49ilY6bO18vDXkQM5hp4mxtCzEsrnqKmg3sEYNTmDJGjXlkvrtYMWLYys5evkWyjVMXbL9JSt5MhX+65aD9W5idoyetVRfmtWlE12BJl/Rc8ijj84crLX84gP61yzNR+rfxG+cOEX9UoN5Sp0HeD8zDR8RJ36/h2OlvV2cTVtfOdQF3hVpXl4OrQgbzh5coFy0Xzo42/dbMvJvsk9jNSGtGp21K1diGmnh0NefozF76n8xrUozq+uwbKI/m1oDTTmMF+CVjr+HPy1Ls9lvoflkY2mV1cxPw6P17BeDq61gXrPcG+jTweywSy8NI+cQLYIL2zBf+PqLmQV9c9QakJLxeQ6QhnSqs3r6JWNR7QED/jmoeYQTrs2y1ZkGde1QK89mNfIFfG5YpgBaoaNzgzPUO3CGy70nKB2GfJgxdfsigc6wn7z+BziyI1hhl2MG/Rr9CxR/qng2ubB+DmrJ/eT+8li9Bq5f7a4P9S2hyvSljftBVwVN6+KqD8Lxv01+EJH6/b9Wuj5uQS9x6bNlZ8466DVOWQd0/IB0rKhq30UrWCf9uGlFjS0oLFpq8e3FtsW56n3nliEp1aptW7fu8T1brgG669q6/ym3XvPeKLDvZp7dUq9dmj7A7k+G1zvRXinaJ5YlG/Wbh+tfqGd9hvl93DEVdgWWKajnZk9rtk0PEp0vwj2lR2UXfSIjqItD8zWcF8J84WKsWMS54otgTRsyXwjY05yB/cxxpzJc0XSMWeX+UZyP1mMXiP3zyz3MwZNfwyqaDHfyHzjLOLAvZr5xjR6dZr5xu93yDeuTSzfOMgwMpfIeJK8wD2K8WR6uCLpeDLo6TOjyB2AXEavcQeY8R3gLrEmUU4O5fvHsQWzU7Ecl7EMZ8Mk85acN5O+k9hEi4e4ZyBS8ZHa7ktDDi7Zigj2z2Atq5+XsGeu4VjBsWQtybvk3SjvxssYvpjSG4rMFpLhidT/MHyUb0bXs7ZvweoFtNK7rENmYri6ZhKpaa4u3m1NBsPBndKk75NGcWW8mo4ZQL7NClLk2+xjmCzfxolT1yb4Zgvj1CTm2iiPfzHkFBFGLkn4m28Hpv/twAFmvE9Nx+riGxrZW518Q4NvaDyGZ0i3RVvL/WhrAXMk+L7fk0KujTTs9/HipPVYcVL0vf5J/96IMxJd8TdKsnjPwtza48mtVXo5mAqfFHJ1zSxS01xdzFxnP3M9jCszMOmYAeTbrCBFvs0+hsnybZwIeB3xPp8UPqa5xieF6fL36O9AxM/q3K9Pyey4/T9p/QPYq1jOdGsAAA==
+
+MazeGenerator
+CarvePassages(nx, ny, cells)</generationState>
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="de9c0029-231d-4162-bd65-5091ef3fb8f8" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <lostFoundTargetMoniker Id="112c5f0c-1a1c-41d2-ab4c-c844ab4f5695" LastKnownName="LostFoundTarget" />
+            </receiveEvent>
+          </message>
+          <message Id="68faa58c-b91d-4f0c-b80b-e7f8342e90c7" name="ValuesToBorders" messageKind="Complete" messageSort="SynchCall" createSelfMessage="true" signatureText="ValuesToBorders(field)">
+            <referencesInternal>
+              <reference Id="b9710494-ab26-4bcb-8500-7dc39eba03b7" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=BombDefuserEngine.Playfield)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&amp;quot; Namespace=BombDefuserEngine.Playfield Type=MazeGenerator)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&amp;quot; Namespace=BombDefuserEngine.Playfield Type=MazeGenerator Member=(Name=ValuesToBorders OverloadingParameters=[(Assembly=&amp;quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&amp;quot; Namespace=BombDefuserEngine.Playfield Type=Field)]))&quot;)" tag="DGQL" />
+              <reference Id="d014e9e5-0149-4ed9-9fa9-5a55d70c2945" handle="(Assembly=&quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&quot; Namespace=BombDefuserEngine.Playfield Type=MazeGenerator Member=(Name=ValuesToBorders OverloadingParameters=[(Assembly=&quot;$(597c93e8-ef3e-4e31-bad8-bb9ccc9bbbbe.OutputPathUri)&quot; Namespace=BombDefuserEngine.Playfield Type=Field)]))" tag="DGML" />
+            </referencesInternal>
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="c277c182-9b77-4934-942f-81d23dc7402d" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="b2a428d9-4112-4c41-8827-b1ec1d2ac254" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+        </messages>
+      </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="0fb4f5a8-35ec-4da6-8917-e5a76aed6357" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="cc8565a8-badb-43b0-b27f-5d258f452c84" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="1f9486de-5d55-4373-8493-30a29920fe5f" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="74a5acb0-ebff-47a3-b775-58e2184cb412" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="511bcfaf-f5ac-40da-8573-93883c9b4530" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="fb79df75-c861-4771-b33f-9457febccc2b" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="1c26e718-6891-496d-bdb4-874f1fa71c1f" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="314a379b-d727-4925-83ff-6eb7ede562d0" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="7256a553-2757-4b6a-9d11-fe419b81f9ba" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="a05ccaad-5ba7-441d-a635-2f9d139c35ac" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="2c2f5ae7-d622-4c73-a96f-bc05cf355dd8" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="282e6a61-9130-48a8-8a52-5f5a4abdebd1" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="624083f7-3f49-46cf-bf7e-53eab1f085b7" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="1635f002-67fd-4e6b-bd0e-baf6e532fb1e" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="896d6bc0-e7d9-4328-bf27-89b70b9c04a9" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="6e1acc6b-ce9a-4c7b-afd4-948e2e29fabc" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="4324a443-fd3b-4b9b-b8cf-88cb8afb4be3" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="82f4350a-073d-4450-8309-2a925985d78d" name="ExecutionEvent" />
+    </packageHasNamedElement>
+  </packagedElements>
+</SequenceDesignerModel>

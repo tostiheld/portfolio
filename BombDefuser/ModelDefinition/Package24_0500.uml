@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="fcb94a7b-d278-4e3d-b1b8-6d56bfd98342"
+  name="EV3MessengerLib"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="584107bd-5f4a-4eca-876a-f29af89cc1e9"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DEV3MessengerLib"
+      tag="ViewCode" />
+  </referencesInternal>
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0e2e812b-bf64-4428-8231-85ada8e8e327">
+      <profileInstance
+        Id="e5629189-464f-4bf7-bb83-271d21f0eaca"
+        name="CSharpProfile" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="4234ded9-0652-4c4d-af65-5a1a5eb8d0f2"
+        name="EV3Message"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="d28b6ed9-7aa1-42b0-8aaf-2c62a7013bd8"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FThomas%2FSource%2FRepos%2FTowerHunter%2FTowerHunterEngine%2FLibraries%2FEV3MessengerLib.dll Namespace%3DEV3MessengerLib Type%3DEV3Message"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="be9baccb-9f5c-43f5-b657-1d2173db2e0c"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d87d5576-f1e4-4421-b9bc-14e9d1a3ce05">
+                <propertyInstance
+                  Id="525b7330-052a-4315-9b3c-7668d6ff8c84"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="18bb1897-34b1-46ce-8a92-0213ccde55b6">
+                <propertyInstance
+                  Id="48233515-05a2-40ad-ba3f-f445bfa1df1c"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="2b7e3a3a-f602-406f-b4d6-876cad28438d">
+                <propertyInstance
+                  Id="405079a8-e622-4701-98a5-ad122b0c2bd9"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="1f00b123-f9d6-4bf2-8d99-9c1948e7fb0b">
+                <propertyInstance
+                  Id="ac84d67b-bde4-4f19-8c3d-7fb3aee34c5e"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d8545c59-568b-4f26-a22b-65eb2a8a74d0">
+                <propertyInstance
+                  Id="f4a90df1-1096-4b39-8d21-43554c20ab99"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="08c97f54-e091-4d8e-8869-4bff48a2e392"
+        name="EV3Messenger"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="67e5819a-1a12-4bef-8673-85f9d1667a4f"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FThomas%2FSource%2FRepos%2FTowerHunter%2FTowerHunterEngine%2FLibraries%2FEV3MessengerLib.dll Namespace%3DEV3MessengerLib Type%3DEV3Messenger"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="7b56b214-339f-4f6c-aac0-e5ef064ae4f6"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="21384767-d6a9-4c2a-a3db-6d157dc4ba9f">
+                <propertyInstance
+                  Id="34ff62aa-08a8-4302-8b54-2a34588401a5"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="2d55474e-8392-477c-aa7c-7aab324421ce">
+                <propertyInstance
+                  Id="b561d875-8943-42bd-b2f5-159525bc7124"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="47c21897-6812-4f55-ab2e-340c86207544">
+                <propertyInstance
+                  Id="56b81ef9-a7d9-4270-aba9-7d8001f4150b"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="84a8bcb8-6601-4a93-850e-657d33232999">
+                <propertyInstance
+                  Id="ce39292f-b219-4ca1-bb9b-8884569b4fce"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="074b0c86-698e-4ffa-97ab-d7d9beab3de6">
+                <propertyInstance
+                  Id="e1ddfa6d-e0f2-4431-83d9-a5ce60828c28"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

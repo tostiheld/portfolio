@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="5eaab842-95b9-465e-b81e-5e0e63667c3c"
+  name="MonoGameConsole"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="ffcffc45-2d30-4f03-8efd-6926ab645d5f"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DMonoGameConsole"
+      tag="ViewCode" />
+  </referencesInternal>
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="53253361-d739-4727-a346-4ef05f68bf8d">
+      <profileInstance
+        Id="4651743c-a1c7-4d11-af95-13ec3419950e"
+        name="CSharpProfile" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <Interface
+        Id="47a20fdc-a2a9-412f-9a4a-d4212cf2ee31"
+        name="IConsoleCommand"
+        isAbstract="false"
+        isLeaf="false">
+        <referencesInternal>
+          <reference
+            Id="fa1c0c5d-dc9a-4244-81e5-c89a770bdca4"
+            handle="viewcode://./CodeSchema_Interface?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FThomas%2FSource%2FRepos%2FTowerHunter%2FTowerHunterEngine%2FLibraries%2FMonoGameConsole%2FMonoGameConsole.dll Namespace%3DMonoGameConsole Type%3DIConsoleCommand"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="e55bee8a-2119-4a8b-b77c-92a7b8d6b88e"
+            name="interface"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="a9d11543-f04f-4119-b483-a40cc03643b5">
+                <propertyInstance
+                  Id="fc6eb233-d72e-4c7d-b94f-5d5a78db0846"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="0660a84a-388c-424d-a000-f3081b14c7fa">
+                <propertyInstance
+                  Id="e84a1849-b53c-4d15-a62e-531dea6141d0"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f3a4cd82-424f-4bf2-afc3-61435f0ac778">
+                <propertyInstance
+                  Id="3f1e10a7-3a15-4b2e-b56e-c8acb5029280"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f5deba67-faa3-453d-a50b-59e7fa007881">
+                <propertyInstance
+                  Id="68f1e5d4-e8ad-429c-a715-cb5a50f130c9"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="57dd4b11-66c3-46e6-bf67-31fd73e95425"
+        name="GameConsole"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="a6ff8ab2-8999-4a5e-b5c5-acb3a463f0b8"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FThomas%2FSource%2FRepos%2FTowerHunter%2FTowerHunterEngine%2FLibraries%2FMonoGameConsole%2FMonoGameConsole.dll Namespace%3DMonoGameConsole Type%3DGameConsole"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="14c6dc7d-9b43-4eb0-9338-a62fb40f9852"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="8285b00d-3704-448f-b4d7-0f99e362b8ac">
+                <propertyInstance
+                  Id="5527e9a1-ca35-4f4b-955a-198470781a2f"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="4bd95ec1-c77d-4e0c-ad8d-c8f46591dfc7">
+                <propertyInstance
+                  Id="fc6b1b49-a943-4edf-ac75-4e51eae62f7a"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="2c94e615-4020-42b0-ba9b-5e1df8d3b587">
+                <propertyInstance
+                  Id="ffe4f9a8-104a-49bd-921b-916d992a05b4"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="faf36490-1e46-44a0-b30b-38bb3f95dcd7">
+                <propertyInstance
+                  Id="0e4b2009-df0a-4e8c-b6cb-e4e7ec5fe6d1"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7f2e22e5-db1d-4f6d-bfcd-e9df53097eeb">
+                <propertyInstance
+                  Id="53537630-2b36-4fd2-b13c-c74497240409"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>
