@@ -146,9 +146,6 @@
     <Content Include="Content\Fonts\octin-stencil-100_0.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Fonts\octin-stencil-150_0.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\HPBar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -158,9 +155,6 @@
     <Content Include="Icon.ico" />
     <Content Include="Libraries\MonoGameConsole\MonoGameConsole.dll" />
     <Content Include="todo.txt" />
-    <Content Include="Content\Fonts\octin-stencil-150.fnt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\Fonts\octin-stencil-100.fnt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
