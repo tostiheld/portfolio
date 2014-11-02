@@ -68,13 +68,12 @@ namespace BombDefuserEngine
             Point TimerPosition = new Point();
             TimerPosition.X = 5;
             TimerPosition.Y = (Resolution.Y - 83);
-            this.Timer = new PlayerFeedback.CountdownTimer(this, 10, TimerPosition);
+            this.Timer = new PlayerFeedback.CountdownTimer(this, 100, TimerPosition);
             Components.Add(Timer);
             Timer.IsEnabled = true;
 
             PlayerData = new Player.Data(100);
             PlayerData.HitPoints = 100;
-            PlayerData.Score = 100;
 
             this.Info = new PlayerFeedback.InfoView(this, PlayerData, new Point(220, Resolution.Y - 60));
             Components.Add(Info);

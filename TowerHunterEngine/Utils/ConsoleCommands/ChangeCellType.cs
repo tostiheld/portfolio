@@ -49,6 +49,7 @@ namespace BombDefuserEngine.Utils.ConsoleCommands
                         type = Playfield.CellType.Powerup;
                         break;
                     case "coin":
+                        anim = Field.AnimatedTextures["coin"];
                         type = Playfield.CellType.Coin;
                         break;
                     case "goal":

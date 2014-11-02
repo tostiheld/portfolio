@@ -79,22 +79,34 @@ namespace BombDefuserEngine.Playfield
             this.MustUpdate = true;
         }
 
-        public void AddBomb()
+        public void AddSpecialCell(CellType type)
         {
             Color usedColor = GetFirstAvailableColor();
-            
+
             Point RandomPos = new Point();
 
             RandomPos.X = new Random(Guid.NewGuid().GetHashCode()).Next(Size.X);
             RandomPos.Y = new Random(Guid.NewGuid().GetHashCode()).Next(Size.Y);
-            
+
             while (Cells[RandomPos.X, RandomPos.Y].Type == CellType.Bomb ||
                    IsNextToBomb(RandomPos))
             {
                 RandomPos.X = new Random(Guid.NewGuid().GetHashCode()).Next(Size.X);
                 RandomPos.Y = new Random(Guid.NewGuid().GetHashCode()).Next(Size.Y);
             }
-            Cells[RandomPos.X, RandomPos.Y].ChangeType(CellType.Bomb, usedColor, AnimatedTextures["bomb"]);
+
+            string stype = "";
+            switch (type)
+            {
+                case CellType.Bomb:
+                    stype = "bomb";
+                    break;
+                case CellType.Coin:
+                    stype = "coin";
+                    break;
+            }
+
+            Cells[RandomPos.X, RandomPos.Y].ChangeType(type, usedColor, AnimatedTextures[stype]);
 
             this.MustUpdate = true;
         }
@@ -160,7 +172,7 @@ namespace BombDefuserEngine.Playfield
 
             for (int i = 0; i < this.BombAmount; i++)
             {
-                AddBomb();
+                AddSpecialCell(CellType.Bomb);
             }
         }
 
@@ -174,6 +186,15 @@ namespace BombDefuserEngine.Playfield
                                                                 new Point(100, 100)));
 
             this.AnimatedTextures["bomb"].Load(Parent.Content, "bomb", 20, 10);
+
+            this.AnimatedTextures.Add("coin",
+                                      new Utils.AnimatedTexture(Vector2.Zero,
+                                                                0f,
+                                                                1f,
+                                                                1f,
+                                                                new Point(64, 64)));
+
+            this.AnimatedTextures["coin"].Load(Parent.Content, "coin.png", 8, 8);
 
             base.LoadContent();
         }

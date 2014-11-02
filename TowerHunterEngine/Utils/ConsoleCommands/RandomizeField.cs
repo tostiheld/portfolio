@@ -34,7 +34,7 @@ namespace BombDefuserEngine.Utils.ConsoleCommands
             Field.GenerateRandom();
             for (int i = 0; i < Bombs; i++)
             {
-                Field.AddBomb();
+                Field.AddSpecialCell(Playfield.CellType.Bomb);
             }
 
             return "Randomized the field";
