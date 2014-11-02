@@ -102,7 +102,7 @@ namespace BombDefuserEngine.PlayerFeedback
                         0f, 
                         new Point(192, 192));
 
-                anim.Load(Parent.Content, "explosion.png", 8, 15);
+                anim.Load(Parent.Content, "explosion.png", 8, 10);
                 anim.Pause();
                 KeyValuePair<Vector2, Utils.AnimatedTexture> pair = 
                     new KeyValuePair<Vector2, Utils.AnimatedTexture>(pos, anim);
@@ -135,8 +135,13 @@ namespace BombDefuserEngine.PlayerFeedback
 
             if (this.Playing)
             {
-                fontRenderer.DrawText(spriteBatch, 300, 100, "GAME", textOpacity);
-                fontRenderer.DrawText(spriteBatch, 320, 300, "OVER", textOpacity);
+                int text1 = fontRenderer.MeasureString("GAME");
+                int text2 = fontRenderer.MeasureString("OVER");
+                int posX1 = (Parent.GraphicsDevice.Viewport.Width / 2) - (text1 / 2);
+                int posX2 = (Parent.GraphicsDevice.Viewport.Width / 2) - (text2 / 2);
+
+                fontRenderer.DrawText(spriteBatch, posX1, 100, "GAME", textOpacity);
+                fontRenderer.DrawText(spriteBatch, posX2, 300, "OVER", textOpacity);
             }
 
             spriteBatch.End();

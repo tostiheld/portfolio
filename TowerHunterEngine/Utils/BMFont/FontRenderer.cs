@@ -60,5 +60,20 @@ namespace BombDefuserEngine.Utils.BMFont
                 }
             }
         }
+
+        public int MeasureString(string text)
+        {
+            int length = 0;
+            foreach (char c in text)
+            {
+                FontChar fc;
+                if(_characterMap.TryGetValue(c, out fc))
+                {
+                    length += fc.Width;
+                }
+            }
+
+            return length;
+        }
     }
 }

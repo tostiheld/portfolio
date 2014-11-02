@@ -23,6 +23,7 @@ namespace BombDefuserEngine
         private string Port;
 
         public bool HasFrameCounter = false;
+        private bool IsGameOver = false;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -117,12 +118,15 @@ namespace BombDefuserEngine
 
             Info.Data = PlayerData;
 
-            if (Timer.Elapsed)
+            if (Timer.Elapsed && !IsGameOver)
             {
-                if (!GameOver.Playing)
+                IsGameOver = true;
+                foreach (Utils.AvailableColor ac in playField.AvailableColors.Values)
                 {
-                    GameOver.Begin();
+                    playField.ResetCell(ac.Value);
                 }
+                playField.MustUpdate = true;
+                GameOver.Begin();
             }
 
             /*

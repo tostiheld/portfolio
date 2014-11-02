@@ -55,7 +55,6 @@ namespace BombDefuserEngine.Utils.ConsoleCommands
             }
 
             Field.ResetCell(color);
-            Field.MustUpdate = true;
 
             return "Cell reset";
         }

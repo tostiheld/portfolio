@@ -76,6 +76,7 @@ namespace BombDefuserEngine.Playfield
                     }
                 }
             }
+            this.MustUpdate = true;
         }
 
         public void AddBomb()
