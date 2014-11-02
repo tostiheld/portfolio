@@ -14,7 +14,7 @@ namespace BombDefuserEngine.PlayerFeedback
     public class CountdownTimer : DrawableGameComponent
     {
         private SpriteBatch spriteBatch;
-        ContentManager content;
+        private Game Parent;
 
         private FontRenderer fontRenderer;
         private FontFile fontFile;
@@ -28,28 +28,21 @@ namespace BombDefuserEngine.PlayerFeedback
 
         public CountdownTimer(Game game, int initialSeconds, Point position) : base(game)
         {
+            this.Parent = game;
             this.IsEnabled = false;
             this.TimeLeft = TimeSpan.FromSeconds(initialSeconds);
             
             this.Position = position;
-
-            content = new ContentManager(game.Services);
-            content.RootDirectory = "Content";
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            string path = System.IO.Path.Combine(content.RootDirectory, "Fonts/octin-stencil-100.fnt");
-            fontTexture = content.Load<Texture2D>("Fonts/octin-stencil-100_0.png");
+            string path = System.IO.Path.Combine(Parent.Content.RootDirectory, "Fonts/octin-stencil-100.fnt");
+            fontTexture = Parent.Content.Load<Texture2D>("Fonts/octin-stencil-100_0.png");
             fontFile = FontLoader.Load(path);
             fontRenderer = new FontRenderer(fontFile, fontTexture);
-        }
-
-        protected override void UnloadContent()
-        {
-            content.Unload();
         }
 
         public override void Update(GameTime gameTime)

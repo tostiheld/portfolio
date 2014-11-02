@@ -30,6 +30,7 @@ namespace BombDefuserEngine
         private Playfield.Field playField;
         private PlayerFeedback.CountdownTimer Timer;
         private PlayerFeedback.InfoView Info;
+        private PlayerFeedback.GameOverView GameOver;
         private Player.Data PlayerData;
         private GameConsole console;
 
@@ -66,7 +67,7 @@ namespace BombDefuserEngine
             Point TimerPosition = new Point();
             TimerPosition.X = 5;
             TimerPosition.Y = (Resolution.Y - 83);
-            this.Timer = new PlayerFeedback.CountdownTimer(this, 70, TimerPosition);
+            this.Timer = new PlayerFeedback.CountdownTimer(this, 10, TimerPosition);
             Components.Add(Timer);
             Timer.IsEnabled = true;
 
@@ -77,11 +78,15 @@ namespace BombDefuserEngine
             this.Info = new PlayerFeedback.InfoView(this, PlayerData, new Point(220, Resolution.Y - 60));
             Components.Add(Info);
 
+            this.GameOver = new PlayerFeedback.GameOverView(this);
+            Components.Add(GameOver);
+
             Content.RootDirectory = "Content";
         }
 
         protected override void Initialize()
         {
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
 #if DEBUG
             DebugLine = new List<string>(2);
@@ -114,7 +119,10 @@ namespace BombDefuserEngine
 
             if (Timer.Elapsed)
             {
-                // game over
+                if (!GameOver.Playing)
+                {
+                    GameOver.Begin();
+                }
             }
 
             /*
