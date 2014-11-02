@@ -101,6 +101,7 @@
     <Compile Include="Utils\ConsoleCommands\Reset.cs" />
     <Compile Include="Utils\ConsoleCommands\RandomizeField.cs" />
     <Compile Include="Utils\ConsoleCommands\SetHP.cs" />
+    <Compile Include="Utils\ConsoleCommands\ToggleFrameCounter.cs" />
     <Compile Include="Utils\Exceptions\EV3CommunicationException.cs" />
     <Compile Include="Utils\FrameCounter.cs" />
     <Compile Include="Utils\RobotColors.cs" />

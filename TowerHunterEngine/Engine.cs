@@ -22,6 +22,8 @@ namespace TowerHunterEngine
         private int CorrectionScale;
         private string Port;
 
+        public bool HasFrameCounter = false;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -68,15 +70,12 @@ namespace TowerHunterEngine
             Components.Add(Timer);
             Timer.IsEnabled = true;
 
-            PlayerData = new Player.Data(200);
-            PlayerData.HitPoints = 50;
+            PlayerData = new Player.Data(100);
+            PlayerData.HitPoints = 100;
+            PlayerData.Score = 100;
 
             this.Info = new PlayerFeedback.InfoView(this, PlayerData, new Point(220, Resolution.Y - 60));
             Components.Add(Info);
-
-#if DEBUG
-            Components.Add(new Utils.FrameCounter(this));
-#endif
 
             Content.RootDirectory = "Content";
         }
@@ -166,7 +165,8 @@ namespace TowerHunterEngine
                 new Utils.ConsoleCommands.ChangeCellType(playField),
                 new Utils.ConsoleCommands.ResetCell(playField),
                 new Utils.ConsoleCommands.Reset(this),
-                new Utils.ConsoleCommands.SetHP(PlayerData)
+                new Utils.ConsoleCommands.SetHP(PlayerData),
+                new Utils.ConsoleCommands.ToggleFrameCounter(this)
                 //new Utils.ConsoleCommands.GetLastMessage(EV3Connection)
             };
             console.AddCommand(commands);
