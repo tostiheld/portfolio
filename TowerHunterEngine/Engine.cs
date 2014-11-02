@@ -68,7 +68,7 @@ namespace TowerHunterEngine
             Components.Add(Timer);
             Timer.IsEnabled = true;
 
-            PlayerData = new Player.Data(100);
+            PlayerData = new Player.Data(200);
             PlayerData.HitPoints = 50;
 
             this.Info = new PlayerFeedback.InfoView(this, PlayerData, new Point(220, Resolution.Y - 60));

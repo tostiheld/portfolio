@@ -1,4 +1,11 @@
-﻿using System;
+﻿﻿/*
+ *
+ * algorithm: (recursive backtracking)
+ * http://weblog.jamisbuck.org/2010/12/27/maze-generation-recursive-backtracking
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

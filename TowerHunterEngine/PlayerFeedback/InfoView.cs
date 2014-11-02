@@ -13,9 +13,9 @@ namespace TowerHunterEngine.PlayerFeedback
 {
     public class InfoView : DrawableGameComponent
     {
-        public const int WIDTH = 300;
+        public const int WIDTH = 350;
         public const int HEIGHT = 60;
-        private const int CHAR_HEIGHT = 48;
+        private const int CHAR_HEIGHT = 61;
 
         private Game Parent;
         private SpriteBatch spriteBatch;
@@ -43,7 +43,7 @@ namespace TowerHunterEngine.PlayerFeedback
                 Bounds = new Rectangle(value.X, value.Y, WIDTH, HEIGHT);
 
                 // make score position depend on same bounds
-                ScorePosition.X = (int)(Position.X + (Bounds.Width * 0.8));
+                ScorePosition.X = (int)(Position.X + (Bounds.Width * 0.7));
                 ScorePosition.Y = Position.Y + (Bounds.Height / 2) - (CHAR_HEIGHT / 2);
             }
         }
@@ -58,10 +58,10 @@ namespace TowerHunterEngine.PlayerFeedback
             this.Content = game.Content;
 
             Rectangle HPBarBounds = new Rectangle(
-                (int)(Position.X + (Bounds.Width * 0.1f)),
-                (int)(Position.Y  + ((Bounds.Height / 2) - ((Bounds.Height * 0.9f) / 2))),
-                (int)(Bounds.Width * 0.7f),
-                (int)(Bounds.Height * 0.9f));
+                (int)(Position.X + (Bounds.Width * 0.02f)),
+                (int)(Position.Y  + ((Bounds.Height / 2) - ((Bounds.Height * 0.7f) / 2))),
+                (int)(Bounds.Width * 0.6f),
+                (int)(Bounds.Height * 0.7f));
             HitPointBar = new HPBar(Parent, HPBarBounds);
         }
 
@@ -69,12 +69,16 @@ namespace TowerHunterEngine.PlayerFeedback
         {
             base.Initialize();
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+
+            Background = Utils.RuntimeTextures.Basic(GraphicsDevice, Color.Transparent);
+
+            /*
             Background = 
                 Utils.RuntimeTextures.ShadowedBackground(
                 GraphicsDevice,
                 Color.CornflowerBlue, 
                 new Point(Bounds.Width, Bounds.Height));
+             */
         }
 
         protected override void LoadContent()
