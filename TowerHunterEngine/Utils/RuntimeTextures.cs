@@ -104,46 +104,5 @@ namespace BombDefuserEngine.Utils
 
             return texture;
         }
-
-        static public Texture2D ShadowedBackground(GraphicsDevice device, Color fill, Point size)
-        {
-            Drawing.Bitmap bmp = new Drawing.Bitmap(size.X, size.Y);
-            Drawing.Color usedColor = ConvertXNAColor(fill);
-
-            for (int x = 0; x < size.X - 1; x++)
-            {
-                for (int y = 0; y < size.Y - 1; y++)
-                {
-                    bmp.SetPixel(x, y, usedColor);
-                }
-            }
-
-            for (int x = 1; x < size.X; x++)
-            {
-                bmp.SetPixel(x, size.Y - 1, Drawing.Color.Gray);
-            }
-
-            for (int y = 1; y < size.Y; y++)
-            {
-                bmp.SetPixel(size.X - 1, y, Drawing.Color.Gray);
-            }
-
-            Texture2D texture = new Texture2D(device, size.X, size.Y);
-
-            // lockbits improve performance
-            Imaging.BitmapData data;
-            data = bmp.LockBits(
-                new Drawing.Rectangle(0, 0, size.X, size.Y),
-                Imaging.ImageLockMode.ReadOnly,
-                bmp.PixelFormat);
-
-            int bufferSize = data.Height * data.Stride;
-            byte[] bytes = new byte[bufferSize];
-            Marshal.Copy(data.Scan0, bytes, 0, bytes.Length);
-
-            texture.SetData<byte>(bytes);
-
-            return texture;
-        }
     }
 }
