@@ -168,11 +168,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Libraries\CommandMessenger\CommandMessenger.dll" />
-    <None Include="Libraries\MonoBrick\hidapi.dll" />
-    <None Include="Libraries\MonoBrick\LibUsbDotNet.dll" />
-    <None Include="Libraries\MonoBrick\MonoBrick.dll" />
-    <None Include="Libraries\MonoBrick\MonoBrick.xml" />
-    <None Include="Libraries\MonoBrick\usbHowTo.txt" />
     <None Include="Documentatie\memory-usage-v2014-9-29-42.diagsession" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -211,11 +206,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Documentatie\documentatie.docx" />
-    <None Include="Libraries\MonoBrick\hidapi.dylib" />
-    <None Include="Libraries\MonoBrick\libusb-1.0.0.dylib" />
-    <None Include="Libraries\MonoBrick\libusb-1.0.a" />
-    <None Include="Libraries\MonoBrick\libusb-1.0.dylib" />
-    <None Include="Libraries\MonoBrick\libusb-1.0.la" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
