@@ -96,7 +96,7 @@ namespace BombDefuserEngine
 #endif
             SetupConsole();
 
-            EV3Connection = new Robot.Connection(Port);
+            //EV3Connection = new Robot.Connection(Port);
 
             base.Initialize();
         }
@@ -118,10 +118,10 @@ namespace BombDefuserEngine
         {
             base.Update(gameTime);
 
-            if (EV3Connection.Status == Robot.RobotStatus.Homed)
+            /*if (EV3Connection.Status == Robot.RobotStatus.Homed)
             {
                 this.Reset();
-            }
+            }*/
 
             Info.Data = PlayerData;
 
@@ -134,7 +134,7 @@ namespace BombDefuserEngine
                 GameOver();
             }
 
-            if (EV3Connection.Status == Robot.RobotStatus.HitWall)
+            /*if (EV3Connection.Status == Robot.RobotStatus.HitWall)
             {
                 PlayerData.HitPoints -= 10;
                 EV3Connection.Status = Robot.RobotStatus.Empty;
@@ -161,7 +161,7 @@ namespace BombDefuserEngine
             {
                 Point directions = Player.Input.GetDirections(Scale, CorrectionScale);
                 EV3Connection.SendWheelData(directions.X, directions.Y);
-            }
+            }*/
         }
 
         protected override void Draw(GameTime gameTime)

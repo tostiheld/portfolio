@@ -21,7 +21,7 @@
       <Value Profile="(Default)">com40</Value>
     </Setting>
     <Setting Name="Position" Type="System.Drawing.Point" Scope="Application">
-      <Value Profile="(Default)">1280, 0</Value>
+      <Value Profile="(Default)">0, 0</Value>
     </Setting>
   </Settings>
 </SettingsFile>
