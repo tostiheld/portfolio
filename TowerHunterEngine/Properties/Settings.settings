@@ -23,5 +23,11 @@
     <Setting Name="Position" Type="System.Drawing.Point" Scope="Application">
       <Value Profile="(Default)">0, 0</Value>
     </Setting>
+    <Setting Name="FormLocation" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://athena.fhict.nl/users/i318432/form.php?points=</Value>
+    </Setting>
+    <Setting Name="QRCodeBounds" Type="System.Drawing.Rectangle" Scope="Application">
+      <Value Profile="(Default)">20, 500, 200, 200</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -85,5 +85,23 @@ namespace BombDefuserEngine.Properties {
                 return ((global::System.Drawing.Point)(this["Position"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://athena.fhict.nl/users/i318432/form.php?points=")]
+        public string FormLocation {
+            get {
+                return ((string)(this["FormLocation"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20, 500, 200, 200")]
+        public global::System.Drawing.Rectangle QRCodeBounds {
+            get {
+                return ((global::System.Drawing.Rectangle)(this["QRCodeBounds"]));
+            }
+        }
     }
 }

@@ -11,9 +11,7 @@ using MonoGameConsole;
 namespace BombDefuserEngine
 {
     public class Engine : Game
-    {
-        private Texture2D qrcode;
-        
+    {        
         private readonly Properties.Settings Settings = 
             Properties.Settings.Default;
 
@@ -76,7 +74,7 @@ namespace BombDefuserEngine
             
             this.Info = new PlayerFeedback.InfoView(this, PlayerData, new Point(220, Resolution.Y - 60));
             
-            this.GameOverScreen = new PlayerFeedback.GameOverView(this);
+            this.GameOverScreen = new PlayerFeedback.GameOverView(this, PlayerData.Score);
 
             Content.RootDirectory = "Content";
         }
@@ -109,7 +107,6 @@ namespace BombDefuserEngine
             GroundTexture = Content.Load<Texture2D>("ground-texture2.png");
 
             Point res = new Point(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-            qrcode = Utils.RuntimeTextures.GenerateQRCode(GraphicsDevice, "test");
         }
 
         protected override void UnloadContent()
@@ -175,6 +172,7 @@ namespace BombDefuserEngine
             spriteBatch.End();
 
             base.Draw(gameTime);
+
             spriteBatch.Begin();
 #if DEBUG
             spriteBatch.DrawString(
@@ -183,19 +181,6 @@ namespace BombDefuserEngine
                 new Vector2(10, 10),
                 Color.Red);
 #endif
-            spriteBatch.Draw(qrcode, new Rectangle(50, 50, qrcode.Width, qrcode.Height), Color.White);
-
-            spriteBatch.End();
-
-            spriteBatch.Begin(
-                SpriteSortMode.Deferred,
-                BlendState.AlphaBlend,
-                SamplerState.PointClamp,
-                DepthStencilState.None,
-                RasterizerState.CullNone); // these are settings to scale up textures without blurring them
-
-            spriteBatch.Draw(qrcode, new Rectangle(50, 50, 300, 300), Color.White);
-
             spriteBatch.End();
         }
 
