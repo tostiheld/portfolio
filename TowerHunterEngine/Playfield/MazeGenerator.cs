@@ -94,20 +94,7 @@ namespace BombDefuserEngine.Playfield
         private static void ValuesToBorders(Field field)
         {
             int rows = field.Cells.GetLength(1);
-            int columns = field.Cells.GetLength(0);
-
-            // top border
-
-            for (int i = 0; i < columns; i++)
-            {
-                field.Cells[i, 0].Borders[0] = true;
-            }
-
-            // bottom border
-            for (int i = 0; i < columns; i++)
-            {
-                field.Cells[i, rows - 1].Borders[2] = true;
-            }
+            int columns = field.Cells.GetLength(0);            
 
             for (int y = 0; y < rows; y++)
             {
@@ -122,6 +109,18 @@ namespace BombDefuserEngine.Playfield
                     if (!directions.HasFlag(Directions.E))
                         field.Cells[x, y].Borders[1] = true;
                 }
+            }
+
+            // top border
+            for (int i = 0; i < columns; i++)
+            {
+                field.Cells[i, 0].Borders[0] = true;
+            }
+
+            // bottom border
+            for (int i = 0; i < columns; i++)
+            {
+                field.Cells[i, rows - 1].Borders[2] = true;
             }
         }
 

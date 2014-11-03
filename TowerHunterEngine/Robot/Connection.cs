@@ -17,9 +17,20 @@ namespace BombDefuserEngine.Robot
         private EV3Messenger Messenger;
         private Timer ReadTimer;
 
+        private Color lastColor;
+
         public EV3Message LastMessage { get; private set; }
-        public Color LastColor { get; private set; }
-        public RobotStatus LastStatus { get; private set; }
+        public Color LastColor 
+        {
+            get { return lastColor; }
+            private set
+            {
+                LastColorIsRead = false;
+                lastColor = value;
+            }
+        }
+        public RobotStatus Status { get; set; }
+        public bool LastColorIsRead { get; set; }
 
         public Connection(string port)
         {
@@ -28,10 +39,10 @@ namespace BombDefuserEngine.Robot
                 throw new EV3CommunicationException(
                     "Connection with EV3 failed");
 
-            this.LastStatus = RobotStatus.Empty;
+            this.Status = RobotStatus.Empty;
             this.LastColor = Color.White;
 
-            ReadTimer = new Timer(1);
+            ReadTimer = new Timer(50);
             ReadTimer.Elapsed += new ElapsedEventHandler(ReadTimer_Elapsed);
             ReadTimer.Start();
         }
@@ -67,14 +78,17 @@ namespace BombDefuserEngine.Robot
                         case "orange":
                             this.LastColor = RobotColors.Orange;
                             break;
-                        case "dismantling":
-                            this.LastStatus = RobotStatus.Dismantling;
+                        case "hitwall":
+                            this.Status = RobotStatus.HitWall;
                             break;
-                        case "homing":
-                            this.LastStatus = RobotStatus.Homing;
+                        case "dismantling":
+                            this.Status = RobotStatus.Dismantling;
+                            break;
+                        case "homed":
+                            this.Status = RobotStatus.Homed;
                             break;
                         case "nothing":
-                            this.LastStatus = RobotStatus.Empty;
+                            this.Status = RobotStatus.Empty;
                             break;
                         default:
                             // iets anders dan een kleur of status
@@ -96,6 +110,26 @@ namespace BombDefuserEngine.Robot
                 if (Messenger.SendMessage("left", (float)leftWheel) &&
                     Messenger.SendMessage("right", (float)RightWeel))
                     return;
+                else
+                    throw new EV3CommunicationException(
+                        "Failed to send wheel data.");
+            }
+            else
+            {
+                throw new EV3CommunicationException(
+                    "Not connected to the EV3.");
+            }
+        }
+
+        public void SendHome()
+        {
+            if (Messenger != null || Messenger.IsConnected)
+            {
+                if (Messenger.SendMessage("home", true))
+                {
+                    this.Status = RobotStatus.Homing;
+                    return;
+                }                    
                 else
                     throw new EV3CommunicationException(
                         "Failed to send wheel data.");

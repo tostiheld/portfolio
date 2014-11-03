@@ -59,9 +59,17 @@ namespace BombDefuserEngine.Utils.ConsoleCommands
                         type = Playfield.CellType.Test;
                         break;
                     default:
-                    return "Unknown type";
+                        return "Unknown type";
                 }
-                color = Field.GetFirstAvailableColor();
+                AvailableColor ac = Field.GetFirstAvailableColor();
+                if (ac.Available)
+                {
+                    color = ac.Value;
+                }
+                else
+                {
+                    return "No more colors available.";
+                }
             }
 
             Field.Cells[ax, ay].ChangeType(type, color, anim);

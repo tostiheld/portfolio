@@ -30,23 +30,38 @@ namespace BombDefuserEngine.PlayerFeedback
         private FontFile fontFile;
         private Texture2D fontTexture;
 
+        private Texture2D HomingScreen;
+        private Timer HomingScreenTimer;
+        private int HomingScreenTime = 0;
+        private int HomingScreenOpacity = 0;
+
+
         public bool Playing { get; private set; }
+        public bool HomingScreenVisible { get; private set; }
 
         public GameOverView(Game game) : base(game)
         {
             this.Parent = game;
+            HomingScreenVisible = false;
             Explosions = new List<KeyValuePair<Vector2, Utils.AnimatedTexture>>();
 
             ExplosionTimer = new Timer(100);
             ExplosionTimer.Elapsed += new ElapsedEventHandler(ExplosionTimer_Elapsed);
+
+            HomingScreenTimer = new Timer(100);
+            HomingScreenTimer.Elapsed += new ElapsedEventHandler(HomingScreenTimer_Elapsed);
         }
 
         public void Reset()
         {
             ExplosionTimer.Stop();
+            HomingScreenTimer.Stop();
             this.Playing = false;
+            this.HomingScreenVisible = false;
             currentExplosion = 0;
             textOpacity = 0;
+            HomingScreenTime = 0;
+            HomingScreenOpacity = 0;
 
             foreach (KeyValuePair<Vector2, Utils.AnimatedTexture> pair in Explosions)
             {
@@ -59,6 +74,26 @@ namespace BombDefuserEngine.PlayerFeedback
         {
             Playing = true;
             ExplosionTimer.Start();
+        }
+
+        private void HomingScreenTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if (HomingScreenTime < 30)
+            {
+                HomingScreenTime++;
+            }
+            else
+            {
+                if (HomingScreenOpacity < 255)
+                {
+                    HomingScreenOpacity += 10;
+                }
+                else
+                {
+                    this.HomingScreenVisible = true;
+                    HomingScreenTimer.Stop();
+                }
+            }
         }
 
         private void ExplosionTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -75,6 +110,7 @@ namespace BombDefuserEngine.PlayerFeedback
             }
             else
             {
+                HomingScreenTimer.Start();
                 ExplosionTimer.Stop();
             }
         }
@@ -122,6 +158,11 @@ namespace BombDefuserEngine.PlayerFeedback
                     new KeyValuePair<Vector2, Utils.AnimatedTexture>(pos, anim);
 
                 Explosions.Add(pair);
+
+                Point res = new Point(Parent.GraphicsDevice.Viewport.Width,
+                                      Parent.GraphicsDevice.Viewport.Height);
+
+                HomingScreen = Parent.Content.Load<Texture2D>("HomingTexture.png");
             }
         }
 
@@ -146,6 +187,19 @@ namespace BombDefuserEngine.PlayerFeedback
             {
                 pair.Value.DrawFrame(spriteBatch, pair.Key);
             }
+
+            spriteBatch.Draw(
+                HomingScreen, 
+                new Rectangle(
+                    0, 
+                    0,
+                    Parent.GraphicsDevice.Viewport.Width,
+                    Parent.GraphicsDevice.Viewport.Height),
+                new Color(
+                    255, 
+                    255, 
+                    255, 
+                    HomingScreenOpacity));
 
             if (this.Playing)
             {

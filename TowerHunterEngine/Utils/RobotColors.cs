@@ -53,7 +53,7 @@ namespace BombDefuserEngine.Utils
         {
             get
             {
-                return new Color(255, 0, 255);
+                return new Color(255, 0, 180);
             }
         }
 

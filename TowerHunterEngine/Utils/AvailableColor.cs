@@ -17,5 +17,10 @@ namespace BombDefuserEngine.Utils
             this.Value = color;
             this.Available = available;
         }
+        public AvailableColor(bool available)
+        {
+            this.Value = Color.Black;
+            this.Available = available;
+        }
     }
 }

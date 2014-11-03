@@ -40,7 +40,7 @@ namespace BombDefuserEngine
 
         private Texture2D GroundTexture;
 
-        //private Robot.Connection EV3Connection;
+        private Robot.Connection EV3Connection;
 
         public Engine()
             : base()
@@ -96,7 +96,7 @@ namespace BombDefuserEngine
 #endif
             SetupConsole();
 
-            //EV3Connection = new Robot.Connection(Port);
+            EV3Connection = new Robot.Connection(Port);
 
             base.Initialize();
         }
@@ -105,6 +105,8 @@ namespace BombDefuserEngine
         {
             font = Content.Load<SpriteFont>("Fonts/font");
             GroundTexture = Content.Load<Texture2D>("ground-texture2.png");
+
+            Point res = new Point(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
         }
 
         protected override void UnloadContent()
@@ -115,6 +117,11 @@ namespace BombDefuserEngine
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if (EV3Connection.Status == Robot.RobotStatus.Homed)
+            {
+                this.Reset();
+            }
 
             Info.Data = PlayerData;
 
@@ -127,24 +134,34 @@ namespace BombDefuserEngine
                 GameOver();
             }
 
-            /*
-            if (EV3Connection.LastStatus == Robot.RobotStatus.Dismantling)
+            if (EV3Connection.Status == Robot.RobotStatus.HitWall)
             {
-                foreach (Utils.AvailableColor ac in playField.AvailableColors.Values)
+                PlayerData.HitPoints -= 10;
+                EV3Connection.Status = Robot.RobotStatus.Empty;
+            }
+
+            if (!EV3Connection.LastColorIsRead)
+            {
+                if (!playField.IsColorAvailable(EV3Connection.LastColor))
                 {
-                    if (ac.Value == EV3Connection.LastColor &&
-                        !ac.Available)
-                    {
-                        playField.ResetCell(EV3Connection.LastColor);
-                    }
+                    playField.ResetCell(EV3Connection.LastColor);
+                    EV3Connection.LastColorIsRead = true;
+                    PlayerData.Score += 100;
                 }
             }
 
-            if (EV3Connection.LastStatus == Robot.RobotStatus.Empty)
+            if (GameOverScreen.HomingScreenVisible &&
+                EV3Connection.Status != Robot.RobotStatus.Homing)
+            {
+                EV3Connection.SendHome();
+                EV3Connection.Status = Robot.RobotStatus.Empty;
+            }
+
+            if (EV3Connection.Status == Robot.RobotStatus.Empty && !IsGameOver)
             {
                 Point directions = Player.Input.GetDirections(Scale, CorrectionScale);
                 EV3Connection.SendWheelData(directions.X, directions.Y);
-            }*/
+            }
         }
 
         protected override void Draw(GameTime gameTime)
@@ -163,6 +180,7 @@ namespace BombDefuserEngine
                 new Vector2(10, 10),
                 Color.Red);
 #endif
+
             spriteBatch.End();            
         }
 
@@ -204,6 +222,7 @@ namespace BombDefuserEngine
             ResetConsoleCommands();
 
             console.Options.Prompt = ">";
+            console.Options.ToggleKey = Keys.F1;
             console.Options.BackgroundColor = new Color(0, 0, 0, 190);
         }
 

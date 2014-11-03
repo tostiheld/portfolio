@@ -2,8 +2,10 @@
 {
     public enum RobotStatus
     {
+        HitWall,
         Dismantling,
         Homing,
+        Homed,
         Empty
     }
 }

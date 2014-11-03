@@ -63,19 +63,33 @@ namespace BombDefuserEngine.Playfield
             {
                 AddSpecialCell(CellType.Bomb);
             }
+
+            this.MustUpdate = true;
         }
 
-        public Color GetFirstAvailableColor()
+        public AvailableColor GetFirstAvailableColor()
         {
             foreach (string s in AvailableColors.Keys)
             {
                 if (AvailableColors[s].Available)
                 {
                     AvailableColors[s].Available = false;
-                    return AvailableColors[s].Value;
+                    return new AvailableColor(AvailableColors[s].Value, true);
                 }
             }
-            throw new IndexOutOfRangeException("No more available colors.");
+            return new AvailableColor(false);
+        }
+
+        public bool IsColorAvailable(Color color)
+        {
+            foreach (AvailableColor ac in AvailableColors.Values)
+            {
+                if (ac.Value == color)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public void ResetCell(Color color)
@@ -99,7 +113,16 @@ namespace BombDefuserEngine.Playfield
 
         public void AddSpecialCell(CellType type)
         {
-            Color usedColor = GetFirstAvailableColor();
+            Color usedColor = Color.White;
+            AvailableColor ac = GetFirstAvailableColor();
+            if (ac.Available)
+            {
+                usedColor = ac.Value;
+            }
+            else
+            {
+                throw new IndexOutOfRangeException("No more colors available");
+            }
 
             Point RandomPos = new Point();
 
@@ -269,16 +292,19 @@ namespace BombDefuserEngine.Playfield
                 DepthStencilState.None,
                 RasterizerState.CullNone); // these are settings to scale up textures without blurring them
 
-            for (int x = 0; x < Cells.GetLength(0); x++)
+            if (!this.MustUpdate)
             {
-                for (int y = 0; y < Cells.GetLength(1); y++)
+                for (int x = 0; x < Cells.GetLength(0); x++)
                 {
-                    spriteBatch.Draw(
-                        Cells[x, y].Texture,
-                        Cells[x, y].Bounds,
-                        Color.White);
+                    for (int y = 0; y < Cells.GetLength(1); y++)
+                    {
+                        spriteBatch.Draw(
+                            Cells[x, y].Texture,
+                            Cells[x, y].Bounds,
+                            Color.White);
 
-                    Cells[x, y].DrawAnimation(spriteBatch);
+                        Cells[x, y].DrawAnimation(spriteBatch);
+                    }
                 }
             }
 
