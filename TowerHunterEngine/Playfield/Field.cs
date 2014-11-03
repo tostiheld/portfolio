@@ -48,6 +48,23 @@ namespace BombDefuserEngine.Playfield
             this.BombAmount = initialBombs;
         }
 
+        public void Reset(int initialBombs)
+        {
+            this.BombAmount = initialBombs;
+
+            foreach (AvailableColor ac in AvailableColors.Values)
+            {
+                ac.Available = true;
+            }
+
+            GenerateRandom();
+
+            for (int i = 0; i < this.BombAmount; i++)
+            {
+                AddSpecialCell(CellType.Bomb);
+            }
+        }
+
         public Color GetFirstAvailableColor()
         {
             foreach (string s in AvailableColors.Keys)

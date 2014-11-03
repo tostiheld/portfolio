@@ -65,6 +65,11 @@ namespace BombDefuserEngine.PlayerFeedback
             HitPointBar = new HPBar(Parent, HPBarBounds);
         }
 
+        public void Reset(Player.Data data)
+        {
+            this.Data = data;
+        }
+
         public override void Initialize()
         {
             base.Initialize();

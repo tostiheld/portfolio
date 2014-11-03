@@ -27,18 +27,7 @@ namespace BombDefuserEngine.PlayerFeedback
             get { return percentage; }
             set
             {
-                if (value < 0)
-                {
-                    throw new NotSupportedException("Percentage value must be larger than 0.");
-                }
-                else if (value > 1)
-                {
-                    throw new NotSupportedException("Percentage value must be smaller than 1.");
-                }
-                else
-                {
-                    percentage = value;
-                }
+                percentage = MathHelper.Clamp(value, 0, 1);
             }
         }
 

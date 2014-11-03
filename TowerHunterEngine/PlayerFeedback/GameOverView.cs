@@ -24,7 +24,7 @@ namespace BombDefuserEngine.PlayerFeedback
         private Point MaxPositions;
 
         private int currentExplosion = 0;
-        private int textOpacity = 1;
+        private int textOpacity = 0;
 
         private FontRenderer fontRenderer;
         private FontFile fontFile;
@@ -39,6 +39,20 @@ namespace BombDefuserEngine.PlayerFeedback
 
             ExplosionTimer = new Timer(100);
             ExplosionTimer.Elapsed += new ElapsedEventHandler(ExplosionTimer_Elapsed);
+        }
+
+        public void Reset()
+        {
+            ExplosionTimer.Stop();
+            this.Playing = false;
+            currentExplosion = 0;
+            textOpacity = 0;
+
+            foreach (KeyValuePair<Vector2, Utils.AnimatedTexture> pair in Explosions)
+            {
+                pair.Value.Reset();
+                pair.Value.Pause();
+            }
         }
 
         public void Begin()

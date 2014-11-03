@@ -35,6 +35,13 @@ namespace BombDefuserEngine.PlayerFeedback
             this.Position = position;
         }
 
+        public void Reset(int initialSeconds)
+        {
+            this.Elapsed = false;
+            this.IsEnabled = false;
+            this.TimeLeft = TimeSpan.FromSeconds(initialSeconds);
+        }
+
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);

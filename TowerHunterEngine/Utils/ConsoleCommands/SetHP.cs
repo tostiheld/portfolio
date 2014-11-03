@@ -24,22 +24,22 @@ namespace BombDefuserEngine.Utils.ConsoleCommands
         public string Execute(string[] arguments)
         {
             int targetValue;
-            if (Int32.TryParse(arguments[0], out targetValue))
+            if (arguments.Length > 0)
             {
-                if (targetValue > Data.MaxHitPoints)
+                if (Int32.TryParse(arguments[0], out targetValue))
                 {
-                    return "Specified value is larger that the maximal amount of hit points (" + Data.MaxHitPoints.ToString() + ").";
-                }
-                else
-                {
-                    Data.HitPoints = targetValue;
-                    return "Hit points set.";
+                    if (targetValue > Data.MaxHitPoints)
+                    {
+                        return "Specified value is larger that the maximal amount of hit points (" + Data.MaxHitPoints.ToString() + ").";
+                    }
+                    else
+                    {
+                        Data.HitPoints = targetValue;
+                        return "Hit points set.";
+                    }
                 }
             }
-            else
-            {
-                return "Value is not a number.";
-            }
+            return "Value is not a number.";
         }
 
         public string Name

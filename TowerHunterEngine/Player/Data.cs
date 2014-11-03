@@ -9,7 +9,7 @@
         public Data(int maxHP)
         {
             Score = 0;
-            HitPoints = 0;
+            HitPoints = maxHP;
             MaxHitPoints = maxHP;
         }
     }

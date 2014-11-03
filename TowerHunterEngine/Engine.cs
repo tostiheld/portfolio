@@ -31,7 +31,7 @@ namespace BombDefuserEngine
         private Playfield.Field playField;
         private PlayerFeedback.CountdownTimer Timer;
         private PlayerFeedback.InfoView Info;
-        private PlayerFeedback.GameOverView GameOver;
+        private PlayerFeedback.GameOverView GameOverScreen;
         private Player.Data PlayerData;
         private GameConsole console;
 
@@ -62,24 +62,19 @@ namespace BombDefuserEngine
             graphics.PreferredBackBufferWidth = Settings.Resolution.X;
             graphics.ApplyChanges();
 
+            PlayerData = new Player.Data(100);
+
             this.playField = new Playfield.Field(this, Resolution, Fieldsize, BombAmount);
-            Components.Add(playField);
 
             Point TimerPosition = new Point();
             TimerPosition.X = 5;
             TimerPosition.Y = (Resolution.Y - 83);
             this.Timer = new PlayerFeedback.CountdownTimer(this, 100, TimerPosition);
-            Components.Add(Timer);
             Timer.IsEnabled = true;
-
-            PlayerData = new Player.Data(100);
-            PlayerData.HitPoints = 100;
-
+            
             this.Info = new PlayerFeedback.InfoView(this, PlayerData, new Point(220, Resolution.Y - 60));
-            Components.Add(Info);
-
-            this.GameOver = new PlayerFeedback.GameOverView(this);
-            Components.Add(GameOver);
+            
+            this.GameOverScreen = new PlayerFeedback.GameOverView(this);
 
             Content.RootDirectory = "Content";
         }
@@ -88,6 +83,12 @@ namespace BombDefuserEngine
         {
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            Components.Add(playField);
+            Components.Add(Timer);
+            Components.Add(Info);
+            Components.Add(GameOverScreen);
+
 #if DEBUG
             DebugLine = new List<string>(2);
             DebugLine.Add("DEBUGGING");
@@ -118,14 +119,12 @@ namespace BombDefuserEngine
             Info.Data = PlayerData;
 
             if (Timer.Elapsed && !IsGameOver)
+                GameOver();
+
+            if (PlayerData.HitPoints <= 0 && !IsGameOver)
             {
-                IsGameOver = true;
-                foreach (Utils.AvailableColor ac in playField.AvailableColors.Values)
-                {
-                    playField.ResetCell(ac.Value);
-                }
-                playField.MustUpdate = true;
-                GameOver.Begin();
+                Timer.IsEnabled = false;
+                GameOver();
             }
 
             /*
@@ -167,9 +166,49 @@ namespace BombDefuserEngine
             spriteBatch.End();            
         }
 
+        public void Reset(int initialBombs, int time = 180, int maxhp = 100)
+        {
+            this.BombAmount = initialBombs;
+            Reset(time, maxhp);
+        }
+        public void Reset(int time = 180, int maxhp = 100)
+        {
+            this.IsGameOver = false;
+
+            playField.Reset(BombAmount);
+            Timer.Reset(time);
+            PlayerData = new Player.Data(maxhp);
+            Info.Reset(PlayerData);
+            GameOverScreen.Reset();
+
+            ResetConsoleCommands();
+
+            Timer.IsEnabled = true;
+        }
+
+        private void GameOver()
+        {
+            IsGameOver = true;
+            foreach (Utils.AvailableColor ac in playField.AvailableColors.Values)
+            {
+                playField.ResetCell(ac.Value);
+            }
+            playField.MustUpdate = true;
+            GameOverScreen.Begin();
+        }
+
         private void SetupConsole()
         {
             console = new GameConsole(this, spriteBatch);
+
+            ResetConsoleCommands();
+
+            console.Options.Prompt = ">";
+            console.Options.BackgroundColor = new Color(0, 0, 0, 190);
+        }
+
+        private void ResetConsoleCommands()
+        {
             IConsoleCommand[] commands = new IConsoleCommand[]
             {
                 new Utils.ConsoleCommands.RandomizeField(playField),
@@ -181,10 +220,13 @@ namespace BombDefuserEngine
                 new Utils.ConsoleCommands.AddTime(Timer)
                 //new Utils.ConsoleCommands.GetLastMessage(EV3Connection)
             };
-            console.AddCommand(commands);
 
-            console.Options.Prompt = ">";
-            console.Options.BackgroundColor = new Color(0, 0, 0, 190);
+            if (console.Commands.Count > 3)
+            {
+                console.Commands.RemoveRange(3, commands.Length);
+            }
+
+            console.AddCommand(commands);
         }
     }
 }
