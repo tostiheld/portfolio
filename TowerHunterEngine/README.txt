@@ -9,7 +9,7 @@ Needed components to make this game run:
 Steps to follow:
 
   1. Connect the beamer to a computer, as well as the gamepad and optionally the bluetooth adapter
-  2. Specify in the configuration file where the topleft corner is of the beamer.
+  2. Specify in the configuration file where the top left corner of the projector is.
      (this is usually the X component of your computer's resolution and a zero,
 	  so for example (1280, 0))
   3. Pair the computer and the EV3
