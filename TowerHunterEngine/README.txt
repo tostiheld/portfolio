@@ -13,8 +13,9 @@ Steps to follow:
      (this is usually the X component of your computer's resolution and a zero,
 	  so for example (1280, 0))
   3. Pair the computer and the EV3
-  4. Start the game
-  5. Start the special software on the EV3
+  4. Place the EV3 on the perspex surface
+  5. Start the game
+  6. Start the special software on the EV3
 
 This software uses the following components/art:
 
