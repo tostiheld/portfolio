@@ -1,5 +1,21 @@
 ﻿You are allowed to use this software under terms as described in the license file.
 
+Needed components to make this game run:
+  - 1 Lego EV3 robot equipped with an HiTechnic Color sensor, a gyro, and two servos
+  - 1 XBOX360 gamepad
+  - 1 projector, with its projection reflected on a perspex surface
+  - (optional) A bluetooth adapter
+
+Steps to follow:
+
+  1. Connect the beamer to a computer, as well as the gamepad and optionally the bluetooth adapter
+  2. Specify in the configuration file where the topleft corner is of the beamer.
+     (this is usually the X component of your computer's resolution and a zero,
+	  so for example (1280, 0))
+  3. Pair the computer and the EV3
+  4. Start the game
+  5. Start the special software on the EV3
+
 This software uses the following components/art:
 
   Libraries/code:
