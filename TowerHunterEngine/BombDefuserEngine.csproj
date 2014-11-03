@@ -164,7 +164,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
+    <Content Include="Libraries\EV3MessengerLib.dll" />
     <Content Include="Libraries\MonoGameConsole\MonoGameConsole.dll" />
+    <Content Include="README.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="todo.txt" />
     <Content Include="Content\Fonts\octin-stencil-100.fnt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -175,7 +179,6 @@
     <Content Include="Content\Fonts\octin-stencil-gameover.fnt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Libraries\CommandMessenger\CommandMessenger.dll" />
     <None Include="Documentatie\memory-usage-v2014-9-29-42.diagsession" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

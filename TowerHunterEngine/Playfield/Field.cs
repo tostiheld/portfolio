@@ -13,7 +13,8 @@ namespace BombDefuserEngine.Playfield
 {
     public class Field : DrawableGameComponent
     {
-        public Dictionary<string, Utils.AvailableColor> AvailableColors = new Dictionary<string, Utils.AvailableColor>
+        public Dictionary<string, Utils.AvailableColor> AvailableColors =
+            new Dictionary<string, Utils.AvailableColor>
         {
             {"red",     new AvailableColor(RobotColors.Red, true)},
             {"green",   new AvailableColor(RobotColors.Green, true)},
@@ -89,6 +90,7 @@ namespace BombDefuserEngine.Playfield
             RandomPos.Y = new Random(Guid.NewGuid().GetHashCode()).Next(Size.Y);
 
             while (Cells[RandomPos.X, RandomPos.Y].Type == CellType.Bomb ||
+                   Cells[RandomPos.X, RandomPos.Y].Type == CellType.Coin ||
                    IsNextToBomb(RandomPos))
             {
                 RandomPos.X = new Random(Guid.NewGuid().GetHashCode()).Next(Size.X);
@@ -104,6 +106,8 @@ namespace BombDefuserEngine.Playfield
                 case CellType.Coin:
                     stype = "coin";
                     break;
+                default:
+                    throw new NotSupportedException("Celltype not indexed.");
             }
 
             Cells[RandomPos.X, RandomPos.Y].ChangeType(type, usedColor, AnimatedTextures[stype]);
