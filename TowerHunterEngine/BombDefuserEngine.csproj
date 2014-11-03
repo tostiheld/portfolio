@@ -113,6 +113,9 @@
     <Reference Include="EV3MessengerLib">
       <HintPath>Libraries\EV3MessengerLib.dll</HintPath>
     </Reference>
+    <Reference Include="Gma.QrCodeNet.Encoding">
+      <HintPath>Libraries\Gma.QrCodeNet.Encoding.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
       <Private>True</Private>

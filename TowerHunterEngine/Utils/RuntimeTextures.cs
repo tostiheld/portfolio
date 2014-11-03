@@ -7,6 +7,9 @@ using Drawing = System.Drawing;
 using Imaging = System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
+using Gma.QrCodeNet.Encoding;
+using Gma.QrCodeNet.Encoding.Windows.Render;
+
 namespace BombDefuserEngine.Utils
 {
     static class RuntimeTextures
@@ -100,6 +103,38 @@ namespace BombDefuserEngine.Utils
             byte[] bytes = new byte[bufferSize];
             Marshal.Copy(data.Scan0, bytes, 0, bytes.Length);
             
+            texture.SetData<byte>(bytes);
+
+            return texture;
+        }
+
+        static public Texture2D GenerateQRCode(GraphicsDevice device, string text)
+        {
+            QrEncoder encoder = new QrEncoder(ErrorCorrectionLevel.M);
+            QrCode qrCode;
+            encoder.TryEncode(text, out qrCode);
+
+            GraphicsRenderer gRenderer = new GraphicsRenderer(
+                new FixedModuleSize(2, QuietZoneModules.Two));
+
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            gRenderer.WriteToStream(qrCode.Matrix, Drawing.Imaging.ImageFormat.Bmp, ms);
+
+            Drawing.Bitmap bmp = new Drawing.Bitmap(ms);
+
+            Texture2D texture = new Texture2D(device, bmp.Width, bmp.Height);
+
+            // lockbits improve performance
+            Imaging.BitmapData data;
+            data = bmp.LockBits(
+                new Drawing.Rectangle(0, 0, bmp.Width, bmp.Height),
+                Imaging.ImageLockMode.ReadOnly,
+                bmp.PixelFormat);
+
+            int bufferSize = data.Height * data.Stride;
+            byte[] bytes = new byte[bufferSize];
+            Marshal.Copy(data.Scan0, bytes, 0, bytes.Length);
+
             texture.SetData<byte>(bytes);
 
             return texture;
