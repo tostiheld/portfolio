@@ -35,15 +35,27 @@ namespace BombDefuserEngine.PlayerFeedback
         private int HomingScreenTime = 0;
         private int HomingScreenOpacity = 0;
 
+        private int Score;
+        private Texture2D QRCode;
+        private Rectangle QRCodeBounds;
+
 
         public bool Playing { get; private set; }
         public bool HomingScreenVisible { get; private set; }
 
-        public GameOverView(Game game) : base(game)
+        public GameOverView(Game game, int score) : base(game)
         {
+            this.Score = score;
             this.Parent = game;
             HomingScreenVisible = false;
             Explosions = new List<KeyValuePair<Vector2, Utils.AnimatedTexture>>();
+
+            System.Drawing.Rectangle rect = Properties.Settings.Default.QRCodeBounds;
+            QRCodeBounds = new Rectangle(
+                rect.X,
+                rect.Y,
+                rect.Width,
+                rect.Height);
 
             ExplosionTimer = new Timer(100);
             ExplosionTimer.Elapsed += new ElapsedEventHandler(ExplosionTimer_Elapsed);
@@ -163,6 +175,9 @@ namespace BombDefuserEngine.PlayerFeedback
                                       Parent.GraphicsDevice.Viewport.Height);
 
                 HomingScreen = Parent.Content.Load<Texture2D>("HomingTexture.png");
+                QRCode = Utils.RuntimeTextures.GenerateQRCode(
+                    Parent.GraphicsDevice,
+                    Properties.Settings.Default.FormLocation + Score.ToString());
             }
         }
 
@@ -181,28 +196,44 @@ namespace BombDefuserEngine.PlayerFeedback
         {
             base.Draw(gameTime);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied);
-
-            foreach (KeyValuePair<Vector2, Utils.AnimatedTexture> pair in Explosions)
-            {
-                pair.Value.DrawFrame(spriteBatch, pair.Key);
-            }
-
-            spriteBatch.Draw(
-                HomingScreen, 
-                new Rectangle(
-                    0, 
-                    0,
-                    Parent.GraphicsDevice.Viewport.Width,
-                    Parent.GraphicsDevice.Viewport.Height),
-                new Color(
-                    255, 
-                    255, 
-                    255, 
-                    HomingScreenOpacity));
+            spriteBatch.Begin(
+                SpriteSortMode.Deferred,
+                BlendState.NonPremultiplied,
+                SamplerState.PointClamp,
+                DepthStencilState.None,
+                RasterizerState.CullNone); // these are settings to scale up textures without blurring them
 
             if (this.Playing)
             {
+
+                foreach (KeyValuePair<Vector2, Utils.AnimatedTexture> pair in Explosions)
+                {
+                    pair.Value.DrawFrame(spriteBatch, pair.Key);
+                }
+
+                spriteBatch.Draw(
+                    HomingScreen,
+                    new Rectangle(
+                        0,
+                        0,
+                        Parent.GraphicsDevice.Viewport.Width,
+                        Parent.GraphicsDevice.Viewport.Height),
+                    new Color(
+                        255,
+                        255,
+                        255,
+                        HomingScreenOpacity));
+
+                spriteBatch.Draw(
+                    QRCode,
+                    QRCodeBounds,
+                    new Color(
+                        255,
+                        255,
+                        255,
+                        HomingScreenOpacity));
+
+
                 int text1 = fontRenderer.MeasureString("GAME");
                 int text2 = fontRenderer.MeasureString("OVER");
                 int posX1 = (Parent.GraphicsDevice.Viewport.Width / 2) - (text1 / 2);

@@ -11,7 +11,7 @@ using MonoGameConsole;
 namespace BombDefuserEngine
 {
     public class Engine : Game
-    {
+    {        
         private readonly Properties.Settings Settings = 
             Properties.Settings.Default;
 
@@ -74,7 +74,7 @@ namespace BombDefuserEngine
             
             this.Info = new PlayerFeedback.InfoView(this, PlayerData, new Point(220, Resolution.Y - 60));
             
-            this.GameOverScreen = new PlayerFeedback.GameOverView(this);
+            this.GameOverScreen = new PlayerFeedback.GameOverView(this, PlayerData.Score);
 
             Content.RootDirectory = "Content";
         }
@@ -96,7 +96,7 @@ namespace BombDefuserEngine
 #endif
             SetupConsole();
 
-            EV3Connection = new Robot.Connection(Port);
+            //EV3Connection = new Robot.Connection(Port);
 
             base.Initialize();
         }
@@ -118,10 +118,10 @@ namespace BombDefuserEngine
         {
             base.Update(gameTime);
 
-            if (EV3Connection.Status == Robot.RobotStatus.Homed)
+            /*if (EV3Connection.Status == Robot.RobotStatus.Homed)
             {
                 this.Reset();
-            }
+            }*/
 
             Info.Data = PlayerData;
 
@@ -134,7 +134,7 @@ namespace BombDefuserEngine
                 GameOver();
             }
 
-            if (EV3Connection.Status == Robot.RobotStatus.HitWall)
+            /*if (EV3Connection.Status == Robot.RobotStatus.HitWall)
             {
                 PlayerData.HitPoints -= 10;
                 EV3Connection.Status = Robot.RobotStatus.Empty;
@@ -161,7 +161,7 @@ namespace BombDefuserEngine
             {
                 Point directions = Player.Input.GetDirections(Scale, CorrectionScale);
                 EV3Connection.SendWheelData(directions.X, directions.Y);
-            }
+            }*/
         }
 
         protected override void Draw(GameTime gameTime)
@@ -172,6 +172,7 @@ namespace BombDefuserEngine
             spriteBatch.End();
 
             base.Draw(gameTime);
+
             spriteBatch.Begin();
 #if DEBUG
             spriteBatch.DrawString(
@@ -180,8 +181,7 @@ namespace BombDefuserEngine
                 new Vector2(10, 10),
                 Color.Red);
 #endif
-
-            spriteBatch.End();            
+            spriteBatch.End();
         }
 
         public void Reset(int initialBombs, int time = 180, int maxhp = 100)
