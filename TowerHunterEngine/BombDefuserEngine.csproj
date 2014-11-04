@@ -164,6 +164,7 @@
     </Content>
     <Content Include="Icon.ico" />
     <Content Include="Libraries\EV3MessengerLib.dll" />
+    <Content Include="Libraries\Gma.QrCodeNet.Encoding.dll" />
     <Content Include="Libraries\MonoGameConsole\MonoGameConsole.dll" />
     <Content Include="README.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
