@@ -110,7 +110,7 @@ namespace BombDefuserEngine.Utils
 
         static public Texture2D GenerateQRCode(GraphicsDevice device, string text)
         {
-            QrEncoder encoder = new QrEncoder(ErrorCorrectionLevel.M);
+            QrEncoder encoder = new QrEncoder(ErrorCorrectionLevel.H);
             QrCode qrCode;
             encoder.TryEncode(text, out qrCode);
 

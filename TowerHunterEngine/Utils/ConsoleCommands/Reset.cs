@@ -19,27 +19,12 @@ namespace BombDefuserEngine.Utils.ConsoleCommands
 
         public string Description
         {
-            get { return "Resets the game. Optional arguments: initial time, max hit points and initial amount of bombs"; }
+            get { return "Resets the game."; }
         }
 
         public string Execute(string[] arguments)
         {
-            int time = 0;
-            int hp = 0;
-            int bombs = 0;
-            if (arguments.Length > 0)
-            {
-                if (Int32.TryParse(arguments[0], out time) &&
-                    Int32.TryParse(arguments[1], out hp) &&
-                    Int32.TryParse(arguments[2], out bombs))
-                {
-                    Parent.Reset(bombs, time, hp);
-                }
-            }
-            else
-            {
-                Parent.Reset();
-            }
+            Parent.Reset();
 
             return "Game reset.";
         }

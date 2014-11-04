@@ -31,6 +31,7 @@ namespace BombDefuserEngine.Robot
         }
         public RobotStatus Status { get; set; }
         public bool LastColorIsRead { get; set; }
+        public bool Home { get; set; }
 
         public Connection(string port)
         {
@@ -121,15 +122,54 @@ namespace BombDefuserEngine.Robot
             }
         }
 
+        public void SetGameOver()
+        {
+            if (Messenger != null || Messenger.IsConnected)
+            {
+                if (Messenger.SendMessage("gameover", true))
+                {
+                    return;
+                }
+                else
+                    throw new EV3CommunicationException(
+                        "Failed to send wheel data.");
+            }
+            else
+            {
+                throw new EV3CommunicationException(
+                    "Not connected to the EV3.");
+            }
+        }
+
         public void SendHome()
         {
             if (Messenger != null || Messenger.IsConnected)
             {
-                if (Messenger.SendMessage("home", true))
+                if (Messenger.SendMessage("gameover", false) &&
+                    Messenger.SendMessage("home", true))
                 {
                     this.Status = RobotStatus.Homing;
                     return;
                 }                    
+                else
+                    throw new EV3CommunicationException(
+                        "Failed to send wheel data.");
+            }
+            else
+            {
+                throw new EV3CommunicationException(
+                    "Not connected to the EV3.");
+            }
+        }
+
+        public void ResetHoming()
+        {
+            if (Messenger != null || Messenger.IsConnected)
+            {
+                if (Messenger.SendMessage("home", false))
+                {
+                    return;
+                }
                 else
                     throw new EV3CommunicationException(
                         "Failed to send wheel data.");

@@ -177,7 +177,7 @@ namespace BombDefuserEngine.PlayerFeedback
                 HomingScreen = Parent.Content.Load<Texture2D>("HomingTexture.png");
                 QRCode = Utils.RuntimeTextures.GenerateQRCode(
                     Parent.GraphicsDevice,
-                    Properties.Settings.Default.FormLocation + Score.ToString());
+                    Properties.Settings.Default.FormLocation + Base64Encode(Score.ToString()));
             }
         }
 
@@ -244,6 +244,12 @@ namespace BombDefuserEngine.PlayerFeedback
             }
 
             spriteBatch.End();
+        }
+
+        public static string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
         }
     }
 }

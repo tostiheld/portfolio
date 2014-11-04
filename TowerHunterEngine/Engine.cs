@@ -21,6 +21,9 @@ namespace BombDefuserEngine
         private int Scale;
         private int CorrectionScale;
         private string Port;
+        private int initialTime;
+        private int initialMaxHP;
+        private int currentTime;
 
         public bool HasFrameCounter = false;
         private bool IsGameOver = false;
@@ -34,9 +37,6 @@ namespace BombDefuserEngine
         private PlayerFeedback.GameOverView GameOverScreen;
         private Player.Data PlayerData;
         private GameConsole console;
-
-        private List<string> DebugLine;
-        private SpriteFont font;
 
         private Texture2D GroundTexture;
 
@@ -56,20 +56,23 @@ namespace BombDefuserEngine
             Scale = Settings.Scale;
             CorrectionScale = Settings.CorrectionScale;
             Port = Settings.Port;
+            initialTime = Settings.Time;
+            initialMaxHP = 100;
+            currentTime = initialTime;
 
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferHeight = Settings.Resolution.Y;
             graphics.PreferredBackBufferWidth = Settings.Resolution.X;
             graphics.ApplyChanges();
 
-            PlayerData = new Player.Data(100);
+            PlayerData = new Player.Data(initialMaxHP);
 
             this.playField = new Playfield.Field(this, Resolution, Fieldsize, BombAmount);
 
             Point TimerPosition = new Point();
             TimerPosition.X = 5;
             TimerPosition.Y = (Resolution.Y - 83);
-            this.Timer = new PlayerFeedback.CountdownTimer(this, 100, TimerPosition);
+            this.Timer = new PlayerFeedback.CountdownTimer(this, initialTime, TimerPosition);
             Timer.IsEnabled = true;
             
             this.Info = new PlayerFeedback.InfoView(this, PlayerData, new Point(220, Resolution.Y - 60));
@@ -89,21 +92,15 @@ namespace BombDefuserEngine
             Components.Add(Info);
             Components.Add(GameOverScreen);
 
-#if DEBUG
-            DebugLine = new List<string>(2);
-            DebugLine.Add("DEBUGGING");
-            DebugLine.Add(Assembly.GetExecutingAssembly().GetName().Version.ToString());
-#endif
             SetupConsole();
 
-            //EV3Connection = new Robot.Connection(Port);
+            EV3Connection = new Robot.Connection(Port);
 
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            font = Content.Load<SpriteFont>("Fonts/font");
             GroundTexture = Content.Load<Texture2D>("ground-texture2.png");
 
             Point res = new Point(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
@@ -118,10 +115,17 @@ namespace BombDefuserEngine
         {
             base.Update(gameTime);
 
-            /*if (EV3Connection.Status == Robot.RobotStatus.Homed)
+            GamePadState state = GamePad.GetState(PlayerIndex.One);
+            if (EV3Connection.Home &&
+                state.Buttons.A == ButtonState.Pressed)
             {
                 this.Reset();
-            }*/
+            }
+
+            if (EV3Connection.Status == Robot.RobotStatus.Homed)
+            {
+                EV3Connection.Home = true;
+            }
 
             Info.Data = PlayerData;
 
@@ -134,7 +138,18 @@ namespace BombDefuserEngine
                 GameOver();
             }
 
-            /*if (EV3Connection.Status == Robot.RobotStatus.HitWall)
+            if (playField.BombAmount <= 0)
+            {
+                Timer.Reset((int)(currentTime * 0.9));
+                playField.BombAmount = BombAmount;
+
+                for (int i = 0; i < playField.BombAmount; i++)
+                {
+                    playField.AddSpecialCell(Playfield.CellType.Bomb);
+                }
+            }
+
+            if (EV3Connection.Status == Robot.RobotStatus.HitWall)
             {
                 PlayerData.HitPoints -= 10;
                 EV3Connection.Status = Robot.RobotStatus.Empty;
@@ -161,7 +176,7 @@ namespace BombDefuserEngine
             {
                 Point directions = Player.Input.GetDirections(Scale, CorrectionScale);
                 EV3Connection.SendWheelData(directions.X, directions.Y);
-            }*/
+            }
         }
 
         protected override void Draw(GameTime gameTime)
@@ -172,30 +187,19 @@ namespace BombDefuserEngine
             spriteBatch.End();
 
             base.Draw(gameTime);
-
-            spriteBatch.Begin();
-#if DEBUG
-            spriteBatch.DrawString(
-                font, 
-                DebugLine[0] + " v" + DebugLine[1],
-                new Vector2(10, 10),
-                Color.Red);
-#endif
-            spriteBatch.End();
         }
 
-        public void Reset(int initialBombs, int time = 180, int maxhp = 100)
-        {
-            this.BombAmount = initialBombs;
-            Reset(time, maxhp);
-        }
-        public void Reset(int time = 180, int maxhp = 100)
+        public void Reset()
         {
             this.IsGameOver = false;
+            this.currentTime = initialTime;
+
+            EV3Connection.Home = false;
+            EV3Connection.ResetHoming();
 
             playField.Reset(BombAmount);
-            Timer.Reset(time);
-            PlayerData = new Player.Data(maxhp);
+            Timer.Reset(initialTime);
+            PlayerData = new Player.Data(initialMaxHP);
             Info.Reset(PlayerData);
             GameOverScreen.Reset();
 
@@ -207,11 +211,9 @@ namespace BombDefuserEngine
         private void GameOver()
         {
             IsGameOver = true;
-            foreach (Utils.AvailableColor ac in playField.AvailableColors.Values)
-            {
-                playField.ResetCell(ac.Value);
-            }
-            playField.MustUpdate = true;
+            EV3Connection.SetGameOver();
+            EV3Connection.SendWheelData(0, 0);
+            
             GameOverScreen.Begin();
         }
 

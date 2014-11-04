@@ -16,7 +16,6 @@ namespace BombDefuserEngine.Playfield
         public Dictionary<string, Utils.AvailableColor> AvailableColors =
             new Dictionary<string, Utils.AvailableColor>
         {
-            {"red",     new AvailableColor(RobotColors.Red, true)},
             {"green",   new AvailableColor(RobotColors.Green, true)},
             {"blue",    new AvailableColor(RobotColors.Blue, true)},
             {"cyan",    new AvailableColor(RobotColors.Cyan, true)},
@@ -63,8 +62,6 @@ namespace BombDefuserEngine.Playfield
             {
                 AddSpecialCell(CellType.Bomb);
             }
-
-            this.MustUpdate = true;
         }
 
         public AvailableColor GetFirstAvailableColor()
@@ -98,6 +95,10 @@ namespace BombDefuserEngine.Playfield
             {
                 if (c.Fill == color)
                 {
+                    if (c.Type == CellType.Bomb)
+                    {
+                        BombAmount--;
+                    }
                     c.ChangeType(CellType.Safe);
                     foreach (Utils.AvailableColor ac in AvailableColors.Values)
                     {
@@ -131,7 +132,8 @@ namespace BombDefuserEngine.Playfield
 
             while (Cells[RandomPos.X, RandomPos.Y].Type == CellType.Bomb ||
                    Cells[RandomPos.X, RandomPos.Y].Type == CellType.Coin ||
-                   IsNextToBomb(RandomPos))
+                   IsNextToBomb(RandomPos) ||
+                   RandomPos == new Point(0, Size.Y - 1))
             {
                 RandomPos.X = new Random(Guid.NewGuid().GetHashCode()).Next(Size.X);
                 RandomPos.Y = new Random(Guid.NewGuid().GetHashCode()).Next(Size.Y);
@@ -197,6 +199,7 @@ namespace BombDefuserEngine.Playfield
                         CellSize.X, CellSize.Y);
 
                     Cell c = new Cell(Bounds);
+                    c.Texture = Utils.RuntimeTextures.Basic(Parent.GraphicsDevice, Color.Transparent);
                     Cells.SetValue(c, x, y);
                 }
             }
@@ -292,8 +295,6 @@ namespace BombDefuserEngine.Playfield
                 DepthStencilState.None,
                 RasterizerState.CullNone); // these are settings to scale up textures without blurring them
 
-            if (!this.MustUpdate)
-            {
                 for (int x = 0; x < Cells.GetLength(0); x++)
                 {
                     for (int y = 0; y < Cells.GetLength(1); y++)
@@ -306,7 +307,6 @@ namespace BombDefuserEngine.Playfield
                         Cells[x, y].DrawAnimation(spriteBatch);
                     }
                 }
-            }
 
             spriteBatch.End();
             base.Draw(gameTime);

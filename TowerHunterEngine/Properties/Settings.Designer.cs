@@ -79,7 +79,7 @@ namespace BombDefuserEngine.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1280, 0")]
         public global::System.Drawing.Point Position {
             get {
                 return ((global::System.Drawing.Point)(this["Position"]));
@@ -97,10 +97,19 @@ namespace BombDefuserEngine.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("20, 500, 200, 200")]
+        [global::System.Configuration.DefaultSettingValueAttribute("20, 400, 200, 200")]
         public global::System.Drawing.Rectangle QRCodeBounds {
             get {
                 return ((global::System.Drawing.Rectangle)(this["QRCodeBounds"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000000")]
+        public int Time {
+            get {
+                return ((int)(this["Time"]));
             }
         }
     }
