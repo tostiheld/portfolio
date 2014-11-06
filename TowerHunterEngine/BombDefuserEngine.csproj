@@ -64,6 +64,7 @@
     <Compile Include="PlayerFeedback\GameOverView.cs" />
     <Compile Include="PlayerFeedback\HPBar.cs" />
     <Compile Include="PlayerFeedback\InfoView.cs" />
+    <Compile Include="PlayerFeedback\Tutorial.cs" />
     <Compile Include="Player\Data.cs" />
     <Compile Include="Player\Input.cs" />
     <Compile Include="Playfield\Cell.cs" />
@@ -163,6 +164,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\HPBarFill.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\tutScreen1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\tutScreen2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />

@@ -35,7 +35,6 @@ namespace BombDefuserEngine.PlayerFeedback
         private int HomingScreenTime = 0;
         private int HomingScreenOpacity = 0;
 
-        private int Score;
         private Texture2D QRCode;
         private Rectangle QRCodeBounds;
 
@@ -45,7 +44,6 @@ namespace BombDefuserEngine.PlayerFeedback
 
         public GameOverView(Game game, int score) : base(game)
         {
-            this.Score = score;
             this.Parent = game;
             HomingScreenVisible = false;
             Explosions = new List<KeyValuePair<Vector2, Utils.AnimatedTexture>>();
@@ -82,8 +80,11 @@ namespace BombDefuserEngine.PlayerFeedback
             }
         }
 
-        public void Begin()
+        public void Begin(int score)
         {
+            QRCode = Utils.RuntimeTextures.GenerateQRCode(
+                    Parent.GraphicsDevice,
+                    Properties.Settings.Default.FormLocation + score.ToString());
             Playing = true;
             ExplosionTimer.Start();
         }
@@ -175,9 +176,6 @@ namespace BombDefuserEngine.PlayerFeedback
                                       Parent.GraphicsDevice.Viewport.Height);
 
                 HomingScreen = Parent.Content.Load<Texture2D>("HomingTexture.png");
-                QRCode = Utils.RuntimeTextures.GenerateQRCode(
-                    Parent.GraphicsDevice,
-                    Properties.Settings.Default.FormLocation + Base64Encode(Score.ToString()));
             }
         }
 

@@ -17,7 +17,7 @@ namespace BombDefuserEngine
 
         private Point Resolution;
         private Point Fieldsize;
-        private int BombAmount;
+        private int InitialBombs;
         private int Scale;
         private int CorrectionScale;
         private string Port;
@@ -35,6 +35,7 @@ namespace BombDefuserEngine
         private PlayerFeedback.CountdownTimer Timer;
         private PlayerFeedback.InfoView Info;
         private PlayerFeedback.GameOverView GameOverScreen;
+        private PlayerFeedback.Tutorial tutorial;
         private Player.Data PlayerData;
         private GameConsole console;
 
@@ -52,7 +53,7 @@ namespace BombDefuserEngine
             Fieldsize = new Point(Settings.FieldSize.X,
                                   Settings.FieldSize.Y);
 
-            BombAmount = Settings.Bombs;
+            InitialBombs = Settings.Bombs;
             Scale = Settings.Scale;
             CorrectionScale = Settings.CorrectionScale;
             Port = Settings.Port;
@@ -67,7 +68,7 @@ namespace BombDefuserEngine
 
             PlayerData = new Player.Data(initialMaxHP);
 
-            this.playField = new Playfield.Field(this, Resolution, Fieldsize, BombAmount);
+            this.playField = new Playfield.Field(this, Resolution, Fieldsize, InitialBombs);
 
             Point TimerPosition = new Point();
             TimerPosition.X = 5;
@@ -78,6 +79,8 @@ namespace BombDefuserEngine
             this.Info = new PlayerFeedback.InfoView(this, PlayerData, new Point(220, Resolution.Y - 60));
             
             this.GameOverScreen = new PlayerFeedback.GameOverView(this, PlayerData.Score);
+
+            this.tutorial = new PlayerFeedback.Tutorial(this);
 
             Content.RootDirectory = "Content";
         }
@@ -91,12 +94,20 @@ namespace BombDefuserEngine
             Components.Add(Timer);
             Components.Add(Info);
             Components.Add(GameOverScreen);
+            Components.Add(tutorial);
+            
+            base.Initialize();
+
+            for (int i = 0; i < playField.InitialBombs; i++ )
+            {
+                playField.AddSpecialCell(Playfield.CellType.Bomb);
+            }
 
             SetupConsole();
 
             EV3Connection = new Robot.Connection(Port);
 
-            base.Initialize();
+            tutorial.Show(Timer);
         }
 
         protected override void LoadContent()
@@ -115,67 +126,71 @@ namespace BombDefuserEngine
         {
             base.Update(gameTime);
 
-            GamePadState state = GamePad.GetState(PlayerIndex.One);
-            if (EV3Connection.Home &&
-                state.Buttons.A == ButtonState.Pressed)
+            if (!tutorial.IsShown)
             {
-                this.Reset();
-            }
-
-            if (EV3Connection.Status == Robot.RobotStatus.Homed)
-            {
-                EV3Connection.Home = true;
-            }
-
-            Info.Data = PlayerData;
-
-            if (Timer.Elapsed && !IsGameOver)
-                GameOver();
-
-            if (PlayerData.HitPoints <= 0 && !IsGameOver)
-            {
-                Timer.IsEnabled = false;
-                GameOver();
-            }
-
-            if (playField.BombAmount <= 0)
-            {
-                Timer.Reset((int)(currentTime * 0.9));
-                playField.BombAmount = BombAmount;
-
-                for (int i = 0; i < playField.BombAmount; i++)
+                GamePadState state = GamePad.GetState(PlayerIndex.One);
+                if (EV3Connection.Home &&
+                    state.Buttons.A == ButtonState.Pressed)
                 {
-                    playField.AddSpecialCell(Playfield.CellType.Bomb);
+                    this.Reset();
                 }
-            }
 
-            if (EV3Connection.Status == Robot.RobotStatus.HitWall)
-            {
-                PlayerData.HitPoints -= 10;
-                EV3Connection.Status = Robot.RobotStatus.Empty;
-            }
-
-            if (!EV3Connection.LastColorIsRead)
-            {
-                if (!playField.IsColorAvailable(EV3Connection.LastColor))
+                if (EV3Connection.Status == Robot.RobotStatus.Homed)
                 {
-                    playField.ResetCell(EV3Connection.LastColor);
-                    EV3Connection.LastColorIsRead = true;
-                    PlayerData.Score += 100;
+                    EV3Connection.Home = true;
                 }
-            }
 
-            if (GameOverScreen.HomingScreenVisible &&
-                EV3Connection.Status != Robot.RobotStatus.Homing)
-            {
-                EV3Connection.SendHome();
-                EV3Connection.Status = Robot.RobotStatus.Empty;
-            }
+                Info.Data = PlayerData;
 
-            if (EV3Connection.Status == Robot.RobotStatus.Empty && !IsGameOver)
-            {
-                Point directions = Player.Input.GetDirections(Scale, CorrectionScale);
-                EV3Connection.SendWheelData(directions.X, directions.Y);
+                if (Timer.Elapsed && !IsGameOver)
+                    GameOver();
+
+                if (PlayerData.HitPoints <= 0 && !IsGameOver)
+                {
+                    Timer.IsEnabled = false;
+                    GameOver();
+                }
+
+                if (playField.BombAmount <= 0)
+                {
+                    Timer.Reset((int)(currentTime * 0.8));
+
+                    for (int i = 0; i < playField.InitialBombs; i++)
+                    {
+                        playField.AddSpecialCell(Playfield.CellType.Bomb);
+                    }
+
+                    Timer.IsEnabled = true;
+                }
+
+                if (EV3Connection.Status == Robot.RobotStatus.HitWall)
+                {
+                    PlayerData.HitPoints -= 10;
+                    EV3Connection.Status = Robot.RobotStatus.Empty;
+                }
+
+                if (!EV3Connection.LastColorIsRead)
+                {
+                    if (!playField.IsColorAvailable(EV3Connection.LastColor))
+                    {
+                        playField.ResetCell(EV3Connection.LastColor);
+                        EV3Connection.LastColorIsRead = true;
+                        PlayerData.Score += 100;
+                    }
+                }
+
+                if (GameOverScreen.HomingScreenVisible &&
+                    EV3Connection.Status != Robot.RobotStatus.Homing)
+                {
+                    EV3Connection.SendHome();
+                    EV3Connection.Status = Robot.RobotStatus.Empty;
+                }
+
+                if (EV3Connection.Status == Robot.RobotStatus.Empty && !IsGameOver)
+                {
+                    Point directions = Player.Input.GetDirections(Scale, CorrectionScale);
+                    EV3Connection.SendWheelData(directions.X, directions.Y);
+                }
             }
         }
 
@@ -197,7 +212,7 @@ namespace BombDefuserEngine
             EV3Connection.Home = false;
             EV3Connection.ResetHoming();
 
-            playField.Reset(BombAmount);
+            playField.Reset(InitialBombs);
             Timer.Reset(initialTime);
             PlayerData = new Player.Data(initialMaxHP);
             Info.Reset(PlayerData);
@@ -205,7 +220,7 @@ namespace BombDefuserEngine
 
             ResetConsoleCommands();
 
-            Timer.IsEnabled = true;
+            tutorial.Show(Timer);
         }
 
         private void GameOver()
@@ -214,7 +229,7 @@ namespace BombDefuserEngine
             EV3Connection.SetGameOver();
             EV3Connection.SendWheelData(0, 0);
             
-            GameOverScreen.Begin();
+            GameOverScreen.Begin(PlayerData.Score);
         }
 
         private void SetupConsole()

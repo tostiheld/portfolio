@@ -106,7 +106,7 @@ namespace BombDefuserEngine.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1000000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
         public int Time {
             get {
                 return ((int)(this["Time"]));

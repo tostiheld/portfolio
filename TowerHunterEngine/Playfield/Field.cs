@@ -34,6 +34,7 @@ namespace BombDefuserEngine.Playfield
         public bool MustUpdate { get; set; }
         public Dictionary<string, Utils.AnimatedTexture> AnimatedTextures { get; set; }
         public int BombAmount { get; set; }
+        public int InitialBombs { get; set; }
 
         public Field(Game game, Point resolution, Point cellAmount, int initialBombs) : base(game)
         {
@@ -44,12 +45,13 @@ namespace BombDefuserEngine.Playfield
             this.MustUpdate = false;
             this.Parent = game;
             this.AnimatedTextures = new Dictionary<string, Utils.AnimatedTexture>();
-            this.BombAmount = initialBombs;
+            this.InitialBombs = initialBombs;
         }
 
         public void Reset(int initialBombs)
         {
-            this.BombAmount = initialBombs;
+            this.InitialBombs = initialBombs;
+            this.BombAmount = 0;
 
             foreach (AvailableColor ac in AvailableColors.Values)
             {
@@ -58,9 +60,9 @@ namespace BombDefuserEngine.Playfield
 
             GenerateRandom();
 
-            for (int i = 0; i < this.BombAmount; i++)
+            for (int i = 0; i < InitialBombs; i++)
             {
-                AddSpecialCell(CellType.Bomb);
+                AddSpecialCell(Playfield.CellType.Bomb);
             }
         }
 
@@ -83,10 +85,11 @@ namespace BombDefuserEngine.Playfield
             {
                 if (ac.Value == color)
                 {
-                    return false;
+                    if (ac.Available)
+                        return true;
                 }
             }
-            return true;
+            return false;
         }
 
         public void ResetCell(Color color)
@@ -94,19 +97,20 @@ namespace BombDefuserEngine.Playfield
             foreach (Cell c in this.Cells)
             {
                 if (c.Fill == color)
-                {
-                    if (c.Type == CellType.Bomb)
-                    {
-                        BombAmount--;
-                    }
-                    c.ChangeType(CellType.Safe);
+                {                    
                     foreach (Utils.AvailableColor ac in AvailableColors.Values)
                     {
-                        if (ac.Value == color)
+                        if (ac.Value == color &&
+                            !ac.Available)
                         {
                             ac.Available = true;
+                            if (c.Type == CellType.Bomb)
+                            {
+                                BombAmount--;
+                            }
                         }
                     }
+                    c.ChangeType(CellType.Safe);
                 }
             }
             this.MustUpdate = true;
@@ -144,6 +148,7 @@ namespace BombDefuserEngine.Playfield
             {
                 case CellType.Bomb:
                     stype = "bomb";
+                    BombAmount++;
                     break;
                 case CellType.Coin:
                     stype = "coin";
@@ -216,11 +221,6 @@ namespace BombDefuserEngine.Playfield
             
             // init field
             GenerateRandom();
-
-            for (int i = 0; i < this.BombAmount; i++)
-            {
-                AddSpecialCell(CellType.Bomb);
-            }
         }
 
         protected override void LoadContent()

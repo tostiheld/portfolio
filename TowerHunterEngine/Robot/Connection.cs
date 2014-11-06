@@ -42,6 +42,7 @@ namespace BombDefuserEngine.Robot
 
             this.Status = RobotStatus.Empty;
             this.LastColor = Color.White;
+            this.LastColorIsRead = true;
 
             ReadTimer = new Timer(50);
             ReadTimer.Elapsed += new ElapsedEventHandler(ReadTimer_Elapsed);
