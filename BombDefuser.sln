@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNAContentCompiler", "XNACo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller-EV3-Test", "Controller-EV3-Test\Controller-EV3-Test.csproj", "{36D0D259-CDFA-4B0D-A606-486E13B1083C}"
 EndProject
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "BombDefuser", "BombDefuser\BombDefuser.modelproj", "{854DCD70-C22C-407B-9AE5-40FEEC4F8084}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BombDefuserSetup", "BombDefuserSetup\BombDefuserSetup.csproj", "{F0066259-AFCC-4023-997B-895C3BD490F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EV3-Messaging", "EV3-Messaging\EV3-Messaging.csproj", "{D326E726-5050-4BF9-9C4B-B5F11E696A36}"
@@ -55,16 +53,6 @@ Global
 		{36D0D259-CDFA-4B0D-A606-486E13B1083C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{36D0D259-CDFA-4B0D-A606-486E13B1083C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{36D0D259-CDFA-4B0D-A606-486E13B1083C}.Release|x86.ActiveCfg = Release|Any CPU
-		{854DCD70-C22C-407B-9AE5-40FEEC4F8084}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{854DCD70-C22C-407B-9AE5-40FEEC4F8084}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{854DCD70-C22C-407B-9AE5-40FEEC4F8084}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{854DCD70-C22C-407B-9AE5-40FEEC4F8084}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{854DCD70-C22C-407B-9AE5-40FEEC4F8084}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{854DCD70-C22C-407B-9AE5-40FEEC4F8084}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{854DCD70-C22C-407B-9AE5-40FEEC4F8084}.Release|Any CPU.Build.0 = Release|Any CPU
-		{854DCD70-C22C-407B-9AE5-40FEEC4F8084}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{854DCD70-C22C-407B-9AE5-40FEEC4F8084}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{854DCD70-C22C-407B-9AE5-40FEEC4F8084}.Release|x86.ActiveCfg = Release|Any CPU
 		{F0066259-AFCC-4023-997B-895C3BD490F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F0066259-AFCC-4023-997B-895C3BD490F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0066259-AFCC-4023-997B-895C3BD490F3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
