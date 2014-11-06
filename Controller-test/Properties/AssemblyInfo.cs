@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TowerHunterEngine")]
-[assembly: AssemblyProduct("TowerHunterEngine")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyTitle("Controller-test")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyCompany("Viper Arcade")]
-[assembly: AssemblyCopyright("Copyright © Viper Arcade 2014")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Controller-test")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1d9507f2-d2e8-42a7-98be-62b415c610d9")]
+[assembly: Guid("ca3569cd-710a-400c-85ad-b5e25f06f1f0")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2014.11.6.250")]
-[assembly: AssemblyFileVersion("2014.11.6.250")]
+[assembly: AssemblyVersion("2014.10.23.9")]
+[assembly: AssemblyFileVersion("2014.10.23.9")]

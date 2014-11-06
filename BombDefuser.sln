@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller-EV3-Test", "Cont
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EV3-Messaging", "EV3-Messaging\EV3-Messaging.csproj", "{D326E726-5050-4BF9-9C4B-B5F11E696A36}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Besturing-Controller", "Besturing-Controller\Besturing-Controller.csproj", "{CF49A808-9A7C-446A-99DD-585371691FDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller-test", "Controller-test\Controller-test.csproj", "{327B67EF-E946-4DDD-ADDD-D48358F74EEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,13 +53,33 @@ Global
 		{D326E726-5050-4BF9-9C4B-B5F11E696A36}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D326E726-5050-4BF9-9C4B-B5F11E696A36}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D326E726-5050-4BF9-9C4B-B5F11E696A36}.Release|x86.ActiveCfg = Release|Any CPU
+		{CF49A808-9A7C-446A-99DD-585371691FDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF49A808-9A7C-446A-99DD-585371691FDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF49A808-9A7C-446A-99DD-585371691FDF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CF49A808-9A7C-446A-99DD-585371691FDF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CF49A808-9A7C-446A-99DD-585371691FDF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CF49A808-9A7C-446A-99DD-585371691FDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF49A808-9A7C-446A-99DD-585371691FDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF49A808-9A7C-446A-99DD-585371691FDF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CF49A808-9A7C-446A-99DD-585371691FDF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CF49A808-9A7C-446A-99DD-585371691FDF}.Release|x86.ActiveCfg = Release|Any CPU
+		{327B67EF-E946-4DDD-ADDD-D48358F74EEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{327B67EF-E946-4DDD-ADDD-D48358F74EEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{327B67EF-E946-4DDD-ADDD-D48358F74EEB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{327B67EF-E946-4DDD-ADDD-D48358F74EEB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{327B67EF-E946-4DDD-ADDD-D48358F74EEB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{327B67EF-E946-4DDD-ADDD-D48358F74EEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{327B67EF-E946-4DDD-ADDD-D48358F74EEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{327B67EF-E946-4DDD-ADDD-D48358F74EEB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{327B67EF-E946-4DDD-ADDD-D48358F74EEB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{327B67EF-E946-4DDD-ADDD-D48358F74EEB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_ConfigurationName = Release
-		BuildVersion_UseGlobalSettings = True
 		BuildVersion_AssemblyInfoFilename = BombDefuserEngine\Properties\AssemblyInfo.cs
+		BuildVersion_UseGlobalSettings = True
+		BuildVersion_ConfigurationName = Release
 	EndGlobalSection
 EndGlobal
