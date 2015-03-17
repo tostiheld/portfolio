@@ -6,8 +6,8 @@ efficient.
 
 Contributors
 ------------
-Stijn Buurman
-Floris de Jongh
-Nick van den Heuvel
-Wout van den Dungen
-Thomas Schraven
+- Stijn Buurman
+- Floris de Jongh
+- Nick van den Heuvel
+- Wout van den Dungen
+- Thomas Schraven
