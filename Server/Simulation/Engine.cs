@@ -8,21 +8,19 @@ namespace Server.Simulation
 {
     public class Engine : Game
     {
-        GraphicsDevice graphics;
         SpriteBatch spriteBatch;
 
         public Engine()
             : base()
         {
+            // initialise graphics
+            GraphicsDeviceManager graphics = new GraphicsDeviceManager(this);
         }
 
         protected override void Initialize()
         {
             base.Initialize();
-            GraphicsDeviceManager graphicsd = new GraphicsDeviceManager(this);
-            graphicsd.CreateDevice();
-            graphics = graphicsd.GraphicsDevice;
-            spriteBatch = new SpriteBatch(graphics);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             Content.RootDirectory = "";
         }
@@ -34,7 +32,7 @@ namespace Server.Simulation
 
         protected override void Draw(GameTime gameTime)
         {
-            graphics.Clear(Color.Green);
+            GraphicsDevice.Clear(Color.Green);
 
             base.Draw(gameTime);
 
