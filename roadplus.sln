@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard", "Dashboard\Dashboard.csproj", "{76238D12-6129-4FC9-97AC-D84BCF95AC74}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server-Windows", "Server-Windows\Server-Windows.csproj", "{F8715E33-65A9-426A-A9BD-2088BEE835CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -19,6 +21,10 @@ Global
 		{76238D12-6129-4FC9-97AC-D84BCF95AC74}.Debug|x86.Build.0 = Debug|x86
 		{76238D12-6129-4FC9-97AC-D84BCF95AC74}.Release|x86.ActiveCfg = Release|x86
 		{76238D12-6129-4FC9-97AC-D84BCF95AC74}.Release|x86.Build.0 = Release|x86
+		{F8715E33-65A9-426A-A9BD-2088BEE835CF}.Debug|x86.ActiveCfg = Debug|x86
+		{F8715E33-65A9-426A-A9BD-2088BEE835CF}.Debug|x86.Build.0 = Debug|x86
+		{F8715E33-65A9-426A-A9BD-2088BEE835CF}.Release|x86.ActiveCfg = Release|x86
+		{F8715E33-65A9-426A-A9BD-2088BEE835CF}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Server\Server.csproj
