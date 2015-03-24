@@ -8,13 +8,21 @@ namespace Server.Simulation
 {
     public class Engine : Game
     {
-        SpriteBatch spriteBatch;
+        public SpriteBatch spriteBatch { get; private set; }
 
-        public Engine()
+        private TrafficManager Traffic;
+
+        public Engine(Zone zone)
             : base()
         {
             // initialise graphics
             GraphicsDeviceManager graphics = new GraphicsDeviceManager(this);
+
+            Road startRoad = new Road(
+                new Point(40, 40),
+                new Point(40, 100),
+                Settings.RoadWidth);
+            Traffic = new TrafficManager(this, startRoad);
         }
 
         protected override void Initialize()
@@ -22,7 +30,7 @@ namespace Server.Simulation
             base.Initialize();
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Content.RootDirectory = "";
+            Content.RootDirectory = ".";
         }
 
         protected override void Update(GameTime gameTime)

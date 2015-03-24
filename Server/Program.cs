@@ -7,7 +7,7 @@ namespace Server
     {
         static void Main()
         {
-            using (Engine e = new Engine())
+            using (Engine e = new Engine(new Zone()))
             {
                 e.Run();
             }

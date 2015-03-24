@@ -54,6 +54,15 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Simulation\Engine.cs" />
+    <Compile Include="Zone.cs" />
+    <Compile Include="Simulation\Car.cs" />
+    <Compile Include="Simulation\TrafficManager.cs" />
+    <Compile Include="Simulation\Road.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Simulation\UnmatchingStartpointException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
 </Project>
