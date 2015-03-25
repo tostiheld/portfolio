@@ -7,15 +7,32 @@ namespace Server.Simulation
 {
     public class Car : IDisposable
     {
-        public float Speed { get; set; }
-        public Rectangle Bounds { get; private set; }
         public int Angle { get; set; }
+        public float Speed { get; set; }
+        public float Slowrate { get; set; }
+        public Rectangle Bounds { get; private set; }
+        public Rectangle FOV 
+        { 
+            get
+            {
+                return new Rectangle(
+                    Bounds.X,
+                    Bounds.Y - (Settings.CarFOVMargin / 2),
+                    Bounds.Width,
+                    Bounds.Height + Settings.CarFOVMargin);
+            }
+        }
 
-        private Texture2D texture;
+        private Texture2D carTexture;
 
-        public Car(ContentManager content, string assetname)
+        public Car(Texture2D texture, Size size)
         {
-            texture = content.Load<Texture2D>(assetname);
+            carTexture = texture;
+            Bounds = new Rectangle(
+                0,
+                0,
+                size.Width,
+                size.Height);
         }
 
         public void Update()
@@ -25,10 +42,10 @@ namespace Server.Simulation
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (texture != null)
+            if (carTexture != null)
             {
                 spriteBatch.Draw(
-                    texture,
+                    carTexture,
                     Bounds,
                     Color.White);
             }
@@ -36,7 +53,7 @@ namespace Server.Simulation
 
         public void Dispose()
         {
-            texture.Dispose();
+            carTexture.Dispose();
         }
     }
 }

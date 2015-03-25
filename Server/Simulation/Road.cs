@@ -25,11 +25,36 @@ namespace Server.Simulation
                 width,
                 height);
 
+            /*
+             * We don't use this code because this gives a 
+             * really odd bug in Mono.
+             * This should be the correct code though, 
+             * because this works in .NET on Windows.
+             * 
             double dX = Convert.ToDouble(end.X - start.X);
             double dY = Convert.ToDouble(end.Y - start.Y);
 
-            //if (Math.Abs(dX) <= Double.Epsilon)
-            if (IsApproximatelyEqualTo(dX, 0.0, Double.Epsilon))
+            if (Math.Abs(dX) <= Double.Epsilon)
+            {
+                if (dY > 0.0)
+                {
+                    Angle = 90.0;
+                }
+                else
+                {
+                    Angle = 270.0;
+                }
+            }
+            else
+            {
+                Angle = Math.Atan2(dY, dX) * 180 / Math.PI;
+            }*/
+
+            // Instead, we use this code:
+            int dX = End.X - Start.X;
+            int dY = End.Y - Start.Y;
+
+            if (dX == 0)
             {
                 if (dY > 0)
                 {
@@ -42,16 +67,13 @@ namespace Server.Simulation
             }
             else
             {
-                Angle = Math.Atan2(dY, dX) * 180 / Math.PI;
+                Angle = Math.Atan2(
+                    Convert.ToDouble(dY),
+                    Convert.ToDouble(dX))
+                    * 180 / Math.PI;
             }
 
             SpeedLimit = speedlimit;
-        }
-
-        private bool IsApproximatelyEqualTo(double initialValue, double value, double maximumDifferenceAllowed)
-        {
-            // Handle comparisons of floating point values that may not be exactly the same
-            return (Math.Abs(initialValue - value) < maximumDifferenceAllowed);
         }
     }
 }

@@ -8,39 +8,89 @@ namespace Server.Simulation
     public class TrafficManager : DrawableGameComponent
     {
         private List<Road> Network;
-        private Queue<Car> Cars;
+        private SortedList<int, Car> Cars;
+        private int CarsPointer;
 
         private SpriteBatch spriteBatch;
         private Engine Parent;
         private Point Endpoint;
 
+        private Texture2D CarTexture;
+
         public TrafficManager(Engine parent, Road start)
             : base(parent)
         {
             Network = new List<Road>();
-            Cars = new Queue<Car>();
+            Cars = new SortedList<int, Car>();
 
-            spriteBatch = parent.spriteBatch;
+            Parent = parent;
+            spriteBatch = Parent.spriteBatch;
 
             Endpoint = start.Start;
             AddRoad(start);
         }
 
+        protected override void LoadContent()
+        {
+            base.LoadContent();
+
+            CarTexture = Parent.Content.Load<Texture2D>(
+                Settings.CarAssetName);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            foreach (Car c in Cars.Values)
+            {
+
+            }
+            /*
+            foreach (Car x in Cars)
+            {
+                foreach (Car y in Cars)
+                {
+                    if (x.FOV.Intersects(
+                        y.FOV))
+                    {
+                        float delta = Convert.ToSingle(
+                            x.FOV.Top - y.FOV.Bottom);
+                        x.Slowrate = 1 / delta;
+                    }
+                }
+            }*/
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            base.Draw(gameTime);
+
+            /*
+            foreach (Car c in Cars)
+            {
+                c.Draw(spriteBatch);
+            }*/
+        }
+
         public void AddCar()
         {
             Car c = new Car(
-                Parent.Content, 
-                Settings.CarAssetName);
+                CarTexture,
+                Settings.CarSize);
 
-            Cars.Enqueue(c);
+            Cars.Add(CarsPointer, c);
+            CarsPointer++;
         }
 
         public void RemoveCar()
         {
             if (Cars.Count > 1)
             {
-                Car target = Cars.Dequeue();
+                Car target = Cars.Values[CarsPointer];
+                Cars.Remove(CarsPointer);
                 target.Dispose();
+                CarsPointer--;
             }
         }
 
@@ -58,26 +108,6 @@ namespace Server.Simulation
 
             Network.Add(road);
             Endpoint = road.End;
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-
-            foreach (Car c in Cars)
-            {
-                c.Update();
-            }
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            base.Draw(gameTime);
-
-            foreach (Car c in Cars)
-            {
-                c.Draw(spriteBatch);
-            }
         }
     }
 }

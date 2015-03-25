@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F8715E33-65A9-426A-A9BD-2088BEE835CF}</ProjectGuid>
+    <ProjectGuid>{CEA9CD98-9A28-498C-9CC2-1AFEF4F50EE5}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>ServerWindows</RootNamespace>
     <AssemblyName>Server-Windows</AssemblyName>
@@ -32,6 +32,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Reference Include="System" />
     <Reference Include="MonoGame.Framework">
       <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.3.0.0\lib\net40\MonoGame.Framework.dll</HintPath>
     </Reference>
@@ -40,12 +41,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Server\Server.csproj">
-      <Project>{025FB059-654D-4AB7-80F9-7233D89529CD}</Project>
-      <Name>Server</Name>
-    </ProjectReference>
+    <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <ProjectReference Include="Server.csproj">
+      <Project>{954F708C-29E8-4282-B16D-4EA837F4B099}</Project>
+      <Name>Server</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
