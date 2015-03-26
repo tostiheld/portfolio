@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Server.Simulation
 {
@@ -9,7 +10,7 @@ namespace Server.Simulation
         public Point End { get; private set; }
         public Rectangle Surface { get; private set; }
         public int SpeedLimit { get; set; }
-        public double Angle { get; private set; }
+        public float Angle { get; private set; }
 
         public Road(Point start, Point end, int width, int speedlimit = 30)
         {
@@ -58,22 +59,39 @@ namespace Server.Simulation
             {
                 if (dY > 0)
                 {
-                    Angle = 90.0;
+                    Angle = 90f;
                 }
                 else
                 {
-                    Angle = 270.0;
+                    Angle = 270f;
                 }
             }
             else
             {
-                Angle = Math.Atan2(
+                Angle = Convert.ToSingle(
+                    Math.Atan2(
                     Convert.ToDouble(dY),
                     Convert.ToDouble(dX))
-                    * 180 / Math.PI;
+                    * 180 / Math.PI);
             }
 
             SpeedLimit = speedlimit;
+        }
+
+        public void Draw(SpriteBatch batch, Texture2D texture)
+        {
+            if (texture != null)
+            {
+                batch.Draw(
+                    texture,
+                    Surface,
+                    null,
+                    Color.White,
+                    Angle,
+                    Vector2.Zero,
+                    SpriteEffects.None,
+                    0f);
+            }
         }
     }
 }

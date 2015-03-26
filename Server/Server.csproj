@@ -36,14 +36,17 @@
     <Compile Include="Settings.cs" />
     <Compile Include="Zone.cs" />
     <Compile Include="Simulation\Car.cs" />
-    <Compile Include="Simulation\Engine.cs" />
     <Compile Include="Simulation\Road.cs" />
     <Compile Include="Simulation\Size.cs" />
-    <Compile Include="Simulation\TrafficManager.cs" />
+    <Compile Include="Simulation\TrafficManager.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Simulation\UnmatchingStartpointException.cs" />
+    <Compile Include="Simulation\Engine.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\road.png" />
     <None Include="OpenTK.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -63,5 +66,13 @@
     <Reference Include="Tao.Sdl">
       <HintPath>..\packages\MonoGame.Framework.Linux.3.3.0.0\lib\net40\Tao.Sdl.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\car.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\road.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>

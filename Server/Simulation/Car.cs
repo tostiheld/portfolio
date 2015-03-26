@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Server.Simulation
 {
-    public class Car : IDisposable
+    public class Car
     {
         public int Angle { get; set; }
         public float Speed { get; set; }
@@ -23,11 +23,8 @@ namespace Server.Simulation
             }
         }
 
-        private Texture2D carTexture;
-
-        public Car(Texture2D texture, Size size)
+        public Car(Size size)
         {
-            carTexture = texture;
             Bounds = new Rectangle(
                 0,
                 0,
@@ -40,20 +37,12 @@ namespace Server.Simulation
 
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Texture2D texture)
         {
-            if (carTexture != null)
-            {
-                spriteBatch.Draw(
-                    carTexture,
-                    Bounds,
-                    Color.White);
-            }
-        }
-
-        public void Dispose()
-        {
-            carTexture.Dispose();
+            spriteBatch.Draw(
+                texture,
+                Bounds,
+                Color.White);
         }
     }
 }
