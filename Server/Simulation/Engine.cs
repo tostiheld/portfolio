@@ -15,7 +15,7 @@ namespace Server.Simulation
         public Engine(Zone zone)
             : base()
         {
-            // initialise graphics5
+            // initialise graphics
             GraphicsDeviceManager graphics = new GraphicsDeviceManager(this);
 
             Road startRoad = new Road(
