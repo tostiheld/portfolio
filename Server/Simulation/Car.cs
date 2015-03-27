@@ -32,7 +32,7 @@ namespace Server.Simulation
                 size.Height);
         }
 
-        public void Update()
+        public void Update(GameTime time, int maxspeed)
         {
 
         }

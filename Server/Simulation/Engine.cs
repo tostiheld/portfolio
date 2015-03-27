@@ -18,24 +18,19 @@ namespace Server.Simulation
             : base()
         {
             // initialise graphics
-            GraphicsDeviceManager graphics = new GraphicsDeviceManager(this);
+            new GraphicsDeviceManager(this);
+
+            IsMouseVisible = true;
 
             // set up traffic system
             Road startRoad = new Road(
-                new Point(40, 40),
-                new Point(40, 100),
+                new Point(100, 40),
+                new Point(100, 100),
                 Settings.RoadWidth);
             Traffic = new TrafficManager(this, startRoad);
             Components.Add(Traffic);
 
             Content.RootDirectory = "Resources";
-        }
-
-        protected override void Initialize()
-        {
-            base.Initialize();
-
-            IsMouseVisible = true;
         }
 
         protected override void LoadContent()
@@ -52,14 +47,14 @@ namespace Server.Simulation
 
             MouseState mouse = Mouse.GetState();
 
-            if (previousState.LeftButton == ButtonState.Pressed &&
-                mouse.LeftButton == ButtonState.Released)
-            {
-                Point p = new Point(
-                    mouse.X,
-                    mouse.Y);
+            //System.Diagnostics.Debug.WriteLine(
+            //    mouse.Position.ToString());
 
-                Traffic.AddRoad(p);
+            if (previousState.LeftButton == ButtonState.Pressed &&
+                mouse.LeftButton == ButtonState.Released &&
+                GraphicsDevice.Viewport.Bounds.Contains(mouse.Position))
+            {
+                Traffic.AddRoad(mouse.Position);
             }
 
             previousState = mouse;
@@ -67,7 +62,7 @@ namespace Server.Simulation
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Green);
+            GraphicsDevice.Clear(Color.White);
 
             base.Draw(gameTime);
         }

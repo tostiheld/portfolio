@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Server.Simulation
 {
-    public class TrafficManager : DrawableGameComponent
+    public class TrafficManager :  DrawableGameComponent, IDisposable
     {
         private List<Road> Network;
         private Dictionary<int, Car> Cars;
@@ -17,6 +17,8 @@ namespace Server.Simulation
 
         private Texture2D CarTexture;
         private Texture2D RoadTexture;
+
+        private bool disposed;
 
         public TrafficManager(Engine parent, Road start)
             : base(parent)
@@ -68,6 +70,10 @@ namespace Server.Simulation
                     }
                 }
 
+                foreach (Road r in Network)
+                {
+                    //Cars[i].Update(gameTime, );
+                }
             }
         }
 
@@ -109,7 +115,6 @@ namespace Server.Simulation
             {
                 Car target = Cars[CarsPointer];
                 Cars.Remove(CarsPointer);
-                //target.Dispose();
                 CarsPointer--;
             }
         }
@@ -139,6 +144,33 @@ namespace Server.Simulation
 
             Network.Add(r);
             Endpoint = r.End;
+        }
+
+        public void Dispose()
+        { 
+            Dispose(true);
+            GC.SuppressFinalize(this);           
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return; 
+
+            if (disposing) {
+                // free managed
+                CarTexture.Dispose();
+                RoadTexture.Dispose();
+            }
+
+            // free unmanaged
+
+            disposed = true;
+        }
+
+        ~TrafficManager()
+        {
+            Dispose(false);
         }
     }
 }

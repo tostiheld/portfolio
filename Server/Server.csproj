@@ -42,9 +42,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Simulation\UnmatchingStartpointException.cs" />
-    <Compile Include="Simulation\Engine.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="Simulation\Engine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config">
