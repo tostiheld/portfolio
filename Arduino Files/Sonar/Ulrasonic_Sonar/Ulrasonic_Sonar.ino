@@ -1,16 +1,25 @@
+#include <Servo.h> 
+Servo Servo1;
 const int trigPin = 12;
 const int echoPin = 13;
-int hoek = 405;
+int hoek = 55;
+boolean Richting;
 
 void setup() 
 {
+  Servo1.attach(10);
   Serial.begin (9600);
   pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
+  pinMode(echoPin, INPUT);  
 }
 
 void loop() 
 {
+  if (Richting){hoek+=3;}
+  if (!Richting){hoek-=3;}
+  if (hoek <= 0){Richting = true;}
+  if (hoek >= 90){Richting = false;}
+  Servo1.write(hoek + 20);
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(1000);
   digitalWrite(trigPin, LOW);
@@ -30,6 +39,5 @@ void loop()
     Serial.print("    Y = ");
     Serial.println(y);
   }
-  delay(50);
 }
 
