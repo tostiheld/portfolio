@@ -1,6 +1,6 @@
 using System;
 
-namespace Server
+namespace Roadplus.Server.Map
 {
     public class Zone
     {
