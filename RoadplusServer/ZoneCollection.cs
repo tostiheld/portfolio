@@ -1,13 +1,16 @@
 using System;
 using System.Collections.Generic;
+using Roadplus.Server.Map;
 
 namespace Roadplus.Server
 {
     public class ZoneCollection : IList<Roadplus.Server.Map.Zone>
     {
+        private List<Zone> internalList;
+
         public ZoneCollection()
         {
-
+            internalList = new List<Zone>();
         }
 
         #region IList implementation

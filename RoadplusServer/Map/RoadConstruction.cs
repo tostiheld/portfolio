@@ -6,11 +6,13 @@ namespace Roadplus.Server.Map
     {
         public Edge Location { get; private set; }
         public TimeSpan Duration { get; set; }
+        public DirectionType Direction { get; set; }
 
         public RoadConstruction(Edge target, TimeSpan duration)
         {
             Location = target;
             Duration = duration;
+            Direction = DirectionType.Both;
         }
     }
 }

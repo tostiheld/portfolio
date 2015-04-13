@@ -2,11 +2,11 @@ using System;
 
 namespace Roadplus.Server.Map
 {
-    public enum Direction
+    public enum DirectionType
     {
+        Both,
         StartToEnd,
-        EndToStart,
-        Both
+        EndToStart
     }
 }
 

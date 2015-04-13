@@ -62,10 +62,6 @@ namespace Roadplus.Server.Map
             {
                 throw new ArgumentNullException("second");
             }
-            else if (duration == null)
-            {
-                throw new ArgumentNullException("duration");
-            }
 
             foreach (Edge e in Edges)
             {

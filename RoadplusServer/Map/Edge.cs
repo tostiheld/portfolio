@@ -8,11 +8,13 @@ namespace Roadplus.Server.Map
         public Vertex End { get; private set; }
         public double Weight { get; set; }
         public int MaxSpeed { get; set; }
+        public DirectionType Direction { get; set; }
 
         public Edge(Vertex start, Vertex end)
         {
             Start = start;
             End = end;
+            Direction = DirectionType.Both;
         }
     }
 }
