@@ -25,6 +25,17 @@ namespace Roadplus.Server.Map
         /// <param name="end">The point to connect to</param>
         public void Connect(Point end)
         {
+            // formula to check if two circles intersect
+            // (R0-R1)^2 <= (x0-x1)^2+(y0-y1)^2 <= (R0+R1)^2
+            int r = Settings.VertexRadius;
+            int distance = ((Location.X - end.X) * (Location.X - end.X)) +
+                           ((Location.Y - end.Y) * (Location.Y - end.Y));
+            if (0 <= distance &&
+                distance <= (r * 2) * (r * 2))
+            {
+                throw new VertexTooCloseException();
+            }
+
             Vertex endVertex = new Vertex(end);
             Edge newEdge = new Edge(this, endVertex);
 
