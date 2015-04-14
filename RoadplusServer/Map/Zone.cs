@@ -12,12 +12,15 @@ namespace Roadplus.Server.Map
         private List<Vertex> vertices;
         private List<Edge> edges;
 
-        public Zone(Vertex startingpoint)
+        public Zone(Vertex startingPoint)
         {
+			if (startingPoint == null) {
+				throw new ArgumentNullException ("startingPoint");
+			}
             vertices = new List<Vertex>();
             edges = new List<Edge>();
 
-            root = startingpoint;
+            root = startingPoint;
             vertices.Add(root);
             root.NewConnection += Vertex_NewConnection;
         }
@@ -61,6 +64,9 @@ namespace Roadplus.Server.Map
         /// <param name="location">The location of the radar on the map</param> 
         public void Connect(RoadCommunicator comms, Point location)
         {
+			if (RoadCommunicator == null) {
+				throw new ArgumentNullException ("comms");
+			}
             Vertex radarlocation = PointToVertex(location);
             if (radarlocation == null)
             {

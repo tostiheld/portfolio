@@ -14,6 +14,10 @@ namespace Roadplus.Server.Map
 
         public Vertex(Point location)
         {
+			//STIJN: i'm not totally sure if this makes sense..
+			if (location == default(Point)) {
+				throw new ArgumentException ("Location is not set");
+			}
             Location = location;
             Edges = new List<Edge>();
         }
@@ -55,19 +59,20 @@ namespace Roadplus.Server.Map
         /// </returns>
         /// <param name="second">The second vertex to look for the road 
         /// inbetween</param>
-        /// <param name="duration">How long to obstruct the road</param>
-        public RoadConstruction ObstructRoad(Vertex second, TimeSpan duration)
+        /// <param name="dateRange">From when to when is the road obstructed?</param>
+		public RoadConstruction ObstructRoad(Vertex second, Utils.DateRange dateRange)
         {
-            if (second == null)
-            {
-                throw new ArgumentNullException("second");
-            }
+			if (second == null) {
+				throw new ArgumentNullException ("second");
+			} else if (dateRange == null) {
+				throw new ArgumentNullException ("dateRange");
+			}
 
             foreach (Edge e in Edges)
             {
                 if (Object.ReferenceEquals(e.End, second))
                 {
-                    RoadConstruction rc = new RoadConstruction(e, duration);
+                    RoadConstruction rc = new RoadConstruction(e, dateRange);
                     return rc;
                 }
             }
