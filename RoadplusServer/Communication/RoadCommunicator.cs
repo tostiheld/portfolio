@@ -2,7 +2,7 @@ using System;
 
 namespace Roadplus.Server.Communication
 {
-    public class RoadCommunicator
+    public class RoadCommunicator : Communicator
     {
         public RoadCommunicator()
         {
