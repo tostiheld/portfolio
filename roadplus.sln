@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard", "Dashboard\Dashboard.csproj", "{76238D12-6129-4FC9-97AC-D84BCF95AC74}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roadplus.Server", "RoadplusServer\Roadplus.Server.csproj", "{5EB2E5B3-96D7-4D92-B172-DC60F9827B94}"
 EndProject
 Global
@@ -15,12 +13,8 @@ Global
 		{5EB2E5B3-96D7-4D92-B172-DC60F9827B94}.Debug|x86.Build.0 = Debug|x86
 		{5EB2E5B3-96D7-4D92-B172-DC60F9827B94}.Release|x86.ActiveCfg = Release|x86
 		{5EB2E5B3-96D7-4D92-B172-DC60F9827B94}.Release|x86.Build.0 = Release|x86
-		{76238D12-6129-4FC9-97AC-D84BCF95AC74}.Debug|x86.ActiveCfg = Debug|x86
-		{76238D12-6129-4FC9-97AC-D84BCF95AC74}.Debug|x86.Build.0 = Debug|x86
-		{76238D12-6129-4FC9-97AC-D84BCF95AC74}.Release|x86.ActiveCfg = Release|x86
-		{76238D12-6129-4FC9-97AC-D84BCF95AC74}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Dashboard\Dashboard.csproj
+		StartupItem = RoadplusServer\Roadplus.Server.csproj
 	EndGlobalSection
 EndGlobal

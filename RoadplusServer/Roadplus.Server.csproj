@@ -91,6 +91,13 @@
     <Compile Include="Map\DirectionType.cs" />
     <Compile Include="Utils\DateRange.cs" />
     <Compile Include="Utils\TimeRange.cs" />
+    <Compile Include="Map\VertexTooCloseException.cs" />
+    <Compile Include="Communication\MessageReceivedEventArgs.cs" />
+    <Compile Include="Communication\InvalidChannelException.cs" />
+    <Compile Include="Communication\Message.cs" />
+    <Compile Include="Communication\ConfigurationException.cs" />
+    <Compile Include="Communication\MessageTypes.cs" />
+    <Compile Include="Communication\CarListener.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
