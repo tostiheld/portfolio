@@ -12,11 +12,17 @@ namespace Roadplus.Server.Map
 			if (beginTime > endTime) {
 				throw new ArgumentException ("beginTime is later than endTime");
 			}
-			if (beginTime == TimeSpan.Zero || endTime == TimeSpan.Zero) {
-				throw new ArgumentNullException ();
+			else if (beginTime == TimeSpan.Zero) {
+				throw new ArgumentException ("beginTime is not set");
 			}
-			if (beginTime < TimeSpan.Zero || endTime < TimeSpan.Zero) {
-				throw new ArgumentOutOfRangeException ();
+			else if (endTime == TimeSpan.Zero) {
+				throw new ArgumentException ("endTime is not set");
+			}
+			else if (beginTime < TimeSpan.Zero) {
+				throw new ArgumentOutOfRangeException ("beginTime");
+			}
+			else if (endTime < TimeSpan.Zero) {
+				throw new ArgumentOutOfRangeException ("endTime");
 			}
 
 			BeginTime = beginTime;

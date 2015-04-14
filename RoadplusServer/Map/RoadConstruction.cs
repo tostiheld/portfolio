@@ -5,14 +5,22 @@ namespace Roadplus.Server.Map
     public class RoadConstruction
     {
         public Edge Location { get; private set; }
-        public TimeSpan Duration { get; set; }
+        public DateRange DateRange { get; set; }
         public DirectionType Direction { get; set; }
 
-        public RoadConstruction(Edge target, TimeSpan duration)
+		public RoadConstruction(Edge target, DateRange dateRange)
         {
+			if (target == null) {
+				throw new ArgumentNullException ("target");
+			} else if (dateRange == null) {
+				throw new ArgumentNullException ("dateRange");
+			}
+
             Location = target;
-            Duration = duration;
-            Direction = DirectionType.Both;
+			DateRange = dateRange;
+
+			//Is this needed? if direction is always both/same as edge?
+			Direction = target.Direction;
         }
     }
 }
