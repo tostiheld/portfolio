@@ -1,4 +1,5 @@
 using System;
+using Roadplus.Server.Utils;
 
 namespace Roadplus.Server.Map
 {
@@ -19,7 +20,7 @@ namespace Roadplus.Server.Map
             Location = target;
 			DateRange = dateRange;
 
-			//Is this needed? if direction is always both/same as edge?
+			//STIJN: Is this needed? if direction is always both/same as edge?
 			Direction = target.Direction;
         }
     }

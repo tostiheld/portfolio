@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Roadplus.Server.Map
+namespace Roadplus.Server.Utils
 {
 	public class DateRange
 	{
