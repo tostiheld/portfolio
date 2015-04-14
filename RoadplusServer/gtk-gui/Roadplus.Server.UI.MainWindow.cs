@@ -4,6 +4,10 @@ namespace Roadplus.Server.UI
 {
 	public partial class MainWindow
 	{
+		private global::Gtk.Fixed fixed1;
+		
+		private global::Gtk.Button button1;
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
@@ -11,11 +15,26 @@ namespace Roadplus.Server.UI
 			this.Name = "Roadplus.Server.UI.MainWindow";
 			this.Title = global::Mono.Unix.Catalog.GetString ("MainWindow");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
+			// Container child Roadplus.Server.UI.MainWindow.Gtk.Container+ContainerChild
+			this.fixed1 = new global::Gtk.Fixed ();
+			this.fixed1.Name = "fixed1";
+			this.fixed1.HasWindow = false;
+			// Container child fixed1.Gtk.Fixed+FixedChild
+			this.button1 = new global::Gtk.Button ();
+			this.button1.CanFocus = true;
+			this.button1.Name = "button1";
+			this.button1.UseUnderline = true;
+			this.button1.Label = global::Mono.Unix.Catalog.GetString ("Thomas deze shit compiled niet");
+			this.fixed1.Add (this.button1);
+			global::Gtk.Fixed.FixedChild w1 = ((global::Gtk.Fixed.FixedChild)(this.fixed1 [this.button1]));
+			w1.X = 35;
+			w1.Y = 30;
+			this.Add (this.fixed1);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
-			this.DefaultWidth = 400;
-			this.DefaultHeight = 300;
+			this.DefaultWidth = 631;
+			this.DefaultHeight = 308;
 			this.Show ();
 			this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 		}

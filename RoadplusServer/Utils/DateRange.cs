@@ -23,12 +23,16 @@ namespace Roadplus.Server.Utils
 			EndDate = endDate;
 		}
 
-		public Boolean IsActive(DateTime date = DateTime.Now){
+		public Boolean IsActive(DateTime date){
 			
 			if (date > BeginDate && date < EndDate) {
 				return true;
 			}
 			return false;
+		}
+
+		public Boolean IsActive(){
+			return IsActive (DateTime.Now);
 		}
 
 	}

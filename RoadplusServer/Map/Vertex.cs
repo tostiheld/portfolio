@@ -14,11 +14,7 @@ namespace Roadplus.Server.Map
 
         public Vertex(Point location)
         {
-			//STIJN: i'm not totally sure if this makes sense..
-			if (location == default(Point)) {
-				throw new ArgumentException ("Location is not set");
-			}
-            Location = location;
+			Location = location;
             Edges = new List<Edge>();
         }
 

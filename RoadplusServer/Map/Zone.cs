@@ -64,7 +64,7 @@ namespace Roadplus.Server.Map
         /// <param name="location">The location of the radar on the map</param> 
         public void Connect(RoadCommunicator comms, Point location)
         {
-			if (RoadCommunicator == null) {
+			if (comms == null) {
 				throw new ArgumentNullException ("comms");
 			}
             Vertex radarlocation = PointToVertex(location);

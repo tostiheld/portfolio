@@ -22,7 +22,7 @@
             <property name="MemberName" />
             <property name="CanFocus">True</property>
             <property name="Type">TextOnly</property>
-            <property name="Label" translatable="yes">Thomas deze shit compiled niet</property>
+            <property name="Label" translatable="yes">Test Button</property>
             <property name="UseUnderline">True</property>
           </widget>
           <packing>

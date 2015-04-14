@@ -29,12 +29,16 @@ namespace Roadplus.Server.Utils
 			EndTime = endTime;
 		}
 
-		public Boolean IsActive(DateTime date = DateTime.Now){
-			TimeSpan currentTime = date.Now.TimeOfDay;
+		public Boolean IsActive(DateTime date){
+			TimeSpan currentTime = date.TimeOfDay;
 			if (currentTime > BeginTime && currentTime < EndTime) {
 				return true;
 			}
 			return false;
+		}
+
+		public Boolean IsActive(){
+			return IsActive (DateTime.Now);
 		}
 			
 	}
