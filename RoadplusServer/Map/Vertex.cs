@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
 
 namespace Roadplus.Server.Map
 {
@@ -67,11 +66,14 @@ namespace Roadplus.Server.Map
         /// <param name="second">The second vertex to look for the road 
         /// inbetween</param>
         /// <param name="dateRange">From when to when is the road obstructed?</param>
-		public RoadConstruction ObstructRoad(Vertex second, Utils.DateRange dateRange)
+		public RoadConstruction ObstructRoad(Vertex second, TimeRange duration)
         {
-			if (second == null) {
+			if (second == null)
+            {
 				throw new ArgumentNullException ("second");
-			} else if (dateRange == null) {
+			} 
+            else if (duration == null)
+            {
 				throw new ArgumentNullException ("dateRange");
 			}
 
@@ -79,7 +81,7 @@ namespace Roadplus.Server.Map
             {
                 if (Object.ReferenceEquals(e.End, second))
                 {
-                    RoadConstruction rc = new RoadConstruction(e, dateRange);
+                    RoadConstruction rc = new RoadConstruction(e, duration);
                     return rc;
                 }
             }

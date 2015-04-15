@@ -4,18 +4,18 @@ namespace Roadplus.Server.Map
 {
     public class School
     {
-		public Utils.TimeRange TimeRange { get; set; }
+		public TimeRange Schedule { get; private set; }
 		public String Name { get; set; }
 
-		public School(Utils.TimeRange timeRange, String name)
+		public School(TimeRange schedule, String name)
         {
-			if (timeRange == null) {
-				throw new ArgumentNullException ("timeRange");
+			if (schedule == null) {
+				throw new ArgumentNullException ("schedule");
 			} else if (name == null) {
 				throw new ArgumentNullException ("name");
 			} 
 
-			TimeRange = timeRange;
+			Schedule = schedule;
 			Name = name;
         }
     }

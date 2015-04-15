@@ -9,7 +9,7 @@ namespace Roadplus.Server
     {
         public const int VertexRadius = 5;
 
-        public const Dictionary<string, MessageTypes> Messages = 
+        public readonly static Dictionary<string, MessageTypes> Messages = 
         new Dictionary<string, MessageTypes>()
         {
             { "TEST", MessageTypes.Test }

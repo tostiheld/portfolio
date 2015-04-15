@@ -32,7 +32,7 @@ namespace Roadplus.Server.Communication
 
                 if (message != null)
                 {
-                    Buffer += message;
+                    buffer += message;
                     ProcessMessages();
                 }
             }
@@ -57,12 +57,12 @@ namespace Roadplus.Server.Communication
 
                     Message received = Message.FromString(cmd, data);
 
-                    if (Message != null &&
+                    if (received != null &&
                         MessageReceived != null)
                     {
                         MessageReceivedEventArgs e = new MessageReceivedEventArgs(
                             received);
-                        MessageReceived(this, received);
+                        MessageReceived(this, e);
                     }
                 }
             }

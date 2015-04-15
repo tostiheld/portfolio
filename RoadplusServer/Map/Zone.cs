@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
 using Roadplus.Server.Communication;
 
 namespace Roadplus.Server.Map
@@ -62,7 +61,7 @@ namespace Roadplus.Server.Map
         /// </summary>
         /// <param name="comms">The communicator to pair with</param>
         /// <param name="location">The location of the radar on the map</param> 
-        public void Connect(RoadCommunicator comms, Point location)
+        public void Connect(RoadCommunication comms, Point location)
         {
 			if (comms == null) {
 				throw new ArgumentNullException ("comms");
