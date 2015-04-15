@@ -1,15 +1,25 @@
 using System;
 using System.Collections.Generic;
+using ProtoBuf;
 using Roadplus.Server.Communication;
 
 namespace Roadplus.Server.Map
 {
+    [ProtoContract]
     public class Zone
     {
+        [ProtoMember(1)]
         private Vertex root;
+        [ProtoMember(2)]
         private Vertex radarLocation;
+        [ProtoMember(3)]
         private List<Vertex> vertices;
+        [ProtoMember(4)]
         private List<Edge> edges;
+
+        // USED BY PROTBUF-NET
+        // DO NOT EXPOSE
+        private Zone() { }
 
         public Zone(Vertex startingPoint)
         {

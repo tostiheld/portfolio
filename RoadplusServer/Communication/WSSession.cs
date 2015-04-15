@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading;
@@ -100,9 +101,26 @@ namespace Roadplus.Server.Communication
             }
         }
 
+        public void Send(Message message)
+        {
+            using (WebSocketMessageWriteStream stream = 
+                   webSocket.CreateMessageWriter(WebSocketMessageType.Text))
+            {
+                using (StreamWriter sw = new StreamWriter(stream, Encoding.UTF8))
+                {
+                    sw.Write(message.ToString());
+                }
+            }
+        }
+
         public void End()
         {
             webSocket.Close();
+
+            if (Disconnected != null)
+            {
+                Disconnected(this, EventArgs.Empty);
+            }
         }
     }
 }
