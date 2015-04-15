@@ -23,9 +23,12 @@ namespace Roadplus.Server.Map
 
         public Edge(Vertex start, Vertex end)
         {
-			if (start == null) {
+			if (start == null) 
+            {
 				throw new ArgumentNullException ("start");
-			} else if (end == null) {
+			} 
+            else if (end == null) 
+            {
 				throw new ArgumentNullException ("end");
 			}
 

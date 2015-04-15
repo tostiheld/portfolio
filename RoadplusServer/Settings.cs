@@ -31,10 +31,6 @@ namespace Roadplus.Server
             { "TEST", MessageTypes.Test },
             { "SOFF", MessageTypes.ServerOffline }
         };
-
-        // We cant have too many threads!
-        public const int MaxCarConnections = 100;
-        public const int CarReceiveBufferSize = 256;
     }
 }
 
