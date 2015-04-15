@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,6 +11,15 @@ namespace Roadplus.Server.Communication
     {
         public delegate void OnMessageReceived(object sender, MessageReceivedEventArgs e);
         public event OnMessageReceived MessageReceived;
+        public event EventHandler Disconnected;
+
+        public IPAddress IP
+        {
+            get
+            {
+                return webSocket.LocalEndpoint.Address;
+            }
+        }
 
         private WebSocket webSocket;
         private string buffer;
@@ -49,6 +59,11 @@ namespace Roadplus.Server.Communication
                     ProcessMessages();
                 }
             }
+
+            if (Disconnected != null)
+            {
+                Disconnected(this, EventArgs.Empty);
+            }
         }
 
         /// <summary>
@@ -83,6 +98,11 @@ namespace Roadplus.Server.Communication
                     }
                 }
             }
+        }
+
+        public void End()
+        {
+            webSocket.Close();
         }
     }
 }

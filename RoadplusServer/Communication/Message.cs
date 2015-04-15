@@ -93,7 +93,7 @@ namespace Roadplus.Server.Communication
             }
 
             string format = MessageStart + "{0}" + MessageSplit + 
-                            "{1}" + MessageSplit + MessageTerminator;
+                            "{1}" + MessageTerminator;
             return String.Format(format, type, metadata);
         }
     }

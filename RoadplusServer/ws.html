@@ -1,0 +1,28 @@
+<html>
+<head>
+<script>
+function test() {
+    var socket = new WebSocket('ws://localhost:4242/');
+
+    socket.onopen = function() {
+        console.log('connection opened');
+    }
+
+    socket.onclose = function() {
+        console.log('connection closed');
+    }
+
+    socket.onerror = function(error) {
+        console.log('Error: ' + error);
+    }
+
+    socket.send('>TEST:bladibla:;');
+    socket.close();
+
+
+    console.log('finished');
+}
+</script>
+</head>
+<body onload="test()"></body>
+<html>
