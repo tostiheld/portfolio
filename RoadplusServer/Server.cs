@@ -10,7 +10,7 @@ using Roadplus.Server.Map;
 
 namespace Roadplus.Server
 {
-    public class Server
+    public partial class Server
     {
         public bool IsRunning { get; private set; }
 
@@ -27,8 +27,33 @@ namespace Roadplus.Server
                 throw new ArgumentNullException("endpoint");
             }
 
+            AttachCallbacks();
+
             logStream = logstream;
             service = new WSService(endpoint);
+            service.NewSession += Service_NewSession;
+        }
+
+        private void Service_NewSession(object sender, NewSessionEventArgs e)
+        {
+            sessions.Add(e.Session);
+            e.Session.MessageReceived += Session_MessageReceived;
+        }
+
+        private void Session_MessageReceived(object sender, MessageReceivedEventArgs e)
+        {
+            Action<string> callback;
+            if (MessageCallbacks.TryGetValue(
+                e.Received.MessageType,
+                out callback))
+            {
+                callback(e.Received.MetaData);
+            }
+            else
+            {
+                logStream.WriteLine(
+                    "Message does not have a callback: " + e.Received.ToString());
+            }
         }
 
         private void Mockups()

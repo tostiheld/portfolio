@@ -10,7 +10,7 @@ namespace Roadplus.Server.Communication
         public const char MessageTerminator = ';';
 
         public MessageTypes MessageType { get; private set; }
-        public string[] MetaData { get; private set; }
+        public string MetaData { get; private set; }
         public Source MessageSource { get; private set; }
 
         public Message(MessageTypes type)
@@ -24,12 +24,7 @@ namespace Roadplus.Server.Communication
             }
 
             MessageType = type;
-
-            // remove count
-            // TODO: what do we do with metadata count
-            List<string> data = new List<string>(metadata.Split(MessageSplit));
-            data.RemoveAt(0);
-            MetaData = data.ToArray();
+            MetaData = metadata;
         }
 
         /// <summary>
@@ -44,13 +39,10 @@ namespace Roadplus.Server.Communication
         /// <param name="metadata">Extra data</param>
         public static Message FromString(string input, string metadata)
         {
-            // TODO: is this doable with an indexoutofrange exception?
-            foreach (string s in Settings.Messages.Keys)
+            MessageTypes type;
+            if (Settings.Messages.TryGetValue(input, out type))
             {
-                if (input == s)
-                {
-                    return new Message(Settings.Messages[s], metadata);
-                }
+                return new Message(type, metadata);
             }
 
             return null;
@@ -77,12 +69,6 @@ namespace Roadplus.Server.Communication
         /// <returns>The message string</returns>
         public override string ToString()
         {
-            string metadata = "";
-            foreach (string s in MetaData)
-            {
-                metadata += s + ":";
-            }
-
             string type = "NULL";
             foreach (KeyValuePair<string, MessageTypes> pair in Settings.Messages)
             {
@@ -94,7 +80,7 @@ namespace Roadplus.Server.Communication
 
             string format = MessageStart + "{0}" + MessageSplit + 
                             "{1}" + MessageTerminator;
-            return String.Format(format, type, metadata);
+            return String.Format(format, type, MetaData);
         }
     }
 }

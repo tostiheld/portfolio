@@ -79,6 +79,7 @@
     <Compile Include="Utils\Point.cs" />
     <Compile Include="Communication\Source.cs" />
     <Compile Include="Communication\SourceType.cs" />
+    <Compile Include="Server.Callbacks.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
