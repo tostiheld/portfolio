@@ -7,6 +7,8 @@ namespace Roadplus.Server
 {
     public struct Settings
     {
+        public const int BufferSize = 256;
+
         public const int VertexRadius = 5;
 
         public readonly static Dictionary<string, MessageTypes> Messages = 
