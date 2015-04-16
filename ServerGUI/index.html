@@ -15,6 +15,9 @@
     <script src="assets/js/Models/WebSocketClient.js"></script>
     <script src="assets/js/Models/ViewHandler.js"></script>
     <script src="assets/js/Models/School.js"></script>
+    <script src="assets/js/Models/RoadConstruction.js"></script>
+    <script src="assets/js/Models/Zone.js"></script>
+
     <script src="assets/js/Controllers/main.js"></script>
 </head>
 
@@ -94,6 +97,7 @@
                         <th>Name</th>
                         <th>Time Open</th>
                         <th>Time Close</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -105,9 +109,53 @@
 
     </div>
 
-    <div id="roadConstruction" class="view">
-        <h1>Add Road Constructions</h1>
+    <div id="roadConstructions" class="view">
+        <h1>Road Constructions</h1>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">All Road Constructions</div>
 
+            <!-- Table -->
+            <table class="table" id="roadConstructionTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Time Open</th>
+                        <th>Time Close</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="zones" class="view">
+        <h1>Zones</h1>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">All Zones</div>
+
+            <!-- Table -->
+            <table class="table" id="zoneTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Schools</th>
+                        <th>Road Constructions</th>
+                        <th>Vertexen</th>
+                        <th>Edges</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </body>

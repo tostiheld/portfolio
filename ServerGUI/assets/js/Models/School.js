@@ -17,7 +17,7 @@ Schools.prototype.Add = function (name, dateStart, dateEnd) {
     this.addToGUI(newSchool);
 }
 Schools.prototype.addToGUI = function (newSchool) {
-    $("> tbody", this.Element).append('<tr id="' + newSchool.ID + '"><td>' + newSchool.ID + '</td><td>' + newSchool.Name + '</td><td> ' + newSchool.DateStart + ' </td><td>' + newSchool.DateEnd + '</td></tr>');
+    $("> tbody", this.Element).append('<tr id="' + newSchool.ID + '"><td>' + newSchool.ID + '</td><td>' + newSchool.Name + '</td><td> ' + newSchool.DateStart + ' </td><td>' + newSchool.DateEnd + '</td><td><span class="remove glyphicon glyphicon-remove" aria-hidden="true"></span></td></tr>');
 }
 Schools.prototype.Remove = function (id) {
     for (var key in this.SchoolList) {
