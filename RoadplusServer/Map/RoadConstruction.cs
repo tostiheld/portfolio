@@ -4,18 +4,23 @@ namespace Roadplus.Server.Map
 {
     public class RoadConstruction
     {
+        public int ID { get; private set; }
         public Edge Location { get; private set; }
         public TimeRange Duration { get; private set; }
         public DirectionType Direction { get; set; }
 
-		public RoadConstruction(Edge target, TimeRange duration)
+		public RoadConstruction(int id, Edge target, TimeRange duration)
         {
-			if (target == null) {
+			if (target == null) 
+            {
 				throw new ArgumentNullException ("target");
-			} else if (duration == null) {
+			}
+            else if (duration == null) 
+            {
 				throw new ArgumentNullException ("duration");
 			}
 
+            ID = id;
             Location = target;
 			Duration = duration;
 

@@ -66,7 +66,7 @@ namespace Roadplus.Server.Communication
                         List<string> payload = new List<string>();
                         foreach (string s in parts)
                         {
-                            if (s != cmdstr &&
+                            if (s.ToUpper() != cmdstr &&
                                 s != "")
                             {
                                 payload.Add(s);

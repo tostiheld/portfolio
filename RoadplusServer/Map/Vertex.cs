@@ -76,7 +76,7 @@ namespace Roadplus.Server.Map
         /// <param name="second">The second vertex to look for the road 
         /// inbetween</param>
         /// <param name="dateRange">From when to when is the road obstructed?</param>
-		public RoadConstruction ObstructRoad(Vertex second, TimeRange duration)
+		public RoadConstruction ObstructRoad(int id, Vertex second, TimeRange duration)
         {
 			if (second == null)
             {
@@ -91,7 +91,7 @@ namespace Roadplus.Server.Map
             {
                 if (Object.ReferenceEquals(e.End, second))
                 {
-                    RoadConstruction rc = new RoadConstruction(e, duration);
+                    RoadConstruction rc = new RoadConstruction(id, e, duration);
                     return rc;
                 }
             }

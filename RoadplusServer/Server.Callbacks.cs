@@ -109,10 +109,11 @@ namespace Roadplus.Server
             {
                 try
                 {
+                    int id = Convert.ToInt32(message.Payload[1]);
+
                     switch (message.Payload[0])
                     {
                         case "zone":
-                            int id = Convert.ToInt32(message.Payload[1]);
                             int x = Convert.ToInt32(message.Payload[2]);
                             int y = Convert.ToInt32(message.Payload[3]);
 
@@ -142,7 +143,6 @@ namespace Roadplus.Server
 
                             break;
                         case "school":
-                            id = Convert.ToInt32(message.Payload[1]);
                             int sid = Convert.ToInt32(message.Payload[2]);
                             int hStart = Convert.ToInt32(message.Payload[3].Split('-')[0]);
                             int mStart = Convert.ToInt32(message.Payload[3].Split('-')[1]);
@@ -192,6 +192,8 @@ namespace Roadplus.Server
 
                             break;
                         case "roadconstruction":
+                            int rid = Convert.ToInt32(message.Payload[2]);
+
 
                             break;
                     }
