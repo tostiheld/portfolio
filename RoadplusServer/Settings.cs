@@ -14,6 +14,8 @@ namespace Roadplus.Server
 
         public const int Port = 42424;
 
+        public const int BaudRate = 38400;
+
         public const string ZoneFileName = "default.zones";
 
         public static readonly string ZoneFilePath = Path.Combine(
@@ -29,7 +31,8 @@ namespace Roadplus.Server
         new Dictionary<string, MessageTypes>()
         {
             { "TEST", MessageTypes.Test },
-            { "SOFF", MessageTypes.ServerOffline }
+            { "SOFF", MessageTypes.ServerOffline },
+            { "IDEN", MessageTypes.Identification }
         };
     }
 }

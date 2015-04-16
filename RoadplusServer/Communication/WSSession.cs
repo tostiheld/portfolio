@@ -21,6 +21,7 @@ namespace Roadplus.Server.Communication
                 return webSocket.LocalEndpoint.Address;
             }
         }
+        public SourceTypes SourceType { get; set; } 
 
         private WebSocket webSocket;
         private string buffer;
@@ -57,39 +58,8 @@ namespace Roadplus.Server.Communication
                     ASCIIEncoding encoding = new ASCIIEncoding();
                     string message = encoding.GetString(bytes);
                     buffer += message;
-                    ProcessMessages();
-                }
-            }
-
-            if (Disconnected != null)
-            {
-                Disconnected(this, EventArgs.Empty);
-            }
-        }
-
-        /// <summary>
-        /// Only processes new string messages.
-        /// Expects messages in simple ASCII protocol format.
-        /// </summary>
-        private void ProcessMessages()
-        {
-            int start = buffer.IndexOf(Message.MessageStart);
-            if (start != -1)
-            {
-                int end = buffer.IndexOf(Message.MessageTerminator);
-                if (end != -1)
-                {
-                    string msg = buffer.Substring(
-                        start, (end - start) + 1);
-                    buffer = buffer.Substring(end + 1);
-
-                    string cmd = msg.Substring(1, 4);
-                    string data = msg.Substring(4, msg.Length - 6);
-
-                    Message received = Message.FromString(cmd, data);
-
-                    // drop message if unknown command
-                    // TODO: do we need a notification?
+                    Source source = new Source(SourceType, IP);
+                    Message received = Utilities.ProcessMessages(source, buffer);
                     if (received != null &&
                         MessageReceived != null)
                     {
@@ -98,6 +68,11 @@ namespace Roadplus.Server.Communication
                         MessageReceived(this, e);
                     }
                 }
+            }
+
+            if (Disconnected != null)
+            {
+                Disconnected(this, EventArgs.Empty);
             }
         }
 

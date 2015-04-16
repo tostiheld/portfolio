@@ -38,16 +38,28 @@ namespace Roadplus.Server
         {
             sessions.Add(e.Session);
             e.Session.MessageReceived += Session_MessageReceived;
+            e.Session.Disconnected += Session_Disconnected;
+            logStream.WriteLine("New session with " + e.Session.IP.ToString());
+        }
+
+        private void Session_Disconnected(object sender, EventArgs e)
+        {
+            if (sender is WSSession)
+            {
+                WSSession session = sender as WSSession;
+                logStream.WriteLine("Client at " + session.IP.ToString() + " disconnected");
+                sessions.Remove(session);
+            }
         }
 
         private void Session_MessageReceived(object sender, MessageReceivedEventArgs e)
         {
-            Action<string> callback;
+            Action<Message> callback;
             if (MessageCallbacks.TryGetValue(
                 e.Received.MessageType,
                 out callback))
             {
-                callback(e.Received.MetaData);
+                callback(e.Received);
             }
             else
             {
@@ -131,8 +143,11 @@ namespace Roadplus.Server
                 service.Stop();
 
                 // ...then kick everyone out.
-                Message msg = new Message(MessageTypes.ServerOffline);
-                foreach (WSSession session in sessions)
+                Source source = new Source(SourceTypes.Server, service.IP);
+                Message msg = new Message(source, MessageTypes.ServerOffline);
+                // clone list because we're going to modify the other one
+                List<WSSession> temp = new List<WSSession>(sessions);
+                foreach (WSSession session in temp)
                 {
                     session.Send(msg);
                     session.End();

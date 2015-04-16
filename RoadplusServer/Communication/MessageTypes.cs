@@ -5,7 +5,8 @@ namespace Roadplus.Server.Communication
     public enum MessageTypes
     {
         Test,
-        ServerOffline
+        ServerOffline,
+        Identification
     }
 }
 

@@ -12,6 +12,8 @@ namespace Roadplus.Server.Communication
         public delegate void OnNewSession(object sender, NewSessionEventArgs e);
         public event OnNewSession NewSession;
 
+        public IPAddress IP { get; private set; }
+
         private WebSocketListener listener;
 
         public WSService(IPEndPoint endpoint)
@@ -19,6 +21,7 @@ namespace Roadplus.Server.Communication
             listener = new WebSocketListener(endpoint);
             WebSocketFactoryRfc6455 standard = new WebSocketFactoryRfc6455(listener);
             listener.Standards.RegisterStandard(standard);
+            IP = endpoint.Address;
         }
 
         private async Task Listen()

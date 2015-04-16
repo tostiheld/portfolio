@@ -13,10 +13,10 @@ namespace Roadplus.Server.Communication
         public string MetaData { get; private set; }
         public Source MessageSource { get; private set; }
 
-        public Message(MessageTypes type)
-            : this(type, "") { }
+        public Message(Source source, MessageTypes type)
+            : this(source, type, "") { }
 
-        public Message(MessageTypes type, string metadata)
+        public Message(Source source, MessageTypes type, string metadata)
         {
             if (metadata == null)
             {
@@ -25,6 +25,7 @@ namespace Roadplus.Server.Communication
 
             MessageType = type;
             MetaData = metadata;
+            MessageSource = source;
         }
 
         /// <summary>
@@ -37,12 +38,12 @@ namespace Roadplus.Server.Communication
         /// </returns>
         /// <param name="input">The string to construct a message from</param>
         /// <param name="metadata">Extra data</param>
-        public static Message FromString(string input, string metadata)
+        public static Message FromString(Source source, string input, string metadata)
         {
             MessageTypes type;
             if (Settings.Messages.TryGetValue(input, out type))
             {
-                return new Message(type, metadata);
+                return new Message(source, type, metadata);
             }
 
             return null;
@@ -57,9 +58,9 @@ namespace Roadplus.Server.Communication
         /// nothing was found.
         /// </returns>
         /// <param name="input">The string to construct a message from</param>
-        public static Message FromString(string input)
+        public static Message FromString(Source source, string input)
         {
-            return FromString(input, "");
+            return FromString(source, input, "");
         }
 
         /// <summary>
