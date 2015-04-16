@@ -71,6 +71,10 @@ WebSocketHandler.prototype.onError = function (e) {
     this.con.appendError(message);
 };
 
+WebSocketHandler.prototype.onDisconnect = function () {
+    this.send(">DISC:;");
+}
+
 WebSocketHandler.prototype.newZone = function (newZone) {
     this.ZoneList.Add(newZone);
     this.send(">CZON:" + newZone.ID + ":" + newZone.X + ":" + newZone.Y + ":;");
