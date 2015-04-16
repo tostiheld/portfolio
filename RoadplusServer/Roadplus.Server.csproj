@@ -82,6 +82,8 @@
     <Compile Include="Communication\WSService.cs" />
     <Compile Include="Communication\WSSession.cs" />
     <Compile Include="Communication\CommandType.cs" />
+    <Compile Include="Server.Callbacks.Extensions.cs" />
+    <Compile Include="HttpService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
