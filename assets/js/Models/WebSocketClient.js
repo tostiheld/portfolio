@@ -9,10 +9,10 @@ function WebSocketClient(serverURI, handler) {
     this.serverURI = serverURI;
     this.handler = handler;
     this.ws = new WebSocket(serverURI);
+    this.handler.WebSocketC = this;
 
     this.ws.onopen = function () {
         handler.onOpen();
-        this.send(">IDEN:UI:;")
     };
     this.ws.onmessage = function (e) {
         handler.onMessage(e);
