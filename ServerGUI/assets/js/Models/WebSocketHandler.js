@@ -38,6 +38,7 @@ WebSocketHandler.prototype.onOpen = function () {
     this.newZone(new Zone(1, "test", 5, 8));
     this.newZone(new Zone(2, "test2", 1, 10));
     this.newSchool(new School("Fontys", "dateStart", "dateEnd", "12"), 1);
+    this.newRoadConstruction(new RoadConstruction("Aids", "dateStart", "dateEnd", "5"), 1);
     //this.getData();
 };
 /**
@@ -118,11 +119,40 @@ WebSocketHandler.prototype.removeSchool = function (schoolId) {
     }
 }
 
+WebSocketHandler.prototype.newRoadConstruction = function (roadConstruction, zoneID) {
+
+    for (var skey in this.ZoneList.ZoneList) {
+        if (this.ZoneList.ZoneList[skey].ID == zoneID) {
+            this.ZoneList.ZoneList[skey].RoadConstructionList.Add(roadConstruction);
+            var roadConstructionTable = this.ZoneList.ZoneList[skey].RoadConstructionList.Element;
+            console.log("new RC");
+        }
+    }
+    var wsh = this;
+    $("tr .remove", roadConstructionTable).on('click', function () {
+        wsh.removeRoadConstruction($(this).parents("tr").attr("id"));
+    });
+}
+
+WebSocketHandler.prototype.removeRoadConstruction = function (roadConstructionId) {
+    for (var zkey in this.ZoneList.ZoneList) {
+        if (this.ZoneList.ZoneList[zkey].RoadConstructionList.Remove(roadConstructionId)) {
+            this.send(">RRCS:" + id + ":;");
+            console.log("remove roadConstruction: " + id);
+        } else {
+            console.log("could not be deleted");
+        }
+    }
+}
+
 
 WebSocketHandler.prototype.getData = function () {
     //Ask for all Zones
     console.log('Get All Zones');
     this.send(">GETZ:;");
+
+    console.log('Get Com Ports');
+    this.send(">GRDS:;");
 
     //Ask for all schools,roadConstructions,Vertexes en Edges
     for (var key in this.ZoneList.ZoneList) {

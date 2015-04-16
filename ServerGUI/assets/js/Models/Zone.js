@@ -4,7 +4,7 @@ function Zone(id, name, x, y) {
     this.X = x;
     this.Y = y;
     this.SchoolList = new Schools($("#schoolTable"));
-    this.RoadConstructionList = new RoadConstructions();
+    this.RoadConstructionList = new RoadConstructions($("#roadConstructionTable"));
     this.VertexList = [];
     this.EdgeList = [];
 }
@@ -29,7 +29,8 @@ Zones.prototype.Remove = function (id) {
             console.log(this.ZoneList);
             return true;
         }
-    };
+    }
+    return false;
 }
 Zones.prototype.removeFromGUI = function (Zone) {
     $('#' + Zone.ID, this.Element).remove();
