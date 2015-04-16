@@ -119,6 +119,19 @@ namespace Roadplus.Server.Map
             }
         }
 
+        public School GetSchoolByID(int id)
+        {
+            foreach (School s in Schools)
+            {
+                if (s.ID == id)
+                {
+                    return s;
+                }
+            }
+
+            return null;
+        }
+
         public void SetSign(int speed)
         {
             Message message = new Message(

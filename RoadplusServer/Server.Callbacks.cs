@@ -142,6 +142,53 @@ namespace Roadplus.Server
 
                             break;
                         case "school":
+                            id = Convert.ToInt32(message.Payload[1]);
+                            int sid = Convert.ToInt32(message.Payload[2]);
+                            int hStart = Convert.ToInt32(message.Payload[3].Split('-')[0]);
+                            int mStart = Convert.ToInt32(message.Payload[3].Split('-')[1]);
+                            int hEnd = Convert.ToInt32(message.Payload[4].Split('-')[0]);
+                            int mEnd = Convert.ToInt32(message.Payload[4].Split('-')[1]);
+
+                            Zone target = GetZoneByID(id);
+                            if (target == null)
+                            {
+                                TrySendFailure(
+                                    message.MessageSource.IP,
+                                    "Zone with id " + id.ToString() + " not found");
+                                return;
+                            }
+
+                            if (target.GetSchoolByID(sid) != null)
+                            {
+                                TrySendFailure(
+                                    message.MessageSource.IP,
+                                    String.Format(
+                                        "School with id {0} in zone {1} already exists",
+                                        sid.ToString(),
+                                        id.ToString()));
+                                return;
+                            }
+
+                            DateTime sTime = new DateTime(0, 0, 0, hStart, mStart, 0);
+                            DateTime eTime = new DateTime(0, 0, 0, hEnd, mEnd, 0);
+                            School school = new School(
+                                new TimeRange(sTime, eTime),
+                                sid);
+                            target.Schools.Add(school);
+
+                            logStream.WriteLine(
+                                String.Format(
+                                "Session at {0} added school with id {1} to zone {2}",
+                                message.MessageSource.IP.ToString(),
+                                sid.ToString(),
+                                id.ToString()));
+                            success = new Message(
+                                CommandType.Acknoledge,
+                                new string[] { sid.ToString() },
+                                "school");
+                            TrySendMessage(
+                                message.MessageSource.IP,
+                                success);
 
                             break;
                         case "roadconstruction":
