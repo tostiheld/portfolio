@@ -63,15 +63,16 @@ namespace Roadplus.Server.Communication
                     CommandType command;
                     if (Settings.Messages.TryGetValue(cmdstr, out command))
                     {
-                        string[] payload = null;
-                        if (parts.Length > 1)
+                        List<string> payload = new List<string>();
+                        foreach (string s in parts)
                         {
-                            for (int i = 1; i < parts.Length - 1; i++)
+                            if (s != cmdstr &&
+                                s != "")
                             {
-                                payload[i] = parts[1];
+                                payload.Add(s);
                             }
                         }
-                        output = new Message(command, payload);
+                        output = new Message(command, payload.ToArray());
                         return true;
                     }
                 }

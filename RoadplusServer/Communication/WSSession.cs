@@ -60,6 +60,8 @@ namespace Roadplus.Server.Communication
                     string message = encoding.GetString(bytes);
                     buffer += message;
 
+                    System.Diagnostics.Debug.Write(buffer);
+
                     Message received = Utilities.ProcessMessages(ref buffer);
                     if (received != null &&
                         MessageReceived != null)
