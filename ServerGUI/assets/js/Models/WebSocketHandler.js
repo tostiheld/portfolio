@@ -48,7 +48,12 @@ WebSocketHandler.prototype.onOpen = function () {
 WebSocketHandler.prototype.onMessage = function (e) {
     var message = e.data;
     this.con.appendFromServer(message);
-
+    try {
+        var json = JSON.parse(this.responseText);
+    } catch (e) {
+        console.log("this is no json");
+    }
+    console.log("message type:" + json.type);
 };
 
 /**
