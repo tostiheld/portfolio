@@ -26,17 +26,16 @@ $(document).ready(function () {
 
 
     Handler.ZoneList = new Zones($("#zoneTable"));
-    Handler.ZoneList.Add(1, "test");
-    Handler.ZoneList.Add(2, "test2");
+
 
     //Create elements
-    Schools = new Schools($("#schoolTable"));
-    Schools.Add("Stijn", "Test", "Test");
-    Schools.Add("Stijn2", "Test2", "Test2");
-
-    RoadConstructions = new RoadConstructions($("#roadConstructionTable"));
-    RoadConstructions.Add("Stijn", "Test", "Test");
-    RoadConstructions.Add("Stijn2", "Test2", "Test2");
+//    Schools = new Schools($("#schoolTable"));
+//    Schools.Add("Stijn", "Test", "Test");
+//    Schools.Add("Stijn2", "Test2", "Test2");
+//
+//    RoadConstructions = new RoadConstructions($("#roadConstructionTable"));
+//    RoadConstructions.Add("Stijn", "Test", "Test");
+//    RoadConstructions.Add("Stijn2", "Test2", "Test2");
 
 
     // assign event handler to the connect button
