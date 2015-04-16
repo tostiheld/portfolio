@@ -29,13 +29,13 @@ $(document).ready(function () {
 
 
     //Create elements
-//    Schools = new Schools($("#schoolTable"));
-//    Schools.Add("Stijn", "Test", "Test");
-//    Schools.Add("Stijn2", "Test2", "Test2");
-//
-//    RoadConstructions = new RoadConstructions($("#roadConstructionTable"));
-//    RoadConstructions.Add("Stijn", "Test", "Test");
-//    RoadConstructions.Add("Stijn2", "Test2", "Test2");
+    //    Schools = new Schools($("#schoolTable"));
+    //    Schools.Add("Stijn", "Test", "Test");
+    //    Schools.Add("Stijn2", "Test2", "Test2");
+    //
+    //    RoadConstructions = new RoadConstructions($("#roadConstructionTable"));
+    //    RoadConstructions.Add("Stijn", "Test", "Test");
+    //    RoadConstructions.Add("Stijn2", "Test2", "Test2");
 
 
     // assign event handler to the connect button
@@ -52,6 +52,7 @@ $(document).ready(function () {
 
     // assign event handler to the disconnect button
     $("#disconnect").click(function (e) {
+        window.Handler.onDisconnect();
         window.WebSocketC.disconnect();
         window.WebSocketC == null;
         e.preventDefault();
