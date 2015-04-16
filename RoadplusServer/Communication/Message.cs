@@ -15,6 +15,8 @@ namespace Roadplus.Server.Communication
         public MessageTypes MessageType { get; private set; }
         [DataMember(Name="metadata")]
         public string[] MetaData { get; private set; }
+        [DataMember(Name="datatype")]
+        public string DataType { get; set; }
         public Source MessageSource { get; private set; }
 
         public Message(Source source, MessageTypes type)

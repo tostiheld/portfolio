@@ -119,7 +119,8 @@ namespace Roadplus.Server
                         Message tosend = new Message(
                             source,
                             MessageTypes.Acknoledge,
-                            "zone:" + id.ToString());
+                            id.ToString() + Message.MessageSplit);
+                        tosend.DataType = "zone";
                         session.Send(tosend);
                     }
                     else
@@ -169,6 +170,7 @@ namespace Roadplus.Server
                                 source,
                                 MessageTypes.Acknoledge,
                                 msg);
+                            tosend.DataType = "schools";
                             session.Send(tosend);
                         }
                     }
@@ -194,8 +196,8 @@ namespace Roadplus.Server
                     Message tosend = new Message(
                         source,
                         MessageTypes.Acknoledge,
-                        "ports:" + reply);
-
+                        reply);
+                    tosend.DataType = "ports";
                     session.Send(tosend);
                 }
             }
@@ -237,7 +239,8 @@ namespace Roadplus.Server
                             Message tosend = new Message(
                                 source,
                                 MessageTypes.Acknoledge,
-                                "roadconnected:" + roadcom.PortName);
+                                roadcom.PortName);
+                            tosend.DataType = "roadconnected";
                             session.Send(tosend);
                         }
                     }
@@ -303,8 +306,8 @@ namespace Roadplus.Server
 
                     Message toSend = new Message(
                         source,
-                        MessageTypes.Acknoledge,
-                        "sign:");
+                        MessageTypes.Acknoledge);
+                    toSend.DataType = "sign";
                     session.Send(toSend);
                 }
             }
