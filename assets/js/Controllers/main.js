@@ -54,6 +54,7 @@ $(document).ready(function () {
         var message = $("#prompt").val();
         window.WebSocketC.send(message);
         $("#prompt").val('');
+        $(".latestCommands").prepend("<button type='button' class='btn btn-default'>" + message + "</button>");
         e.preventDefault();
     });
 
