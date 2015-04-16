@@ -115,6 +115,7 @@ WebSocketHandler.prototype.removeZone = function (id) {
     } else {
         console.log("could not be deleted");
     }
+    //TODO: delete all schools and roadConstructions linked to this Zone
 }
 
 WebSocketHandler.prototype.newSchool = function (school, zoneID) {
@@ -126,7 +127,7 @@ WebSocketHandler.prototype.newSchool = function (school, zoneID) {
             var succeed = true;
             var dateStart = school.DateStart.replace(':', '-');
             var dateEnd = school.DateEnd.replace(':', '-');
-            this.send(">Create:school:" + school.ID + ":" + zoneID + ":" + school.Name + ":" + dateStart + ":" + dateEnd + ":;");
+            this.send(">Create:school:" + zoneID + ":" + school.ID + ":" + school.Name + ":" + dateStart + ":" + dateEnd + ":;");
         }
     }
     if (succeed) {
@@ -159,7 +160,7 @@ WebSocketHandler.prototype.newRoadConstruction = function (roadConstruction, zon
             var roadConstructionTable = this.ZoneList.ZoneList[skey].RoadConstructionList.Element;
             this.updateGUI(this.ZoneList.ZoneList[skey]);
             var succeed = true;
-            this.send(">Create:roadconstruction:" + roadConstruction.ID + ":" + roadConstruction.Name + ":" + roadConstruction.DateStart + ":" + roadConstruction.DateEnd + ":;");
+            this.send(">Create:roadconstruction:" + zoneID + ":" + roadConstruction.ID + ":" + roadConstruction.Name + ":" + roadConstruction.DateStart + ":" + roadConstruction.DateEnd + ":;");
         }
     }
     if (succeed) {

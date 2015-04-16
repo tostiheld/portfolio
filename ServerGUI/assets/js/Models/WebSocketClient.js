@@ -33,7 +33,6 @@ function WebSocketClient(serverURI, handler) {
 WebSocketClient.prototype.send = function (message) {
     if (this.ws.readyState == this.STATE_CONNECTED) {
         this.handler.send(message);
-        this.ws.send(message);
     } else {
         this.handler.onError("Not Connected");
     }
