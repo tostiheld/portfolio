@@ -10,10 +10,8 @@ function RoadConstructions(table) {
     this.Element = table;
 }
 
-RoadConstructions.prototype.Add = function (name, dateStart, dateEnd) {
-    var newRoadConstruction = new RoadConstruction(name, dateStart, dateEnd, this.RoadConstructionList.length);
+RoadConstructions.prototype.Add = function (newRoadConstruction) {
     this.RoadConstructionList.push(newRoadConstruction);
-    console.log(this.RoadConstructionList);
     this.addToGUI(newRoadConstruction);
 }
 RoadConstructions.prototype.addToGUI = function (newRoadConstruction) {
@@ -25,9 +23,10 @@ RoadConstructions.prototype.Remove = function (id) {
             this.removeFromGUI(this.RoadConstructionList[key]);
             this.RoadConstructionList.splice(key, 1);
             console.log(this.RoadConstructionList);
-            break;
+            return true;
         }
-    };
+    }
+    return false;
 }
 RoadConstructions.prototype.removeFromGUI = function (roadConstruction) {
     $('#' + roadConstruction.ID, this.Element).remove();
