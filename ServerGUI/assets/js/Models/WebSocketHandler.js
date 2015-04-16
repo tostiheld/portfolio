@@ -34,9 +34,11 @@ WebSocketHandler.prototype.onOpen = function () {
     $("#disconnect").show();
     $("#send").removeClass("disabled");
     this.send(">IDEN:UI:;");
+    this.ZoneList = new Zones($("#zoneTable"));
     this.newZone(new Zone(1, "test", 5, 8));
     this.newZone(new Zone(2, "test2", 1, 10));
-    this.getData();
+    this.newSchool(new School("Fontys", "dateStart", "dateEnd", "12"), 1);
+    //this.getData();
 };
 /**
  *  when a message is recieved from the server,
@@ -92,16 +94,22 @@ WebSocketHandler.prototype.removeZone = function (id) {
 }
 
 WebSocketHandler.prototype.newSchool = function (school, zoneID) {
-    for (var skey in this.ZoneList) {
-        if (this.ZoneList[skey].ID == zoneID) {
-            this.ZoneList[skey].Add(school);
+
+    for (var skey in this.ZoneList.ZoneList) {
+        if (this.ZoneList.ZoneList[skey].ID == zoneID) {
+            this.ZoneList.ZoneList[skey].SchoolList.Add(school);
+            var schoolsTable = this.ZoneList.ZoneList[skey].SchoolList.Element;
         }
     }
+    var wsh = this;
+    $("tr .remove", schoolsTable).on('click', function () {
+        wsh.removeSchool($(this).parents("tr").attr("id"));
+    });
 }
 
 WebSocketHandler.prototype.removeSchool = function (schoolId) {
-    for (var zkey in this.ZoneList) {
-        if (this.ZoneList[zkey].Remove(schoolId)) {
+    for (var zkey in this.ZoneList.ZoneList) {
+        if (this.ZoneList.ZoneList[zkey].SchoolList.Remove(schoolId)) {
             this.send(">RSCH:" + id + ":;");
             console.log("remove school: " + id);
         } else {
