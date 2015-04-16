@@ -26,7 +26,8 @@ $(document).ready(function () {
 
 
     Handler.ZoneList = new Zones($("#zoneTable"));
-    Handler.ZoneList.Add(1, "test")
+    Handler.ZoneList.Add(1, "test");
+    Handler.ZoneList.Add(2, "test2");
 
     //Create elements
     Schools = new Schools($("#schoolTable"));

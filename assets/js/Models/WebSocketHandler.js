@@ -11,6 +11,7 @@ function WebSocketHandler(console) {
     this.con = console;
     this.WebSocketC;
     this.ZoneList;
+    this.SchoolList;
 }
 
 /**
@@ -19,6 +20,7 @@ function WebSocketHandler(console) {
  */
 WebSocketHandler.prototype.send = function (message) {
     this.con.appendFromClient(message);
+    this.WebSocketC.ws.send(message);
 }
 
 /**
@@ -32,9 +34,8 @@ WebSocketHandler.prototype.onOpen = function () {
     $("#connect").hide();
     $("#disconnect").show();
     $("#send").removeClass("disabled");
-    this.WebSocketC.ws.send(">IDEN:UI:;");
     this.send(">IDEN:UI:;");
-    this.getData();
+    setTimeout(this.getData(), 2000);
 };
 /**
  *  when a message is recieved from the server,
@@ -43,6 +44,7 @@ WebSocketHandler.prototype.onOpen = function () {
 WebSocketHandler.prototype.onMessage = function (e) {
     var message = e.data;
     this.con.appendFromServer(message);
+
 };
 
 /**
@@ -68,7 +70,11 @@ WebSocketHandler.prototype.onError = function (e) {
 };
 
 WebSocketHandler.prototype.getData = function () {
-    this.WebSocketC.ws.send(">GETS:1:;");
-    this.send(">GETS:1:;");
 
-}
+    //Ask for all schools
+    for (var key in this.ZoneList.ZoneList) {
+        console.log('school');
+        this.send(">CZON:" + this.ZoneList.ZoneList[key].ID + ":5:5:;")
+        this.send(">GETS:" + this.ZoneList.ZoneList[key].ID + ":;"); //Get Schools 
+    };
+};
