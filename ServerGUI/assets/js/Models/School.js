@@ -10,10 +10,8 @@ function Schools(table) {
     this.Element = table;
 }
 
-Schools.prototype.Add = function (name, dateStart, dateEnd) {
-    var newSchool = new School(name, dateStart, dateEnd, this.SchoolList.length);
+Schools.prototype.Add = function (newSchool) {
     this.SchoolList.push(newSchool);
-    console.log(this.SchoolList);
     this.addToGUI(newSchool);
 }
 Schools.prototype.addToGUI = function (newSchool) {
@@ -25,9 +23,10 @@ Schools.prototype.Remove = function (id) {
             this.removeFromGUI(this.SchoolList[key]);
             this.SchoolList.splice(key, 1);
             console.log(this.SchoolList);
-            break;
+            return true;
         }
-    };
+    }
+    return false;
 }
 Schools.prototype.removeFromGUI = function (school) {
     $('#' + school.ID, this.Element).remove();

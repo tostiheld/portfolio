@@ -22,6 +22,7 @@ function WebSocketClient(serverURI, handler) {
     };
     this.ws.onerror = function (e) {
         handler.onError(e);
+        console.log(e);
 
     };
 }
