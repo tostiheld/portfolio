@@ -29,9 +29,9 @@ $(document).ready(function () {
 
 
     //Create elements
-    //    Schools = new Schools($("#schoolTable"));
-    //    Schools.Add("Stijn", "Test", "Test");
-    //    Schools.Add("Stijn2", "Test2", "Test2");
+    //Schools = new Schools($("#schoolTable"));
+    //Schools.Add("Stijn", "Test", "Test");
+    //Schools.Add("Stijn2", "Test2", "Test2");
     //
     //    RoadConstructions = new RoadConstructions($("#roadConstructionTable"));
     //    RoadConstructions.Add("Stijn", "Test", "Test");
@@ -66,9 +66,5 @@ $(document).ready(function () {
         e.preventDefault();
     });
 
-    //Delete School
-    $("tr", Schools.Element).on('click', '.remove', function () {
-        window.Schools.Remove($(this).parents("tr").attr("id"));
-    });
 
 });
