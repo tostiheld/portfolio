@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WebSocket Tester</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/websockettester.css" />
+    <link rel="stylesheet" href="assets/css/dashboard.css" />
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="assets/js/settings.js"></script>
+    <script src="assets/js/Models/Console.js"></script>
+    <script src="assets/js/Models/WebSocketHandler.js"></script>
+    <script src="assets/js/Models/WebSocketClient.js"></script>
+    <script src="assets/js/Models/ViewHandler.js"></script>
+    <script src="assets/js/Models/School.js"></script>
+    <script src="assets/js/Controllers/main.js"></script>
+</head>
+
+<body>
+
+    <!--------------- NAVIGATION -------------!-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Road+</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" onclick="window.ViewHandler.Show('dashboard');">Dashboard</a>
+                    </li>
+                    <li><a href="#" onclick="window.ViewHandler.Show('schools');">Schools</a>
+                    </li>
+                    <li><a href="#" onclick="window.ViewHandler.Show('roadConstructions');">RoadConstructions</a>
+                    </li>
+                    <li><a href="#" onclick="window.ViewHandler.Show('simulation');">Simulation</a>
+                    </li>
+                    <li><a href="#" onclick="window.ViewHandler.Show('debug');">Debug</a>
+                    </li>
+                    <li><a><span id="connect">Connect</span><span id="disconnect" style="display:none;">Disonnect</span> <span id="connected"><i class="icon-check-empty"></i></span></a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <!--------------- !NAVIGATION -------------!-->
+
+
+
+    <!--------------- Debug Window -------------!-->
+    <div id="debug" class="view">
+
+        <h1>Debug</h1>
+
+        <div id="description">Here you can send manual messages to server and view socket log</div>
+
+        <div class="row">
+            <div id="input" class="span5">
+                <textarea class="text_io" type="text" id="prompt" name="prompt" placeholder="type your message to the WebSocket server here"></textarea>
+                <br>
+                <button class="btn disabled" id="send">Send</button>
+            </div>
+            <br>
+            <br>
+            <div id="output" class="span5">
+                <div class="text_io" id="console"></div>
+            </div>
+
+        </div>
+        <!-- .row -->
+    </div>
+    <!-- #content -->
+
+    <div id="schools" class="view">
+        <h1>Schools</h1>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">All Schools</div>
+
+            <!-- Table -->
+            <table class="table" id="schoolTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Time Open</th>
+                        <th>Time Close</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+    <div id="roadConstruction" class="view">
+        <h1>Add Road Constructions</h1>
+
+    </div>
+
+</body>
+
+</html>
