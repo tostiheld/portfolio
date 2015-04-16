@@ -29,6 +29,7 @@ $(document).ready(function () {
     Handler.ZoneList = new Zones($("#zoneTable"));
 
 
+
     // assign event handler to the connect button
     $("#connect").click(function (e) {
         var server = Settings.URI;
@@ -54,9 +55,82 @@ $(document).ready(function () {
         var message = $("#prompt").val();
         window.WebSocketC.send(message);
         $("#prompt").val('');
-        $(".latestCommands").prepend("<button type='button' class='btn btn-default'>" + message + "</button>");
+        addToLatestCommands(message);
+        $('#input .text_io').val('');
+        window.commandIndex = getLocalCommands().length + 1;
         e.preventDefault();
     });
+
+    $('.text_io').bind('keyup', function (e) {
+
+
+        if (e.which == 13) {
+            //enter
+            $("#send").trigger("click");
+        } else if (e.which == 38) {
+            //omhoog
+            LatestCommands = getLocalCommands();
+            console.log(LatestCommands);
+            if (typeof window.commandIndex == "undefined" || window.commandIndex < 0) {
+                window.commandIndex = LatestCommands.length;
+            } else {
+                window.commandIndex--;
+            }
+            if (window.commandIndex == 0 || window.commandIndex > LatestCommands.length) {
+                $(this).val("");
+                window.commandIndex--;
+
+            } else {
+                $(this).val(LatestCommands[window.commandIndex - 1]);
+            }
+            console.log(window.commandIndex);
+
+        } else if (e.which == 40) {
+            //omlaag
+            LatestCommands = getLocalCommands();
+            console.log(LatestCommands);
+            if (typeof window.commandIndex == "undefined" || window.commandIndex >= LatestCommands.length || window.commandIndex < 0) {
+                $(this).val("");
+                window.commandIndex = -1;
+
+            } else {
+                window.commandIndex++;
+                $(this).val(LatestCommands[window.commandIndex - 1]);
+            }
+            console.log(window.commandIndex);
+        }
+    });
+
+
+    function getLocalCommands() {
+        var LatestCommands;
+        if (localStorage.commands === null || localStorage.commands == "" || typeof localStorage.commands == "undefined") {
+            LatestCommands = new Array();
+            console.log("no storage set");
+        } else {
+            LatestCommands = JSON.parse(localStorage.commands);
+        }
+        return LatestCommands;
+    }
+
+    function addToLatestCommands(message) {
+        message = $.trim(message);
+        var LatestCommands = getLocalCommands();
+        for (var key in LatestCommands) {
+            if (LatestCommands[key] == message) {
+                LatestCommands.splice(key, 1);
+            }
+        }
+        LatestCommands.push(message);
+        localStorage.commands = JSON.stringify(LatestCommands);
+        //$(".latestCommands").prepend("<button type='button' class='btn btn-default'>" + message + "</button>");
+
+
+        // on latest command click
+        $(".latestCommands .btn").on("click", function () {
+            window.WebSocketC.send($(this).text());
+        });
+    }
 
 
 });
