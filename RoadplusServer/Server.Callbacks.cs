@@ -144,10 +144,11 @@ namespace Roadplus.Server
                             break;
                         case "school":
                             int sid = Convert.ToInt32(message.Payload[2]);
-                            int hStart = Convert.ToInt32(message.Payload[3].Split('-')[0]);
-                            int mStart = Convert.ToInt32(message.Payload[3].Split('-')[1]);
-                            int hEnd = Convert.ToInt32(message.Payload[4].Split('-')[0]);
-                            int mEnd = Convert.ToInt32(message.Payload[4].Split('-')[1]);
+                            string name = message.Payload[3];
+                            int hStart = Convert.ToInt32(message.Payload[4].Split('-')[0]);
+                            int mStart = Convert.ToInt32(message.Payload[4].Split('-')[1]);
+                            int hEnd = Convert.ToInt32(message.Payload[5].Split('-')[0]);
+                            int mEnd = Convert.ToInt32(message.Payload[5].Split('-')[1]);
 
                             Zone target = GetZoneByID(id);
                             if (target == null)
@@ -174,6 +175,7 @@ namespace Roadplus.Server
                             School school = new School(
                                 new TimeRange(sTime, eTime),
                                 sid);
+                            school.Name = name;
                             target.Schools.Add(school);
 
                             logStream.WriteLine(

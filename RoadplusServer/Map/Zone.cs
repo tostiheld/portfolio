@@ -12,7 +12,7 @@ namespace Roadplus.Server.Map
         public int ID { get; private set; }
         [ProtoMember(6)]
         public string Name { get; set; }
-        [ProtoMember(7)]
+        //[ProtoMember(7)]
         public List<School> Schools { get; private set; }
         //[ProtoMember(8)]
         public RoadCommunication Road 
