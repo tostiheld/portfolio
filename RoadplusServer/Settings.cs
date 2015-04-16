@@ -14,14 +14,19 @@ namespace Roadplus.Server
 
         public const int Port = 42424;
 
+        public const string HttpServiceUrl = "http://localhost:8080/";
+
         public const int BaudRate = 38400;
+
+        public static readonly string FileRoot = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+        public static readonly string HttpRoot = Path.Combine(FileRoot, "www");
 
         public const string ZoneFileName = "default.zones";
 
         public static readonly string ZoneFilePath = Path.Combine(
-            Path.GetDirectoryName(
-                Assembly.GetExecutingAssembly().Location), 
-            ZoneFileName);
+                FileRoot, 
+                ZoneFileName);
 
         public const int BufferSize = 256;
 

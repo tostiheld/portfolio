@@ -15,6 +15,7 @@ namespace Roadplus.Server
         public bool IsRunning { get; private set; }
 
         private WSService service;
+        private HttpService httpService;
         private StreamWriter logStream;
         private List<WSSession> sessions;
         private List<Zone> zones;
@@ -29,6 +30,7 @@ namespace Roadplus.Server
             AttachCallbacks();
 
             logStream = logstream;
+            httpService = new HttpService(Settings.HttpServiceUrl);
             service = new WSService(endpoint);
             service.NewSession += Service_NewSession;
         }
@@ -136,6 +138,7 @@ namespace Roadplus.Server
                 logStream.WriteLine("Starting server... ");
 
                 LoadZones();
+                httpService.Run();
                 sessions = new List<WSSession>();
                 service.Start();
                 IsRunning = true;
@@ -171,6 +174,7 @@ namespace Roadplus.Server
                     session.End();
                 }
 
+                httpService.Stop();
                 SaveZones();
                 IsRunning = false;
 
