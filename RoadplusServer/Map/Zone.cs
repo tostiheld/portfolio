@@ -14,6 +14,7 @@ namespace Roadplus.Server.Map
         public string Name { get; set; }
         //[ProtoMember(7)]
         public List<School> Schools { get; private set; }
+        public List<RoadConstruction> RoadConstructions { get; private set; }
         //[ProtoMember(8)]
         public RoadCommunication Road 
         { 
@@ -54,6 +55,8 @@ namespace Roadplus.Server.Map
 
             ID = id;
             Schools = new List<School>();
+
+            RoadConstructions = new List<RoadConstruction>();
 
             root = startingPoint;
             vertices.Add(root);
@@ -118,6 +121,19 @@ namespace Roadplus.Server.Map
 
                 // further implementation down here
             }
+        }
+
+        public RoadConstruction TEMPGetRCByID(int id)
+        {
+            foreach (RoadConstruction r in RoadConstructions)
+            {
+                if (r.ID == id)
+                {
+                    return r;
+                }
+            }
+
+            return null;
         }
 
         public School GetSchoolByID(int id)
