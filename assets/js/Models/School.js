@@ -1,4 +1,4 @@
-function School(name, dateStart, dateEnd, id) {
+function School(id, name, dateStart, dateEnd) {
     this.Name = name;
     this.DateStart = dateStart;
     this.DateEnd = dateEnd;
