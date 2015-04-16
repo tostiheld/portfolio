@@ -53,10 +53,13 @@ WebSocketHandler.prototype.onMessage = function (e) {
     } catch (e) {
         console.log("this is no json");
     }
+    //if temperature
     if (json['datatype'] == "temperature") {
         var minT = -30;
         var maxT = 50;
-
+        var tempT = json['metadata'][0] + -(minT);
+        var percentT = tempT / (maxT + -(minT)) * 100;
+        $(".temp").css("width", percenT + "%");
     }
     console.log("message type:" + json['type'] + ", Message: " + json['metadata']);
 };
