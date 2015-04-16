@@ -13,7 +13,7 @@ namespace Roadplus.Server
 {
 	public partial class Server
 	{
-        private Dictionary<MessageTypes, Action<Message>> MessageCallbacks;
+        private Dictionary<CommandType, Action<Message>> MessageCallbacks;
 
         private WSSession FindSessionByIP(IPAddress ip)
         {
@@ -30,16 +30,16 @@ namespace Roadplus.Server
 
         private void AttachCallbacks()
         {
-            MessageCallbacks = new Dictionary<MessageTypes, Action<Message>>()
+            MessageCallbacks = new Dictionary<CommandType, Action<Message>>()
             {
-                { MessageTypes.Identification, IdentificationCallback },
-                { MessageTypes.GetSchools, GetSchoolsCallback },
-                { MessageTypes.CreateZone, CreateZoneCallback },
-                { MessageTypes.Disconnect, DisconnectCallback },
-                { MessageTypes.GetRoads, GetRoadsCallback },
-                { MessageTypes.ConnectRoadToZone, ConnectRoadZoneCallback },
-                { MessageTypes.SetRoadSign, SetSignCallback },
-                { MessageTypes.Temperature, GetTempCallback }
+                { CommandType.Identification, IdentificationCallback },
+                { CommandType.GetSchools, GetSchoolsCallback },
+                { CommandType.CreateZone, CreateZoneCallback },
+                { CommandType.Disconnect, DisconnectCallback },
+                { CommandType.GetRoads, GetRoadsCallback },
+                { CommandType.ConnectRoadToZone, ConnectRoadZoneCallback },
+                { CommandType.SetRoadSign, SetSignCallback },
+                { CommandType.Temperature, GetTempCallback }
             };
         }
 
@@ -51,7 +51,7 @@ namespace Roadplus.Server
                     message.MessageSource.IP);
                 if (session != null)
                 {
-                    switch (message.MetaData[0].ToLower())
+                    switch (message.Payload[0].ToLower())
                     {
                         case "ui":
                             session.SourceType = SourceTypes.UI;
@@ -95,15 +95,14 @@ namespace Roadplus.Server
                     int id;
                     int x;
                     int y;
-                    if (!Int32.TryParse(message.MetaData[0], out id) ||
-                        !Int32.TryParse(message.MetaData[1], out x) ||
-                        !Int32.TryParse(message.MetaData[2], out y))
+                    if (!Int32.TryParse(message.Payload[0], out id) ||
+                        !Int32.TryParse(message.Payload[1], out x) ||
+                        !Int32.TryParse(message.Payload[2], out y))
                     {
                         logStream.WriteLine("Illegal CZONE message from " + session.IP);
                         Message tosend = new Message(
-                            source,
-                            MessageTypes.Failure,
-                            "Illegal data");
+                            CommandType.Failure,
+                            new string[] { "Illegal data" });
                         session.Send(tosend);
                         return;
                     }
@@ -117,18 +116,16 @@ namespace Roadplus.Server
                         logStream.WriteLine(
                             "Session at " + session.IP.ToString() + " created new zone with id " + id.ToString());
                         Message tosend = new Message(
-                            source,
-                            MessageTypes.Acknoledge,
-                            id.ToString() + Message.MessageSplit);
-                        tosend.DataType = "zone";
+                            CommandType.Acknoledge,
+                            new string[] { id.ToString() },
+                            "zone");
                         session.Send(tosend);
                     }
                     else
                     {
                         Message tosend = new Message(
-                            source,
-                            MessageTypes.Failure, 
-                            "Zone with id " + id.ToString() + " already exists");
+                            CommandType.Failure, 
+                            new string[] { "Zone with id " + id.ToString() + " already exists" });
                         session.Send(tosend);
                     }
                 }
@@ -144,19 +141,15 @@ namespace Roadplus.Server
                 if (session != null)
                 {
                     int id;
-                    if (Int32.TryParse(message.MetaData[0], out id))
+                    if (Int32.TryParse(message.Payload[0], out id))
                     {
                         Zone zone = GetZoneByID(id);
                         if (zone != null)
                         {
-                            DataContractJsonSerializer json = 
-                                new DataContractJsonSerializer(typeof(List<School>));
-
-                            byte[] data;
-                            using (MemoryStream ms = new MemoryStream())
+                            List<string> schools = new List<string>();
+                            foreach (School s in zone.Schools)
                             {
-                                json.WriteObject(ms, zone.Schools);
-                                data = ms.ToArray();
+                                schools.Add(s.ToString("json"));
                             }
 
                             logStream.WriteLine(
@@ -164,13 +157,10 @@ namespace Roadplus.Server
                                               id.ToString(),
                                               session.IP.ToString()));
 
-                            UTF8Encoding encoder = new UTF8Encoding();
-                            string msg = encoder.GetString(data);
                             Message tosend = new Message(
-                                source,
-                                MessageTypes.Acknoledge,
-                                msg);
-                            tosend.DataType = "schools";
+                                CommandType.Acknoledge,
+                                schools.ToArray(),
+                                "schools");
                             session.Send(tosend);
                         }
                     }
@@ -205,17 +195,10 @@ namespace Roadplus.Server
                         }
                     }
 
-                    string reply = "";
-                    foreach (string s in workingports)
-                    {
-                        reply += s + ":";
-                    }
-
                     Message tosend = new Message(
-                        source,
-                        MessageTypes.Acknoledge,
-                        reply);
-                    tosend.DataType = "ports";
+                        CommandType.Acknoledge,
+                        workingports.ToArray(),
+                        "ports");
                     session.Send(tosend);
                 }
             }
@@ -231,14 +214,13 @@ namespace Roadplus.Server
                 {
                     try
                     {
-                        RoadCommunication roadcom = new RoadCommunication(message.MetaData[1]);
+                        RoadCommunication roadcom = new RoadCommunication(message.Payload[1]);
                         int id;
-                        if (!Int32.TryParse(message.MetaData[0], out id))
+                        if (!Int32.TryParse(message.Payload[0], out id))
                         {
                             Message tosend = new Message(
-                                source,
-                                MessageTypes.Failure,
-                                "Illegal data");
+                                CommandType.Failure,
+                                new string[] { "Illegal data" });
                             session.Send(tosend);
                             return;
                         }
@@ -255,10 +237,9 @@ namespace Roadplus.Server
                                 zone.ID.ToString()));
 
                             Message tosend = new Message(
-                                source,
-                                MessageTypes.Acknoledge,
-                                roadcom.PortName);
-                            tosend.DataType = "roadconnected";
+                                CommandType.Acknoledge,
+                                new string[] { roadcom.PortName },
+                                "roadconnected");
                             session.Send(tosend);
                         }
                     }
@@ -269,9 +250,8 @@ namespace Roadplus.Server
                             ex is UnauthorizedAccessException)
                         {
                             Message tosend = new Message(
-                                source,
-                                MessageTypes.Failure,
-                                "Port is invalid, in use or does not exist");
+                                CommandType.Failure,
+                                new string[] { "Port is invalid, in use or does not exist" });
                             session.Send(tosend);
                         }
 
@@ -297,13 +277,12 @@ namespace Roadplus.Server
                 {
                     int id;
                     int speed;
-                    if (!Int32.TryParse(message.MetaData[0], out speed) ||
-                        !Int32.TryParse(message.MetaData[1], out id))
+                    if (!Int32.TryParse(message.Payload[0], out speed) ||
+                        !Int32.TryParse(message.Payload[1], out id))
                     {
                         Message tosend = new Message(
-                            source,
-                            MessageTypes.Failure,
-                            "Illegal data");
+                            CommandType.Failure,
+                            new string[] { "Illegal data" });
                         session.Send(tosend);
                         return;
                     }
@@ -313,9 +292,8 @@ namespace Roadplus.Server
                     if (zone == null)
                     {
                         Message tosend = new Message(
-                            source,
-                            MessageTypes.Failure,
-                            "Zone not found");
+                            CommandType.Failure,
+                            new string[] { "Zone not found" });
                         session.Send(tosend);
                         return;
                     }
@@ -323,9 +301,8 @@ namespace Roadplus.Server
                     zone.SetSign(speed);
 
                     Message toSend = new Message(
-                        source,
-                        MessageTypes.Acknoledge);
-                    toSend.DataType = "sign";
+                        CommandType.Acknoledge,
+                        "sign");
                     session.Send(toSend);
                 }
             }
@@ -340,12 +317,11 @@ namespace Roadplus.Server
                 if (session != null)
                 {
                     int id;
-                    if (!Int32.TryParse(message.MetaData[0], out id))
+                    if (!Int32.TryParse(message.Payload[0], out id))
                     {
                         Message tosend = new Message(
-                            source,
-                            MessageTypes.Failure,
-                            "Illegal data");
+                            CommandType.Failure,
+                            new string[] { "Illegal data" });
                         session.Send(tosend);
                         return;
                     }
@@ -355,16 +331,15 @@ namespace Roadplus.Server
                     if (zone == null)
                     {
                         Message tosend = new Message(
-                            source,
-                            MessageTypes.Failure,
-                            "Zone not found");
+                            CommandType.Failure,
+                            new string[] { "Zone not found" });
                         session.Send(tosend);
                         return;
                     }
 
                     zone.GetTemp();
 
-                    session.Send(new Message(source, MessageTypes.Acknoledge));
+                    session.Send(new Message(CommandType.Acknoledge, "temp"));
                 }
             }
         }

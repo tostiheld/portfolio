@@ -27,50 +27,50 @@ namespace Roadplus.Server
 
         public const int VertexRadius = 5;
 
-        public readonly static Dictionary<string, MessageTypes> Messages = 
-        new Dictionary<string, MessageTypes>()
+        public readonly static Dictionary<string, CommandType> Messages = 
+        new Dictionary<string, CommandType>()
         {
             // format: >ACKN:;
             // summary: acknoledge (not used yet)
-            { "ACKN", MessageTypes.Acknoledge },
+            { "ACKN", CommandType.Acknoledge },
             // format: >SOFF:;
             // summary: inform ui clients server goes offline
-            { "SOFF", MessageTypes.ServerOffline },
+            { "SOFF", CommandType.ServerOffline },
             // format: >IDEN:<type>:;
             // summary: websocket client identifies itself for server
             //          <type> is UI or CAR
-            { "IDEN", MessageTypes.Identification },
+            { "IDEN", CommandType.Identification },
             // format: >GETS:<id>:;
             // summary: gets schools from zone with id <id>
-            { "GETS", MessageTypes.GetSchools },
+            { "GETS", CommandType.GetSchools },
             // format: >CZON:<id>:<x>:<y>:;
             // summary: creates zone with id <id> at <x>, <y>
-            { "CZON", MessageTypes.CreateZone },
+            { "CZON", CommandType.CreateZone },
             // format: >RZON:<id>:;
             // summary: removes zone with id <id>
-            { "RZON", MessageTypes.RemoveZone },
+            { "RZON", CommandType.RemoveZone },
             // format: >FAIL:<reason>:;
             // summary: sends info about an error
-            { "FAIL", MessageTypes.Failure },
+            { "FAIL", CommandType.Failure },
             // format: >DISC:;
             // summary: graceful disconnect from any websocket client
-            { "DISC", MessageTypes.Disconnect },
+            { "DISC", CommandType.Disconnect },
             // format: >GRDS:;
             // summary: get all available serial devices
-            { "GRDS", MessageTypes.GetRoads },
+            { "GRDS", CommandType.GetRoads },
             // format: >CONR:<id>:<port>:;
             // summary: connects the road device on port <port> 
             //          with the zone with id <id>
-            { "CONR", MessageTypes.ConnectRoadToZone },
+            { "CONR", CommandType.ConnectRoadToZone },
             // format: >SIGN:<speed>:;
             // summary: sets road sign at the specified speed
             // or if from websocket:
             // format: >SIGN:<speed>:id:;
             // summary sets road sign in zone
-            { "SIGN", MessageTypes.SetRoadSign },
+            { "SIGN", CommandType.SetRoadSign },
             // format: >TEMP:;
             // summary: gets temp from road
-            { "TEMP", MessageTypes.Temperature }
+            { "TEMP", CommandType.Temperature }
         };
     }
 }

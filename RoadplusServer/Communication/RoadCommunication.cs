@@ -51,11 +51,14 @@ namespace Roadplus.Server.Communication
                         ASCIIEncoding encoder = new ASCIIEncoding();
                         string message = encoder.GetString(bytes);
                         buffer += message;
-                        Source source = new Source(SourceTypes.Road, Port.ToString());
-                        Message received = Utilities.ProcessMessages(source, ref buffer);
+                        Message received = Utilities.ProcessMessages(ref buffer);
                         if (received != null &&
                             MessageReceived != null)
                         {
+                            received.MessageSource = new Source(
+                                SourceTypes.Road,
+                                Port.ToString());
+
                             MessageReceivedEventArgs e = new MessageReceivedEventArgs(
                                 received);
                             MessageReceived(this, e);
@@ -73,8 +76,7 @@ namespace Roadplus.Server.Communication
         {
             if (isReceiving)
             {
-                System.Diagnostics.Debug.Write(message.ToString());
-                Port.Write(message.ToString());
+                Port.Write(message.ToString("ascii"));
             }
         }
 

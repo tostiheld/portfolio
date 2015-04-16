@@ -12,7 +12,7 @@ namespace Roadplus.Server
         /// <returns>
         /// A message if one is found, null if nothing is found
         /// </returns>
-        public static Message ProcessMessages(Source source, ref string buffer)
+        public static Message ProcessMessages(ref string buffer)
         {
             int start = buffer.IndexOf(Message.MessageStart);
             if (start != -1)
@@ -24,10 +24,11 @@ namespace Roadplus.Server
                         start, (end - start) + 1);
                     buffer = buffer.Substring(end + 1);
 
-                    string cmd = msg.Substring(1, 4);
-                    string data = msg.Substring(6, msg.Length - 7);
-
-                    return Message.FromString(source, cmd, data);
+                    Message returnval;
+                    if (Message.TryParse(msg, out returnval))
+                    {
+                        return returnval;
+                    }
                 }
             }
 

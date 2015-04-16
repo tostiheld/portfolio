@@ -1,5 +1,8 @@
 using System;
+using System.Text;
+using System.IO;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 
 namespace Roadplus.Server.Map
 {
@@ -24,6 +27,29 @@ namespace Roadplus.Server.Map
 
 			Schedule = schedule;
             ID = id;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("[School: ID={0}, Schedule={1}, Name={2}, Location={3}]", ID, Schedule, Name, Location);
+        } 
+
+        public string ToString(string format)
+        {
+            if (format == "json")
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    DataContractJsonSerializer json = 
+                        new DataContractJsonSerializer(typeof(School));
+                    json.WriteObject(ms, this);
+                    using (StreamReader sr = new StreamReader(ms, Encoding.UTF8))
+                    {
+                        return sr.ReadToEnd();
+                    }
+                }
+            }
+            return ToString();
         }
     }
 }

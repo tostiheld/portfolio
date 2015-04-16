@@ -12,11 +12,8 @@ namespace Roadplus.Server
 {
     public partial class Server
     {
-        private readonly Source source = new Source(SourceTypes.Server, Settings.IP);
-
         public bool IsRunning { get; private set; }
 
-        private IPEndPoint endPoint;
         private WSService service;
         private StreamWriter logStream;
         private List<WSSession> sessions;
@@ -66,7 +63,7 @@ namespace Roadplus.Server
         {
             Action<Message> callback;
             if (MessageCallbacks.TryGetValue(
-                e.Received.MessageType,
+                e.Received.Command,
                 out callback))
             {
                 callback(e.Received);
@@ -153,12 +150,19 @@ namespace Roadplus.Server
             {
                 logStream.WriteLine("Stopping server... ");
 
+                foreach (Zone z in zones)
+                {
+                    if (z.Road != null)
+                    {
+                        z.Road.Stop();
+                    }
+                }
+
                 // first ensure nobody is coming in anymore...
                 service.Stop();
 
                 // ...then kick everyone out.
-                Source source = new Source(SourceTypes.Server, service.IP);
-                Message msg = new Message(source, MessageTypes.ServerOffline);
+                Message msg = new Message(CommandType.ServerOffline);
                 // clone list because we're going to modify the other one
                 List<WSSession> temp = new List<WSSession>(sessions);
                 foreach (WSSession session in temp)

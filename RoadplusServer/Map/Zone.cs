@@ -122,17 +122,15 @@ namespace Roadplus.Server.Map
         public void SetSign(int speed)
         {
             Message message = new Message(
-                new Source(SourceTypes.Server, Road.PortName),
-                MessageTypes.SetRoadSign,
-                speed.ToString());
+                CommandType.SetRoadSign,
+                new string[] { speed.ToString() });
             Road.Send(message);
         }
 
         public void GetTemp()
         {
             Message message = new Message(
-                new Source(SourceTypes.Server, Road.PortName),
-                MessageTypes.Temperature);
+                CommandType.Temperature);
             Road.Send(message);
         }
     }

@@ -2,7 +2,7 @@ using System;
 
 namespace Roadplus.Server.Communication
 {
-    public enum MessageTypes
+    public enum CommandType
     {
         Acknoledge,
         Failure,

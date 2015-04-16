@@ -60,11 +60,13 @@ namespace Roadplus.Server.Communication
                     string message = encoding.GetString(bytes);
                     buffer += message;
 
-                    Source source = new Source(SourceType, IP);
-                    Message received = Utilities.ProcessMessages(source, ref buffer);
+                    Message received = Utilities.ProcessMessages(ref buffer);
                     if (received != null &&
                         MessageReceived != null)
                     {
+                        received.MessageSource = new Source(
+                            SourceType,
+                            IP);
                         MessageReceivedEventArgs e = new MessageReceivedEventArgs(
                             received);
                         MessageReceived(this, e);
@@ -82,23 +84,12 @@ namespace Roadplus.Server.Communication
         {
             if (webSocket.IsConnected)
             {
-                byte[] bytes;
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(Message));
-                    json.WriteObject(ms, message);
-                    bytes = ms.ToArray();
-                }
-
-                UTF8Encoding encoder = new UTF8Encoding();
-                string sendstring = encoder.GetString(bytes);
-
                 using (WebSocketMessageWriteStream stream = 
                        webSocket.CreateMessageWriter(WebSocketMessageType.Text))
                 {
                     using (StreamWriter sw = new StreamWriter(stream, Encoding.UTF8))
                     {
-                        sw.Write(sendstring);
+                        sw.Write(message.ToString("json"));
                     }
                 }
             }
