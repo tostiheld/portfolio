@@ -38,6 +38,14 @@ namespace Roadplus.Server
 
         private void Service_NewSession(object sender, NewSessionEventArgs e)
         {
+            foreach (WSSession s in sessions)
+            {
+                if (s.IP == e.Session.IP)
+                {
+                    sessions.Remove(s);
+                }
+            }
+
             sessions.Add(e.Session);
             e.Session.MessageReceived += Session_MessageReceived;
             e.Session.Disconnected += Session_Disconnected;

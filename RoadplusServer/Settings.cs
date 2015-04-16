@@ -46,6 +46,9 @@ namespace Roadplus.Server
             // format: >CZON:<id>:<x>:<y>:;
             // summary: creates zone with id <id> at <x>, <y>
             { "CZON", MessageTypes.CreateZone },
+            // format: >RZON:<id>:;
+            // summary: removes zone with id <id>
+            { "RZON", MessageTypes.RemoveZone },
             // format: >FAIL:<reason>:;
             // summary: sends info about an error
             { "FAIL", MessageTypes.Failure },
@@ -58,7 +61,13 @@ namespace Roadplus.Server
             // format: >CONR:<id>:<port>:;
             // summary: connects the road device on port <port> 
             //          with the zone with id <id>
-            { "CONR", MessageTypes.ConnectRoadToZone }
+            { "CONR", MessageTypes.ConnectRoadToZone },
+            // format: >SIGN:<speed>:;
+            // summary: sets road sign at the specified speed
+            // or if from websocket:
+            // format: >SIGN:<speed>:id:;
+            // summary sets road sign in zone
+            { "SIGN", MessageTypes.SetRoadSign }
         };
     }
 }

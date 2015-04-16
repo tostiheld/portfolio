@@ -18,6 +18,11 @@ namespace Roadplus.Server.Communication
             }
         }
 
+        public bool IsConnected
+        { 
+            get { return isReceiving; }
+        }
+
         private Thread receiveThread;
         private volatile bool isReceiving;
         private SerialPort Port;
@@ -61,6 +66,15 @@ namespace Roadplus.Server.Communication
                 {
                     isReceiving = false;
                 }
+            }
+        }
+
+        public void Send(Message message)
+        {
+            if (isReceiving)
+            {
+                System.Diagnostics.Debug.Write(message.ToString());
+                Port.Write(message.ToString());
             }
         }
 

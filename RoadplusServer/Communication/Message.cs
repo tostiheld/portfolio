@@ -1,15 +1,19 @@
 using System;
+using System.Runtime.Serialization;
 using System.Collections.Generic;
 
 namespace Roadplus.Server.Communication
 {
+    [DataContract]
     public class Message
     {
         public const char MessageStart = '>';
         public const char MessageSplit = ':';
         public const char MessageTerminator = ';';
 
+        [DataMember(Name="type")]
         public MessageTypes MessageType { get; private set; }
+        [DataMember(Name="metadata")]
         public string[] MetaData { get; private set; }
         public Source MessageSource { get; private set; }
 

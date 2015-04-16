@@ -8,11 +8,15 @@ namespace Roadplus.Server.Communication
         Failure,
         Disconnect,
         ServerOffline,
+
+        SetRoadSign,
+
         Identification,
         GetRoads,
         ConnectRoadToZone,
         GetSchools,
-        CreateZone
+        CreateZone,
+        RemoveZone
     }
 }
 

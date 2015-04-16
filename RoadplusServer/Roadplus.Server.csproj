@@ -35,6 +35,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="protobuf-net">
+      <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Threading.Tasks.Dataflow">
       <HintPath>..\packages\Microsoft.Tpl.Dataflow.4.5.9\lib\net45\System.Threading.Tasks.Dataflow.dll</HintPath>
     </Reference>
@@ -47,11 +52,6 @@
     <Reference Include="vtortola.WebSockets.Rfc6455">
       <HintPath>..\packages\vtortola.WebSocketListener.2.1.5.0\lib\net45\vtortola.WebSockets.Rfc6455.dll</HintPath>
     </Reference>
-    <Reference Include="protobuf-net">
-      <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -73,8 +73,6 @@
     <Compile Include="Communication\MessageReceivedEventArgs.cs" />
     <Compile Include="Communication\Message.cs" />
     <Compile Include="Communication\MessageTypes.cs" />
-    <Compile Include="Communication\WSService.cs" />
-    <Compile Include="Communication\WSSession.cs" />
     <Compile Include="Communication\RoadCommunication.cs" />
     <Compile Include="Communication\NewSessionEventArgs.cs" />
     <Compile Include="Utils\Point.cs" />
@@ -82,6 +80,8 @@
     <Compile Include="Server.Callbacks.cs" />
     <Compile Include="Communication\SourceTypes.cs" />
     <Compile Include="Utils\Utilities.cs" />
+    <Compile Include="Communication\WSService.cs" />
+    <Compile Include="Communication\WSSession.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

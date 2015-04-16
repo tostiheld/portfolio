@@ -4,6 +4,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Runtime.Serialization.Json;
 using vtortola.WebSockets;
 
 namespace Roadplus.Server.Communication
@@ -79,19 +80,25 @@ namespace Roadplus.Server.Communication
 
         public void Send(Message message)
         {
-            Send(message.ToString());
-        }
-
-        public void Send(string message)
-        {
             if (webSocket.IsConnected)
             {
+                byte[] bytes;
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(Message));
+                    json.WriteObject(ms, message);
+                    bytes = ms.ToArray();
+                }
+
+                UTF8Encoding encoder = new UTF8Encoding();
+                string sendstring = encoder.GetString(bytes);
+
                 using (WebSocketMessageWriteStream stream = 
                        webSocket.CreateMessageWriter(WebSocketMessageType.Text))
                 {
                     using (StreamWriter sw = new StreamWriter(stream, Encoding.UTF8))
                     {
-                        sw.Write(message);
+                        sw.Write(sendstring);
                     }
                 }
             }

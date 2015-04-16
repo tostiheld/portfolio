@@ -25,7 +25,7 @@ namespace Roadplus.Server
                     buffer = buffer.Substring(end + 1);
 
                     string cmd = msg.Substring(1, 4);
-                    string data = msg.Substring(6, msg.Length - 8);
+                    string data = msg.Substring(6, msg.Length - 7);
 
                     return Message.FromString(source, cmd, data);
                 }

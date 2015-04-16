@@ -37,7 +37,9 @@ namespace Roadplus.Server
                 { MessageTypes.CreateZone, CreateZoneCallback },
                 { MessageTypes.Disconnect, DisconnectCallback },
                 { MessageTypes.GetRoads, GetRoadsCallback },
-                { MessageTypes.ConnectRoadToZone, ConnectRoadZoneCallback }
+                { MessageTypes.ConnectRoadToZone, ConnectRoadZoneCallback },
+                { MessageTypes.SetRoadSign, SetSignCallback }//,
+                //{ MessageTypes.RemoveZone, RemoveZoneCallback }
             };
         }
 
@@ -65,6 +67,19 @@ namespace Roadplus.Server
                             // do nothing
                             break;
                     }
+                }
+            }
+        }
+
+        private void RemoveZoneCallback(Message message)
+        {
+            if (message.MessageSource.Type == SourceTypes.UI)
+            {
+                WSSession session = FindSessionByIP(
+                    message.MessageSource.IP);
+                if (session != null)
+                {
+
                 }
             }
         }
@@ -113,7 +128,7 @@ namespace Roadplus.Server
                             source,
                             MessageTypes.Failure, 
                             "Zone with id " + id.ToString() + " already exists");
-                        session.Send(message);
+                        session.Send(tosend);
                     }
                 }
             }
@@ -150,7 +165,11 @@ namespace Roadplus.Server
 
                             UTF8Encoding encoder = new UTF8Encoding();
                             string msg = encoder.GetString(data);
-                            session.Send(msg);
+                            Message tosend = new Message(
+                                source,
+                                MessageTypes.Acknoledge,
+                                msg);
+                            session.Send(tosend);
                         }
                     }
                 }
@@ -245,6 +264,50 @@ namespace Roadplus.Server
         {
             WSSession session = FindSessionByIP(message.MessageSource.IP);
             session.End();
+        }
+
+        private void SetSignCallback(Message message)
+        {
+            if (message.MessageSource.Type == SourceTypes.UI)
+            {
+                WSSession session = FindSessionByIP(
+                    message.MessageSource.IP);
+                if (session != null)
+                {
+                    int id;
+                    int speed;
+                    if (!Int32.TryParse(message.MetaData[0], out speed) ||
+                        !Int32.TryParse(message.MetaData[1], out id))
+                    {
+                        Message tosend = new Message(
+                            source,
+                            MessageTypes.Failure,
+                            "Illegal data");
+                        session.Send(tosend);
+                        return;
+                    }
+
+                    Zone zone = GetZoneByID(id);
+
+                    if (zone == null)
+                    {
+                        Message tosend = new Message(
+                            source,
+                            MessageTypes.Failure,
+                            "Zone not found");
+                        session.Send(tosend);
+                        return;
+                    }
+
+                    zone.SetSign(speed);
+
+                    Message toSend = new Message(
+                        source,
+                        MessageTypes.Acknoledge,
+                        "sign:");
+                    session.Send(toSend);
+                }
+            }
         }
 	}
 }

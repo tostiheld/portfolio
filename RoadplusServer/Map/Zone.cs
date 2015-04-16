@@ -14,8 +14,22 @@ namespace Roadplus.Server.Map
         public string Name { get; set; }
         [ProtoMember(7)]
         public List<School> Schools { get; private set; }
-        [ProtoMember(8)]
-        public RoadCommunication Road { get; set; }
+        //[ProtoMember(8)]
+        public RoadCommunication Road 
+        { 
+            get
+            {
+                return road;
+            }
+            set
+            {
+                road = value;
+                road.MessageReceived += Road_MessageReceived;
+                road.Start();
+            }
+        }
+
+        private RoadCommunication road;
 
         [ProtoMember(1)]
         private Vertex root;
@@ -43,6 +57,11 @@ namespace Roadplus.Server.Map
             root = startingPoint;
             vertices.Add(root);
             root.NewConnection += Vertex_NewConnection;
+        }
+
+        private void Road_MessageReceived(object sender, MessageReceivedEventArgs e)
+        {
+
         }
 
         private void Vertex_NewConnection(object sender, NewConnectionEventArgs e)
@@ -98,6 +117,15 @@ namespace Roadplus.Server.Map
 
                 // further implementation down here
             }
+        }
+
+        public void SetSign(int speed)
+        {
+            Message message = new Message(
+                new Source(SourceTypes.Server, Road.PortName),
+                MessageTypes.SetRoadSign,
+                speed.ToString());
+            Road.Send(message);
         }
     }
 }
