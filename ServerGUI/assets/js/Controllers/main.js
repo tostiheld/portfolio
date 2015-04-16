@@ -18,6 +18,7 @@ $(document).ready(function () {
 
     //Create Views and show debug
     ViewHandler = new Views();
+    ViewHandler.Add("dashboard", $("#dashboard"));
     ViewHandler.Add("debug", $("#debug"));
     ViewHandler.Add("schools", $("#schools"));
     ViewHandler.Add("roadConstructions", $("#roadConstructions"));
