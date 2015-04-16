@@ -67,7 +67,10 @@ namespace Roadplus.Server
             // or if from websocket:
             // format: >SIGN:<speed>:id:;
             // summary sets road sign in zone
-            { "SIGN", MessageTypes.SetRoadSign }
+            { "SIGN", MessageTypes.SetRoadSign },
+            // format: >TEMP:;
+            // summary: gets temp from road
+            { "TEMP", MessageTypes.Temperature }
         };
     }
 }

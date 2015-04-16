@@ -10,6 +10,7 @@ namespace Roadplus.Server.Communication
         ServerOffline,
 
         SetRoadSign,
+        Temperature,
 
         Identification,
         GetRoads,

@@ -61,7 +61,7 @@ namespace Roadplus.Server.Map
 
         private void Road_MessageReceived(object sender, MessageReceivedEventArgs e)
         {
-
+            System.Diagnostics.Debug.WriteLine(e.Received.ToString());
         }
 
         private void Vertex_NewConnection(object sender, NewConnectionEventArgs e)
@@ -125,6 +125,14 @@ namespace Roadplus.Server.Map
                 new Source(SourceTypes.Server, Road.PortName),
                 MessageTypes.SetRoadSign,
                 speed.ToString());
+            Road.Send(message);
+        }
+
+        public void GetTemp()
+        {
+            Message message = new Message(
+                new Source(SourceTypes.Server, Road.PortName),
+                MessageTypes.Temperature);
             Road.Send(message);
         }
     }

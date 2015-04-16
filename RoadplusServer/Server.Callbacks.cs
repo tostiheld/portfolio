@@ -38,8 +38,8 @@ namespace Roadplus.Server
                 { MessageTypes.Disconnect, DisconnectCallback },
                 { MessageTypes.GetRoads, GetRoadsCallback },
                 { MessageTypes.ConnectRoadToZone, ConnectRoadZoneCallback },
-                { MessageTypes.SetRoadSign, SetSignCallback }//,
-                //{ MessageTypes.RemoveZone, RemoveZoneCallback }
+                { MessageTypes.SetRoadSign, SetSignCallback },
+                { MessageTypes.Temperature, GetTempCallback }
             };
         }
 
@@ -190,12 +190,14 @@ namespace Roadplus.Server
                     List<string> workingports = new List<string>();
                     foreach (string s in ports)
                     {
-                        SerialPort p = new SerialPort(s);
                         try
                         {
-                            p.Open();
-                            p.Close();
-                            workingports.Add(s);
+                            using (SerialPort p = new SerialPort(s))
+                            {
+                                p.Open();
+                                p.Close();
+                                workingports.Add(s);
+                            }
                         }
                         catch
                         {
@@ -325,6 +327,44 @@ namespace Roadplus.Server
                         MessageTypes.Acknoledge);
                     toSend.DataType = "sign";
                     session.Send(toSend);
+                }
+            }
+        }
+
+        private void GetTempCallback(Message message)
+        {
+            if (message.MessageSource.Type == SourceTypes.UI)
+            {
+                WSSession session = FindSessionByIP(
+                    message.MessageSource.IP);
+                if (session != null)
+                {
+                    int id;
+                    if (!Int32.TryParse(message.MetaData[0], out id))
+                    {
+                        Message tosend = new Message(
+                            source,
+                            MessageTypes.Failure,
+                            "Illegal data");
+                        session.Send(tosend);
+                        return;
+                    }
+
+                    Zone zone = GetZoneByID(id);
+
+                    if (zone == null)
+                    {
+                        Message tosend = new Message(
+                            source,
+                            MessageTypes.Failure,
+                            "Zone not found");
+                        session.Send(tosend);
+                        return;
+                    }
+
+                    zone.GetTemp();
+
+                    session.Send(new Message(source, MessageTypes.Acknoledge));
                 }
             }
         }
