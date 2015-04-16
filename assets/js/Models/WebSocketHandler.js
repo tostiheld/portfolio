@@ -35,7 +35,9 @@ WebSocketHandler.prototype.onOpen = function () {
     $("#disconnect").show();
     $("#send").removeClass("disabled");
     this.send(">IDEN:UI:;");
-    setTimeout(this.getData(), 2000);
+    this.newZone(new Zone(1, "test", 5, 8));
+    this.newZone(new Zone(2, "test2", 1, 10));
+    //this.getData();
 };
 /**
  *  when a message is recieved from the server,
@@ -69,12 +71,17 @@ WebSocketHandler.prototype.onError = function (e) {
     this.con.appendError(message);
 };
 
+WebSocketHandler.prototype.newZone = function (newZone) {
+    this.ZoneList.Add(newZone);
+    this.send(">CZON:" + newZone.ID + ":" + newZone.X + ":" + newZone.Y + ":;");
+}
+
 WebSocketHandler.prototype.getData = function () {
 
     //Ask for all schools
     for (var key in this.ZoneList.ZoneList) {
         console.log('school');
-        this.send(">CZON:" + this.ZoneList.ZoneList[key].ID + ":5:5:;")
-        this.send(">GETS:" + this.ZoneList.ZoneList[key].ID + ":;"); //Get Schools 
+
+        //this.send(">GETS:" + this.ZoneList.ZoneList[key].ID + ":;"); //Get Schools 
     };
 };

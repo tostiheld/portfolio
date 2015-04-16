@@ -1,6 +1,8 @@
-function Zone(id, name) {
+function Zone(id, name, x, y) {
     this.Name = name;
     this.ID = id;
+    this.X = x;
+    this.Y = y;
     this.SchoolList = new Schools();
     this.RoadConstructionList = new RoadConstructions();
     this.VertexList = [];
@@ -12,10 +14,8 @@ function Zones(table) {
     this.Element = table;
 }
 
-Zones.prototype.Add = function (id, name) {
-    var newZone = new Zone(id, name);
+Zones.prototype.Add = function (newZone) {
     this.ZoneList.push(newZone);
-    console.log(this.ZoneList);
     this.addToGUI(newZone);
 }
 Zones.prototype.addToGUI = function (newZone) {
