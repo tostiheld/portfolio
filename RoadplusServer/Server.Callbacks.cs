@@ -187,8 +187,24 @@ namespace Roadplus.Server
                 if (session != null)
                 {
                     string[] ports = SerialPort.GetPortNames();
-                    string reply = "";
+                    List<string> workingports = new List<string>();
                     foreach (string s in ports)
+                    {
+                        SerialPort p = new SerialPort(s);
+                        try
+                        {
+                            p.Open();
+                            p.Close();
+                            workingports.Add(s);
+                        }
+                        catch
+                        {
+                            // port is not working
+                        }
+                    }
+
+                    string reply = "";
+                    foreach (string s in workingports)
                     {
                         reply += s + ":";
                     }
