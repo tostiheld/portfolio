@@ -114,89 +114,13 @@ namespace Roadplus.Server
                     switch (message.Payload[0])
                     {
                         case "zone":
-                            int x = Convert.ToInt32(message.Payload[2]);
-                            int y = Convert.ToInt32(message.Payload[3]);
-
-                            if (GetZoneByID(id) != null)
-                            {
-                                TrySendFailure(
-                                    message.MessageSource.IP,
-                                    "Zone with id " + id.ToString() + " already exists");
-                                return;
-                            }
-
-                            Vertex start = new Vertex(new Point(x, y));
-                            Zone zone = new Zone(start, id);
-                            zones.Add(zone);
-
-                            logStream.WriteLine(
-                                "Session at {0} created a zone with id {1}",
-                                message.MessageSource.IP.ToString(),
-                                id.ToString());
-                            Message success = new Message(
-                                CommandType.Acknoledge,
-                                new string[] { id.ToString() },
-                                "zone");
-                            TrySendMessage(
-                                message.MessageSource.IP,
-                                success);
-
+                            CreateZone(message);
                             break;
                         case "school":
-                            int sid = Convert.ToInt32(message.Payload[2]);
-                            string name = message.Payload[3];
-                            int hStart = Convert.ToInt32(message.Payload[4].Split('-')[0]);
-                            int mStart = Convert.ToInt32(message.Payload[4].Split('-')[1]);
-                            int hEnd = Convert.ToInt32(message.Payload[5].Split('-')[0]);
-                            int mEnd = Convert.ToInt32(message.Payload[5].Split('-')[1]);
-
-                            Zone target = GetZoneByID(id);
-                            if (target == null)
-                            {
-                                TrySendFailure(
-                                    message.MessageSource.IP,
-                                    "Zone with id " + id.ToString() + " not found");
-                                return;
-                            }
-
-                            if (target.GetSchoolByID(sid) != null)
-                            {
-                                TrySendFailure(
-                                    message.MessageSource.IP,
-                                    String.Format(
-                                        "School with id {0} in zone {1} already exists",
-                                        sid.ToString(),
-                                        id.ToString()));
-                                return;
-                            }
-
-                            DateTime sTime = new DateTime(1, 1, 1, hStart, mStart, 0);
-                            DateTime eTime = new DateTime(1, 1, 1, hEnd, mEnd, 0);
-                            School school = new School(
-                                new TimeRange(sTime, eTime),
-                                sid);
-                            school.Name = name;
-                            target.Schools.Add(school);
-
-                            logStream.WriteLine(
-                                String.Format(
-                                "Session at {0} added school with id {1} to zone {2}",
-                                message.MessageSource.IP.ToString(),
-                                sid.ToString(),
-                                id.ToString()));
-                            success = new Message(
-                                CommandType.Acknoledge,
-                                new string[] { sid.ToString() },
-                                "school");
-                            TrySendMessage(
-                                message.MessageSource.IP,
-                                success);
-
+                            CreateSchool(message);           
                             break;
                         case "roadconstruction":
-                            int rid = Convert.ToInt32(message.Payload[2]);
-
-
+                            CreateRoadConstruction(message);
                             break;
                     }
                 }
