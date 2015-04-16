@@ -2,7 +2,7 @@
 
 // initialize global variables
 var Handler;
-var WebSocketClient;
+var WebSocketC;
 var ViewHandler;
 var Schools;
 
@@ -31,22 +31,25 @@ $(document).ready(function () {
     $("#connect").click(function (e) {
         var server = Settings.URI;
 
-
-        window.WebSocketClient = new WebSocketClient(server, window.Handler);
+        //if (typeof window.WebSocketClient.serverURI == "undefined") {
+        //  console.log('true');
+        window.WebSocketC = new WebSocketClient(server, window.Handler);
+        //}
 
         e.preventDefault();
     });
 
     // assign event handler to the disconnect button
     $("#disconnect").click(function (e) {
-        window.WebSocketClient.disconnect();
+        window.WebSocketC.disconnect();
+        window.WebSocketC == null;
         e.preventDefault();
     });
 
     // assign event handler to the send button
     $("#send").click(function (e) {
         var message = $("#prompt").val();
-        window.WebSocketClient.send(message);
+        window.WebSocketC.send(message);
         $("#prompt").val('');
         e.preventDefault();
     });
