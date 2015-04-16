@@ -40,6 +40,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#" onclick="window.ViewHandler.Show('dashboard');">Dashboard</a>
                     </li>
+                    <li><a href="#" onclick="window.ViewHandler.Show('zones');">Zones</a>
+                    </li>
                     <li><a href="#" onclick="window.ViewHandler.Show('schools');">Schools</a>
                     </li>
                     <li><a href="#" onclick="window.ViewHandler.Show('roadConstructions');">RoadConstructions</a>
@@ -47,8 +49,6 @@
                     <li><a href="#" onclick="window.ViewHandler.Show('simulation');">Simulation</a>
                     </li>
                     <li><a href="#" onclick="window.ViewHandler.Show('debug');">Debug</a>
-                    </li>
-                    <li><a href="#" onclick="window.ViewHandler.Show('zones');">Zones</a>
                     </li>
                     <li><a><span id="connect">Connect</span><span id="disconnect" style="display:none;">Disonnect</span> <span id="connected"><i class="icon-check-empty"></i></span></a>
                     </li>
@@ -59,6 +59,22 @@
     </nav>
     <!--------------- !NAVIGATION -------------!-->
 
+    <!--------------- Dashboard Window -------------!-->
+    <div id="dashboard" class="view">
+
+        <h1>Dashboard</h1>
+
+        <div id="description">Temperature</div>
+
+        <div class="row">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                    0&deg;
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--------------- #Dashboard Window -------------!-->
 
 
     <!--------------- Debug Window -------------!-->
@@ -81,10 +97,11 @@
             </div>
 
         </div>
-        <!-- .row -->
     </div>
-    <!-- #content -->
+    <!--------------- #Debug Window -------------!-->
 
+
+    <!--------------- Schools Window -------------!-->
     <div id="schools" class="view">
         <h1>Schools</h1>
         <div class="panel panel-default">
@@ -107,9 +124,8 @@
                 </tbody>
             </table>
         </div>
-
-
     </div>
+    <!--------------- #Schools Window -------------!-->
 
     <div id="roadConstructions" class="view">
         <h1>Road Constructions</h1>
@@ -134,6 +150,8 @@
             </table>
         </div>
     </div>
+    <!--------------- #Debug Window -------------!-->
+
 
     <div id="zones" class="view">
         <h1>Zones</h1>

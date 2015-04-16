@@ -49,11 +49,16 @@ WebSocketHandler.prototype.onMessage = function (e) {
     var message = e.data;
     this.con.appendFromServer(message);
     try {
-        var json = JSON.parse(this.responseText);
+        var json = JSON.parse(message);
     } catch (e) {
         console.log("this is no json");
     }
-    console.log("message type:" + json.type);
+    if (json['datatype'] == "temperature") {
+        var minT = -30;
+        var maxT = 50;
+
+    }
+    console.log("message type:" + json['type'] + ", Message: " + json['metadata']);
 };
 
 /**
@@ -116,8 +121,8 @@ WebSocketHandler.prototype.newSchool = function (school, zoneID) {
 WebSocketHandler.prototype.removeSchool = function (schoolId) {
     for (var zkey in this.ZoneList.ZoneList) {
         if (this.ZoneList.ZoneList[zkey].SchoolList.Remove(schoolId)) {
-            this.send(">RSCH:" + id + ":;");
-            console.log("remove school: " + id);
+            this.send(">RSCH:" + schoolId + ":;");
+            console.log("remove school: " + schoolId);
         } else {
             console.log("could not be deleted");
         }
