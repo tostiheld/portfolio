@@ -30,9 +30,12 @@ namespace Roadplus.Server
         public readonly static Dictionary<string, MessageTypes> Messages = 
         new Dictionary<string, MessageTypes>()
         {
+            { "ACKN", MessageTypes.Acknoledge },
             { "TEST", MessageTypes.Test },
             { "SOFF", MessageTypes.ServerOffline },
-            { "IDEN", MessageTypes.Identification }
+            { "IDEN", MessageTypes.Identification },
+            { "GETS", MessageTypes.GetSchools },
+            { "CZON", MessageTypes.CreateZone }
         };
     }
 }
