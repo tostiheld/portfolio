@@ -12,6 +12,8 @@ namespace Roadplus.Server
 {
     public partial class Server
     {
+        private readonly Source source = new Source(SourceTypes.Server, Settings.IP);
+
         public bool IsRunning { get; private set; }
 
         private IPEndPoint endPoint;
@@ -68,13 +70,6 @@ namespace Roadplus.Server
             }
         }
 
-        private void Mockups()
-        {
-            Vertex start = new Vertex(new Point(0, 0));
-            zones.Add(new Zone(start));
-            start.Connect(new Point(20, 20));
-        }
-
         private void LoadZones()
         {
             try
@@ -116,6 +111,19 @@ namespace Roadplus.Server
             }
         }
 
+        private Zone GetZoneByID(int id)
+        {
+            foreach (Zone z in zones)
+            {
+                if (z.ID == id)
+                {
+                    return z;
+                }
+            }
+
+            return null;
+        }
+
         public void Start()
         {
             if (!IsRunning)
@@ -126,8 +134,6 @@ namespace Roadplus.Server
                 sessions = new List<WSSession>();
                 service.Start();
                 IsRunning = true;
-
-                Mockups();
 
                 logStream.WriteLine("Server started.");
             }

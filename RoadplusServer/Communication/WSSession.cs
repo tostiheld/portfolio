@@ -10,9 +10,8 @@ namespace Roadplus.Server.Communication
 {
     public class WSSession
     {
-        public delegate void OnMessageReceived(object sender, MessageReceivedEventArgs e);
-        public event OnMessageReceived MessageReceived;
-        public event EventHandler Disconnected;
+        public event EventHandler<MessageReceivedEventArgs> MessageReceived;
+        public event EventHandler<EventArgs> Disconnected;
 
         public IPAddress IP
         {
@@ -33,6 +32,7 @@ namespace Roadplus.Server.Communication
                 throw new ArgumentNullException("socket");
             }
 
+            SourceType = SourceTypes.Unidentified;
             webSocket = socket;
             Task.Run((Func<Task>)Receive);
         }
@@ -55,11 +55,12 @@ namespace Roadplus.Server.Communication
                         break;
                     }
 
-                    ASCIIEncoding encoding = new ASCIIEncoding();
+                    UTF8Encoding encoding = new UTF8Encoding();
                     string message = encoding.GetString(bytes);
                     buffer += message;
+
                     Source source = new Source(SourceType, IP);
-                    Message received = Utilities.ProcessMessages(source, buffer);
+                    Message received = Utilities.ProcessMessages(source, ref buffer);
                     if (received != null &&
                         MessageReceived != null)
                     {
@@ -78,12 +79,20 @@ namespace Roadplus.Server.Communication
 
         public void Send(Message message)
         {
-            using (WebSocketMessageWriteStream stream = 
-                   webSocket.CreateMessageWriter(WebSocketMessageType.Text))
+            Send(message.ToString());
+        }
+
+        public void Send(string message)
+        {
+            if (webSocket.IsConnected)
             {
-                using (StreamWriter sw = new StreamWriter(stream, Encoding.UTF8))
+                using (WebSocketMessageWriteStream stream = 
+                       webSocket.CreateMessageWriter(WebSocketMessageType.Text))
                 {
-                    sw.Write(message.ToString());
+                    using (StreamWriter sw = new StreamWriter(stream, Encoding.UTF8))
+                    {
+                        sw.Write(message);
+                    }
                 }
             }
         }

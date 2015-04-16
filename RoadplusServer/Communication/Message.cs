@@ -10,7 +10,7 @@ namespace Roadplus.Server.Communication
         public const char MessageTerminator = ';';
 
         public MessageTypes MessageType { get; private set; }
-        public string MetaData { get; private set; }
+        public string[] MetaData { get; private set; }
         public Source MessageSource { get; private set; }
 
         public Message(Source source, MessageTypes type)
@@ -24,7 +24,7 @@ namespace Roadplus.Server.Communication
             }
 
             MessageType = type;
-            MetaData = metadata;
+            MetaData = metadata.Split(MessageSplit);
             MessageSource = source;
         }
 
@@ -70,6 +70,12 @@ namespace Roadplus.Server.Communication
         /// <returns>The message string</returns>
         public override string ToString()
         {
+            string metadata = "";
+            foreach (string s in MetaData)
+            {
+                metadata += s + MessageSplit;
+            }
+
             string type = "NULL";
             foreach (KeyValuePair<string, MessageTypes> pair in Settings.Messages)
             {
@@ -81,7 +87,7 @@ namespace Roadplus.Server.Communication
 
             string format = MessageStart + "{0}" + MessageSplit + 
                             "{1}" + MessageTerminator;
-            return String.Format(format, type, MetaData);
+            return String.Format(format, type, metadata);
         }
     }
 }

@@ -8,8 +8,7 @@ namespace Roadplus.Server.Communication
 {
     public class RoadCommunication
     {
-        public delegate void OnMessageReceived(object sender, MessageReceivedEventArgs e);
-        public event OnMessageReceived MessageReceived;
+        public event EventHandler<MessageReceivedEventArgs> MessageReceived;
 
         private Thread receiveThread;
         private volatile bool isReceiving;
@@ -37,7 +36,7 @@ namespace Roadplus.Server.Communication
                     string message = encoder.GetString(bytes);
                     buffer += message;
                     Source source = new Source(SourceTypes.Road, Port.ToString());
-                    Message received = Utilities.ProcessMessages(source, buffer);
+                    Message received = Utilities.ProcessMessages(source, ref buffer);
                     if (received != null &&
                         MessageReceived != null)
                     {

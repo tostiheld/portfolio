@@ -45,7 +45,10 @@ namespace Roadplus.Server
             { "GETS", MessageTypes.GetSchools },
             // format: >CZON:<id>:<x>:<y>:;
             // summary: creates zone with id <id> at <x>, <y>
-            { "CZON", MessageTypes.CreateZone }
+            { "CZON", MessageTypes.CreateZone },
+            // format: >FAIL:<reason>:;
+            // summary: sends info about an error
+            { "FAIL", MessageTypes.Failure }
         };
     }
 }

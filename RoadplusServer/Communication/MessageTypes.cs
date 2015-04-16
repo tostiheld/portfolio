@@ -4,9 +4,12 @@ namespace Roadplus.Server.Communication
 {
     public enum MessageTypes
     {
-        Test,
+        Acknoledge,
+        Failure,
         ServerOffline,
-        Identification
+        Identification,
+        GetSchools,
+        CreateZone
     }
 }
 

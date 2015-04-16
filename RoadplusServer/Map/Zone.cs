@@ -8,6 +8,13 @@ namespace Roadplus.Server.Map
     [ProtoContract]
     public class Zone
     {
+        [ProtoMember(5)]
+        public int ID { get; private set; }
+        [ProtoMember(6)]
+        public string Name { get; set; }
+        [ProtoMember(7)]
+        public List<School> Schools { get; private set; }
+
         [ProtoMember(1)]
         private Vertex root;
         [ProtoMember(2)]
@@ -21,13 +28,15 @@ namespace Roadplus.Server.Map
         // DO NOT EXPOSE
         private Zone() { }
 
-        public Zone(Vertex startingPoint)
+        public Zone(Vertex startingPoint, int id)
         {
 			if (startingPoint == null) {
 				throw new ArgumentNullException ("startingPoint");
 			}
             vertices = new List<Vertex>();
             edges = new List<Edge>();
+
+            ID = id;
 
             root = startingPoint;
             vertices.Add(root);

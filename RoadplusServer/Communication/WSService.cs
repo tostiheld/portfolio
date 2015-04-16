@@ -9,8 +9,7 @@ namespace Roadplus.Server.Communication
 {
     public class WSService
     {
-        public delegate void OnNewSession(object sender, NewSessionEventArgs e);
-        public event OnNewSession NewSession;
+        public event EventHandler<NewSessionEventArgs> NewSession;
 
         public IPAddress IP { get; private set; }
 
