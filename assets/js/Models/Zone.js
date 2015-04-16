@@ -3,7 +3,7 @@ function Zone(id, name, x, y) {
     this.ID = id;
     this.X = x;
     this.Y = y;
-    this.SchoolList = new Schools();
+    this.SchoolList = new Schools($("#schoolTable"));
     this.RoadConstructionList = new RoadConstructions();
     this.VertexList = [];
     this.EdgeList = [];
