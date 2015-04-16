@@ -27,7 +27,7 @@ Zones.prototype.Remove = function (id) {
             this.removeFromGUI(this.ZoneList[key]);
             this.ZoneList.splice(key, 1);
             console.log(this.ZoneList);
-            break;
+            return true;
         }
     };
 }
