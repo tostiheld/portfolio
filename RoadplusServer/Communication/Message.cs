@@ -59,7 +59,7 @@ namespace Roadplus.Server.Communication
                 string[] parts = clean.Split(MessageSplit);
                 if (parts.Length >= 1)
                 {
-                    string cmdstr = parts[0];
+                    string cmdstr = parts[0].ToUpper();
                     CommandType command;
                     if (Settings.Messages.TryGetValue(cmdstr, out command))
                     {
@@ -125,11 +125,6 @@ namespace Roadplus.Server.Communication
                         byte[] bytes = ms.ToArray();
                         string returnval = Encoding.UTF8.GetString(bytes);
                         return returnval;
-                        /*
-                        using (StreamReader sr = new StreamReader(ms, Encoding.UTF8))
-                        {
-                            return sr.ReadToEnd();
-                        }*/
                     }
                 case "ascii":
                 default:

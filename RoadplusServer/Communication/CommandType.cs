@@ -9,15 +9,15 @@ namespace Roadplus.Server.Communication
         Disconnect,
         ServerOffline,
 
-        SetRoadSign,
-        Temperature,
-
         Identification,
-        GetRoads,
-        ConnectRoadToZone,
-        GetSchools,
-        CreateZone,
-        RemoveZone
+        Set,
+        Get,
+        Create,
+        Remove,
+        Edit,
+
+        SetRoadSign,
+        Temperature
     }
 }
 

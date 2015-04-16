@@ -40,28 +40,19 @@ namespace Roadplus.Server
             // summary: websocket client identifies itself for server
             //          <type> is UI or CAR
             { "IDEN", CommandType.Identification },
-            // format: >GETS:<id>:;
-            // summary: gets schools from zone with id <id>
-            { "GETS", CommandType.GetSchools },
-            // format: >CZON:<id>:<x>:<y>:;
-            // summary: creates zone with id <id> at <x>, <y>
-            { "CZON", CommandType.CreateZone },
-            // format: >RZON:<id>:;
-            // summary: removes zone with id <id>
-            { "RZON", CommandType.RemoveZone },
             // format: >FAIL:<reason>:;
             // summary: sends info about an error
             { "FAIL", CommandType.Failure },
             // format: >DISC:;
             // summary: graceful disconnect from any websocket client
             { "DISC", CommandType.Disconnect },
-            // format: >GRDS:;
-            // summary: get all available serial devices
-            { "GRDS", CommandType.GetRoads },
-            // format: >CONR:<id>:<port>:;
-            // summary: connects the road device on port <port> 
-            //          with the zone with id <id>
-            { "CONR", CommandType.ConnectRoadToZone },
+
+            { "SET", CommandType.Set },
+            { "GET", CommandType.Get },
+            { "CREATE", CommandType.Create },
+            { "REMOVE", CommandType.Remove },
+            { "EDIT", CommandType.Edit },
+
             // format: >SIGN:<speed>:;
             // summary: sets road sign at the specified speed
             // or if from websocket:

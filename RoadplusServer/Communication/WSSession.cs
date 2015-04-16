@@ -95,6 +95,10 @@ namespace Roadplus.Server.Communication
                     }
                 }
             }
+            else
+            {
+                End();
+            }
         }
 
         public void End()

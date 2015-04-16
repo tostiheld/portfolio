@@ -33,13 +33,14 @@ namespace Roadplus.Server
             MessageCallbacks = new Dictionary<CommandType, Action<Message>>()
             {
                 { CommandType.Identification, IdentificationCallback },
-                { CommandType.GetSchools, GetSchoolsCallback },
-                { CommandType.CreateZone, CreateZoneCallback },
-                { CommandType.Disconnect, DisconnectCallback },
-                { CommandType.GetRoads, GetRoadsCallback },
-                { CommandType.ConnectRoadToZone, ConnectRoadZoneCallback },
-                { CommandType.SetRoadSign, SetSignCallback },
-                { CommandType.Temperature, GetTempCallback }
+                { CommandType.Get, GetCallback },
+                { CommandType.Set, SetCallback },
+                { CommandType.Create, CreateCallback },
+                { CommandType.Remove, RemoveCallback },
+                { CommandType.Edit, EditCallback },
+
+                { CommandType.Disconnect, DisconnectCallback }
+
             };
         }
 
@@ -71,277 +72,106 @@ namespace Roadplus.Server
             }
         }
 
-        private void RemoveZoneCallback(Message message)
+        private bool TrySendFailure(IPAddress to, string reason)
         {
-            if (message.MessageSource.Type == SourceTypes.UI)
-            {
-                WSSession session = FindSessionByIP(
-                    message.MessageSource.IP);
-                if (session != null)
-                {
-
-                }
-            }
-        }
-
-        private void CreateZoneCallback(Message message)
-        {
-            if (message.MessageSource.Type == SourceTypes.UI)
-            {
-                WSSession session = FindSessionByIP(
-                    message.MessageSource.IP);
-                if (session != null)
-                {
-                    int id;
-                    int x;
-                    int y;
-                    if (!Int32.TryParse(message.Payload[0], out id) ||
-                        !Int32.TryParse(message.Payload[1], out x) ||
-                        !Int32.TryParse(message.Payload[2], out y))
-                    {
-                        logStream.WriteLine("Illegal CZONE message from " + session.IP);
-                        Message tosend = new Message(
+            return TrySendMessage(
+                        to, 
+                        new Message(
                             CommandType.Failure,
-                            new string[] { "Illegal data" });
-                        session.Send(tosend);
-                        return;
-                    }
-
-                    if (GetZoneByID(id) == null)
-                    {
-                        Vertex start = new Vertex(new Point(x, y));
-                        Zone newzone = new Zone(start, id);
-                        zones.Add(newzone);
-
-                        logStream.WriteLine(
-                            "Session at " + session.IP.ToString() + " created new zone with id " + id.ToString());
-                        Message tosend = new Message(
-                            CommandType.Acknoledge,
-                            new string[] { id.ToString() },
-                            "zone");
-                        session.Send(tosend);
-                    }
-                    else
-                    {
-                        Message tosend = new Message(
-                            CommandType.Failure, 
-                            new string[] { "Zone with id " + id.ToString() + " already exists" });
-                        session.Send(tosend);
-                    }
-                }
-            }
+                            new string[] { reason }));
         }
 
-        private void GetSchoolsCallback(Message message)
+        private bool TrySendMessage(IPAddress to, Message message)
+        {
+            WSSession session = FindSessionByIP(to);
+
+            if (session != null)
+            {
+                session.Send(message);
+                return true;
+            }
+
+            return false;
+        }
+
+        private void GetCallback(Message message)
+        {
+        }
+        
+        private void SetCallback(Message message)
+        {
+
+        }
+
+        private void CreateCallback(Message message)
         {
             if (message.MessageSource.Type == SourceTypes.UI)
             {
-                WSSession session = FindSessionByIP(
-                    message.MessageSource.IP);
-                if (session != null)
+                try
                 {
-                    int id;
-                    if (Int32.TryParse(message.Payload[0], out id))
+                    switch (message.Payload[0])
                     {
-                        Zone zone = GetZoneByID(id);
-                        if (zone != null)
-                        {
-                            List<string> schools = new List<string>();
-                            foreach (School s in zone.Schools)
+                        case "zone":
+                            int id = Convert.ToInt32(message.Payload[1]);
+                            int x = Convert.ToInt32(message.Payload[2]);
+                            int y = Convert.ToInt32(message.Payload[3]);
+
+                            if (GetZoneByID(id) != null)
                             {
-                                schools.Add(s.ToString("json"));
+                                TrySendFailure(
+                                    message.MessageSource.IP,
+                                    "Zone with id " + id.ToString() + " already exists");
+                                return;
                             }
 
-                            logStream.WriteLine(
-                                String.Format("Sending schools from zone {0} to {1}",
-                                              id.ToString(),
-                                              session.IP.ToString()));
+                            Vertex start = new Vertex(new Point(x, y));
+                            Zone zone = new Zone(start, id);
+                            zones.Add(zone);
 
-                            Message tosend = new Message(
+                            logStream.WriteLine(
+                                "Session at {0} created a zone with id {1}",
+                                message.MessageSource.IP.ToString(),
+                                id.ToString());
+                            Message success = new Message(
                                 CommandType.Acknoledge,
-                                schools.ToArray(),
-                                "schools");
-                            session.Send(tosend);
-                        }
+                                new string[] { id.ToString() },
+                                "zone");
+                            TrySendMessage(
+                                message.MessageSource.IP,
+                                success);
+
+                            break;
+                        case "school":
+
+                            break;
+                        case "roadconstruction":
+
+                            break;
                     }
+                }
+                catch (Exception ex)
+                {
+                    TrySendFailure(
+                        message.MessageSource.IP,
+                        ex.Message);
                 }
             }
         }
-
-        private void GetRoadsCallback(Message message)
+        
+        private void RemoveCallback(Message message)
         {
-            if (message.MessageSource.Type == SourceTypes.UI)
-            {
-                WSSession session = FindSessionByIP(
-                    message.MessageSource.IP);
-                if (session != null)
-                {
-                    string[] ports = SerialPort.GetPortNames();
-                    List<string> workingports = new List<string>();
-                    foreach (string s in ports)
-                    {
-                        try
-                        {
-                            using (SerialPort p = new SerialPort(s))
-                            {
-                                p.Open();
-                                p.Close();
-                                workingports.Add(s);
-                            }
-                        }
-                        catch
-                        {
-                            // port is not working
-                        }
-                    }
 
-                    Message tosend = new Message(
-                        CommandType.Acknoledge,
-                        workingports.ToArray(),
-                        "ports");
-                    session.Send(tosend);
-                }
-            }
         }
-
-        private void ConnectRoadZoneCallback(Message message)
+        
+        private void EditCallback(Message message)
         {
-            if (message.MessageSource.Type == SourceTypes.UI)
-            {
-                WSSession session = FindSessionByIP(
-                    message.MessageSource.IP);
-                if (session != null)
-                {
-                    try
-                    {
-                        RoadCommunication roadcom = new RoadCommunication(message.Payload[1]);
-                        int id;
-                        if (!Int32.TryParse(message.Payload[0], out id))
-                        {
-                            Message tosend = new Message(
-                                CommandType.Failure,
-                                new string[] { "Illegal data" });
-                            session.Send(tosend);
-                            return;
-                        }
 
-                        Zone zone = GetZoneByID(id);
-                        if (zone != null)
-                        {
-                            zone.Road = roadcom;
-                            logStream.WriteLine(
-                                String.Format(
-                                "Session at {0} connected road at {1} to zone with id {2}",
-                                session.IP.ToString(),
-                                roadcom.PortName,
-                                zone.ID.ToString()));
-
-                            Message tosend = new Message(
-                                CommandType.Acknoledge,
-                                new string[] { roadcom.PortName },
-                                "roadconnected");
-                            session.Send(tosend);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        if (ex is IOException ||
-                            ex is ArgumentException || 
-                            ex is UnauthorizedAccessException)
-                        {
-                            Message tosend = new Message(
-                                CommandType.Failure,
-                                new string[] { "Port is invalid, in use or does not exist" });
-                            session.Send(tosend);
-                        }
-
-                        throw;
-                    }
-                }
-            }
         }
 
         private void DisconnectCallback(Message message)
         {
             WSSession session = FindSessionByIP(message.MessageSource.IP);
             session.End();
-        }
-
-        private void SetSignCallback(Message message)
-        {
-            if (message.MessageSource.Type == SourceTypes.UI)
-            {
-                WSSession session = FindSessionByIP(
-                    message.MessageSource.IP);
-                if (session != null)
-                {
-                    int id;
-                    int speed;
-                    if (!Int32.TryParse(message.Payload[0], out speed) ||
-                        !Int32.TryParse(message.Payload[1], out id))
-                    {
-                        Message tosend = new Message(
-                            CommandType.Failure,
-                            new string[] { "Illegal data" });
-                        session.Send(tosend);
-                        return;
-                    }
-
-                    Zone zone = GetZoneByID(id);
-
-                    if (zone == null)
-                    {
-                        Message tosend = new Message(
-                            CommandType.Failure,
-                            new string[] { "Zone not found" });
-                        session.Send(tosend);
-                        return;
-                    }
-
-                    zone.SetSign(speed);
-
-                    Message toSend = new Message(
-                        CommandType.Acknoledge,
-                        "sign");
-                    session.Send(toSend);
-                }
-            }
-        }
-
-        private void GetTempCallback(Message message)
-        {
-            if (message.MessageSource.Type == SourceTypes.UI)
-            {
-                WSSession session = FindSessionByIP(
-                    message.MessageSource.IP);
-                if (session != null)
-                {
-                    int id;
-                    if (!Int32.TryParse(message.Payload[0], out id))
-                    {
-                        Message tosend = new Message(
-                            CommandType.Failure,
-                            new string[] { "Illegal data" });
-                        session.Send(tosend);
-                        return;
-                    }
-
-                    Zone zone = GetZoneByID(id);
-
-                    if (zone == null)
-                    {
-                        Message tosend = new Message(
-                            CommandType.Failure,
-                            new string[] { "Zone not found" });
-                        session.Send(tosend);
-                        return;
-                    }
-
-                    zone.GetTemp();
-
-                    session.Send(new Message(CommandType.Acknoledge, "temp"));
-                }
-            }
         }
 	}
 }
