@@ -30,11 +30,21 @@ namespace Roadplus.Server
         public readonly static Dictionary<string, MessageTypes> Messages = 
         new Dictionary<string, MessageTypes>()
         {
+            // format: >ACKN:;
+            // summary: acknoledge (not used yet)
             { "ACKN", MessageTypes.Acknoledge },
-            { "TEST", MessageTypes.Test },
+            // format: >SOFF:;
+            // summary: inform ui clients server goes offline
             { "SOFF", MessageTypes.ServerOffline },
+            // format: >IDEN:<type>:;
+            // summary: websocket client identifies itself for server
+            //          <type> is UI or CAR
             { "IDEN", MessageTypes.Identification },
+            // format: >GETS:<id>:;
+            // summary: gets schools from zone with id <id>
             { "GETS", MessageTypes.GetSchools },
+            // format: >CZON:<id>:<x>:<y>:;
+            // summary: creates zone with id <id> at <x>, <y>
             { "CZON", MessageTypes.CreateZone }
         };
     }
