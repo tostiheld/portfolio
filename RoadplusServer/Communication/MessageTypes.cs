@@ -6,8 +6,11 @@ namespace Roadplus.Server.Communication
     {
         Acknoledge,
         Failure,
+        Disconnect,
         ServerOffline,
         Identification,
+        GetRoads,
+        ConnectRoadToZone,
         GetSchools,
         CreateZone
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using System.IO;
+using System.IO.Ports;
 using System.Net;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Json;
@@ -33,7 +34,10 @@ namespace Roadplus.Server
             {
                 { MessageTypes.Identification, IdentificationCallback },
                 { MessageTypes.GetSchools, GetSchoolsCallback },
-                { MessageTypes.CreateZone, CreateZoneCallback }
+                { MessageTypes.CreateZone, CreateZoneCallback },
+                { MessageTypes.Disconnect, DisconnectCallback },
+                { MessageTypes.GetRoads, GetRoadsCallback },
+                { MessageTypes.ConnectRoadToZone, ConnectRoadZoneCallback }
             };
         }
 
@@ -151,6 +155,96 @@ namespace Roadplus.Server
                     }
                 }
             }
+        }
+
+        private void GetRoadsCallback(Message message)
+        {
+            if (message.MessageSource.Type == SourceTypes.UI)
+            {
+                WSSession session = FindSessionByIP(
+                    message.MessageSource.IP);
+                if (session != null)
+                {
+                    string[] ports = SerialPort.GetPortNames();
+                    string reply = "";
+                    foreach (string s in ports)
+                    {
+                        reply += s + ":";
+                    }
+
+                    Message tosend = new Message(
+                        source,
+                        MessageTypes.Acknoledge,
+                        "ports:" + reply);
+
+                    session.Send(tosend);
+                }
+            }
+        }
+
+        private void ConnectRoadZoneCallback(Message message)
+        {
+            if (message.MessageSource.Type == SourceTypes.UI)
+            {
+                WSSession session = FindSessionByIP(
+                    message.MessageSource.IP);
+                if (session != null)
+                {
+                    try
+                    {
+                        RoadCommunication roadcom = new RoadCommunication(message.MetaData[1]);
+                        int id;
+                        if (!Int32.TryParse(message.MetaData[0], out id))
+                        {
+                            Message tosend = new Message(
+                                source,
+                                MessageTypes.Failure,
+                                "Illegal data");
+                            session.Send(tosend);
+                            return;
+                        }
+
+                        Zone zone = GetZoneByID(id);
+                        if (zone != null)
+                        {
+                            zone.Road = roadcom;
+                            logStream.WriteLine(
+                                String.Format(
+                                "Session at {0} connected road at {1} to zone with id {2}",
+                                session.IP.ToString(),
+                                roadcom.PortName,
+                                zone.ID.ToString()));
+
+                            Message tosend = new Message(
+                                source,
+                                MessageTypes.Acknoledge,
+                                "roadconnected:" + roadcom.PortName);
+                            session.Send(tosend);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex is IOException ||
+                            ex is ArgumentException || 
+                            ex is UnauthorizedAccessException)
+                        {
+                            Message tosend = new Message(
+                                source,
+                                MessageTypes.Failure,
+                                "Port is invalid, in use or does not exist");
+                            session.Send(tosend);
+                        }
+
+                        throw;
+                    }
+                }
+            }
+        }
+
+        private void DisconnectCallback(Message message)
+        {
+            WSSession session = FindSessionByIP(message.MessageSource.IP);
+            session.End();
         }
 	}
 }

@@ -48,7 +48,17 @@ namespace Roadplus.Server
             { "CZON", MessageTypes.CreateZone },
             // format: >FAIL:<reason>:;
             // summary: sends info about an error
-            { "FAIL", MessageTypes.Failure }
+            { "FAIL", MessageTypes.Failure },
+            // format: >DISC:;
+            // summary: graceful disconnect from any websocket client
+            { "DISC", MessageTypes.Disconnect },
+            // format: >GRDS:;
+            // summary: get all available serial devices
+            { "GRDS", MessageTypes.GetRoads },
+            // format: >CONR:<id>:<port>:;
+            // summary: connects the road device on port <port> 
+            //          with the zone with id <id>
+            { "CONR", MessageTypes.ConnectRoadToZone }
         };
     }
 }

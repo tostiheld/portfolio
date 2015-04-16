@@ -14,6 +14,8 @@ namespace Roadplus.Server.Map
         public string Name { get; set; }
         [ProtoMember(7)]
         public List<School> Schools { get; private set; }
+        [ProtoMember(8)]
+        public RoadCommunication Road { get; set; }
 
         [ProtoMember(1)]
         private Vertex root;

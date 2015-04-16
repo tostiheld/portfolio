@@ -10,6 +10,14 @@ namespace Roadplus.Server.Communication
     {
         public event EventHandler<MessageReceivedEventArgs> MessageReceived;
 
+        public string PortName
+        {
+            get
+            {
+                return Port.PortName;
+            }
+        }
+
         private Thread receiveThread;
         private volatile bool isReceiving;
         private SerialPort Port;
@@ -18,7 +26,9 @@ namespace Roadplus.Server.Communication
         public RoadCommunication(string port)
         {
             Port = new SerialPort(port, Settings.BaudRate);
-
+            // test if everything works
+            Port.Open();
+            Port.Close();
             receiveThread = new Thread(new ThreadStart(Receive));
         }
 
@@ -26,24 +36,30 @@ namespace Roadplus.Server.Communication
         {
             while (isReceiving)
             {
-                if (Port.BytesToRead > 0 &&
-                    Port.IsOpen)
+                if (Port.IsOpen)
                 {
-                    byte[] bytes = new byte[Settings.BufferSize];
-                    buffer += Port.Read(bytes, 0, Settings.BufferSize);
-
-                    ASCIIEncoding encoder = new ASCIIEncoding();
-                    string message = encoder.GetString(bytes);
-                    buffer += message;
-                    Source source = new Source(SourceTypes.Road, Port.ToString());
-                    Message received = Utilities.ProcessMessages(source, ref buffer);
-                    if (received != null &&
-                        MessageReceived != null)
+                    if (Port.BytesToRead > 0)
                     {
-                        MessageReceivedEventArgs e = new MessageReceivedEventArgs(
-                            received);
-                        MessageReceived(this, e);
+                        byte[] bytes = new byte[Settings.BufferSize];
+                        buffer += Port.Read(bytes, 0, Settings.BufferSize);
+
+                        ASCIIEncoding encoder = new ASCIIEncoding();
+                        string message = encoder.GetString(bytes);
+                        buffer += message;
+                        Source source = new Source(SourceTypes.Road, Port.ToString());
+                        Message received = Utilities.ProcessMessages(source, ref buffer);
+                        if (received != null &&
+                            MessageReceived != null)
+                        {
+                            MessageReceivedEventArgs e = new MessageReceivedEventArgs(
+                                received);
+                            MessageReceived(this, e);
+                        }
                     }
+                }
+                else
+                {
+                    isReceiving = false;
                 }
             }
         }

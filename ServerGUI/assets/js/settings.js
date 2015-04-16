@@ -1,3 +1,3 @@
 var Settings = {
-    URI: "ws://echo.websocket.org/"
+    URI: "ws://localhost:42424"
 }
