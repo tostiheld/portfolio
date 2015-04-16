@@ -53,6 +53,7 @@ namespace Roadplus.Server.Map
             edges = new List<Edge>();
 
             ID = id;
+            Schools = new List<School>();
 
             root = startingPoint;
             vertices.Add(root);

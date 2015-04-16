@@ -169,8 +169,8 @@ namespace Roadplus.Server
                                 return;
                             }
 
-                            DateTime sTime = new DateTime(0, 0, 0, hStart, mStart, 0);
-                            DateTime eTime = new DateTime(0, 0, 0, hEnd, mEnd, 0);
+                            DateTime sTime = new DateTime(1, 1, 1, hStart, mStart, 0);
+                            DateTime eTime = new DateTime(1, 1, 1, hEnd, mEnd, 0);
                             School school = new School(
                                 new TimeRange(sTime, eTime),
                                 sid);
