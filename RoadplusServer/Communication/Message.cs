@@ -122,10 +122,14 @@ namespace Roadplus.Server.Communication
                         DataContractJsonSerializer json = 
                             new DataContractJsonSerializer(typeof(Message));
                         json.WriteObject(ms, this);
+                        byte[] bytes = ms.ToArray();
+                        string returnval = Encoding.UTF8.GetString(bytes);
+                        return returnval;
+                        /*
                         using (StreamReader sr = new StreamReader(ms, Encoding.UTF8))
                         {
                             return sr.ReadToEnd();
-                        }
+                        }*/
                     }
                 case "ascii":
                 default:
