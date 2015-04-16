@@ -91,6 +91,26 @@ WebSocketHandler.prototype.removeZone = function (id) {
     }
 }
 
+WebSocketHandler.prototype.newSchool = function (school, zoneID) {
+    for (var skey in this.ZoneList) {
+        if (this.ZoneList[skey].ID == zoneID) {
+            this.ZoneList[skey].Add(school);
+        }
+    }
+}
+
+WebSocketHandler.prototype.removeSchool = function (schoolId) {
+    for (var zkey in this.ZoneList) {
+        if (this.ZoneList[zkey].Remove(schoolId)) {
+            this.send(">RSCH:" + id + ":;");
+            console.log("remove school: " + id);
+        } else {
+            console.log("could not be deleted");
+        }
+    }
+}
+
+
 WebSocketHandler.prototype.getData = function () {
     //Ask for all Zones
     console.log('Get All Zones');
