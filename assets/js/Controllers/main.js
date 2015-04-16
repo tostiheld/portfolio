@@ -30,15 +30,16 @@ $(document).ready(function () {
     // assign event handler to the connect button
     $("#connect").click(function (e) {
         var server = Settings.URI;
-        console.log(server);
+
+
         window.WebSocketClient = new WebSocketClient(server, window.Handler);
+
         e.preventDefault();
     });
 
     // assign event handler to the disconnect button
     $("#disconnect").click(function (e) {
         window.WebSocketClient.disconnect();
-        window.WebSocketClient.destroy();
         e.preventDefault();
     });
 
