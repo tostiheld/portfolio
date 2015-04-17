@@ -10,11 +10,12 @@ function Zone(id, name) {
 }
 
 function Zones(table) {
-    this.ZoneList = new Array();
+    this.ZoneList = [];
     this.Element = table;
 }
 
 Zones.prototype.Add = function (newZone) {
+    console.log(this.ZoneList);
     this.ZoneList.push(newZone);
     console.log(this.ZoneList);
     this.addToGUI(newZone);
@@ -37,4 +38,10 @@ Zones.prototype.Remove = function (id) {
 }
 Zones.prototype.removeFromGUI = function (Zone) {
     $('#' + Zone.ID, this.Element).remove();
+}
+Zones.prototype.RemoveAll = function () {
+    while (this.ZoneList.length > 0) {
+        this.Remove(this.ZoneList[0].ID);
+        console.log(this.ZoneList.length);
+    }
 }
