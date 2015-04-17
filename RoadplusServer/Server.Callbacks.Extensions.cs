@@ -33,7 +33,7 @@ namespace Roadplus.Server
             Message success = new Message(
                 CommandType.Acknoledge,
                 new string[] { id.ToString() },
-            "zone");
+                "zone-created");
             TrySendMessage(
                 message.MessageSource.IP,
                 success);
@@ -86,7 +86,7 @@ namespace Roadplus.Server
             Message success = new Message(
                 CommandType.Acknoledge,
                 new string[] { sid.ToString() },
-            "school");
+                "school-created");
             TrySendMessage(
                 message.MessageSource.IP,
                 success);
@@ -135,7 +135,7 @@ namespace Roadplus.Server
             Message success = new Message(
                 CommandType.Acknoledge,
                 new string[] { rid.ToString() },
-                "roadconstruction");
+                "roadconstruction-created");
             TrySendMessage(
                 message.MessageSource.IP,
                 success);
@@ -153,13 +153,13 @@ namespace Roadplus.Server
                     String.Format(
                     "Session at {0} removed zone with id {1}",
                     message.MessageSource.IP.ToString(),
-						id.ToString()));
+				    id.ToString()));
                 TrySendMessage(
                     message.MessageSource.IP,
                     new Message(
                     CommandType.Acknoledge,
-						new string[] { id.ToString() },
-                    "zone"));
+					new string[] { id.ToString() },
+                    "zone-removed"));
             }
             else
             {
@@ -171,7 +171,43 @@ namespace Roadplus.Server
 
         private void RemoveSchool(Message message)
         {
+            int id = Convert.ToInt32(message.Payload[1]);
+            int sid = Convert.ToInt32(message.Payload[2]);
 
+            Zone target = GetZoneByID(id);
+            if (target != null)
+            {
+                School targetS = target.GetSchoolByID(sid);
+                if (targetS != null)
+                {
+                    target.Schools.Remove(targetS);
+
+                    WriteLineLog(
+                        String.Format(
+                        "Session at {0} removed school with id {1} from zone {2}",
+                        message.MessageSource.IP.ToString(),
+                        id.ToString(),
+                        sid.ToString()));
+                    TrySendMessage(
+                        message.MessageSource.IP,
+                        new Message(
+                        CommandType.Acknoledge,
+                        new string[] { id.ToString() },
+                        "school-removed"));
+                }
+                else
+                {
+                    TrySendFailure(
+                        message.MessageSource.IP,
+                        "School with id " + sid.ToString() + " not found.");
+                }
+            }
+            else
+            {
+                TrySendFailure(
+                    message.MessageSource.IP,
+                    "Zone with id " + id.ToString() + " not found.");
+            }
         }
 
         private void RemoveRoadConstruction(Message message)
