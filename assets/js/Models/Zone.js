@@ -10,12 +10,13 @@ function Zone(id, name) {
 }
 
 function Zones(table) {
-    this.ZoneList = [];
+    this.ZoneList = new Array();
     this.Element = table;
 }
 
 Zones.prototype.Add = function (newZone) {
     this.ZoneList.push(newZone);
+    console.log(this.ZoneList);
     this.addToGUI(newZone);
 }
 Zones.prototype.addToGUI = function (newZone) {
@@ -29,7 +30,6 @@ Zones.prototype.Remove = function (id) {
         if (this.ZoneList[key].ID == id) {
             this.removeFromGUI(this.ZoneList[key]);
             this.ZoneList.splice(key, 1);
-            console.log(this.ZoneList);
             return true;
         }
     }

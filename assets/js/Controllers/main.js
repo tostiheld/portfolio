@@ -26,9 +26,6 @@ $(document).ready(function () {
     ViewHandler.Show("debug");
 
 
-    Handler.ZoneList = new Zones($("#zoneTable"));
-
-
 
     // assign event handler to the connect button
     $("#connect").click(function (e) {
