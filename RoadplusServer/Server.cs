@@ -30,7 +30,10 @@ namespace Roadplus.Server
             AttachCallbacks();
 
             logStream = logstream;
-            httpService = new HttpService(Settings.HttpServiceUrl);
+            if (Settings.EnableHttp)
+            {
+                httpService = new HttpService(Settings.HttpServiceUrl);
+            }
             service = new WSService(endpoint);
             service.NewSession += Service_NewSession;
         }
@@ -81,6 +84,7 @@ namespace Roadplus.Server
         {
             try
             {
+                throw new FileNotFoundException();
                 using (FileStream fs = new FileStream(Settings.ZoneFilePath,
                                                       FileMode.Open))
                 {
@@ -138,7 +142,10 @@ namespace Roadplus.Server
                 logStream.WriteLine("Starting server... ");
 
                 LoadZones();
-                httpService.Run();
+                if (Settings.EnableHttp)
+                {
+                    httpService.Run();
+                }
                 sessions = new List<WSSession>();
                 service.Start();
                 IsRunning = true;
@@ -174,7 +181,10 @@ namespace Roadplus.Server
                     session.End();
                 }
 
-                httpService.Stop();
+                if (Settings.EnableHttp)
+                {
+                    httpService.Stop();
+                }
                 SaveZones();
                 IsRunning = false;
 

@@ -16,21 +16,7 @@ namespace Roadplus.Server.Map
         public List<School> Schools { get; private set; }
         public List<RoadConstruction> RoadConstructions { get; private set; }
         //[ProtoMember(8)]
-        public RoadCommunication Road 
-        { 
-            get
-            {
-                return road;
-            }
-            set
-            {
-                road = value;
-                road.MessageReceived += Road_MessageReceived;
-                road.Start();
-            }
-        }
-
-        private RoadCommunication road;
+        public RoadCommunication Road { get; private set; }
 
         [ProtoMember(1)]
         private Vertex root;
@@ -55,7 +41,6 @@ namespace Roadplus.Server.Map
 
             ID = id;
             Schools = new List<School>();
-
             RoadConstructions = new List<RoadConstruction>();
 
             root = startingPoint;
@@ -118,6 +103,14 @@ namespace Roadplus.Server.Map
             else
             {
                 radarLocation = radarlocation;
+                if (Road != null &&
+                    Road.IsConnected)
+                {
+                    Road.Stop();
+                }
+                Road = comms;
+                Road.MessageReceived += Road_MessageReceived;
+                Road.Start();
 
                 // further implementation down here
             }

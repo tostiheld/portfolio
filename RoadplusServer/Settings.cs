@@ -10,21 +10,25 @@ namespace Roadplus.Server
 {
     public static class Settings
     {
-        public static readonly IPAddress IP = IPAddress.Any;
+        public static IPAddress IP = IPAddress.Parse("127.0.0.1");
 
-        public const int Port = 42424;
+        public static int Port = 42424;
 
-        public const string HttpServiceUrl = "http://localhost:8080/";
+        public static bool EnableHttp = true;
 
-        public const int BaudRate = 38400;
+        public static string HttpPort = "8080";
 
-        public static readonly string FileRoot = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        public static string HttpServiceUrl = "http://" + IP.ToString() + ":" + HttpPort + "/";
 
-        public static readonly string HttpRoot = Path.Combine(FileRoot, "www");
+        public static int BaudRate = 38400;
 
-        public const string ZoneFileName = "default.zones";
+        public static string FileRoot = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-        public static readonly string ZoneFilePath = Path.Combine(
+        public static string HttpRoot = Path.Combine(FileRoot, "www");
+
+        public static string ZoneFileName = "default.zones";
+
+        public static string ZoneFilePath = Path.Combine(
                 FileRoot, 
                 ZoneFileName);
 

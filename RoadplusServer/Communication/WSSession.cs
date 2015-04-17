@@ -25,6 +25,7 @@ namespace Roadplus.Server.Communication
 
         private WebSocket webSocket;
         private string buffer;
+        private bool ending;
 
         public WSSession(WebSocket socket)
         {
@@ -60,8 +61,6 @@ namespace Roadplus.Server.Communication
                     string message = encoding.GetString(bytes);
                     buffer += message;
 
-                    System.Diagnostics.Debug.Write(buffer);
-
                     Message received = Utilities.ProcessMessages(ref buffer);
                     if (received != null &&
                         MessageReceived != null)
@@ -76,7 +75,8 @@ namespace Roadplus.Server.Communication
                 }
             }
 
-            if (Disconnected != null)
+            if (Disconnected != null &&
+                !ending)
             {
                 Disconnected(this, EventArgs.Empty);
             }
@@ -103,6 +103,7 @@ namespace Roadplus.Server.Communication
 
         public void End()
         {
+            ending = true;
             webSocket.Close();
 
             if (Disconnected != null)
