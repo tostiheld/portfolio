@@ -25,10 +25,11 @@ namespace Roadplus.Server
             Zone zone = new Zone(start, id);
             zones.Add(zone);
 
-            logStream.WriteLine(
+            WriteLineLog(
+                String.Format(
                 "Session at {0} created a zone with id {1}",
                 message.MessageSource.IP.ToString(),
-                id.ToString());
+                id.ToString()));
             Message success = new Message(
                 CommandType.Acknoledge,
                 new string[] { id.ToString() },
@@ -76,7 +77,7 @@ namespace Roadplus.Server
             school.Name = name;
             target.Schools.Add(school);
 
-            logStream.WriteLine(
+            WriteLineLog(
                 String.Format(
                 "Session at {0} added school with id {1} to zone {2}",
                 message.MessageSource.IP.ToString(),
@@ -125,7 +126,7 @@ namespace Roadplus.Server
                 new TimeRange(dstart, dend));
             target.RoadConstructions.Add(r);
 
-            logStream.WriteLine(
+            WriteLineLog(
                 String.Format(
                 "Session at {0} added roadconstruction with id {1} to zone {2}",
                 message.MessageSource.IP.ToString(),

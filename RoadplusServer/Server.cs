@@ -51,7 +51,7 @@ namespace Roadplus.Server
             sessions.Add(e.Session);
             e.Session.MessageReceived += Session_MessageReceived;
             e.Session.Disconnected += Session_Disconnected;
-            logStream.WriteLine("New session with " + e.Session.IP.ToString());
+            WriteLineLog("New session with " + e.Session.IP.ToString());
         }
 
         private void Session_Disconnected(object sender, EventArgs e)
@@ -59,7 +59,7 @@ namespace Roadplus.Server
             if (sender is WSSession)
             {
                 WSSession session = sender as WSSession;
-                logStream.WriteLine("Client at " + session.IP.ToString() + " disconnected");
+                WriteLineLog("Client at " + session.IP.ToString() + " disconnected");
                 sessions.Remove(session);
             }
         }
@@ -75,9 +75,19 @@ namespace Roadplus.Server
             }
             else
             {
-                logStream.WriteLine(
+                WriteLineLog(
                     "Message does not have a callback: " + e.Received.ToString());
             }
+        }
+
+        private void WriteLog(string message)
+        {
+            logStream.Write(DateTime.Now.ToString() + ": " + message);
+        }
+
+        private void WriteLineLog(string message)
+        {
+            WriteLog(message + Environment.NewLine);
         }
 
         private void LoadZones()
@@ -91,12 +101,12 @@ namespace Roadplus.Server
                     zones = Serializer.Deserialize<List<Zone>>(fs);
                 }
 
-                logStream.WriteLine("Zones loaded.");
+                WriteLineLog("Zones loaded.");
             }
             catch (FileNotFoundException)
             {
                 zones = new List<Zone>();
-                logStream.WriteLine("No zones file found, so new a collection was created.");
+                WriteLineLog("No zones file found, so new a collection was created.");
             }
             catch (Exception ex)
             {
@@ -114,7 +124,7 @@ namespace Roadplus.Server
                     Serializer.Serialize<List<Zone>>(fs, zones);
                 }
 
-                logStream.WriteLine("Zones saved to file.");
+                WriteLineLog("Zones saved to file.");
             }
             catch(Exception ex)
             {
@@ -139,7 +149,7 @@ namespace Roadplus.Server
         {
             if (!IsRunning)
             {
-                logStream.WriteLine("Starting server... ");
+                WriteLineLog("Starting server... ");
 
                 LoadZones();
                 if (Settings.EnableHttp)
@@ -150,7 +160,7 @@ namespace Roadplus.Server
                 service.Start();
                 IsRunning = true;
 
-                logStream.WriteLine("Server started.");
+                WriteLineLog("Server started.");
             }
         }
 
@@ -158,7 +168,7 @@ namespace Roadplus.Server
         {
             if (IsRunning)
             {
-                logStream.WriteLine("Stopping server... ");
+                WriteLineLog("Stopping server... ");
 
                 foreach (Zone z in zones)
                 {
@@ -188,7 +198,7 @@ namespace Roadplus.Server
                 SaveZones();
                 IsRunning = false;
 
-                logStream.WriteLine("Server stopped.");
+                WriteLineLog("Server stopped.");
             }
         }
     }

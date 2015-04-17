@@ -61,7 +61,7 @@ namespace Roadplus.Server
             { "CREATE", CommandType.Create },
             { "REMOVE", CommandType.Remove },
             { "EDIT", CommandType.Edit },
-            // format: >arduino:<port>:<command>:<payload>:;
+            // format: >arduino:<port>:<baudrate>:<command>:<payload>:;
             // summar: arduino override
             { "ARDUINO", CommandType.RoadDirect },
 

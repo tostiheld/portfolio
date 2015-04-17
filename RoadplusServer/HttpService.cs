@@ -16,8 +16,6 @@ namespace Roadplus.Server
                 throw new NotSupportedException(
                     "Needs Windows XP SP2, Server 2003 or later.");
 
-            // URI prefixes are required, for example 
-            // "http://localhost:8080/index/".
             if (prefixes == null || prefixes.Length == 0)
                 throw new ArgumentException("prefixes");
 

@@ -40,7 +40,7 @@ namespace Roadplus.Server.Communication
 
             Command = command;
             Payload = payload;
-            PayloadType = payloadtype;
+            PayloadType = payloadtype.Normalize();
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Roadplus.Server.Communication
                         if (s.ToUpper() != cmdstr &&
                             s != "")
                         {
-                            payload.Add(s);
+                            payload.Add(s.Normalize());
                         }
                     }
                     output = new Message(command, payload.ToArray(), payloadtype);
@@ -144,8 +144,10 @@ namespace Roadplus.Server.Communication
                             command = pair.Key;
                         }
                     }
-                    return MessageStart + command + 
-                           MessageSplit + payload + MessageTerminator;
+                    byte[] bytestring = Encoding.Default.GetBytes(
+                           MessageStart + command + 
+                           MessageSplit + payload + MessageTerminator);
+                    return Encoding.ASCII.GetString(bytestring);
             }
         }
     }

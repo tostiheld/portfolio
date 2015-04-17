@@ -3,6 +3,7 @@ using System.Text;
 using System.IO;
 using System.IO.Ports;
 using System.Net;
+using System.Threading;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Json;
 
@@ -50,43 +51,63 @@ namespace Roadplus.Server
         {
             if (message.MessageSource.Type == SourceTypes.UI)
             {
-                string roadpayload = "";
-                for (int i = 2; i < message.Payload.Length; i++)
+                try
                 {
-                    roadpayload += message.Payload[i] + ":";
-                }
-                string port = message.Payload[1];
-                string roadstring = 
-                    Message.MessageStart + 
-                    message.Payload[0] +
-                    Message.MessageSplit +
-                    roadpayload +
-                    Message.MessageTerminator;
-
-                Message toRoad;
-                if (Message.TryParse(roadstring, out toRoad))
-                {
-                    try
+                    string roadpayload = "";
+                    for (int i = 3; i < message.Payload.Length; i++)
                     {
-                        using (SerialPort sPort = new SerialPort(port))
-                        {
-                            sPort.Open();
-                            sPort.Write(toRoad.ToString("ascii"));
-                            sPort.Close();
-                        }
+                        roadpayload += message.Payload[i] + ":";
                     }
-                    catch (Exception ex)
+                    string port = message.Payload[0];
+                    int rate = Convert.ToInt32(message.Payload[1]);
+                    string roadstring = 
+                        Message.MessageStart + 
+                        message.Payload[2] +
+                        Message.MessageSplit +
+                        roadpayload +
+                        Message.MessageTerminator;
+
+                    Message toRoad;
+                    if (Message.TryParse(roadstring, out toRoad))
+                    {
+                        Thread sendThread = new Thread(new ThreadStart(delegate {
+                            using (SerialPort sPort = new SerialPort(port, rate, Parity.None, 8, StopBits.One))
+                            {
+                                sPort.Open();
+                                Thread.Sleep(4000);
+                                byte[] bytes = Encoding.ASCII.GetBytes(
+                                    toRoad.ToString("ascii"));
+                                sPort.Write(bytes, 0, bytes.Length);
+                                Thread.Sleep(1000);
+                                sPort.Close();
+                            }
+                        }));
+                        sendThread.Start();
+                    }
+                    else
                     {
                         TrySendFailure(
                             message.MessageSource.IP,
-                            ex.Message);
+                            "Command parse error");
                     }
+
+                    WriteLineLog(
+                        String.Format(
+                        "Manual override from {0} to {1}. Command: {2}",
+                        message.MessageSource.IP,
+                        port,
+                        toRoad.ToString("ascii")));
+                    TrySendMessage(
+                        message.MessageSource.IP,
+                        new Message(
+                        CommandType.Acknoledge,
+                        new string[] { port }, "override"));
                 }
-                else
+                catch (Exception ex)
                 {
                     TrySendFailure(
                         message.MessageSource.IP,
-                        "Command parse error");
+                        ex.Message);
                 }
             }
         }
@@ -116,12 +137,12 @@ namespace Roadplus.Server
                     {
                         case "ui":
                             session.SourceType = SourceTypes.UI;
-                            logStream.WriteLine(
+                            WriteLineLog(
                                 "Session at " + session.IP + " identified as UI");
                             break;
                         case "car":
                             session.SourceType = SourceTypes.Car;
-                            logStream.WriteLine(
+                            WriteLineLog(
                                 "Session at " + session.IP + " identified as car");
                             break;
                         default:
@@ -160,7 +181,7 @@ namespace Roadplus.Server
             {
                 try
                 {
-                    switch (message.Payload[0])
+                    switch (message.Payload[0].ToLower())
                     {
                         case "ports":
                             string[] portnames = SerialPort.GetPortNames();
@@ -194,7 +215,7 @@ namespace Roadplus.Server
             {
                 try
                 {
-                    switch (message.Payload[0])
+                    switch (message.Payload[0].ToLower())
                     {
                         default:
                             TrySendFailure(
@@ -218,7 +239,7 @@ namespace Roadplus.Server
             {
                 try
                 {
-                    switch (message.Payload[0])
+                    switch (message.Payload[0].ToLower())
                     {
                         case "zone":
                             CreateZone(message);
@@ -251,7 +272,7 @@ namespace Roadplus.Server
             {
                 try
                 {
-                    switch (message.Payload[0])
+                    switch (message.Payload[0].ToLower())
                     {
                         default:
                             TrySendFailure(
@@ -275,7 +296,7 @@ namespace Roadplus.Server
             {
                 try
                 {
-                    switch (message.Payload[0])
+                    switch (message.Payload[0].ToLower())
                     {
                         default:
                             TrySendFailure(
