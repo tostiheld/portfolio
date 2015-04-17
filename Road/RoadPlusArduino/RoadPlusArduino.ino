@@ -16,13 +16,12 @@ Servo Servo2;
 //Define Pins:
 const int trigPin1 = A0;
 const int echoPin1 = A1;
-const int trigPin2 = A3;
+const int trigPin2 = A4;
 const int echoPin2 = A3;
 const int servoPin1 = A2;
-const int servoPin2 = A3;
+const int servoPin2 = A5;
 
 //set constants:
-const int BaudRate = 19200;
 const int timeOutPulseRead = 15000;
 const int MaxDistance = 200.0;
 const int MinDistance = 2.0;
