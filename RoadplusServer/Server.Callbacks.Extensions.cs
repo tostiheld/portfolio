@@ -186,8 +186,8 @@ namespace Roadplus.Server
                         String.Format(
                         "Session at {0} removed school with id {1} from zone {2}",
                         message.MessageSource.IP.ToString(),
-                        id.ToString(),
-                        sid.ToString()));
+                        sid.ToString(),
+                        id.ToString()));
                     TrySendMessage(
                         message.MessageSource.IP,
                         new Message(
@@ -212,7 +212,43 @@ namespace Roadplus.Server
 
         private void RemoveRoadConstruction(Message message)
         {
+            int id = Convert.ToInt32(message.Payload[1]);
+            int rid = Convert.ToInt32(message.Payload[2]);
 
+            Zone target = GetZoneByID(id);
+            if (target != null)
+            {
+                RoadConstruction targetR = target.TEMPGetRCByID(rid);
+                if (targetR != null)
+                {
+                    target.RoadConstructions.Remove(targetR);
+
+                    WriteLineLog(
+                        String.Format(
+                        "Session at {0} removed roadconstruction with id {1} from zone {2}",
+                        message.MessageSource.IP.ToString(),
+                        rid.ToString(),
+                        id.ToString()));
+                    TrySendMessage(
+                        message.MessageSource.IP,
+                        new Message(
+                        CommandType.Acknoledge,
+                        new string[] { id.ToString() },
+                    "roadconstructino-removed"));
+                }
+                else
+                {
+                    TrySendFailure(
+                        message.MessageSource.IP,
+                        "RoadConstruction with id " + rid.ToString() + " not found.");
+                }
+            }
+            else
+            {
+                TrySendFailure(
+                    message.MessageSource.IP,
+                    "Zone with id " + id.ToString() + " not found.");
+            }
         }
     }
 }
