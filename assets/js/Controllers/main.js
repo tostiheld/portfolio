@@ -38,6 +38,17 @@ $(document).ready(function () {
 
         e.preventDefault();
     });
+    // assign event handler to the Arduinoconnect button
+    $(".connectArduino").click(function (e) {
+        window.WebSocketC.handler.send(">GET:ports:;");
+        selectPort();
+        e.preventDefault();
+    });
+    // assign event handler to the Arduinoconnect button
+    $(".disconnectArduino").click(function (e) {
+        window.Handler.send(">Arduino:disconnect:;");
+        e.preventDefault();
+    });
 
     // assign event handler to the disconnect button
     $(".disconnect").click(function (e) {
@@ -152,5 +163,8 @@ $(document).ready(function () {
         });
     }
 
+    function selectPort() {
+        $('#portsModal').modal('show');
+    }
 
 });
