@@ -12,6 +12,7 @@ body {
 .view {
     margin: 0px auto;
     width: 900px;
+    max-width: 90%;
     text-align: left;
 }
 /* widgets */
