@@ -15,7 +15,9 @@ function Zones(table) {
 }
 
 Zones.prototype.Add = function (newZone) {
+    console.log(this.ZoneList);
     this.ZoneList.push(newZone);
+    console.log(this.ZoneList);
     this.addToGUI(newZone);
 }
 Zones.prototype.addToGUI = function (newZone) {
@@ -29,7 +31,6 @@ Zones.prototype.Remove = function (id) {
         if (this.ZoneList[key].ID == id) {
             this.removeFromGUI(this.ZoneList[key]);
             this.ZoneList.splice(key, 1);
-            console.log(this.ZoneList);
             return true;
         }
     }
@@ -37,4 +38,10 @@ Zones.prototype.Remove = function (id) {
 }
 Zones.prototype.removeFromGUI = function (Zone) {
     $('#' + Zone.ID, this.Element).remove();
+}
+Zones.prototype.RemoveAll = function () {
+    while (this.ZoneList.length > 0) {
+        this.Remove(this.ZoneList[0].ID);
+        console.log(this.ZoneList.length);
+    }
 }

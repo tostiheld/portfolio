@@ -26,12 +26,9 @@ $(document).ready(function () {
     ViewHandler.Show("debug");
 
 
-    Handler.ZoneList = new Zones($("#zoneTable"));
-
-
 
     // assign event handler to the connect button
-    $("#connect").click(function (e) {
+    $(".connect").click(function (e) {
         var server = Settings.URI;
 
         //if (typeof window.WebSocketClient.serverURI == "undefined") {
@@ -43,7 +40,7 @@ $(document).ready(function () {
     });
 
     // assign event handler to the disconnect button
-    $("#disconnect").click(function (e) {
+    $(".disconnect").click(function (e) {
         window.Handler.onDisconnect();
         window.WebSocketC.disconnect();
         window.WebSocketC == null;

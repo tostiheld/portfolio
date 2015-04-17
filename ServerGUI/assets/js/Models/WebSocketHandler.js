@@ -10,7 +10,7 @@
 function WebSocketHandler(console) {
     this.con = console;
     this.WebSocketC;
-    this.ZoneList;
+    this.Zones;
 }
 
 /**
@@ -29,12 +29,11 @@ WebSocketHandler.prototype.send = function (message) {
  *   - notify user of the connection
  */
 WebSocketHandler.prototype.onOpen = function () {
-    $("#connected").html('<i class="icon-check"></i>');
-    $("#connect").hide();
-    $("#disconnect").show();
+    $(".connect").hide();
+    $(".disconnect").show();
     $("#send").removeClass("disabled");
     this.send(">IDEN:UI:;");
-    this.ZoneList = new Zones($("#zoneTable"));
+    this.Zones = new Zones($("#zoneTable"));
     this.newZone(new Zone(1, "test"));
     this.newZone(new Zone(2, "test2"));
     this.newSchool(new School("12", "Fontys", "08:30", "15:30"), 1);
@@ -71,9 +70,8 @@ WebSocketHandler.prototype.onMessage = function (e) {
  *   - notify user of the connection
  */
 WebSocketHandler.prototype.onClose = function () {
-    $("#connected").html('<i class="icon-check-empty"></i>');
-    $("#disconnect").hide();
-    $("#connect").show();
+    $(".connect").show();
+    $(".disconnect").hide();
     $("#send").addClass("disabled");
 };
 
@@ -88,10 +86,11 @@ WebSocketHandler.prototype.onError = function (e) {
 
 WebSocketHandler.prototype.onDisconnect = function () {
     this.send(">DISC:;");
+    this.removeAll();
 }
 
 WebSocketHandler.prototype.newZone = function (newZone) {
-    this.ZoneList.Add(newZone);
+    this.Zones.Add(newZone);
     if (typeof newZone.X == "undefined") {
         var x = "0";
     } else {
@@ -104,12 +103,12 @@ WebSocketHandler.prototype.newZone = function (newZone) {
     }
     this.send(">Create:zone:" + newZone.ID + ":" + x + ":" + y + ":;");
     var wsh = this;
-    $("tr .remove", this.ZoneList.Element).on('click', function () {
+    $("tr .remove", this.Zones.Element).on('click', function () {
         wsh.removeZone($(this).parents("tr").attr("id"));
     });
 }
 WebSocketHandler.prototype.removeZone = function (id) {
-    if (this.ZoneList.Remove(id)) {
+    if (this.Zones.Remove(id)) {
         this.send(">Remove:zone:" + id + ":;");
         console.log("remove zone: " + id);
     } else {
@@ -119,11 +118,11 @@ WebSocketHandler.prototype.removeZone = function (id) {
 }
 
 WebSocketHandler.prototype.newSchool = function (school, zoneID) {
-    for (var skey in this.ZoneList.ZoneList) {
-        if (this.ZoneList.ZoneList[skey].ID == zoneID) {
-            this.ZoneList.ZoneList[skey].SchoolList.Add(school);
-            var schoolsTable = this.ZoneList.ZoneList[skey].SchoolList.Element;
-            this.updateGUI(this.ZoneList.ZoneList[skey]);
+    for (var skey in this.Zones.ZoneList) {
+        if (this.Zones.ZoneList[skey].ID == zoneID) {
+            this.Zones.ZoneList[skey].SchoolList.Add(school);
+            var schoolsTable = this.Zones.ZoneList[skey].SchoolList.Element;
+            this.updateGUI(this.Zones.ZoneList[skey]);
             var succeed = true;
             var dateStart = school.DateStart.replace(':', '-');
             var dateEnd = school.DateEnd.replace(':', '-');
@@ -139,9 +138,9 @@ WebSocketHandler.prototype.newSchool = function (school, zoneID) {
 }
 
 WebSocketHandler.prototype.removeSchool = function (schoolId) {
-    for (var zkey in this.ZoneList.ZoneList) {
-        if (this.ZoneList.ZoneList[zkey].SchoolList.Remove(schoolId)) {
-            this.updateGUI(this.ZoneList.ZoneList[zkey]);
+    for (var zkey in this.Zones.ZoneList) {
+        if (this.Zones.ZoneList[zkey].SchoolList.Remove(schoolId)) {
+            this.updateGUI(this.Zones.ZoneList[zkey]);
             console.log("remove school: " + schoolId);
             break;
         } else {
@@ -154,11 +153,11 @@ WebSocketHandler.prototype.removeSchool = function (schoolId) {
 
 WebSocketHandler.prototype.newRoadConstruction = function (roadConstruction, zoneID) {
 
-    for (var skey in this.ZoneList.ZoneList) {
-        if (this.ZoneList.ZoneList[skey].ID == zoneID) {
-            this.ZoneList.ZoneList[skey].RoadConstructionList.Add(roadConstruction);
-            var roadConstructionTable = this.ZoneList.ZoneList[skey].RoadConstructionList.Element;
-            this.updateGUI(this.ZoneList.ZoneList[skey]);
+    for (var skey in this.Zones.ZoneList) {
+        if (this.Zones.ZoneList[skey].ID == zoneID) {
+            this.Zones.ZoneList[skey].RoadConstructionList.Add(roadConstruction);
+            var roadConstructionTable = this.Zones.ZoneList[skey].RoadConstructionList.Element;
+            this.updateGUI(this.Zones.ZoneList[skey]);
             var succeed = true;
             this.send(">Create:roadconstruction:" + zoneID + ":" + roadConstruction.ID + ":" + roadConstruction.Name + ":" + roadConstruction.DateStart + ":" + roadConstruction.DateEnd + ":;");
         }
@@ -172,8 +171,8 @@ WebSocketHandler.prototype.newRoadConstruction = function (roadConstruction, zon
 }
 
 WebSocketHandler.prototype.removeRoadConstruction = function (roadConstructionId) {
-    for (var zkey in this.ZoneList.ZoneList) {
-        if (this.ZoneList.ZoneList[zkey].RoadConstructionList.Remove(roadConstructionId)) {
+    for (var zkey in this.Zones.ZoneList) {
+        if (this.Zones.ZoneList[zkey].RoadConstructionList.Remove(roadConstructionId)) {
             this.updateGUI(this.ZoneList.ZoneList[zkey]);
 
             console.log("remove roadConstruction: " + roadConstructionId);
@@ -187,12 +186,27 @@ WebSocketHandler.prototype.removeRoadConstruction = function (roadConstructionId
 }
 
 WebSocketHandler.prototype.updateGUI = function (zone) {
-    this.ZoneList.updateGUI(zone);
+    this.Zones.updateGUI(zone);
     //Fix so the Zone Remove event keeps working... refactor into method
     var wsh = this;
-    $("tr .remove", this.ZoneList.Element).on('click', function () {
+    $("tr .remove", this.Zones.Element).on('click', function () {
         wsh.removeZone($(this).parents("tr").attr("id"));
     });
+}
+
+WebSocketHandler.prototype.removeAll = function () {
+    console.log(this.Zones.ZoneList.length);
+    zonelist = this.Zones.ZoneList;
+    for (var zkey in zonelist) {
+        var zone = zonelist[zkey];
+        for (var skey in zone.SchoolList.SchoolList) {
+            zone.SchoolList.Remove(zone.SchoolList.SchoolList[skey].ID);
+        }
+        for (var rkey in zone.RoadConstructionList.RoadConstructionList) {
+            zone.RoadConstructionList.Remove(zone.RoadConstructionList.RoadConstructionList[rkey].ID);
+        }
+    }
+    this.Zones.RemoveAll();
 }
 
 WebSocketHandler.prototype.getData = function () {
@@ -204,18 +218,18 @@ WebSocketHandler.prototype.getData = function () {
     this.send(">GET:Ports:;");
 
     //Ask for all schools,roadConstructions,Vertexes en Edges
-    for (var key in this.ZoneList.ZoneList) {
-        console.log('Get Schools for Zone:' + this.ZoneList.ZoneList[key].ID);
-        this.send(">GET:schools:" + this.ZoneList.ZoneList[key].ID + ":;");
+    for (var key in this.Zones.ZoneList) {
+        console.log('Get Schools for Zone:' + this.Zones.ZoneList[key].ID);
+        this.send(">GET:schools:" + this.Zones.ZoneList[key].ID + ":;");
 
-        console.log('Get RoadConstructions for Zone:' + this.ZoneList.ZoneList[key].ID);
-        this.send(">GET:roadconstructions:" + this.ZoneList.ZoneList[key].ID + ":;");
+        console.log('Get RoadConstructions for Zone:' + this.Zones.ZoneList[key].ID);
+        this.send(">GET:roadconstructions:" + this.Zones.ZoneList[key].ID + ":;");
 
-        console.log('Get Vertexes for Zone:' + this.ZoneList.ZoneList[key].ID);
-        this.send(">GET:vertex:" + this.ZoneList.ZoneList[key].ID + ":;");
+        console.log('Get Vertexes for Zone:' + this.Zones.ZoneList[key].ID);
+        this.send(">GET:vertex:" + this.Zones.ZoneList[key].ID + ":;");
 
-        console.log('Get Edges for Zone:' + this.ZoneList.ZoneList[key].ID);
-        this.send(">GET:edges:" + this.ZoneList.ZoneList[key].ID + ":;");
+        console.log('Get Edges for Zone:' + this.Zones.ZoneList[key].ID);
+        this.send(">GET:edges:" + this.Zones.ZoneList[key].ID + ":;");
     };
 
 
