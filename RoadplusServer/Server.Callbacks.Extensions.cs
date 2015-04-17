@@ -140,6 +140,44 @@ namespace Roadplus.Server
                 message.MessageSource.IP,
                 success);
         }
+
+        private void RemoveZone(Message message)
+        {
+            int id = Convert.ToInt32(message.Payload[1]);
+
+            Zone target = GetZoneByID(id);
+            if (target != null)
+            {
+                zones.Remove(target);
+                WriteLineLog(
+                    String.Format(
+                    "Session at {0} removed zone with id {1}",
+                    message.MessageSource.IP.ToString(),
+                    id.ToString());
+                TrySendMessage(
+                    message.MessageSource.IP,
+                    new Message(
+                    CommandType.Acknoledge,
+                    new string[] { id },
+                    "zone"));
+            }
+            else
+            {
+                TrySendFailure(
+                    message.MessageSource.IP,
+                    "Zone with id " + id.ToString + " not found.");
+            }
+        }
+
+        private void RemoveSchool(Message message)
+        {
+
+        }
+
+        private void RemoveRoadConstruction(Message message)
+        {
+
+        }
     }
 }
 

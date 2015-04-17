@@ -274,6 +274,15 @@ namespace Roadplus.Server
                 {
                     switch (message.Payload[0].ToLower())
                     {
+                        case "zone":
+                            RemoveZone(message);
+                            break;
+                        case "school":
+                            RemoveSchool(message);
+                            break;
+                        case "roadconstruction":
+                            RemoveRoadConstruction(message);
+                            break;
                         default:
                             TrySendFailure(
                                 message.MessageSource.IP,
