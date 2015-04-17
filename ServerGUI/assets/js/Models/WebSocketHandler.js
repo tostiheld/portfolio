@@ -195,17 +195,18 @@ WebSocketHandler.prototype.updateGUI = function (zone) {
 }
 
 WebSocketHandler.prototype.removeAll = function () {
-    console.log(this.Zones.ZoneList);
-    for (var zkey in this.Zones.ZoneList) {
-        var zone = this.Zones.ZoneList[zkey];
+    console.log(this.Zones.ZoneList.length);
+    zonelist = this.Zones.ZoneList;
+    for (var zkey in zonelist) {
+        var zone = zonelist[zkey];
         for (var skey in zone.SchoolList.SchoolList) {
             zone.SchoolList.Remove(zone.SchoolList.SchoolList[skey].ID);
         }
         for (var rkey in zone.RoadConstructionList.RoadConstructionList) {
             zone.RoadConstructionList.Remove(zone.RoadConstructionList.RoadConstructionList[rkey].ID);
         }
-        this.Zones.Remove(zone.ID);
     }
+    this.Zones.RemoveAll();
 }
 
 WebSocketHandler.prototype.getData = function () {
