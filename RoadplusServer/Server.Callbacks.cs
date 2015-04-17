@@ -38,12 +38,57 @@ namespace Roadplus.Server
                 { CommandType.Create, CreateCallback },
                 { CommandType.Remove, RemoveCallback },
                 { CommandType.Edit, EditCallback },
-
                 { CommandType.Disconnect, DisconnectCallback },
 
+                { CommandType.RoadDirect, RoadDirectCallback },
 
                 { CommandType.Unknown, UnknownCallback }
             };
+        }
+
+        private void RoadDirectCallback(Message message)
+        {
+            if (message.MessageSource.Type == SourceTypes.UI)
+            {
+                string roadpayload = "";
+                for (int i = 2; i < message.Payload.Length; i++)
+                {
+                    roadpayload += message.Payload[i] + ":";
+                }
+                string port = message.Payload[1];
+                string roadstring = 
+                    Message.MessageStart + 
+                    message.Payload[0] +
+                    Message.MessageSplit +
+                    roadpayload +
+                    Message.MessageTerminator;
+
+                Message toRoad;
+                if (Message.TryParse(roadstring, out toRoad))
+                {
+                    try
+                    {
+                        using (SerialPort sPort = new SerialPort(port))
+                        {
+                            sPort.Open();
+                            sPort.Write(toRoad.ToString("ascii"));
+                            sPort.Close();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        TrySendFailure(
+                            message.MessageSource.IP,
+                            ex.Message);
+                    }
+                }
+                else
+                {
+                    TrySendFailure(
+                        message.MessageSource.IP,
+                        "Command parse error");
+                }
+            }
         }
 
         private void UnknownCallback(Message message)

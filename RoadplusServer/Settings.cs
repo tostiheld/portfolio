@@ -61,6 +61,9 @@ namespace Roadplus.Server
             { "CREATE", CommandType.Create },
             { "REMOVE", CommandType.Remove },
             { "EDIT", CommandType.Edit },
+            // format: >arduino:<port>:<command>:<payload>:;
+            // summar: arduino override
+            { "ARDUINO", CommandType.RoadDirect },
 
             // format: >SIGN:<speed>:;
             // summary: sets road sign at the specified speed

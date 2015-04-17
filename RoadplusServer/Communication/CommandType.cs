@@ -16,6 +16,7 @@ namespace Roadplus.Server.Communication
         Remove,
         Edit,
 
+        RoadDirect,
         SetRoadSign,
         Temperature,
 
