@@ -162,6 +162,16 @@ namespace Roadplus.Server
                 {
                     switch (message.Payload[0])
                     {
+                        case "ports":
+                            string[] portnames = SerialPort.GetPortNames();
+                            Message toSend = new Message(
+                                CommandType.Acknoledge,
+                                portnames,
+                                "ports");
+                            TrySendMessage(
+                                message.MessageSource.IP,
+                                toSend);
+                            break;
                         default:
                             TrySendFailure(
                                 message.MessageSource.IP,
