@@ -14,7 +14,7 @@ void GetDistance()
     Richting = false;
   }
   Servo1.write(Positie + offsetServo1);
-//  Servo2.write(Positie + offsetServo2);
+  Servo2.write(Positie + offsetServo2);
 
 
   //Measure Distance Sensor 1
@@ -23,10 +23,10 @@ void GetDistance()
   digitalWrite(trigPin1, LOW);
   float distance1 = (pulseIn(echoPin1, HIGH, timeOutPulseRead) / 2) / 29.1;
   //Measure Distance Sensor 2
-//  digitalWrite(trigPin2, HIGH);
-//  delayMicroseconds(100);
-//  digitalWrite(trigPin2, LOW);
-//  float distance2 = (pulseIn(echoPin2, HIGH, timeOutPulseRead) / 2) / 29.1;
+  digitalWrite(trigPin2, HIGH);
+  delayMicroseconds(100);
+  digitalWrite(trigPin2, LOW);
+  float distance2 = (pulseIn(echoPin2, HIGH, timeOutPulseRead) / 2) / 29.1;
 
 
 
@@ -47,16 +47,16 @@ void GetDistance()
   Serial.println(":;");
 
 //  //Servo 2 print:
-//  Serial.print(">Dist2:");
-//  Serial.print(Positie);
-//  Serial.print(":");
-//  if (distance2 < MinDistance || distance2 > MaxDistance)
-//  {
-//    Serial.print("Out of Range");
-//  }
-//  else
-//  {
-//    Serial.print(distance2);
-//  }
-//  Serial.println(":;");
+  Serial.print(">Dist2:");
+  Serial.print(Positie);
+  Serial.print(":");
+  if (distance2 < MinDistance || distance2 > MaxDistance)
+  {
+    Serial.print("Out of Range");
+  }
+  else
+  {
+    Serial.print(distance2);
+  }
+  Serial.println(":;");
 }

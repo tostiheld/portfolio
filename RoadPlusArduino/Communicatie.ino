@@ -9,9 +9,7 @@ void GetMessage()
   int endSymbol = message.indexOf(';');
   int metaSymbol = message.indexOf(':');
   if (startSymbol > -1 && endSymbol > -1 && metaSymbol > -1)
-  {
-    // <xxxx:iets:;
-    
+  { 
     meta = message.substring(startSymbol + 1, metaSymbol); //xxxx
     metaMessage = message.substring(metaSymbol + 1, endSymbol); //iets
     if (metaMessage.indexOf(':') > -1)
