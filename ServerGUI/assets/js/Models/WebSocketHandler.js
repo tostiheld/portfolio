@@ -52,17 +52,8 @@ WebSocketHandler.prototype.onMessage = function (e) {
     } catch (e) {
         console.log("this is no json");
     }
-    //if ports
-    if (json['payloadtype'] == "ports") {
-        var ports = json['payload'];
-        for (var pkey in ports) {
-            $(".arduinoPorts").append("<option>" + ports[pkey] + "</option>");
-        }
-    }
-
-
     //if temperature
-    if (json['payloadtype'] == "temperature") {
+    if (json['datatype'] == "temperature") {
         var minT = -30;
         var maxT = 50;
         var tempT = json['metadata'][0] + -(minT);
@@ -117,6 +108,7 @@ WebSocketHandler.prototype.newZone = function (newZone) {
     });
 }
 WebSocketHandler.prototype.removeZone = function (id) {
+    this.removeZoneChilds(id);
     if (this.Zones.Remove(id)) {
         this.send(">Remove:zone:" + id + ":;");
         console.log("remove zone: " + id);
@@ -208,14 +200,25 @@ WebSocketHandler.prototype.removeAll = function () {
     zonelist = this.Zones.ZoneList;
     for (var zkey in zonelist) {
         var zone = zonelist[zkey];
-        for (var skey in zone.SchoolList.SchoolList) {
-            zone.SchoolList.Remove(zone.SchoolList.SchoolList[skey].ID);
-        }
-        for (var rkey in zone.RoadConstructionList.RoadConstructionList) {
-            zone.RoadConstructionList.Remove(zone.RoadConstructionList.RoadConstructionList[rkey].ID);
-        }
+        this.removeZoneChilds(zone.ID);
     }
     this.Zones.RemoveAll();
+}
+
+WebSocketHandler.prototype.removeZoneChilds = function (id) {
+    var zonelist = this.Zones.ZoneList;
+    for (var zkey in zonelist) {
+        if (zonelist[zkey].ID == id) {
+            var zone = zonelist[zkey];
+            for (var skey in zone.SchoolList.SchoolList) {
+                zone.SchoolList.Remove(zone.SchoolList.SchoolList[skey].ID);
+            }
+            for (var rkey in zone.RoadConstructionList.RoadConstructionList) {
+                zone.RoadConstructionList.Remove(zone.RoadConstructionList.RoadConstructionList[rkey].ID);
+            }
+        }
+    }
+
 }
 
 WebSocketHandler.prototype.getData = function () {
