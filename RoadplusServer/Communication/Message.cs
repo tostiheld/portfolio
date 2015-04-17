@@ -61,20 +61,23 @@ namespace Roadplus.Server.Communication
                 {
                     string cmdstr = parts[0].ToUpper();
                     CommandType command;
-                    if (Settings.Messages.TryGetValue(cmdstr, out command))
+                    string payloadtype = "";
+                    if (!Settings.Messages.TryGetValue(cmdstr, out command))
                     {
-                        List<string> payload = new List<string>();
-                        foreach (string s in parts)
-                        {
-                            if (s.ToUpper() != cmdstr &&
-                                s != "")
-                            {
-                                payload.Add(s);
-                            }
-                        }
-                        output = new Message(command, payload.ToArray());
-                        return true;
+                        payloadtype = cmdstr;
+                        command = CommandType.Unknown;
                     }
+                    List<string> payload = new List<string>();
+                    foreach (string s in parts)
+                    {
+                        if (s.ToUpper() != cmdstr &&
+                            s != "")
+                        {
+                            payload.Add(s);
+                        }
+                    }
+                    output = new Message(command, payload.ToArray(), payloadtype);
+                    return true;
                 }
             }
             else

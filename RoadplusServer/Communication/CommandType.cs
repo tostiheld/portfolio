@@ -17,7 +17,9 @@ namespace Roadplus.Server.Communication
         Edit,
 
         SetRoadSign,
-        Temperature
+        Temperature,
+
+        Unknown = 9999
     }
 }
 

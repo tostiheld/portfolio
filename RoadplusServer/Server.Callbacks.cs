@@ -39,9 +39,24 @@ namespace Roadplus.Server
                 { CommandType.Remove, RemoveCallback },
                 { CommandType.Edit, EditCallback },
 
-                { CommandType.Disconnect, DisconnectCallback }
+                { CommandType.Disconnect, DisconnectCallback },
 
+
+                { CommandType.Unknown, UnknownCallback }
             };
+        }
+
+        private void UnknownCallback(Message message)
+        {
+            string payloadstring = "";
+            foreach (string s in message.Payload)
+            {
+                payloadstring = s + ":";
+            }
+
+            TrySendFailure(
+                message.MessageSource.IP,
+                "Command " + message.PayloadType + " unkown. " + payloadstring);
         }
 
         private void IdentificationCallback(Message message)
@@ -96,11 +111,50 @@ namespace Roadplus.Server
 
         private void GetCallback(Message message)
         {
+            if (message.MessageSource.Type == SourceTypes.UI)
+            {
+                try
+                {
+                    switch (message.Payload[0])
+                    {
+                        default:
+                            TrySendFailure(
+                                message.MessageSource.IP,
+                                "No get callback for " + message.Payload[0]);
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    TrySendFailure(
+                        message.MessageSource.IP,
+                        ex.Message);
+                }
+            }
         }
         
         private void SetCallback(Message message)
         {
-
+            if (message.MessageSource.Type == SourceTypes.UI)
+            {
+                try
+                {
+                    switch (message.Payload[0])
+                    {
+                        default:
+                            TrySendFailure(
+                                message.MessageSource.IP,
+                                "No set callback for " + message.Payload[0]);
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    TrySendFailure(
+                        message.MessageSource.IP,
+                        ex.Message);
+                }
+            }
         }
 
         private void CreateCallback(Message message)
@@ -109,8 +163,6 @@ namespace Roadplus.Server
             {
                 try
                 {
-                    int id = Convert.ToInt32(message.Payload[1]);
-
                     switch (message.Payload[0])
                     {
                         case "zone":
@@ -121,6 +173,11 @@ namespace Roadplus.Server
                             break;
                         case "roadconstruction":
                             CreateRoadConstruction(message);
+                            break;
+                        default:
+                            TrySendFailure(
+                                message.MessageSource.IP,
+                                "No create callback for " + message.Payload[0]);
                             break;
                     }
                 }
@@ -135,12 +192,50 @@ namespace Roadplus.Server
         
         private void RemoveCallback(Message message)
         {
-
+            if (message.MessageSource.Type == SourceTypes.UI)
+            {
+                try
+                {
+                    switch (message.Payload[0])
+                    {
+                        default:
+                            TrySendFailure(
+                                message.MessageSource.IP,
+                                "No remove callback for " + message.Payload[0]);
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    TrySendFailure(
+                        message.MessageSource.IP,
+                        ex.Message);
+                }
+            }
         }
         
         private void EditCallback(Message message)
         {
-
+            if (message.MessageSource.Type == SourceTypes.UI)
+            {
+                try
+                {
+                    switch (message.Payload[0])
+                    {
+                        default:
+                            TrySendFailure(
+                                message.MessageSource.IP,
+                                "No edit callback for " + message.Payload[0]);
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    TrySendFailure(
+                        message.MessageSource.IP,
+                        ex.Message);
+                }
+            }
         }
 
         private void DisconnectCallback(Message message)
