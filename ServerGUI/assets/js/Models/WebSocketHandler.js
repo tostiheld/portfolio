@@ -52,8 +52,17 @@ WebSocketHandler.prototype.onMessage = function (e) {
     } catch (e) {
         console.log("this is no json");
     }
+    //if ports
+    if (json['payloadtype'] == "ports") {
+        var ports = json['payload'];
+        for (var pkey in ports) {
+            $(".arduinoPorts").append("<option>" + ports[pkey] + "</option>");
+        }
+    }
+
+
     //if temperature
-    if (json['datatype'] == "temperature") {
+    if (json['payloadtype'] == "temperature") {
         var minT = -30;
         var maxT = 50;
         var tempT = json['metadata'][0] + -(minT);

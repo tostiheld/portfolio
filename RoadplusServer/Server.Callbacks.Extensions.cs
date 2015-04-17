@@ -153,19 +153,19 @@ namespace Roadplus.Server
                     String.Format(
                     "Session at {0} removed zone with id {1}",
                     message.MessageSource.IP.ToString(),
-                    id.ToString());
+						id.ToString()));
                 TrySendMessage(
                     message.MessageSource.IP,
                     new Message(
                     CommandType.Acknoledge,
-                    new string[] { id },
+						new string[] { id.ToString() },
                     "zone"));
             }
             else
             {
                 TrySendFailure(
                     message.MessageSource.IP,
-                    "Zone with id " + id.ToString + " not found.");
+					"Zone with id " + id.ToString() + " not found.");
             }
         }
 
