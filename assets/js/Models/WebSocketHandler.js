@@ -29,9 +29,8 @@ WebSocketHandler.prototype.send = function (message) {
  *   - notify user of the connection
  */
 WebSocketHandler.prototype.onOpen = function () {
-    $("#connected").html('<i class="icon-check"></i>');
-    $("#connect").hide();
-    $("#disconnect").show();
+    $(".connect").hide();
+    $(".disconnect").show();
     $("#send").removeClass("disabled");
     this.send(">IDEN:UI:;");
     this.Zones = new Zones($("#zoneTable"));
@@ -71,9 +70,8 @@ WebSocketHandler.prototype.onMessage = function (e) {
  *   - notify user of the connection
  */
 WebSocketHandler.prototype.onClose = function () {
-    $("#connected").html('<i class="icon-check-empty"></i>');
-    $("#disconnect").hide();
-    $("#connect").show();
+    $(".connect").show();
+    $(".disconnect").hide();
     $("#send").addClass("disabled");
 };
 
