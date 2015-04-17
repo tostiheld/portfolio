@@ -38,7 +38,7 @@ WebSocketHandler.prototype.onOpen = function () {
     this.newZone(new Zone(1, "test"));
     this.newZone(new Zone(2, "test2"));
     this.newSchool(new School("12", "Fontys", "08:30", "15:30"), 1);
-    this.newRoadConstruction(new RoadConstruction("Aids", "01-05-2015", "05-05-2015", "5"), 1);
+    this.newRoadConstruction(new RoadConstruction("Road Construction 1", "01-05-2015", "05-05-2015", "5"), 1);
     //this.getData();
 };
 /**
