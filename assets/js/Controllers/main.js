@@ -58,27 +58,6 @@ $(document).ready(function () {
         e.preventDefault();
     });
 
-    $("#newZoneForm").submit(function (e) {
-        e.preventDefault();
-        $(".modal.in").modal('hide');
-        window.WebSocketC.handler.newZone(new Zone($("input[name='zoneID']", this).val(), $("input[name='zoneName']", this).val()));
-
-    });
-
-    $("#newSchoolForm").submit(function (e) {
-        e.preventDefault();
-        $(".modal.in").modal('hide');
-        window.WebSocketC.handler.newSchool(new School($("input[name='schoolID']", this).val(), $("input[name='schoolName']", this).val(), $("input[name='timeStart']", this).val(), $("input[name='timeEnd']", this).val()), 1);
-
-    });
-
-    $("#newRoadConstructionForm").submit(function (e) {
-        e.preventDefault();
-        $(".modal.in").modal('hide');
-        window.WebSocketC.handler.newRoadConstruction(new RoadConstruction($("input[name='roadConstructionID']", this).val(), $("input[name='roadConstructionName']", this).val(), $("input[name='dateStart']", this).val(), $("input[name='dateEnd']", this).val()), 1);
-
-    });
-
 
 
     $("#portsForm").submit(function (e) {
@@ -170,4 +149,10 @@ function selectPort(zoneid) {
     window.WebSocketC.handler.send(">GET:ports:;");
     $('#portsModal').modal('show');
     $('#portsModal input[name="id"]').val(zoneid);
+}
+
+
+
+function dl(message) {
+    //console.log(message);
 }
