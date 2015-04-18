@@ -4,7 +4,7 @@ function View(name, viewElement) {
 }
 View.prototype.Show = function () {
     this.Element.show();
-    console.log(this);
+    dl(this);
 }
 View.prototype.Hide = function () {
     this.Element.hide();
@@ -16,7 +16,7 @@ function Views() {
 Views.prototype.Add = function (name, viewElement) {
     var newView = new View(name, viewElement);
     this.ViewsList.push(newView);
-    console.log(this.ViewsList);
+    dl(this.ViewsList);
 }
 Views.prototype.Show = function (name) {
     this.hideAll();
