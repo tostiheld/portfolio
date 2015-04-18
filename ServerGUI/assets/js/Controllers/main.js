@@ -38,17 +38,6 @@ $(document).ready(function () {
 
         e.preventDefault();
     });
-    // assign event handler to the Arduinoconnect button
-    $(".connectArduino").click(function (e) {
-        window.WebSocketC.handler.send(">GET:ports:;");
-        selectPort();
-        e.preventDefault();
-    });
-    // assign event handler to the Arduinoconnect button
-    $(".disconnectArduino").click(function (e) {
-        window.Handler.send(">Arduino:disconnect:;");
-        e.preventDefault();
-    });
 
     // assign event handler to the disconnect button
     $(".disconnect").click(function (e) {
@@ -89,6 +78,19 @@ $(document).ready(function () {
         window.WebSocketC.handler.newRoadConstruction(new RoadConstruction($("input[name='roadConstructionID']", this).val(), $("input[name='roadConstructionName']", this).val(), $("input[name='dateStart']", this).val(), $("input[name='dateEnd']", this).val()), 1);
 
     });
+
+
+
+    $("#portsForm").submit(function (e) {
+        e.preventDefault();
+        $(".modal.in").modal('hide');
+        var zoneID = $("input[name='id']", this).val();
+        var portName = $("select[name='port']", this).val()
+        window.WebSocketC.handler.send(">SET:zone:" + zoneID + ":road:" + portName + ":;");
+        window.WebSocketC.handler.Zones.byId(zoneID).arduinoPort = portName;
+    });
+
+
 
 
 
@@ -162,9 +164,10 @@ $(document).ready(function () {
             window.WebSocketC.send($(this).text());
         });
     }
-
-    function selectPort() {
-        $('#portsModal').modal('show');
-    }
-
 });
+
+function selectPort(zoneid) {
+    window.WebSocketC.handler.send(">GET:ports:;");
+    $('#portsModal').modal('show');
+    $('#portsModal input[name="id"]').val(zoneid);
+}

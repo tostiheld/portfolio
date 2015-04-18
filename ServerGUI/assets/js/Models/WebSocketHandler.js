@@ -52,8 +52,13 @@ WebSocketHandler.prototype.onMessage = function (e) {
     } catch (e) {
         console.log("this is no json");
     }
-    //if temperature
-    if (json['datatype'] == "temperature") {
+    //if ports
+    if (json['payloadtype'] == "ports") {
+        var ports = json['payload'];
+        for (var pkey in ports) {
+            $(".arduinoPorts").append("<option>" + ports[pkey] + "</option>");
+        }
+    } else if (json['datatype'] == "temperature") {
         var minT = -30;
         var maxT = 50;
         var tempT = json['metadata'][0] + -(minT);
@@ -192,6 +197,9 @@ WebSocketHandler.prototype.updateGUI = function (zone) {
     var wsh = this;
     $("tr .remove", this.Zones.Element).on('click', function () {
         wsh.removeZone($(this).parents("tr").attr("id"));
+    });
+    $("tr .addArduino", this.Zones.Element).on('click', function () {
+        selectPort($(this).parents("tr").attr("id"));
     });
 }
 
