@@ -7,7 +7,8 @@ var ZoneModel = function (zones) {
     self.zones = ko.observableArray(ko.utils.arrayMap(zones, function (zone) {
         return {
             ID: zone.ID,
-            Name: zone.Name,
+            Name: ko.observable(zone.Name),
+            Arduino: ko.observable(zone.Arduino),
             Schools: ko.observableArray(ko.utils.arrayMap(zone.Schools, function (school) {
                 return {
                     ID: school.ID,
@@ -25,10 +26,14 @@ var ZoneModel = function (zones) {
                 };
             })),
             Vertexes: ko.observableArray(zone.Vertexes),
-            Edges: ko.observableArray(zone.Edges),
-            Arduino: zone.Arduino
+            Edges: ko.observableArray(zone.Edges)
         };
     }));
+
+    //
+    // MAKE AN OBSERVABLE ARDUINO PORTS LIST
+    //
+    self.availableArduinoPorts = ko.observableArray();
 
     //
     // ADD SCHOOL FROM GUI
@@ -43,11 +48,7 @@ var ZoneModel = function (zones) {
             $("input[name='dateEnd']", formElement).val())
 
         //empty form
-        $("select[name='zoneID']", formElement).val("");
-        $("input[name='schoolID']", formElement).val("");
-        $("input[name='schoolName']", formElement).val("");
-        $("input[name='dateStart']", formElement).val("");
-        $("input[name='dateEnd']", formElement).val("");
+        clearForm(formElement);
 
         //close popup
         $(".modal.in").modal('hide');
@@ -85,11 +86,7 @@ var ZoneModel = function (zones) {
             $("input[name='dateEnd']", formElement).val())
 
         //empty form
-        $("select[name='zoneID']", formElement).val("");
-        $("input[name='roadcID']", formElement).val("");
-        $("input[name='roadcName']", formElement).val("");
-        $("input[name='dateStart']", formElement).val("");
-        $("input[name='dateEnd']", formElement).val("");
+        clearForm(formElement);
 
         //close popup
         $(".modal.in").modal('hide');
@@ -121,9 +118,39 @@ var ZoneModel = function (zones) {
         self.addZone($("input[name='zoneID']", formElement).val(), $("input[name='zoneName']", formElement).val());
 
         //empty form
-        $("input[name='zoneID']", formElement).val("");
-        $("input[name='zoneName']", formElement).val("");
+        clearForm(formElement);
 
+        //close popup
+        $(".modal.in").modal('hide');
+    };
+
+    //
+    // ADD Arduino
+    //
+    self.addArduino = function (zoneID, arduinoPort) {
+        // find correct zone
+
+        var zone = self.findZoneByID(zoneID);
+        var index = self.zones.indexOf(zone);
+        // Add arduino to zone
+        console.log("index:" + index);
+        console.log(zone);
+        self.zones()[index].Arduino(arduinoPort);
+
+        //self.zones.push(self.zones()[index]);
+        // Send to server
+        window.Handler.connectArduino(zoneID, arduinoPort);
+    };
+
+
+    //
+    // ADD ZONE FROM GUI
+    //
+    self.UIaddArduino = function (formElement) {
+        //add zone to zones
+        self.addArduino($("input[name='id']", formElement).val(), $("select[name='arduinoPort']", formElement).val());
+        //empty form
+        clearForm(formElement);
         //close popup
         $(".modal.in").modal('hide');
     };
@@ -134,12 +161,12 @@ var ZoneModel = function (zones) {
     self.addZone = function (id, name) {
         var newZone = {
                 ID: id,
-                Name: name,
+                Name: ko.observable(name),
                 Schools: ko.observableArray(),
                 RoadConstructions: ko.observableArray(),
                 Vertexes: ko.observableArray(),
                 Edges: ko.observableArray(),
-                Arduino: ""
+                Arduino: ko.observable("")
             }
             // Add to zones list
         self.zones.push(newZone);
@@ -160,6 +187,8 @@ var ZoneModel = function (zones) {
         });
         return zone;
     }
+
+
 
     //
     // REMOVE ZONE FROM UI
@@ -203,6 +232,12 @@ var ZoneModel = function (zones) {
         window.Handler.removeZone(roadc.ID);
     }
 };
+
+
+
+/////////
+///////// JUST SOME GAY TEST DATA
+/////////
 
 var school = function () {
     this.ID = "5";

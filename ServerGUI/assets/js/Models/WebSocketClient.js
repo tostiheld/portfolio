@@ -25,21 +25,16 @@ function WebSocketClient(serverURI, handler) {
         console.log(e);
 
     };
-}
-
-/**
- * Send a message to the WebSocket Server
- */
-WebSocketClient.prototype.send = function (message) {
-    if (this.ws.readyState == this.STATE_CONNECTED) {
-        this.handler.send(message);
-    } else {
-        this.handler.onError("Not Connected");
+    this.send = function (message) {
+        if (this.ws.readyState == this.STATE_CONNECTED) {
+            this.handler.send(message);
+        } else {
+            this.handler.onError("Not Connected");
+        }
+    };
+    this.disconnect = function () {
+        handler.onDisconnect();
+        this.ws.close();
     }
-};
-/**
- * close the connection
- */
-WebSocketClient.prototype.disconnect = function () {
-    this.ws.close();
+
 }
