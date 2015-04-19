@@ -5533,16 +5533,16 @@ End#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O49">
       <dia:attribute name="obj_pos">
-        <dia:point val="38.95,35"/>
+        <dia:point val="39.6635,35"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.9,34.95;56.44,40.05"/>
+        <dia:rectangle val="39.6135,34.95;55.6135,40.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="38.95,35"/>
+        <dia:point val="39.6635,35"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.440000000000001"/>
+        <dia:real val="15.9"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5"/>
@@ -5691,10 +5691,10 @@ End#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#actionsource#</dia:string>
+                <dia:string>#exchange#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#ActivityFactory#</dia:string>
+                <dia:string>#MessageExchange#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -7053,14 +7053,14 @@ ICustomFormatter#</dia:string>
     </dia:object>
     <dia:object type="Standard - ZigZagLine" version="1" id="O59">
       <dia:attribute name="obj_pos">
-        <dia:point val="47.67,40.0503"/>
+        <dia:point val="47.6135,40.0503"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.62,40.0003;53.1988,45.0614"/>
+        <dia:rectangle val="47.5635,40.0003;53.1988,45.0614"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="47.67,40.0503"/>
-        <dia:point val="47.67,42.4999"/>
+        <dia:point val="47.6135,40.0503"/>
+        <dia:point val="47.6135,42.4999"/>
         <dia:point val="52.8679,42.4999"/>
         <dia:point val="52.8679,44.9496"/>
       </dia:attribute>
@@ -8215,14 +8215,14 @@ ICustomFormatter#</dia:string>
     </dia:object>
     <dia:object type="Standard - Line" version="0" id="O80">
       <dia:attribute name="obj_pos">
-        <dia:point val="47.6466,29.4494"/>
+        <dia:point val="47.6342,29.4494"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.3301,29.3992;47.9919,35.0616"/>
+        <dia:rectangle val="47.2906,29.3992;47.9524,35.0616"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="47.6466,29.4494"/>
-        <dia:point val="47.6626,34.9498"/>
+        <dia:point val="47.6342,29.4494"/>
+        <dia:point val="47.6201,34.9498"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -8271,14 +8271,14 @@ ICustomFormatter#</dia:string>
     </dia:object>
     <dia:object type="Standard - Line" version="0" id="O82">
       <dia:attribute name="obj_pos">
-        <dia:point val="56.4398,37.3635"/>
+        <dia:point val="55.6135,37.3759"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="56.389,37.0022;59.0616,37.6639"/>
+        <dia:rectangle val="55.5628,37.0018;59.0618,37.6635"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="56.4398,37.3635"/>
-        <dia:point val="58.9498,37.3245"/>
+        <dia:point val="55.6135,37.3759"/>
+        <dia:point val="58.95,37.3241"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
