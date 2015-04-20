@@ -45,7 +45,7 @@ var ZoneModel = function (zones) {
             $("input[name='schoolID']", formElement).val(),
             $("input[name='schoolName']", formElement).val(),
             $("input[name='dateStart']", formElement).val(),
-            $("input[name='dateEnd']", formElement).val())
+            $("input[name='dateEnd']", formElement).val());
 
         //empty form
         clearForm(formElement);
@@ -83,7 +83,7 @@ var ZoneModel = function (zones) {
             $("input[name='roadcID']", formElement).val(),
             $("input[name='roadcName']", formElement).val(),
             $("input[name='dateStart']", formElement).val(),
-            $("input[name='dateEnd']", formElement).val())
+            $("input[name='dateEnd']", formElement).val());
 
         //empty form
         clearForm(formElement);
@@ -160,15 +160,15 @@ var ZoneModel = function (zones) {
     //
     self.addZone = function (id, name) {
         var newZone = {
-                ID: id,
-                Name: ko.observable(name),
-                Schools: ko.observableArray(),
-                RoadConstructions: ko.observableArray(),
-                Vertexes: ko.observableArray(),
-                Edges: ko.observableArray(),
-                Arduino: ko.observable("")
-            }
-            // Add to zones list
+            ID: id,
+            Name: ko.observable(name),
+            Schools: ko.observableArray(),
+            RoadConstructions: ko.observableArray(),
+            Vertexes: ko.observableArray(),
+            Edges: ko.observableArray(),
+            Arduino: ko.observable("")
+        };
+        // Add to zones list
         self.zones.push(newZone);
         // Send to server
         window.Handler.addZone(newZone);
@@ -186,7 +186,7 @@ var ZoneModel = function (zones) {
             }
         });
         return zone;
-    }
+    };
 
 
 
@@ -213,24 +213,24 @@ var ZoneModel = function (zones) {
     //
     self.UIremoveSchool = function (school) {
         $.each(self.zones(), function () {
-            this.Schools.remove(school)
-        })
+            this.Schools.remove(school);
+        });
 
         //send to server
         window.Handler.removeSchool(school.ID);
-    }
+    };
 
     //
     // REMOVE ROADCONSTRUCTION FROM UI
     //
     self.UIremoveRoadC = function (roadc) {
         $.each(self.zones(), function () {
-            this.RoadConstructions.remove(roadc)
-        })
+            this.RoadConstructions.remove(roadc);
+        });
 
         //send to server
         window.Handler.removeZone(roadc.ID);
-    }
+    };
 };
 
 
@@ -251,7 +251,7 @@ var roadc = function () {
     this.Name = "roadconstruction";
     this.DateStart = "23232";
     this.DateEnd = "24778";
-}
+};
 
 var zone = function (school, roadc) {
     this.ID = 1;
@@ -261,4 +261,4 @@ var zone = function (school, roadc) {
     this.Vertexes = [];
     this.Edges = [];
     this.Arduino = "";
-}
+};

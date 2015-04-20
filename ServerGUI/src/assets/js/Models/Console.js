@@ -6,13 +6,13 @@ function Console(consoleElement) {
 
     this.appendFromClient = function (data) {
         this.append('<div class="msg"><i class="icon-laptop">You said:</i><pre>' + this.encodeHTML(data) + "</pre></div>");
-    }
+    };
     this.appendFromServer = function (data) {
         this.append('<div class="msg"><i class="icon-white icon-cloud">Server said:</i><pre>' + this.encodeHTML(data) + "</pre></div>");
-    }
+    };
     this.appendError = function (data) {
         this.append('<div class="msg"><i class="icon-white icon-warning-sign">Error:</i><pre>' + this.encodeHTML(data) + "</pre></div>");
-    }
+    };
 
     this.append = function (data) {
         // only scroll to bottom if we are currently 
@@ -20,7 +20,7 @@ function Console(consoleElement) {
         // if the user is browsing earlier content, 
         // don't force them down
         // the page when the console updates
-        scrollToBottom = false
+        scrollToBottom = false;
         if (this.isAtBottom()) {
             scrollToBottom = true;
         }
@@ -39,7 +39,7 @@ function Console(consoleElement) {
      */
     this.isAtBottom = function () {
         return (this.con[0].scrollHeight - this.con[0].clientHeight <= this.con.scrollTop());
-    }
+    };
 
     /**
      * encode HTML so it's safe for printing
@@ -48,18 +48,18 @@ function Console(consoleElement) {
         // this method taken from:
         // http://stackoverflow.com/questions/1219860/html-encoding-in-javascript-jquery
         return $('<div/>').text(message).html();
-    }
+    };
 
     this.getLocalCommands = function () {
         var LatestCommands;
-        if (localStorage.commands === null || localStorage.commands == "" || typeof localStorage.commands == "undefined") {
+        if (localStorage.commands === null || localStorage.commands === "" || typeof localStorage.commands == "undefined") {
             LatestCommands = [];
             console.log("no storage set");
         } else {
             LatestCommands = JSON.parse(localStorage.commands);
         }
         return LatestCommands;
-    }
+    };
 
     this.addToLatestCommands = function (message) {
         message = $.trim(message);
@@ -71,7 +71,7 @@ function Console(consoleElement) {
         }
         LatestCommands.push(message);
         localStorage.commands = JSON.stringify(LatestCommands);
-    }
+    };
 
     //Handels key events for the console
     //e = eventData
@@ -90,7 +90,7 @@ function Console(consoleElement) {
             } else {
                 window.commandIndex--;
             }
-            if (window.commandIndex == 0 || window.commandIndex > LatestCommands.length) {
+            if (window.commandIndex === 0 || window.commandIndex > LatestCommands.length) {
                 $(element).val("");
                 window.commandIndex--;
 
@@ -113,5 +113,5 @@ function Console(consoleElement) {
             }
             dl(window.commandIndex);
         }
-    }
+    };
 }

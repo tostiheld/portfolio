@@ -35,6 +35,6 @@ function WebSocketClient(serverURI, handler) {
     this.disconnect = function () {
         handler.onDisconnect();
         this.ws.close();
-    }
+    };
 
 }
