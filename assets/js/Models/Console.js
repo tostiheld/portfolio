@@ -71,14 +71,11 @@ function Console(consoleElement) {
         }
         LatestCommands.push(message);
         localStorage.commands = JSON.stringify(LatestCommands);
-        //$(".latestCommands").prepend("<button type='button' class='btn btn-default'>" + message + "</button>");
-
-        // on latest command click
-        $(".latestCommands .btn").on("click", function () {
-            window.WebSocketC.send($(this).text());
-        });
     }
 
+    //Handels key events for the console
+    //e = eventData
+    //element = the consoleInput element
     this.handleKeyEvents = function (e, element) {
         console.log("test");
         if (e.which == 13) {
