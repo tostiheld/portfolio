@@ -70,9 +70,9 @@ namespace Roadplus.Server.Communication
                         }, listener.GetContext());
                     }
                 }
-                catch 
+                catch (HttpListenerException)
                 {
-                    throw new NotImplementedException();
+                    // ignore exception on close
                 }
             });
         }
