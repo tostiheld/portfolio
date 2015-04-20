@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using System.IO;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 
@@ -21,37 +22,72 @@ namespace Roadplus.Server.Communication
         {
             using (MemoryStream ms = new MemoryStream())
             {
-                DataContractJsonSerializer json = 
-                    new DataContractJsonSerializer(typeof(Message));
-                json.WriteObject(ms, toformat);
-                byte[] bytes = ms.ToArray();
-                string returnval = Encoding.UTF8.GetString(bytes);
-                return returnval;
+                try
+                {
+                    DataContractJsonSerializer json = 
+                        new DataContractJsonSerializer(typeof(Response));
+                    json.WriteObject(ms, toformat);
+                    byte[] bytes = ms.ToArray();
+                    string returnval = Encoding.UTF8.GetString(bytes);
+                    return returnval;
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
             }
         }
 
         public override bool TryParse(Message value, out Activity result)
         {
+            result = null;
+
+            if (value.Format != MessageFormat)
+            {
+                return false;
+            }
+
             try
             {
-                throw new NotImplementedException();
-
-                /*
-                byte[] bytes = Encoding.UTF8.GetBytes(input);
+                byte[] bytes = Encoding.UTF8.GetBytes(value.Content);
+                JSONMessage output = null;
                 using (MemoryStream ms = new MemoryStream(bytes))
                 {
                     DataContractJsonSerializer json = 
-                        new DataContractJsonSerializer(typeof(Message));
-                    output = json.ReadObject(ms) as Message;
+                        new DataContractJsonSerializer(typeof(JSONMessage));
+                    output = json.ReadObject(ms) as JSONMessage;
                     return true;
-                }*/
+                }
+
+                if (output != null)
+                {
+                    List<object> parameters = new List<object>();
+
+                    foreach (string s in output.Parameters)
+                    {
+                        int parameter;
+                        if (Int32.TryParse(s, out parameter))
+                        {
+                            parameters.Add(parameter);
+                        }
+                        else
+                        {
+                            parameters.Add(s);
+                        }
+                    }
+
+                    result = new Activity(
+                        output.Type,
+                        value.From,
+                        parameters.ToArray());
+                    return true;
+                }
             }
             catch (Exception ex)
             {
                 if (ex is InvalidDataContractException ||
                     ex is SerializationException)
                 {
-                    result = null;
                     return false;
                 }
 

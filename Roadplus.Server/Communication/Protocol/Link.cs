@@ -26,10 +26,7 @@ namespace Roadplus.Server.Communication.Protocol
 
         public void Send(Response response)
         {
-            string data = response.ToString(
-                Parent.MessageFormat,
-                Parent.MessageFormatter);
-
+            string data = response.Format(Parent.MessageFormatter);
             Send(data);
         }
 

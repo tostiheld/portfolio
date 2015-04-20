@@ -3,7 +3,7 @@ using Roadplus.Server.EntityManagement;
 
 namespace Roadplus.Server.Communication.Protocol
 {
-    public abstract class FormatHandler : IFormatProvider, ICustomFormatter
+    public abstract class FormatHandler
     {
         public string MessageFormat { get; private set;}
 
@@ -15,45 +15,15 @@ namespace Roadplus.Server.Communication.Protocol
         protected abstract string FormatResponse(Response toformat);
         public abstract bool TryParse(Message value, out Activity result);
 
-        #region IFormatProvider implementation
-
-        public object GetFormat(Type formatType)
+        public string Format(Response toformat)
         {
-            if (formatType == typeof(ICustomFormatter))
+            if (toformat == null)
             {
-                return this;
+                throw new ArgumentNullException("toformat");
             }
-            else
-            {
-                return null;
-            }
+
+            return FormatResponse(toformat);
         }
-
-        #endregion
-
-        #region ICustomFormatter implementation
-
-        public string Format(string format, object arg, IFormatProvider formatProvider)
-        {
-            if (format != MessageFormat)
-            {
-                throw new NotSupportedException("Wrong formatter");
-            }
-
-            else if (arg is Response)
-            {
-                return FormatResponse(arg as Response);
-            }
-            else
-            {
-                throw new NotImplementedException(
-                    "This formatter is only meant to format Response types");
-            }
-        }
-
-        #endregion
-
-
     }
 }
 
