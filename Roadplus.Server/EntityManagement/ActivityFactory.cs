@@ -34,6 +34,15 @@ namespace Roadplus.Server.EntityManagement
             {
                 messageExchange.Post(newActivity);
             }
+            else
+            {
+                Response fail = new Response(
+                    ResponseType.Failure,
+                    e.FoundMessage.From,
+                    this.GetType(),
+                    new string[] { "Message format invalid or not supported" });
+                messageExchange.Post(fail);
+            }
         }
 
         public void Register(FormatHandler handler)
