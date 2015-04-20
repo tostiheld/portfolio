@@ -8,37 +8,50 @@ namespace Roadplus.Server.Communication
 {
     public class HttpService
     {
-        private readonly HttpListener _listener = new HttpListener();
+        private HttpListener listener;
         private string root;
 
-        public HttpService(string httproot, params string[] prefixes)
+        public HttpService(IPEndPoint endpoint, string httproot)
         {
             if (!HttpListener.IsSupported)
+            {
                 throw new NotSupportedException(
-                    "Needs Windows XP SP2, Server 2003 or later.");
+                    "HttpListener is not supported on this platform");
+            }
+            else if (endpoint == null)
+            {
+                throw new ArgumentException("endpoint");
+            }
+            else if (httproot == null)
+            {
+                throw new ArgumentNullException("httproot");
+            }
 
-            if (prefixes == null || prefixes.Length == 0)
-                throw new ArgumentException("prefixes");
+            listener = new HttpListener();
 
-            foreach (string s in prefixes)
-                _listener.Prefixes.Add(s);
+            string prefix = String.Format(
+                "http://{0}:{1}/",
+                endpoint.Address.ToString(),
+                endpoint.Port.ToString());
 
+            listener.Prefixes.Add(prefix);
             root = httproot;
-
-            _listener.Start();
         }
 
         public void Start()
         {
+            // TODO: make this method less shit
+            listener.Start();
+
             ThreadPool.QueueUserWorkItem((o) =>
             {
                 try
                 {
-                    while (_listener.IsListening)
+                    while (listener.IsListening)
                     {
                         ThreadPool.QueueUserWorkItem((c) =>
-                                                     {
-                            var ctx = c as HttpListenerContext;
+                        {
+                            HttpListenerContext ctx = c as HttpListenerContext;
                             try
                             {
                                 string rstr = SendHttpResponse(ctx.Request);
@@ -46,16 +59,21 @@ namespace Roadplus.Server.Communication
                                 ctx.Response.ContentLength64 = buf.Length;
                                 ctx.Response.OutputStream.Write(buf, 0, buf.Length);
                             }
-                            catch { throw; }
+                            catch 
+                            {
+                                throw new NotImplementedException();
+                            }
                             finally
                             {
-                                // always close the stream
                                 ctx.Response.OutputStream.Close();
                             }
-                        }, _listener.GetContext());
+                        }, listener.GetContext());
                     }
                 }
-                catch { } // suppress any exceptions
+                catch 
+                {
+                    throw new NotImplementedException();
+                }
             });
         }
 
@@ -93,8 +111,8 @@ namespace Roadplus.Server.Communication
 
         public void Stop()
         {
-            _listener.Stop();
-            _listener.Close();
+            listener.Stop();
+            listener.Close();
         }
     }
 }
