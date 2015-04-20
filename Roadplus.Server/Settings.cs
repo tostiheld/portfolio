@@ -15,6 +15,7 @@ namespace Roadplus.Server
         public int BaudRate { get; set; }
         public string FileRoot { get; set; }
         public string HttpRoot { get; set; }
+        public int RoadDetectTimeOut { get; set; }
 
         public Settings()
         {
@@ -27,6 +28,7 @@ namespace Roadplus.Server
             FileRoot = Path.GetDirectoryName(
                 Assembly.GetExecutingAssembly().Location);
             HttpRoot = Path.Combine(FileRoot, "www/");
+            RoadDetectTimeOut = 60;
         }
     }
 }

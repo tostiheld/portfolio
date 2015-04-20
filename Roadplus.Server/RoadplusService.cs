@@ -60,7 +60,8 @@ namespace Roadplus.Server
             channels.Add(websocketService);
 
             roadLinkService = new RoadLinkManager(messageExchange,
-                                                  settings.BaudRate);
+                                                  settings.BaudRate,
+                                                  settings.RoadDetectTimeOut);
             activityFactory.Register(roadLinkService);
             channels.Add(roadLinkService);
         }
