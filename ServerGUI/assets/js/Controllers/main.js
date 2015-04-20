@@ -69,10 +69,14 @@ function selectPort(zone) {
     $('#portsModal input[name="id"]').val(zone.ID);
 }
 
+//This is a custom method to log messages.
+//The idea is that logging can be enabled/disabled
+//nex to that is dl shorter than console.log
 function dl(message) {
     //console.log(message);
 }
 
+//This method clears all element in a given element
 function clearForm(formElement) {
-    $(formElement).find("input[type=text], textarea").val("");
+    $(formElement).find("input, textarea, select").val("");
 }
