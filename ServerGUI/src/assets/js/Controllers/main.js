@@ -35,7 +35,6 @@ $(document).ready(function () {
     // assign event handler to the disconnect button
     $(".disconnect").click(function (e) {
         window.WebSocketC.disconnect();
-        window.WebSocketC == null;
         e.preventDefault();
     });
 
