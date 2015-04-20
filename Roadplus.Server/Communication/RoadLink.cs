@@ -99,14 +99,19 @@ namespace Roadplus.Server.Communication
         {
             buffer = "";
             receive = true;
+            Port.Open();
             receiveThread.Start();
         }
 
         public override void Stop()
         {
-            receive = false;
-            receiveThread.Join();
-            OnDisconnected();
+            if (receive)
+            {
+                receive = false;
+                Port.Close();
+                receiveThread.Join();
+                OnDisconnected();
+            }
         }
 
         #endregion
