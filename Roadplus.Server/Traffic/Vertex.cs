@@ -34,6 +34,8 @@ namespace Roadplus.Server.Traffic
         /// <param name="end">The point to connect to</param>
         public void Connect(Point end)
         {
+            throw new NotImplementedException();
+            /*
             // formula to check if two circles intersect
             // (R0-R1)^2 <= (x0-x1)^2+(y0-y1)^2 <= (R0+R1)^2
             int r = Settings.VertexRadius;
@@ -57,7 +59,7 @@ namespace Roadplus.Server.Traffic
                     endVertex,
                     newEdge);
                 NewConnection(this, e);
-            }
+            }*/
         }
 
         // MONODEVELOP IS INTELLIGENT AAHHHH
