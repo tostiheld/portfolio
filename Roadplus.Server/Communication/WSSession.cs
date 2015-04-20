@@ -19,6 +19,7 @@ namespace Roadplus.Server.Communication
         }
 
         private WebSocket webSocket;
+        private bool stopping;
 
         public WSSession(Channel parent, WebSocket socket)
             : base (parent)
@@ -65,8 +66,12 @@ namespace Roadplus.Server.Communication
 
         public override void Stop()
         {
-            webSocket.Close();
-            OnDisconnected();
+            if (!stopping)
+            {
+                stopping = true;
+                webSocket.Close();
+                OnDisconnected();
+            }
         }
 
         #endregion
