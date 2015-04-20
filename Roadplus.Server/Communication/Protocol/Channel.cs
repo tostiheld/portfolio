@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using Roadplus.Server.EntityManagement;
 
@@ -11,14 +12,22 @@ namespace Roadplus.Server.Communication.Protocol
         public event EventHandler<MessageFoundEventArgs> MessageFound;
 
         public string MessageFormat { get; private set; }
-        public IFormatProvider MessageFormatter { get; private set; }
+        public FormatHandler MessageFormatter { get; private set; }
+
+        protected ReadOnlyCollection<Link> Links 
+        {
+            get
+            {
+                return links.AsReadOnly();
+            }
+        }
 
         private List<Link> links;
 
         public Channel(
             MessageExchange exchange, 
             string messageformat,
-            IFormatProvider messageformatter)
+            FormatHandler messageformatter)
         {
             MessageFormat = messageformat;
             MessageFormatter = messageformatter;
@@ -120,12 +129,16 @@ namespace Roadplus.Server.Communication.Protocol
 
         public void Stop()
         {
+            BeforeStop();
+
             Response shutdown = new Response(
                 ResponseType.Information,
                 this.GetType(),
                 new string[] { "Channel closing" });
 
-            foreach (Link l in links)
+            // clone so we can modify
+            List<Link> temp = new List<Link>(links);
+            foreach (Link l in temp)
             {
                 l.Send(shutdown);
                 l.Stop();
@@ -135,6 +148,10 @@ namespace Roadplus.Server.Communication.Protocol
         }
 
         protected abstract void AtStart();
+        protected virtual void BeforeStop()
+        {
+
+        }
         protected abstract void AtStop();
     }
 }
