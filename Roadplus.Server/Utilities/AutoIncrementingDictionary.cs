@@ -16,6 +16,12 @@ namespace Roadplus.Server
 
         public void Add(T item)
         {
+            if (index++ == Int32.MaxValue)
+            {
+                throw new IndexOutOfRangeException(
+                    "Maximum amount of indices reached");
+            }
+
             internalDictionary.Add(index, item);
             index++;
         }
