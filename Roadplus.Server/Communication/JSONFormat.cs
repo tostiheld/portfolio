@@ -56,7 +56,6 @@ namespace Roadplus.Server.Communication
                     DataContractJsonSerializer json = 
                         new DataContractJsonSerializer(typeof(JSONMessage));
                     output = json.ReadObject(ms) as JSONMessage;
-                    return true;
                 }
 
                 if (output != null)
@@ -93,6 +92,8 @@ namespace Roadplus.Server.Communication
 
                 throw;
             }
+
+            return false;
         }
 
         #endregion

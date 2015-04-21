@@ -34,6 +34,24 @@ namespace Roadplus.Server.Communication.Protocol
             links = new List<Link>();
 
             exchange.NewResponse += Exchange_NewResponse;
+            exchange.NewActivity += Exchange_NewActivity;
+        }
+
+        // TODO: this method probably doesn't belong here.
+        private void Exchange_NewActivity(object sender, NewActivityEventArgs e)
+        {
+            if (e.NewActivity.From.Parent == this &&
+                e.NewActivity.Type == ActivityType.Identify)
+            {
+                LinkType linkType = LinkType.Unidentified;
+                if (Enum.TryParse(e.NewActivity.Parameters[0].ToString(), out linkType))
+                {
+                    e.NewActivity.From.Type = linkType;
+                    Trace.WriteLine(
+                        "Link at " + e.NewActivity.From.Address +
+                        " identified as " + linkType.ToString("G"));
+                }
+            }
         }
 
         private void Exchange_NewResponse(object sender, NewResponseEventArgs e)
@@ -66,7 +84,7 @@ namespace Roadplus.Server.Communication.Protocol
                 Link link = sender as Link;
                 links.Remove(link);
                 Trace.WriteLine(
-                    "Link at " + link.Address + " disconnected.");
+                    "Link at " + link.Address + " disconnected");
             }
         }
 
@@ -103,7 +121,7 @@ namespace Roadplus.Server.Communication.Protocol
             links.Add(link);
             link.Start();
             Trace.WriteLine(
-                "New link at " + link.Address + ".");
+                "New link at " + link.Address);
         }
 
         public void Post(Link from, string data)

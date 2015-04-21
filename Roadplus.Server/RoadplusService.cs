@@ -59,11 +59,12 @@ namespace Roadplus.Server
             activityFactory.Register(websocketService);
             channels.Add(websocketService);
 
+            /*
             roadLinkService = new RoadLinkManager(messageExchange,
                                                   settings.BaudRate,
                                                   settings.RoadDetectTimeOut);
             activityFactory.Register(roadLinkService);
-            channels.Add(roadLinkService);
+            channels.Add(roadLinkService);*/
         }
 
         public void Start()
