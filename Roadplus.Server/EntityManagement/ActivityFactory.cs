@@ -32,6 +32,18 @@ namespace Roadplus.Server.EntityManagement
             if (handler != null &&
                 handler.TryParse(e.FoundMessage, out newActivity))
             {
+                if (e.FoundMessage.From.Type == LinkType.Unidentified &&
+                    newActivity.Type != ActivityType.Identify)
+                {
+                    Response fail = new Response(
+                        ResponseType.Failure,
+                        e.FoundMessage.From,
+                        this.GetType(),
+                        new string[] { "Please identify first" });
+                    messageExchange.Post(fail);
+                    return;
+                }
+
                 messageExchange.Post(newActivity);
             }
             else

@@ -2,10 +2,15 @@ using System;
 using System.Text;
 using System.IO;
 using System.IO.Ports;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+
+using System.Linq;
 
 using Roadplus.Server.Communication.Protocol;
+using Roadplus.Server.EntityManagement;
 
 namespace Roadplus.Server.Communication
 {
@@ -21,71 +26,110 @@ namespace Roadplus.Server.Communication
 
         private const int BufferSize = 64;
 
-        private volatile bool search;
+        private volatile bool searching;
         private Thread searchThread;
-        private EventWaitHandle searchWait;
         private int baudRate;
-        private int timeOut;
 
-        public RoadLinkManager(MessageExchange exchange, int baudrate, int timeout)
+        private MessageExchange messageExchange;
+
+        public RoadLinkManager(MessageExchange exchange, int baudrate)
             : base(exchange,
                    "text",
                    new PlainTextFormat())
 
         {
-            //searchThread = new Thread(new ThreadStart(Search));
+            searchThread = new Thread(new ParameterizedThreadStart(Search));
             baudRate = baudrate;
-            searchWait = new EventWaitHandle(false, EventResetMode.AutoReset);
-            timeOut = timeout;
+            searching = false;
+
+            exchange.NewActivity += Exchange_NewActivity;
+            messageExchange = exchange;
         }
 
-        private async Task Search()
+        private void Exchange_NewActivity(object sender, NewActivityEventArgs e)
         {
-            while (search)
+            if (e.NewActivity.From.Type == LinkType.UI &&
+                e.NewActivity.Type == ActivityType.Get &&
+                e.NewActivity.Parameters[0].ToString() == "ports")
             {
-                string[] ports = SerialPort.GetPortNames();
-
-                foreach (string s in ports)
+                if (searching)
                 {
-                    await DetectRoadAt(s);
+                    Response response = new Response(
+                        ResponseType.Information,
+                        e.NewActivity.From,
+                        this.GetType(),
+                        new string[] { "Serial discover in progress" });
+                    messageExchange.Post(response);
                 }
-
-                // only poll every n seconds
-                // otherwise cpu usage will go through the roof
-                //Thread.Sleep(TimeSpan.FromSeconds(timeOut));
+                else
+                {
+                    searchThread.Start(e.NewActivity.From);
+                }
             }
         }
 
-        private async Task DetectRoadAt(string port)
+        private void Search(object returnLink)
         {
-            try
+            searching = true;
+
+            // filter out ports we already have
+            // TODO: can we optimise this?
+            List<string> ports = new List<string>();
+            foreach (string s in SerialPort.GetPortNames())
             {
-                bool used = false;
                 foreach (Link l in Links)
                 {
-                    if (l.Address == port)
+                    if (s == l.Address)
                     {
-                        used = true;
-                        break;
+                        continue;
                     }
                 }
 
-                if (used)
+                ports.Add(s);
+            }
+
+            foreach (string s in ports)
+            {
+                DetectRoadAt(s);
+            }
+
+            if (returnLink is Link)
+            {
+                List<string> newports = new List<string>();
+
+                foreach (Link l in Links)
                 {
-                    return;
+                    newports.Add(l.Address);
                 }
 
+                Response respone = new Response(
+                    ResponseType.Acknoledge,
+                    returnLink as Link,
+                    this.GetType(),
+                    newports.ToArray());
+                messageExchange.Post(respone);
+            }
+
+
+            searching = false;
+        }
+
+        private void DetectRoadAt(string port)
+        {
+            try
+            {
                 string message = "";
                 SerialPort testPort = new SerialPort(port, baudRate);
                 testPort.Open();
-                Thread.Sleep(2000);
-                byte[] bytes = Encoding.ASCII.GetBytes(DiscoverString);
-                await testPort.BaseStream.WriteAsync(bytes, 0, bytes.Length);
+                // give the serial device 3 seconds to wake up
+                Thread.Sleep(3000);
+                testPort.Write(DiscoverString);
+                // give the device a few milliseconds to reply
                 Thread.Sleep(100);
                 if (testPort.BytesToRead > 0)
                 {
                     byte[] buffer = new byte[BufferSize];
-                    await testPort.BaseStream.ReadAsync(buffer, 0, buffer.Length);
+                    testPort.Read(buffer, 0, buffer.Length);
 
                     ASCIIEncoding encoder = new ASCIIEncoding();
                     message = encoder.GetString(buffer);
@@ -120,17 +164,16 @@ namespace Roadplus.Server.Communication
 
         protected override void AtStart()
         {
-            search = true;
-            Task.Run((Func<Task>)Search);
-        }
-
-        protected override void BeforeStop()
-        {
-            search = false;
         }
 
         protected override void AtStop()
         {
+            if (searching)
+            {
+                Trace.WriteLine(
+                    "Ending serial discover in progress, hang on a few seconds...");
+                searchThread.Join();
+            }
         }
 
         #endregion

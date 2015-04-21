@@ -147,8 +147,6 @@ namespace Roadplus.Server.Communication.Protocol
 
         public void Stop()
         {
-            BeforeStop();
-
             Response shutdown = new Response(
                 ResponseType.Information,
                 this.GetType(),
@@ -166,10 +164,6 @@ namespace Roadplus.Server.Communication.Protocol
         }
 
         protected abstract void AtStart();
-        protected virtual void BeforeStop()
-        {
-
-        }
         protected abstract void AtStop();
     }
 }
