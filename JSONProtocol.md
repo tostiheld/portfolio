@@ -133,7 +133,7 @@ payload = an object as specified below
 }
 ```
 
-Where <target> = object type to act on
+Where &lt;target&gt; = object type to act on
 
 ### Create
 ```json
@@ -146,8 +146,8 @@ Where <target> = object type to act on
 }
 ```
 
-Where <target> = the object type to create and <object> = the object 
-data as specified below
+Where &lt;target&gt; = the object type to create and &lt;object&gt; = 
+the object data as specified below
 
 #### Create objects
 Zone
@@ -188,10 +188,9 @@ Road Construction
 }
 ```
 
-Where <target> = the kind of object to remove and <id> is the id to 
-remove
+Where &lt;target&gt; = the kind of object to remove and &lt;id&gt; is 
+the id to remove
 
 ### Disconnect
-is niet nodig - je kan gwn socket.close doen ofzo en als er een error is
-ofzo kan je moeiteloos je opnieuw aanmelden op de server
+not needed - use socket.close() or someting
 
