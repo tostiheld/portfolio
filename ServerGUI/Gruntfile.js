@@ -1,24 +1,23 @@
 module.exports = function (grunt) {
 
-    // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         clean: {
-            all: ["dist/"],
-            tmp: ["dist/js/ServerGUI.js",
+            all: ["dist/"], //Clean whole folder
+            tmp: ["dist/js/ServerGUI.js", //clean only temporary files. This will be called at the end of all tasks
                   "dist/css/ServerGUI.css",
                   "dist/index.tmp.html",
                   "dist/css/ServerGUI.min.css",
                   "dist/css/vendor.css",
                   "dist/css/vendor.min.css"],
-            html: ["dist/index.tmp.html"],
-            css: ["dist/css/ServerGUI.css",
+            html: ["dist/index.tmp.html"],  // clean only tmp html files (used for watch)
+            css: ["dist/css/ServerGUI.css",  // clean only tmp css files (used for watch)
                   "dist/css/ServerGUI.min.css",
                   "dist/css/vendor.css",
                   "dist/css/vendor.min.css"],
-            js: ["dist/js/ServerGUI.js"]
+            js: ["dist/js/ServerGUI.js"]   // clean only js html files (used for watch)
         },
-        includes: {
+        includes: {    // Compiles all the partials into one html file
             files: {
                 src: ['src/index.html'],
                 dest: 'dist/index.tmp.html',
@@ -29,31 +28,24 @@ module.exports = function (grunt) {
                 }
             }
         },
-        concat: {
+        concat: {   //concats files
             options: {
-                // define a string to put between each file in the concatenated output
                 separator: ';'
             },
-            js: {
-                // the files to concatenate
+            js: { //concat all javascript files 
                 src: ['src/assets/js/**/*.js'],
-                // the location of the resulting JS file
                 dest: 'dist/js/<%= pkg.name %>.js'
             },
-            css: {
-                // the files to concatenate
+            css: { //concat all main css files
                 src: ['src/assets/css/*.css'],
-                // the location of the resulting JS file
                 dest: 'dist/css/<%= pkg.name %>.css'
             },
-            cssVendor: {
-                // the files to concatenate
+            cssVendor: { //concat the main css files with the extracted vendor css
                 src: ['dist/css/<%= pkg.name %>.min.css', 'dist/css/vendor.min.css'],
-                // the location of the resulting JS file
                 dest: 'dist/css/<%= pkg.name %>_vendor.min.css'
             }
         },
-        uglify: {
+        uglify: { //uglify the javascript!
             dist: {
                 files: {
                     'dist/js/<%= pkg.name %>.min.js': ['<%= concat.js.dest %>']
@@ -61,7 +53,7 @@ module.exports = function (grunt) {
             }
         },
         cssmin: {
-            main: {
+            main: { //uglify the main css
                 files: {
                     'dist/css/<%= pkg.name %>.min.css': ['<%= concat.css.dest %>']
                 },
@@ -69,7 +61,7 @@ module.exports = function (grunt) {
                     keepSpecialComments: 0
                 }
             },
-            vendor: {
+            vendor: { //uglify the vendor css
                 files: {
                     'dist/css/vendor.min.css': ['dist/css/vendor.css']
                 },
@@ -79,19 +71,19 @@ module.exports = function (grunt) {
             }
         },
         uncss: {
-            dist: {
+            dist: { //uncss the vendor css
                 files: {
                     'dist/css/vendor.css': ['dist/index.tmp.html']
                 }
             },
-            watch: {
+            watch: { //uncss the vendor css (used for watch, because the html file will be in another place)
                 files: {
                     'dist/css/vendor.css': ['dist/index.html']
                 }
             },
             options: {
                 stylesheets: ["../src/assets/css/vendor/bootstrap.min.css"],
-                ignore: ['.modal-open',
+                ignore: ['.modal-open', //ignore these styles because they are needed for modals (loaded by javascript)
                          '.modal-backdrop',
                          '.modal-content',
                          '.modal-backdrop.fade',
@@ -106,7 +98,7 @@ module.exports = function (grunt) {
 
             }
         },
-        htmlmin: {
+        htmlmin: { //minify the html
             dist: {
                 files: {
                     'dist/index.html': 'dist/index.tmp.html'
@@ -121,8 +113,7 @@ module.exports = function (grunt) {
                 }
             }
         },
-        jshint: {
-            // define the files to lint
+        jshint: { //check the javascript for errors
             files: ['gruntfile.js', 'src/assets/js/**/*.js'],
             options: {
                 globals: {
@@ -132,7 +123,7 @@ module.exports = function (grunt) {
                 }
             }
         },
-        copy: {
+        copy: { //copy's the font files needed by bootstrap (glyph icons)
             dist: {
                 expand: true,
                 cwd: 'src/assets/css/vendor/fonts/',
@@ -140,7 +131,8 @@ module.exports = function (grunt) {
                 dest: 'dist/fonts/',
             },
         },
-        watch: {
+        watch: { //watch, runs only the needed tasks for js/css or html
+                 // can be called with "grunt watch"
             js: {
                 files: ['<%= jshint.files %>'],
                 tasks: ['jshint', 'concat:js', 'uglify', 'clean:js']
@@ -169,6 +161,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
 
 
+    //default task runs with "grunt"
+    //while building use "grunt watch": it automatically recompiles the necessary things
     grunt.registerTask('default', ['jshint', 'clean:all', 'concat:js', 'concat:css', 'cssmin:main', 'includes', 'uncss:dist', 'cssmin:vendor', 'uglify', 'htmlmin', 'concat:cssVendor', 'copy', 'clean:tmp']);
 
 };
