@@ -1,61 +1,70 @@
 using System;
-using System.Runtime.Serialization;
+
+using Roadplus.Server.EntityManagement;
 
 namespace Roadplus.Server.Communication.Protocol
 {
-    [DataContract]
     public class Response
     {
-        [DataMember(Name="type")]
+        // json: type
         public ResponseType Type { get; private set; }
-        [DataMember(Name="from")]
-        public string From 
-        { 
-            get
-            {
-                return fromType.Name;
-            }
-            private set
-            {
-                // required for datacontract
-            }
-        }
-        [DataMember(Name="content")]
-        public string[] Content { get; private set; }
+        // json: activity-type
+        public ActivityType FromActivity { get; private set; }
+        // json: message
+        public string Message { get; private set; }
+        // json: payload
+        public object[] Payload { get; private set; }
+
         public Link To { get; private set; }
         public bool Broadcast { get; private set; }
         public LinkType? BroadcastTo { get; private set; }
 
-        private Type fromType;
-
-        public Response(ResponseType type, Link to, Type from, string[] content)
+        public Response(ResponseType type, ActivityType fromactivity, string message, Link to)
         {
             Type = type;
+            FromActivity = fromactivity;
+            Message = message;
+            Payload = null;
+
             To = to;
-            fromType = from;
-            Content = content;
             Broadcast = false;
             BroadcastTo = null;
         }
 
-        public Response(ResponseType type, Type from, string[] content)
+        public Response(ResponseType type, ActivityType fromactivity, string message, LinkType to)
         {
             Type = type;
+            FromActivity = fromactivity;
+            Message = message;
+            Payload = null;
+
             To = null;
-            fromType = from;
-            Content = content;
             Broadcast = true;
+            BroadcastTo = to;
+        }
+
+        public Response(ResponseType type, ActivityType fromactivity, object[] payload, Link to)
+        {
+            Type = type;
+            FromActivity = fromactivity;
+            Message = "";
+            Payload = payload;
+
+            To = to;
+            Broadcast = false;
             BroadcastTo = null;
         }
 
-        public Response(ResponseType type, Type from, string[] content, LinkType broadcasto)
+        public Response(ResponseType type, ActivityType fromactivity, object[] payload, LinkType to)
         {
             Type = type;
+            FromActivity = fromactivity;
+            Message = "";
+            Payload = payload;
+
             To = null;
-            fromType = from;
-            Content = content;
             Broadcast = true;
-            BroadcastTo = broadcasto;
+            BroadcastTo = to;
         }
 
         public string Format(FormatHandler handler)
