@@ -1,0 +1,96 @@
+<div id="simulation" class="view">
+    <h1>Simulation</h1>
+
+    <canvas id="canvas" width="600" height="525" style="border:1px solid black;"></canvas>
+    <script>
+        var AN = AN || {};
+        var clicks = 0;
+        var lastClick = [0, 0];
+        var cv, canvas;
+        var lines = [];
+
+        AN.initialize = function () {
+            cv = $("#canvas")[0];
+            canvas = cv.getContext("2d");
+            cv.addEventListener('click', AN.handleClick, false);
+            cv.addEventListener('mousemove', AN.handleMove, false);
+
+        };
+
+        AN.handleClick = function (e) {
+            x = AN.getCursorPosition(e)[0] - this.offsetLeft;
+            y = AN.getCursorPosition(e)[1] - this.offsetTop;
+
+            if (clicks == 0) {
+                clicks++;
+                lastClick = [x, y];
+            } else if (clicks == 1) {
+                AN.drawLine(x, y, true);
+            }
+        };
+        
+        AN.handleMove = function (e) {
+            x = AN.getCursorPosition(e)[0] - this.offsetLeft;
+            y = AN.getCursorPosition(e)[1] - this.offsetTop;
+
+            if (clicks == 1) {
+                AN.drawLine(x, y, false);
+            }
+        };
+
+        AN.getCursorPosition = function (e) {
+            var x;
+            var y;
+
+            if (e.pageX != undefined && e.pageY != undefined) {
+                x = e.pageX;
+                y = e.pageY;
+            } else {
+                x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+                y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+            }
+
+            return [x, y];
+        };
+
+        AN.drawLine = function (x, y, click) {
+
+            if(!click){
+                canvas.clearRect(0, 0, cv.width, cv.height);
+                $.each(lines, function(index, value){
+                   AN.drawLineNow(value[0],value[1],value[2],value[3]); 
+                });
+            }
+
+            AN.drawLineNow(lastClick[0],lastClick[1],x,y);
+
+            
+            if(click){
+                lines.push([lastClick[0],lastClick[1],x,y]);
+                clicks = 0;
+                console.log(lines);
+            }
+        };
+        
+        AN.drawLineNow = function(x1,y1,x2,y2){
+            canvas.beginPath();
+            canvas.moveTo(x1, y1);
+            canvas.setLineDash([0,0]);
+            canvas.lineTo(x2, y2);
+            canvas.lineWidth=20;
+            canvas.strokeStyle = '#000000';
+            canvas.stroke();
+            canvas.closePath();
+            
+            
+            canvas.beginPath();
+            canvas.moveTo(x1, y1);
+            canvas.lineTo(x2, y2);
+            canvas.setLineDash([6,10]);
+            canvas.lineWidth=3;
+            canvas.strokeStyle = '#ffffff';
+            canvas.stroke();
+            canvas.closePath();
+        };
+    </script>
+</div>

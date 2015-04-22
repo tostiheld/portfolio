@@ -22,6 +22,7 @@ $(document).ready(function () {
     ViewHandler.Add("schools", $("#schools"));
     ViewHandler.Add("roadConstructions", $("#roadConstructions"));
     ViewHandler.Add("zones", $("#zones"));
+    ViewHandler.Add("simulation", $("#simulation"));
     ViewHandler.Show("debug");
 
 
@@ -58,6 +59,12 @@ $(document).ready(function () {
         Console.handleKeyEvents(e, this);
     });
 
+    //
+    // LOAD CANVAS
+    //
+    $(document).ready(function(){
+       window.AN.initialize(); 
+    });
 
 
 });
