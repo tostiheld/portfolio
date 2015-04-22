@@ -38,6 +38,8 @@ namespace Roadplus.Server.Traffic
             //         We should adjust the ctor accordingly
 
             // also: english lol.
+
+			//STIJN: english > nederlands
 			Direction = target.Direction;
         }
     }
