@@ -26,10 +26,9 @@ JSON Messages
     'type': 0,
     'activity-type': 0,
     'message': 'info/error',
-    'payload': {
-        object
-    }
-    'payload-type': 'object'
+    'payload': [
+        object: { object }
+    ]
 }
 ```
 
@@ -42,27 +41,23 @@ member of the activity enum (to indicate what action was successful)
 
 message = a user-friendly description of the response
 
-payload = if the type is acknoledge and the activity has a product, the 
-product is broadcasted to every client
+payload = (always an array!) if the type is acknoledge and the activity 
+has a product, the product is broadcasted to every client
 
-payload-type = type of the product in payload
 
 ## Message structure
 ```json
 {
     'type': 0,
-    'payload-type': 'object'
-    'payload': {
-        object
-    }
+    'payload': [
+        object: { object }
+    ]
 }
 ```
 
 type = activity type (see enum)
 
-payload-type = what object to perform the activity on
-
-payload = an object as specified below
+payload = (always an array!) an object as specified below
 
 
 ## Payload and activity types
@@ -70,22 +65,82 @@ payload = an object as specified below
 ```json
 {
     'type': 1,
-    'payload-type': 'LinkType'
     'payload': {
-        <member of link enum>
+        linktype: <member of link enum>
     }
 }
 ```
+
+Expected response:
+```json
+{
+    'type': 0,
+    'activity-type': 1,
+    'message': 'Identification successful',
+    'payload': []
+}
+```
+
 
 ### Get
 #### Ports
 ```json
 {
     'type': 2,
-    'payload-type': 'none'
-    'payload': {
+    'payload': [
         "ports"
+    ]
+}
+```
+
+Expected response:
+```json
+{
+    'type': 0,
+    'activity-type': 2,
+    'message': '',
+    'payload': [
+        "port1",
+        "port2",
+        "etc..."
+    ]
+}
+```
+
+#### All entities
+```json
+{
+    'type': 2,
+    'payload': {
+        "all"
     }
+}
+```
+
+Expected response:
+```json
+{
+    'type': 0,
+    'activity-type': 2,
+    'message': '',
+    'payload': [
+        zones: [
+            { <zone1> },
+            { <zone2> },
+            { <etc...> },
+        ],
+        schools: [
+            { <school1> },
+            { <school2> },
+            { <etc...> },
+        ],
+        roadconstructions: [
+            { <rc1> },
+            { <rc2> },
+            { <etc...> },
+        ],
+        
+    ]
 }
 ```
 
@@ -93,10 +148,25 @@ payload = an object as specified below
 ```json
 {
     'type': 2,
-    'payload-type': 'Zone'
     'payload': {
-        "all" or <id>
+        "zone": "all" or <id>
     }
+}
+```
+
+Expected response:
+```json
+{
+    'type': 0,
+    'activity-type': 2,
+    'message': '',
+    'payload': [
+        zones: [
+            zone: { <zone1> },
+            zone: { <zone2> },
+            zone: { <etc...> },
+        ]
+    ]
 }
 ```
 
@@ -104,21 +174,52 @@ payload = an object as specified below
 ```json
 {
     'type': 2,
-    'payload-type': 'School'
     'payload': {
-        "all" or <id>
+        "school": "all" or <id>
     }
 }
 ```
+
+Expected response:
+```json
+{
+    'type': 0,
+    'activity-type': 2,
+    'message': '',
+    'payload': [
+        schools: [
+            school: { <school1> },
+            school: { <school2> },
+            school: { <etc...> },
+        ]
+    ]
+}
+```
+
 
 #### RoadConstruction
 ```json
 {
     'type': 2,
-    'payload-type': 'RoadConstruction'
-    'payload': {
-        "all" or <id>
-    }
+    'payload': [
+        roadconstruction: "all" or <id>
+    ]
+}
+```
+
+Expected response:
+```json
+{
+    'type': 0,
+    'activity-type': 2,
+    'message': '',
+    'payload': [
+        roadconstructions: [
+            roadconstruction: { <rc1> },
+            roadconstruction: { <rc2> },
+            roadconstruction: { <etc...> },
+        ]
+    ]
 }
 ```
 
@@ -126,10 +227,27 @@ payload = an object as specified below
 ```json
 {
     'type': 3,
-    'payload-type': '<target>'
-    'payload': {
-        "property": "value"
-    }
+    'payload': [
+        <target>: {
+            <id>,
+            "property": "value", etc...
+        }
+    ]
+}
+```
+
+Expected response:
+```json
+{
+    'type': 0,
+    'activity-type': 3,
+    'message': '',
+    'payload': [
+        <target>: {
+            <id>,
+            "property": "value", etc...
+        }
+    ]
 }
 ```
 
@@ -139,10 +257,21 @@ Where &lt;target&gt; = object type to act on
 ```json
 {
     'type': 4,
-    'payload-type': '<target>'
-    'payload': {
-        <object>
-    }
+    'payload': [
+        <target>: <object>, etc...
+    ]
+}
+```
+
+Expected response:
+```json
+{
+    'type': 0,
+    'activity-type': 4,
+    'message': '',
+    'payload': [
+        <target>: { object }, etc...
+    ]
 }
 ```
 
@@ -181,10 +310,21 @@ Road Construction
 ```json
 {
     'type': 5,
-    'payload-type': '<target>'
-    'payload': {
-        <id>
-    }
+    'payload': [
+        <target>: <id>, etc...
+    ]
+}
+```
+
+Expected response:
+```json
+{
+    'type': 0,
+    'activity-type': 5,
+    'message': '',
+    'payload': [
+        <target>: <id>
+    ]
 }
 ```
 
