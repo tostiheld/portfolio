@@ -43,6 +43,7 @@ JSON Messages
 * 1: Remove
 * 2: Edit
 * 3: Error
+* 4: Identify
 
 ## Payload Types
 * 0: Zone
@@ -51,6 +52,26 @@ JSON Messages
 * 3: PortList
 
 ## GUI -> Server
+### Identification
+This is send on connection
+```json
+{
+    'action': '4',
+    'payload': 'UI',
+    'payloadtype': ''
+}
+```
+
+### Disconnect
+This is send on connection
+```json
+{
+    'action': '4',
+    'payload': 'Disconnect',
+    'payloadtype': ''
+}
+```
+
 ### New School/RoadConstruction/Zone
 ```json
 {
