@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Roadplus.Server
+namespace Roadplus.Server.API
 {
     public class AutoIncrementingDictionary<T>
     {
@@ -14,7 +14,7 @@ namespace Roadplus.Server
             index = 0;
         }
 
-        public void Add(T item)
+        public int Add(T item)
         {
             if (index++ == Int32.MaxValue)
             {
@@ -24,6 +24,7 @@ namespace Roadplus.Server
 
             internalDictionary.Add(index, item);
             index++;
+            return index--;
         }
 
         public void RemoveAt(int index)

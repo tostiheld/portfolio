@@ -1,7 +1,6 @@
 using System;
-using Roadplus.Server.Communication.Protocol;
 
-namespace Roadplus.Server
+namespace Roadplus.Server.API
 {
     public class NewResponseEventArgs : EventArgs
     {

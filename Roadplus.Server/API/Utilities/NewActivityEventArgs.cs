@@ -1,7 +1,6 @@
 using System;
-using Roadplus.Server.EntityManagement;
 
-namespace Roadplus.Server
+namespace Roadplus.Server.API
 {
     public class NewActivityEventArgs : EventArgs
     {

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -20,13 +21,16 @@ namespace Roadplus.Server.API
         [JsonIgnore]
         public LinkType SourceType { get; private set; }
         [JsonIgnore]
-        public Type TargetType { get; set; }
+        public List<Type> TargetTypes { get; set; }
 
         public Activity(ActivityType type, string sourceaddress, LinkType sourcetype)
         {
             Type = type;
             SourceAddress = sourceaddress;
             SourceType = sourcetype;
+
+            Payload = null;
+            TargetTypes = new List<Type>()
         }
     }
 }
