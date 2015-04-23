@@ -158,11 +158,11 @@ function WebSocketHandler(console) {
         //send json
         this.send(JSON.stringify(json));
         
-        var json = [];
+        
 
         dl('Get Com Ports');
         //create json
-        var json;
+        json = [];
         json.type = 5;
         json.payload.roadConstruction = id;
         //send json
