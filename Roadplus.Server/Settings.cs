@@ -28,7 +28,7 @@ namespace Roadplus.Server
             FileRoot = Path.GetDirectoryName(
                 Assembly.GetExecutingAssembly().Location);
             HttpRoot = Path.Combine(FileRoot, "www/");
-            RoadDetectTimeOut = 60;
+            RoadDetectTimeOut = 300;
         }
     }
 }

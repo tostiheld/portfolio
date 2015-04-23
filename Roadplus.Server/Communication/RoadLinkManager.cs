@@ -39,6 +39,8 @@ namespace Roadplus.Server.Communication
             searchTimer = new System.Timers.Timer(
                 TimeSpan.FromSeconds(interval).TotalMilliseconds);
             searchTimer.Elapsed += searchTimer_Elapsed;
+            searchTimer.Enabled = false;
+            searchTimer.Start();
 
             searchThread = new Thread(new ThreadStart(Search));
             baudRate = baudrate;
@@ -155,7 +157,7 @@ namespace Roadplus.Server.Communication
 
         protected override void AtStart()
         {
-            searchTimer.Start();
+            searchThread.Start();
         }
 
         protected override void AtStop()

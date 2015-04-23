@@ -12,6 +12,7 @@ namespace Roadplus.Server
 {
     public class RoadplusService
     {
+        private MessageExchange messageExchange;
 
         private WSSessionManager websocketService;
         private RoadLinkManager roadLinkService;
@@ -44,7 +45,13 @@ namespace Roadplus.Server
                 settings.IP,
                 settings.Port);
 
+            messageExchange = new MessageExchange(new ActivityValidator());
 
+            roadLinkService = new RoadLinkManager(
+                messageExchange,
+                settings.BaudRate,
+                settings.RoadDetectTimeOut);
+            channels.Add(roadLinkService);
         }
 
         public void Start()
