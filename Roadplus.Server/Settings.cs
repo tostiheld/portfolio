@@ -19,7 +19,7 @@ namespace Roadplus.Server
 
         public Settings()
         {
-            IP = IPAddress.Any;
+            IP = IPAddress.Parse("127.0.0.1");
             Port = 42424;
             EnableHttp = true;
             LogToFile = false;
