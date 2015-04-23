@@ -52,6 +52,13 @@ namespace Roadplus.Server
                 settings.BaudRate,
                 settings.RoadDetectTimeOut);
             channels.Add(roadLinkService);
+
+            websocketService = new WSSessionManager(
+                messageExchange,
+                new IPEndPoint(
+                settings.IP,
+                settings.Port));
+            channels.Add(websocketService);
         }
 
         public void Start()
