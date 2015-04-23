@@ -16,8 +16,13 @@ function WebSocketHandler(console) {
         $(".disconnect").show();
         //Enable send message
         $("#send").removeClass("disabled");
-        // Send identification, so the server knows we are an UI
-        this.send(">IDEN:UI:;");
+        // Send identification, so the server knows we are an UI 
+        //create json
+        var json;
+        json.type = 1;
+        json.payload.linktype = 1;
+        //send json
+        this.send(JSON.stringify(json));
 
         //create some more data
         this.Zones.addZone(1, "testManual");
@@ -74,52 +79,94 @@ function WebSocketHandler(console) {
         if (typeof newZone.Y != "undefined") {
             y = newZone.Y;
         }
-        this.send(">Create:zone:" + newZone.ID + ":" + x + ":" + y + ":;");
+
+        //create json
+        var json;
+        json.type = 4;
+        json.payload.zone.x = x;
+        json.payload.zone.y = y;
+        //send json
+        this.send(JSON.stringify(json));
     };
     this.removeZone = function (id) {
-        this.send(">Remove:zone:" + id + ":;");
+        //create json
+        var json;
+        json.type = 5;
+        json.payload.zone = id;
+        //send json
+        this.send(JSON.stringify(json));
     };
 
     this.addSchool = function (zoneID, school) {
         var dateStart = school.DateStart.replace(':', '-');
         var dateEnd = school.DateEnd.replace(':', '-');
-        this.send(">Create:school:" + zoneID + ":" + school.ID + ":" + school.Name + ":" + dateStart + ":" + dateEnd + ":;");
+        //create json
+        var json;
+        json.type = 4;
+        json.payload.school.Name = school.Name;
+        json.payload.school.zoneID = zoneID;
+        json.payload.school.dateStart = dateStart;
+        json.payload.school.dateEnd = dateEnd;
+
+        //send json
+        this.send(JSON.stringify(json));
     };
     this.removeSchool = function (schoolId) {
-        this.send(">Remove:school:" + schoolId + ":;");
+        //create json
+        var json;
+        json.type = 5;
+        json.payload.school = id;
+        //send json
+        this.send(JSON.stringify(json));
     };
     this.addRoadC = function (zoneID, roadc) {
-        this.send(">Create:roadconstruction:" + zoneID + ":" + roadc.ID + ":" + roadc.Name + ":" + roadc.DateStart + ":" + roadc.DateEnd + ":;");
+        //create json
+        var json;
+        json.type = 4;
+        json.payload.school.Name = school.Name;
+        json.payload.school.zoneID = zoneID;
+        json.payload.school.dateStart = dateStart;
+        json.payload.school.dateEnd = dateEnd;
+
+        //send json
+        this.send(JSON.stringify(json));
     };
     this.removeRoadC = function (roadConstructionId) {
-        this.send(">remove:roadconstruction:" + roadConstructionId + ":;");
+        //create json
+        var json;
+        json.type = 5;
+        json.payload.roadConstruction = id;
+        //send json
+        this.send(JSON.stringify(json));
     };
     this.connectArduino = function (zoneID, portName) {
-        this.send(">SET:zone:" + zoneID + ":road:" + portName + ":;");
+        //create json
+        var json;
+        json.type = 3;
+        json.payload.zone = id;
+        json.payload.arduinoPort = portName;
+        //send json
+        this.send(JSON.stringify(json));
     };
     this.getData = function () {
         //Ask for all Zones
         dl('Get All Zones');
-        this.send(">GET:zones:;");
+        //create json
+        var json;
+        json.type = 5;
+        json.payload.roadConstruction = id;
+        //send json
+        this.send(JSON.stringify(json));
+        
+        
 
         dl('Get Com Ports');
-        this.send(">GET:Ports:;");
-
-        //Ask for all schools,roadConstructions,Vertexes en Edges
-        for (var key in this.Zones.ZoneList) {
-            dl('Get Schools for Zone:' + this.Zones.ZoneList[key].ID);
-            this.send(">GET:schools:" + this.Zones.ZoneList[key].ID + ":;");
-
-            dl('Get RoadConstructions for Zone:' + this.Zones.ZoneList[key].ID);
-            this.send(">GET:roadconstructions:" + this.Zones.ZoneList[key].ID + ":;");
-
-            dl('Get Vertexes for Zone:' + this.Zones.ZoneList[key].ID);
-            this.send(">GET:vertex:" + this.Zones.ZoneList[key].ID + ":;");
-
-            dl('Get Edges for Zone:' + this.Zones.ZoneList[key].ID);
-            this.send(">GET:edges:" + this.Zones.ZoneList[key].ID + ":;");
-        }
-
+        //create json
+        json = [];
+        json.type = 5;
+        json.payload.roadConstruction = id;
+        //send json
+        this.send(JSON.stringify(json));
 
     };
 }

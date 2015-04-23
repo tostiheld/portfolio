@@ -244,7 +244,7 @@ Expected response:
     'message': '',
     'payload': [
         <target>: {
-            <id>,
+            "id": <id>,
             "property": "value", etc...
         }
     ]
