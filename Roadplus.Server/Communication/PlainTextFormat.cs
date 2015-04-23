@@ -72,11 +72,20 @@ namespace Roadplus.Server.Communication
 
         public string Format(Response toformat)
         {
+            if (toformat == null)
+            {
+                throw new ArgumentNullException("toformat");
+            }
+
             string type = toformat.Type.ToString("G");
             string parameters = "";
-            foreach (object o in toformat.Payload)
+            if (toformat.Payload != null &&
+                toformat.Payload.Length > 0)
             {
-                parameters += o.ToString() + MessageSplit;
+                foreach (object o in toformat.Payload)
+                {
+                    parameters += o.ToString() + MessageSplit;
+                }
             }
 
             return MessageStart + type + MessageSplit + parameters + MessageTerminator;
