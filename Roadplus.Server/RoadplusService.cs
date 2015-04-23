@@ -41,24 +41,27 @@ namespace Roadplus.Server
                     settings.HttpRoot);
             }
 
-            IPEndPoint wsendpoint = new IPEndPoint(
-                settings.IP,
-                settings.Port);
-
             messageExchange = new MessageExchange(new ActivityValidator());
 
             roadLinkService = new RoadLinkManager(
                 messageExchange,
                 settings.BaudRate,
                 settings.RoadDetectTimeOut);
-            channels.Add(roadLinkService);
+            AddChannel(roadLinkService);
 
             websocketService = new WSSessionManager(
                 messageExchange,
                 new IPEndPoint(
                 settings.IP,
                 settings.Port));
-            channels.Add(websocketService);
+            AddChannel(websocketService);
+        }
+
+        private void AddChannel(Channel channel)
+        {
+            channels.Add(channel);
+            messageExchange.Register(channel);
+            messageExchange.Register(channel.MessageFormatter);
         }
 
         public void Start()

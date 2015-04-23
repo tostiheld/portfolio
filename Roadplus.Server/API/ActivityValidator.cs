@@ -12,7 +12,7 @@ namespace Roadplus.Server.API
             table = new List<Tuple<LinkType, ActivityType>>();
         }
 
-        public bool Validate(Activity activity)
+        public bool IsAllowed(Activity activity)
         {
             foreach (Tuple<LinkType, ActivityType> t in table)
             {

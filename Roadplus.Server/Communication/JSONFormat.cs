@@ -65,12 +65,9 @@ namespace Roadplus.Server.Communication
                     return true;
                 }
             }
-            catch (Exception ex)
+            catch (JsonReaderException)
             {
-                // wtf 
-                // what exceptions does this throw
-                // nowhere to be found omg
-                throw new NotImplementedException();
+                return false;
             }
 
             return false;

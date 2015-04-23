@@ -13,7 +13,7 @@ namespace Roadplus.Server
 
             ParseArguments(settings, args);
 
-            Trace.Listeners.Clear();
+            //Trace.Listeners.Clear();
 
             if (settings.LogToFile)
             {

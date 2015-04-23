@@ -9,10 +9,94 @@ namespace Roadplus.Server.API
         public event EventHandler<NewActivityEventArgs> NewActivity;
 
         private ActivityValidator Validator;
+        private List<IFormatHandler> Formats;
 
         public MessageExchange(ActivityValidator validator)
         {
             Validator = validator;
+            Formats = new List<IFormatHandler>();
+        }
+
+        private void Channel_NewMessage(object sender, MessageFoundEventArgs e)
+        {
+            IFormatHandler handler = GetHandler(e.FoundMessage.Format);
+            if (handler == null)
+            {
+                Post(QuickFailure(
+                    "Unsupported format",
+                    e.FoundMessage.SourceAddress));
+                return;
+            }
+
+            Activity newActivity = null;
+
+            if (handler.TryParse(e.FoundMessage, out newActivity))
+            {
+                if (Validator.IsAllowed(newActivity))
+                {
+                    OnNewActivity(newActivity);
+                }
+                else
+                {
+                    Post(QuickFailure(
+                        "Activity not allowed",
+                        e.FoundMessage.SourceAddress));
+                }
+            }
+            else
+            {
+                Post(QuickFailure(
+                    "Error parsing message",
+                    e.FoundMessage.SourceAddress));
+            }
+        }
+
+        private void OnNewActivity(Activity activity)
+        {
+            if (NewActivity != null &&
+                activity != null)
+            {
+                NewActivityEventArgs e = 
+                    new NewActivityEventArgs(activity);
+                NewActivity(this, e);
+            }
+        }
+
+        private Response QuickFailure(string message, string address)
+        {
+            return new Response(
+                ResponseType.Failure,
+                ActivityType.Unknown,
+                message,
+                address);
+        }
+
+        private Response QuickInfo(string message, string address)
+        {
+            return new Response(
+                ResponseType.Information,
+                ActivityType.Unknown,
+                message,
+                address);
+        }
+
+        private IFormatHandler GetHandler(string format)
+        {
+            foreach (IFormatHandler f in Formats)
+            {
+                if (f.MessageFormat == format)
+                {
+                    return f;
+                }
+            }
+
+            return null;
+        }
+
+        public void Register(Channel channel)
+        {
+            channel.MessageFound += Channel_NewMessage;
+            Formats.Add(channel.MessageFormatter);
         }
 
         public void Post(Response response)
@@ -27,21 +111,6 @@ namespace Roadplus.Server.API
                 NewResponseEventArgs e = 
                     new NewResponseEventArgs(response);
                 NewResponse(this, e);
-            }
-        }
-
-        public void Post(Activity activity)
-        {
-            if (activity == null)
-            {
-                throw new ArgumentNullException("activity");
-            }
-
-            if (NewActivity != null)
-            {
-                NewActivityEventArgs e =
-                    new NewActivityEventArgs(activity);
-                NewActivity(this, e);
             }
         }
     }
