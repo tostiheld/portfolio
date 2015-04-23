@@ -4,7 +4,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Threading;
 
-using Roadplus.Server.Communication.Protocol;
+using Roadplus.Server.API;
 
 namespace Roadplus.Server.Communication
 {
@@ -21,45 +21,55 @@ namespace Roadplus.Server.Communication
         }
 
         private SerialPort Port;
-        private Thread receiveThread;
-        private volatile bool receive;
         private string buffer;
+        private bool startReceiving;
+        private bool receiving;
+        private Thread receiveThread;
 
         public RoadLink(Channel parent, SerialPort port)
             : base(parent)
         {
-            Port = port;
-
             receiveThread = new Thread(new ThreadStart(Receive));
+            Port = port;
+            port.DataReceived += Port_DataReceived;
+            startReceiving = false;
+        }
+
+        private void Port_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (startReceiving)
+            {
+                receiveThread.Start();
+            }
         }
 
         private void Receive()
         {
-            while (receive)
+            receiving = true;
+            if (Port.IsOpen)
             {
-                if (Port.IsOpen)
+                while (Port.BytesToRead > 0)
                 {
-                    if (Port.BytesToRead > 0)
+                    byte[] bytes = new byte[BufferSize];
+                    Port.Read(bytes, 0, BufferSize);
+
+                    ASCIIEncoding encoder = new ASCIIEncoding();
+                    string message = encoder.GetString(bytes);
+                    buffer += message;
+
+                    string found = FindMessages();
+                    if (found != null)
                     {
-                        byte[] bytes = new byte[BufferSize];
-                        Port.Read(bytes, 0, BufferSize);
-
-                        ASCIIEncoding encoder = new ASCIIEncoding();
-                        string message = encoder.GetString(bytes);
-                        buffer += message;
-
-                        string found = FindMessages();
-                        if (found != null)
-                        {
-                            Parent.Post(this, found);
-                        }
+                        Parent.Post(this, found);
                     }
                 }
-                else
-                {
-                    Stop();
-                }
             }
+            else
+            {
+                receiving = false;
+                Stop();
+            }
+            receiving = false;
         }
 
         private string FindMessages()
@@ -83,7 +93,7 @@ namespace Roadplus.Server.Communication
 
         #region implemented abstract members of Link
 
-        protected override void Send(string data)
+        public override void Send(string data)
         {
             if (Port.IsOpen)
             {
@@ -98,20 +108,20 @@ namespace Roadplus.Server.Communication
         public override void Start()
         {
             buffer = "";
-            receive = true;
             Port.Open();
-            receiveThread.Start();
+            startReceiving = true;
         }
 
         public override void Stop()
         {
-            if (receive)
+            if (receiving)
             {
-                receive = false;
-                Port.Close();
                 receiveThread.Join();
-                OnDisconnected();
             }
+
+            startReceiving = false;
+            Port.Close();
+            OnDisconnected();
         }
 
         #endregion

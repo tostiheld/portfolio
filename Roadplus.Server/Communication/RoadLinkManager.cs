@@ -4,13 +4,9 @@ using System.IO;
 using System.IO.Ports;
 using System.Diagnostics;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 
-using System.Linq;
-
-using Roadplus.Server.Communication.Protocol;
-using Roadplus.Server.EntityManagement;
+using Roadplus.Server.API;
 
 namespace Roadplus.Server.Communication
 {
@@ -26,19 +22,25 @@ namespace Roadplus.Server.Communication
 
         private const int BufferSize = 64;
 
-        private volatile bool searching;
+        private bool searching;
         private Thread searchThread;
+        private System.Timers.Timer searchTimer;
         private int baudRate;
 
         private MessageExchange messageExchange;
 
-        public RoadLinkManager(MessageExchange exchange, int baudrate)
+        public RoadLinkManager(MessageExchange exchange,
+                               int baudrate,
+                               int interval)
             : base(exchange,
-                   "text",
                    new PlainTextFormat())
 
         {
-            searchThread = new Thread(new ParameterizedThreadStart(Search));
+            searchTimer = new System.Timers.Timer(
+                TimeSpan.FromSeconds(interval).TotalMilliseconds);
+            searchTimer.Elapsed += searchTimer_Elapsed;
+
+            searchThread = new Thread(new ThreadStart(Search));
             baudRate = baudrate;
             searching = false;
 
@@ -46,29 +48,35 @@ namespace Roadplus.Server.Communication
             messageExchange = exchange;
         }
 
+        private void searchTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            searchTimer.Enabled = false;
+            searchThread.Start();
+        }
+
         private void Exchange_NewActivity(object sender, NewActivityEventArgs e)
         {
-            if (e.NewActivity.From.Type == LinkType.UI &&
-                e.NewActivity.Type == ActivityType.Get &&
-                e.NewActivity.Parameters[0].ToString() == "ports")
+            if (e.NewActivity.Type == ActivityType.Get &&
+                e.NewActivity.Payload[0] is String &&
+                e.NewActivity.Payload[0].ToString() == "ports")
             {
-                if (searching)
+                List<string> addresses = new List<string>();
+                foreach (Link l in Links)
                 {
-                    Response response = new Response(
-                        ResponseType.Information,
-                        e.NewActivity.From,
-                        this.GetType(),
-                        new string[] { "Serial discover in progress" });
-                    messageExchange.Post(response);
+                    addresses.Add(l.Address);
                 }
-                else
-                {
-                    searchThread.Start(e.NewActivity.From);
-                }
+
+                Response response = new Response(
+                    ResponseType.Acknoledge,
+                    ActivityType.Get,
+                    addresses.ToArray(),
+                    e.NewActivity.SourceAddress);
+
+                messageExchange.Post(response);
             }
         }
 
-        private void Search(object returnLink)
+        private void Search()
         {
             searching = true;
 
@@ -93,24 +101,7 @@ namespace Roadplus.Server.Communication
                 DetectRoadAt(s);
             }
 
-            if (returnLink is Link)
-            {
-                List<string> newports = new List<string>();
-
-                foreach (Link l in Links)
-                {
-                    newports.Add(l.Address);
-                }
-
-                Response respone = new Response(
-                    ResponseType.Acknoledge,
-                    returnLink as Link,
-                    this.GetType(),
-                    newports.ToArray());
-                messageExchange.Post(respone);
-            }
-
-
+            searchTimer.Enabled = true;
             searching = false;
         }
 
@@ -164,14 +155,16 @@ namespace Roadplus.Server.Communication
 
         protected override void AtStart()
         {
+            searchTimer.Start();
         }
 
         protected override void AtStop()
         {
+            searchTimer.Stop();
             if (searching)
             {
                 Trace.WriteLine(
-                    "Ending serial discover in progress, hang on a few seconds...");
+                    "Finishing serial discover in progress, hang on a few seconds...");
                 searchThread.Join();
             }
         }

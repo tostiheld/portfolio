@@ -4,23 +4,20 @@ using System.Net;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-using Roadplus.Server.Communication.Protocol;
+using Roadplus.Server.API;
 using Roadplus.Server.Communication;
-using Roadplus.Server.EntityManagement;
 using Roadplus.Server.Traffic;
 
 namespace Roadplus.Server
 {
     public class RoadplusService
     {
-        private ActivityFactory activityFactory;
 
         private WSSessionManager websocketService;
         private RoadLinkManager roadLinkService;
         private HttpService httpService;
 
         private List<Channel> channels;
-        private List<EntityManager> entityManagers;
 
         private string fileRoot;
 
@@ -32,7 +29,6 @@ namespace Roadplus.Server
             }
 
             channels = new List<Channel>();
-            entityManagers = new List<EntityManager>();
             fileRoot = settings.FileRoot;
 
             if (settings.EnableHttp)
@@ -48,21 +44,7 @@ namespace Roadplus.Server
                 settings.IP,
                 settings.Port);
 
-            MessageExchange messageExchange = new MessageExchange();
 
-            activityFactory = new ActivityFactory(messageExchange);
-            activityFactory.Register(new JSONFormat());
-            activityFactory.Register(new PlainTextFormat());
-
-            websocketService = new WSSessionManager(messageExchange,
-                                                    wsendpoint);
-            activityFactory.Register(websocketService);
-            channels.Add(websocketService);
-
-            roadLinkService = new RoadLinkManager(messageExchange,
-                                                  settings.BaudRate);
-            activityFactory.Register(roadLinkService);
-            channels.Add(roadLinkService);
         }
 
         public void Start()
@@ -78,11 +60,6 @@ namespace Roadplus.Server
             foreach (Channel c in channels)
             {
                 c.Start();
-            }
-
-            foreach (EntityManager e in entityManagers)
-            {
-                //e.Load();
             }
 
             Trace.WriteLine(
@@ -102,11 +79,6 @@ namespace Roadplus.Server
             foreach (Channel c in channels)
             {
                 c.Stop();
-            }
-
-            foreach (EntityManager e in entityManagers)
-            {
-                // e.Save();
             }
 
             Trace.WriteLine(

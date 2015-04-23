@@ -1,18 +1,15 @@
 using System;
-using System.Runtime.Serialization;
 using System.Collections.Generic;
 using ProtoBuf;
 
 namespace Roadplus.Server.Traffic
 {
     [ProtoContract]
-    [DataContract]
     public class Vertex
     {
         public event EventHandler<NewConnectionEventArgs> NewConnection;
 
         [ProtoMember(1)]
-        [DataMember(Name="location")]
         public Point Location { get; private set; }
         [ProtoMember(2, AsReference=true)]
         public List<Edge> Edges { get; private set; }

@@ -4,7 +4,7 @@ using vtortola.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Roadplus.Server.Communication.Protocol;
+using Roadplus.Server.API;
 
 namespace Roadplus.Server.Communication
 {
@@ -47,7 +47,7 @@ namespace Roadplus.Server.Communication
 
         #region implemented abstract members of Link
 
-        protected override void Send(string data)
+        public override void Send(string data)
         {
             if (webSocket.IsConnected)
             {

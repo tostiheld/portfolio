@@ -1,37 +1,30 @@
 using System;
 using System.Collections.Generic;
 
-using Roadplus.Server.Communication.Protocol;
-using Roadplus.Server.EntityManagement;
+using Roadplus.Server.API;
 
 namespace Roadplus.Server.Communication
 {
-    public class PlainTextFormat : FormatHandler
+    public class PlainTextFormat : IFormatHandler
     {
         public const char MessageStart = '>';
         public const char MessageSplit = ':';
         public const char MessageTerminator = ';';
 
-        public PlainTextFormat()
-            : base("text")
-        { }
-
-        #region implemented abstract members of FormatHandler
-
-        protected override string FormatResponse(Response toformat)
+        public string MessageFormat
         {
-            string type = toformat.Type.ToString("G");
-            string parameters = "";
-            foreach (string s in toformat.Content)
+            get
             {
-                parameters += s + MessageSplit;
+                return "text";
             }
-
-            return MessageStart + type + MessageSplit + parameters + MessageTerminator;
-
         }
 
-        public override bool TryParse(Message value, out Activity result)
+        public PlainTextFormat()
+        { }
+
+        #region IFormatHandler implementation
+
+        public bool TryParse(RawMessage value, out Activity result)
         {
             if (!value.Content.StartsWith(MessageStart.ToString()) ||
                 !value.Content.EndsWith(MessageTerminator.ToString()) ||
@@ -71,9 +64,22 @@ namespace Roadplus.Server.Communication
 
             result = new Activity(
                 type,
-                value.From,
-                parameters.ToArray());
+                value.SourceAddress,
+                value.SourceType);
+            result.Payload = parameters.ToArray();
             return true;
+        }
+
+        public string Format(Response toformat)
+        {
+            string type = toformat.Type.ToString("G");
+            string parameters = "";
+            foreach (object o in toformat.Payload)
+            {
+                parameters += o.ToString() + MessageSplit;
+            }
+
+            return MessageStart + type + MessageSplit + parameters + MessageTerminator;
         }
 
         #endregion

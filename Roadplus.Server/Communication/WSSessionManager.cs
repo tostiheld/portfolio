@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using vtortola.WebSockets;
 using vtortola.WebSockets.Rfc6455;
 
-using Roadplus.Server.Communication.Protocol;
+using Roadplus.Server.API;
 
 namespace Roadplus.Server.Communication
 {
@@ -17,7 +17,6 @@ namespace Roadplus.Server.Communication
         public WSSessionManager(MessageExchange exchange,
                                 IPEndPoint endpoint)
             : base (exchange,
-                    "json",
                     new JSONFormat())
         {
             listener = new WebSocketListener(endpoint);

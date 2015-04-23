@@ -2,98 +2,34 @@ using System;
 using System.Text;
 using System.IO;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
 
-using Roadplus.Server.Communication.Protocol;
-using Roadplus.Server.EntityManagement;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+using Roadplus.Server.API;
 
 namespace Roadplus.Server.Communication
 {
-    public class JSONFormat : FormatHandler
+    public class JSONFormat : IFormatHandler
     {
-        public JSONFormat()
-            : base("json")
-        { }
-
-        #region implemented abstract members of FormatHandler
-
-        protected override string FormatResponse(Response toformat)
+        public string MessageFormat
         {
-            using (MemoryStream ms = new MemoryStream())
+            get
             {
-                try
-                {
-                    DataContractJsonSerializer json = 
-                        new DataContractJsonSerializer(typeof(Response));
-                    json.WriteObject(ms, toformat);
-                    byte[] bytes = ms.ToArray();
-                    string returnval = Encoding.UTF8.GetString(bytes);
-                    return returnval;
-                }
-                catch (Exception ex)
-                {
-                    throw;
-                }
+                return "json";
             }
         }
 
-        public override bool TryParse(Message value, out Activity result)
+        #region IFormatHandler implementation
+
+        public bool TryParse(RawMessage value, out Activity result)
         {
-            result = null;
+            throw new NotImplementedException();
+        }
 
-            if (value.Format != MessageFormat)
-            {
-                return false;
-            }
-
-            try
-            {
-                byte[] bytes = Encoding.UTF8.GetBytes(value.Content);
-                JSONMessage output = null;
-                using (MemoryStream ms = new MemoryStream(bytes))
-                {
-                    DataContractJsonSerializer json = 
-                        new DataContractJsonSerializer(typeof(JSONMessage));
-                    output = json.ReadObject(ms) as JSONMessage;
-                }
-
-                if (output != null)
-                {
-                    List<object> parameters = new List<object>();
-
-                    foreach (string s in output.Parameters)
-                    {
-                        int parameter;
-                        if (Int32.TryParse(s, out parameter))
-                        {
-                            parameters.Add(parameter);
-                        }
-                        else
-                        {
-                            parameters.Add(s);
-                        }
-                    }
-
-                    result = new Activity(
-                        output.Type,
-                        value.From,
-                        parameters.ToArray());
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                if (ex is InvalidDataContractException ||
-                    ex is SerializationException)
-                {
-                    return false;
-                }
-
-                throw;
-            }
-
-            return false;
+        public string Format(Response toformat)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
