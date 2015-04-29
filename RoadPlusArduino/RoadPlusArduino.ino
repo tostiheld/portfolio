@@ -1,4 +1,7 @@
-
+  static int Distances[100];
+  int avarage;
+  int sum;
+  int i = 0;
 //voor serial
 char incomingByte = 0;
 String message;
@@ -25,10 +28,12 @@ const int trigPin2 = A4;
 const int echoPin2 = A3;
 const int servoPin1 = A2;
 const int servoPin2 = A5;
+long first;
+long second;
 
 //set constants:
 const int timeOutPulseRead = 15000;
-const int MaxDistance = 200.0;
+const int MaxDistance = 250.0;
 const int MinDistance = 2.0;
 const int offsetServo1 = 20;
 const int offsetServo2 = 20;
@@ -262,7 +267,7 @@ void setup()
   pinMode(LEDARRAY_CLK, OUTPUT);
   pinMode(LEDARRAY_LAT, OUTPUT);
   //Display(Init_Display);
-  Serial.begin(19200);
+  Serial.begin(38400);
   sensors.begin();
   Servo1.attach(servoPin1);
   Servo2.attach(servoPin2);
@@ -291,6 +296,7 @@ void loop()
   if (dist)
   {
     GetDistance();
+    dist = false;
   }
 }
 
