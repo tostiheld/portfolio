@@ -36,7 +36,7 @@ void GetSpeedLimit()
   {
     warning = true;
   }  
-  if (metaMessage == "ebola")  //verander variable naam
+  if (metaMessage == "NoWarning")  //verander variable naam
   {
     warning = false;
   }
