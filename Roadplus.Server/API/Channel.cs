@@ -35,19 +35,19 @@ namespace Roadplus.Server.API
         // TODO: this method probably doesn't belong here.
         private void Exchange_NewActivity(object sender, NewActivityEventArgs e)
         {
-            Link targetLink = GetLinkAt(e.NewActivity.SourceAddress);
-            if (targetLink == null)
+            if (e.NewActivity.Type == ActivityType.Identify)
             {
-                return;
-            }
+                Link targetLink = GetLinkAt(e.NewActivity.SourceAddress);
+                if (targetLink == null ||
+                    !e.NewActivity.TargetTypes.Contains(typeof(LinkType)))
+                {
+                    return;
+                }
 
-            LinkType linktype = LinkType.Unidentified;
-            if (e.NewActivity.SourceType == LinkType.Unidentified &&
-                Enum.TryParse(e.NewActivity.Payload[0].ToString(), out linktype))
-            {
+                LinkType linktype = (LinkType)e.NewActivity.Payload[typeof(LinkType)];
                 targetLink.Type = linktype;
                 Trace.WriteLine(
-                    "Link at " + e.NewActivity.SourceAddress +
+                    "Link at " + targetLink.Address +
                     " identified as " + linktype.ToString("G"));
             }
         }

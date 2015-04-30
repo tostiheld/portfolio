@@ -32,7 +32,8 @@ namespace Roadplus.Server.API
 
             if (handler.TryParse(e.FoundMessage, out newActivity))
             {
-                if (Validator.IsAllowed(newActivity))
+                if (newActivity.Type == ActivityType.Identify ||
+                    Validator.IsAllowed(newActivity))
                 {
                     OnNewActivity(newActivity);
                 }

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Roadplus.Server.API
@@ -6,10 +7,25 @@ namespace Roadplus.Server.API
     public class Activity
     {
         public ActivityType Type { get; private set; }
-        public object[] Payload { get; set; }
         public string SourceAddress { get; private set; }
         public LinkType SourceType { get; private set; }
-        public List<Type> TargetTypes { get; set; }
+        public List<Type> TargetTypes { get; private set; }
+        public Dictionary<Type, object> Payload 
+        { 
+            get
+            {
+                return payload;
+            }
+            set
+            {
+                payload = value;
+                TargetTypes = payload.Keys
+                    .Distinct()
+                    .ToList();
+            }
+        }
+
+        private Dictionary<Type, object> payload;
 
         public Activity(ActivityType type, string sourceaddress, LinkType sourcetype)
         {
@@ -17,7 +33,7 @@ namespace Roadplus.Server.API
             SourceAddress = sourceaddress;
             SourceType = sourcetype;
 
-            Payload = null;
+            Payload = new Dictionary<Type, object>();
             TargetTypes = new List<Type>();
         }
     }
