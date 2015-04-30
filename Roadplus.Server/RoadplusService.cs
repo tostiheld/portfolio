@@ -66,6 +66,10 @@ namespace Roadplus.Server
                 settings.IP,
                 settings.Port));
             AddChannel(websocketService);
+
+            EntityManager<Zone> zones = new EntityManager<Zone>(messageExchange);
+            EntityManager<School> scbools = new EntityManager<School>(messageExchange);
+            EntityManager<RoadConstruction> roads = new EntityManager<RoadConstruction>(messageExchange);
         }
 
         private void AddChannel(Channel channel)

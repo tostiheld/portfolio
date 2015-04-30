@@ -51,7 +51,8 @@ namespace Roadplus.Server.Communication
 
             foreach (KeyValuePair<Type, string> pair in payload)
             {
-                if (activity == ActivityType.Get)
+                if (activity == ActivityType.Get ||
+                    activity == ActivityType.Remove)
                 {
                     int tmp = 0;
                     if (Int32.TryParse(pair.Value, out tmp))
@@ -74,11 +75,43 @@ namespace Roadplus.Server.Communication
                     }
                     else
                     {
-                        throw new JsonReaderException("Invalid data type in identify activity");
+                        // HACKS
+                        throw new JsonReaderException("Invalid type encountered while parsing identify activity");
                     }
+                }
+                else if (activity == ActivityType.Create)
+                {
+                    if (pair.Key == typeof(Zone))
+                    {
+                        Zone zone =
+                            JsonConvert.DeserializeObject<Zone>(pair.Value);
+                        output.Add(pair.Key, zone);
+                    }
+                    else if (pair.Key == typeof(School))
+                    {
+                        School school =
+                            JsonConvert.DeserializeObject<School>(pair.Value);
+                        output.Add(pair.Key, school);
+                    }
+                    else if (pair.Key == typeof(RoadConstruction))
+                    {
+                        RoadConstruction rc =
+                            JsonConvert.DeserializeObject<RoadConstruction>(pair.Value);
+                        output.Add(pair.Key, rc);
+                    }
+                    else
+                    {
+                        // HACKS
+                        throw new JsonReaderException("Invalid type encountered while parsing create activity");
+                    }
+                }
+                else if (activity == ActivityType.Set)
+                {
+                    throw new NotImplementedException();
                 }
                 else
                 {
+                    // HACKS
                     throw new JsonReaderException("Invalid activity type");
                 }
             }

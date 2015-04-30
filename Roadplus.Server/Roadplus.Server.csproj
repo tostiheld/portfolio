@@ -82,6 +82,7 @@
     <Compile Include="Communication\RoadLink.cs" />
     <Compile Include="Communication\WSSessionManager.cs" />
     <Compile Include="Communication\RoadLinkManager.cs" />
+    <Compile Include="Traffic\ZoneManager.cs" />
     <Compile Include="Utilities\TimeRange.cs" />
     <Compile Include="Utilities\Point.cs" />
     <Compile Include="Traffic\Zone.cs" />

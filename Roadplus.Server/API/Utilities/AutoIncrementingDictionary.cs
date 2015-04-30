@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Roadplus.Server.API
@@ -35,6 +36,11 @@ namespace Roadplus.Server.API
         public bool TryGetValue(int index, out T value)
         {
             return internalDictionary.TryGetValue(index, out value);
+        }
+
+        public List<T> ToList()
+        {
+            return internalDictionary.Values.ToList();
         }
     }
 }
