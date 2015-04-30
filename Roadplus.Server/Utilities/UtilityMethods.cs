@@ -7,7 +7,7 @@ namespace Roadplus.Server
     public static class UtilityMethods
     {
         /// <summary>
-        /// Tries to find a type from a string in the current AppDomain
+        /// Tries to find a type from a string in the current Assembly
         /// </summary>
         /// <returns>
         /// <c>true</c>, if a single type in the current 
@@ -19,15 +19,12 @@ namespace Roadplus.Server
         {
             List<Type> foundTypes = new List<Type>();
             result = null;
-
-            foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies())
+            
+            foreach (Type t in Assembly.GetExecutingAssembly().GetTypes())
             {
-                foreach (Type t in a.GetTypes())
+                if (t.Name == value)
                 {
-                    if (t.Name == value)
-                    {
-                        foundTypes.Add(t);
-                    }
+                    foundTypes.Add(t);
                 }
             }
 
