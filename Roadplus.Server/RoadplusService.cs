@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 using Roadplus.Server.API;
 using Roadplus.Server.Communication;
+using Roadplus.Server.Communication.Http;
 using Roadplus.Server.Traffic;
 
 namespace Roadplus.Server
@@ -41,7 +42,17 @@ namespace Roadplus.Server
                     settings.HttpRoot);
             }
 
-            messageExchange = new MessageExchange(new ActivityValidator());
+            ActivityValidator validator = new ActivityValidator();
+            validator.AllowActivity(LinkType.UI,
+                                    ActivityType.Get);
+            validator.AllowActivity(LinkType.UI,
+                                    ActivityType.Create);
+            validator.AllowActivity(LinkType.UI,
+                                    ActivityType.Remove);
+            validator.AllowActivity(LinkType.UI,
+                                    ActivityType.Set);
+
+            messageExchange = new MessageExchange(validator);
 
             roadLinkService = new RoadLinkManager(
                 messageExchange,
@@ -61,7 +72,6 @@ namespace Roadplus.Server
         {
             channels.Add(channel);
             messageExchange.Register(channel);
-            messageExchange.Register(channel.MessageFormatter);
         }
 
         public void Start()
@@ -80,7 +90,7 @@ namespace Roadplus.Server
             }
 
             Trace.WriteLine(
-                "... started");
+                "...started.");
         }
 
         public void Stop()
@@ -99,7 +109,7 @@ namespace Roadplus.Server
             }
 
             Trace.WriteLine(
-                "... stopped");
+                "...stopped.");
         }
     }
 }
