@@ -67,17 +67,17 @@ namespace Roadplus.Server.Communication
                     if (pair.Key == typeof(String) &&
                         pair.Value.ToString() == "ports")
                     {
+                        Response response = new Response(
+                            ActivityType.Get,
+                            e.NewActivity.SourceAddress);
+
                         List<string> addresses = new List<string>();
                         foreach (Link l in Links)
                         {
-                            addresses.Add(l.Address);
+                            response.PayloadList.Add(l.Address);
                         }
 
-                        Response response = new Response(
-                            ResponseType.Acknoledge,
-                            ActivityType.Get,
-                            addresses.ToArray(),
-                            e.NewActivity.SourceAddress);
+                        response.Type = ResponseType.Acknoledge;
 
                         messageExchange.Post(response);
                     }

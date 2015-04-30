@@ -164,12 +164,11 @@ namespace Roadplus.Server.API
 
         public void Stop()
         {
-            Response shutdown = new Response(
-                ResponseType.Information,
-                ActivityType.Unknown,
-                "Channel closing",
-                LinkType.Unidentified);
+            Response shutdown = new Response();
+            shutdown.Type = ResponseType.Information;
+            shutdown.Message = "Channel closing";
 
+            // TODO: which formatter to use? - response's own or channel's?
             string message = MessageFormatter.Format(shutdown);
 
             // clone so we can modify
