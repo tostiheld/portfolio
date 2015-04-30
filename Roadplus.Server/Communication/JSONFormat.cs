@@ -74,8 +74,12 @@ namespace Roadplus.Server.Communication
                     }
                     else
                     {
-                        throw new JsonReaderException("Invalid type while identifying");
+                        throw new JsonReaderException("Invalid data type in identify activity");
                     }
+                }
+                else
+                {
+                    throw new JsonReaderException("Invalid activity type");
                 }
             }
 
