@@ -1,4 +1,7 @@
-
+  static int Distances[100];
+  int avarage;
+  int sum;
+  int i = 0;
 //voor serial
 char incomingByte = 0;
 String message;
@@ -9,6 +12,9 @@ long timetillnext;
 long previousTime;
 boolean state;
 boolean warning;
+boolean sign;
+boolean dist;
+boolean temp;
 #include <Servo.h>
 
 //Define instances of Servo:
@@ -22,10 +28,12 @@ const int trigPin2 = A4;
 const int echoPin2 = A3;
 const int servoPin1 = A2;
 const int servoPin2 = A5;
+long first;
+long second;
 
 //set constants:
 const int timeOutPulseRead = 15000;
-const int MaxDistance = 200.0;
+const int MaxDistance = 250.0;
 const int MinDistance = 2.0;
 const int offsetServo1 = 20;
 const int offsetServo2 = 20;
@@ -74,10 +82,10 @@ const unsigned char  signWarning[1][32] =
 
 const unsigned char  OneDirection[1][32] =
 {
-  0xf8,0xe0,0xe0,0x80,0x80,0x00,0x00,0x0f,
-  0x0f,0x00,0x00,0x80,0x80,0xc0,0xe0,0xf8,
-  0x1f,0x07,0x03,0x01,0x01,0x00,0x00,0xf0,
-  0xf0,0x00,0x00,0x01,0x01,0x03,0x07,0x1f,
+  0xf8, 0xe0, 0xe0, 0x80, 0x80, 0x00, 0x00, 0x0f,
+  0x0f, 0x00, 0x00, 0x80, 0x80, 0xc0, 0xe0, 0xf8,
+  0x1f, 0x07, 0x03, 0x01, 0x01, 0x00, 0x00, 0xf0,
+  0xf0, 0x00, 0x00, 0x01, 0x01, 0x03, 0x07, 0x1f,
 };
 
 const unsigned char  sign10[1][32] =
@@ -259,7 +267,7 @@ void setup()
   pinMode(LEDARRAY_CLK, OUTPUT);
   pinMode(LEDARRAY_LAT, OUTPUT);
   //Display(Init_Display);
-  Serial.begin(9600);
+  Serial.begin(38400);
   sensors.begin();
   Servo1.attach(servoPin1);
   Servo2.attach(servoPin2);
@@ -275,17 +283,20 @@ void loop()
 {
 
   GetMessage();
-  if (meta == "SIGN" || speedLimit != 0)
+
+  if (sign || speedLimit != 0)
   {
     DisplaySpeedLimit();
   }
-  if (meta == "TEMP")
+  if (temp)
   {
     SendTemperature();
+    temp = false;
   }
-  if (meta == "DIST")
+  if (dist)
   {
     GetDistance();
+    dist = false;
   }
 }
 
