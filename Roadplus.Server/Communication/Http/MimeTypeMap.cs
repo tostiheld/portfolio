@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * From: https://github.com/samuelneff/MimeTypeMap
+ * Thanks, random stranger!
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
