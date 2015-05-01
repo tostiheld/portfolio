@@ -66,7 +66,7 @@ namespace Roadplus.Server.Communication
                 type,
                 value.SourceAddress,
                 value.SourceType);
-            result.Payload = parameters.ToArray();
+            //result.Payload = parameters.ToArray();
             return true;
         }
 

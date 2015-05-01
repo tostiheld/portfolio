@@ -23,12 +23,12 @@ JSON Messages
 ## Response structure
 ```json
 {
-    'type': 0,
-    'activity-type': 0,
-    'message': 'info/error',
-    'payload': [
-        object: { object }
-    ]
+    "type": 0,
+    "activity-type": 0,
+    "message": "info/error",
+    "payload": {
+        "object": { object }
+    }
 }
 ```
 
@@ -48,10 +48,10 @@ has a product, the product is broadcasted to every client
 ## Message structure
 ```json
 {
-    'type': 0,
-    'payload': [
-        object: { object }
-    ]
+    "type": 0,
+    "payload": {
+        "object": { object }
+    }
 }
 ```
 
@@ -64,9 +64,9 @@ payload = (always an array!) an object as specified below
 ### Identify
 ```json
 {
-    'type': 1,
-    'payload': {
-        linktype: <member of link enum>
+    "type": 1,
+    "payload": {
+        "LinkType": <member of link enum>
     }
 }
 ```
@@ -74,10 +74,10 @@ payload = (always an array!) an object as specified below
 Expected response:
 ```json
 {
-    'type': 0,
-    'activity-type': 1,
-    'message': 'Identification successful',
-    'payload': []
+    "type": 0,
+    "activity-type": 1,
+    "message": "Identification successful",
+    "payload": null
 }
 ```
 
@@ -86,33 +86,33 @@ Expected response:
 #### Ports
 ```json
 {
-    'type': 2,
-    'payload': [
-        "ports"
-    ]
+    "type": 2,
+    "payload": {
+        "System.String": "ports"
+    }
 }
 ```
 
 Expected response:
 ```json
 {
-    'type': 0,
-    'activity-type': 2,
-    'message': '',
-    'payload': [
+    "type": 0,
+    "activity-type": 2,
+    "message": "",
+    "payload": {[
         "port1",
         "port2",
         "etc..."
-    ]
+    ]}
 }
 ```
 
 #### All entities
 ```json
 {
-    'type': 2,
-    'payload': {
-        "all"
+    "type": 2,
+    "payload": {
+        "System.String": "all"
     }
 }
 ```
@@ -120,36 +120,36 @@ Expected response:
 Expected response:
 ```json
 {
-    'type': 0,
-    'activity-type': 2,
-    'message': '',
-    'payload': [
-        zones: [
+    "type": 0,
+    "activity-type": 2,
+    "message": "",
+    "payload": {
+        "zones": [
             { <zone1> },
             { <zone2> },
             { <etc...> },
         ],
-        schools: [
+        "schools": [
             { <school1> },
             { <school2> },
             { <etc...> },
         ],
-        roadconstructions: [
+        "roadconstructions": [
             { <rc1> },
             { <rc2> },
             { <etc...> },
         ],
         
-    ]
+    }
 }
 ```
 
 #### Zone
 ```json
 {
-    'type': 2,
-    'payload': {
-        "zone": "all" or <id>
+    "type": 2,
+    "payload": {
+        "Zone": "all" or <id>
     }
 }
 ```
@@ -157,25 +157,25 @@ Expected response:
 Expected response:
 ```json
 {
-    'type': 0,
-    'activity-type': 2,
-    'message': '',
-    'payload': [
-        zones: [
-            zone: { <zone1> },
-            zone: { <zone2> },
-            zone: { <etc...> },
+    "type": 0,
+    "activity-type": 2,
+    "message": "",
+    "payload": {
+        "zones": [
+            "zone": { <zone1> },
+            "zone": { <zone2> },
+            "zone": { <etc...> },
         ]
-    ]
+    }
 }
 ```
 
 #### School
 ```json
 {
-    'type': 2,
-    'payload': {
-        "school": "all" or <id>
+    "type": 2,
+    "payload": {
+        "School": "all" or <id>
     }
 }
 ```
@@ -183,16 +183,16 @@ Expected response:
 Expected response:
 ```json
 {
-    'type': 0,
-    'activity-type': 2,
-    'message': '',
-    'payload': [
-        schools: [
-            school: { <school1> },
-            school: { <school2> },
-            school: { <etc...> },
+    "type": 0,
+    "activity-type": 2,
+    "message": "",
+    "payload": {
+        "schools": [
+            "School": { <school1> },
+            "School": { <school2> },
+            "School": { <etc...> },
         ]
-    ]
+    }
 }
 ```
 
@@ -200,24 +200,24 @@ Expected response:
 #### RoadConstruction
 ```json
 {
-    'type': 2,
-    'payload': [
-        roadconstruction: "all" or <id>
-    ]
+    "type": 2,
+    "payload": {
+        "RoadConstruction": "all" or <id>
+    }
 }
 ```
 
 Expected response:
 ```json
 {
-    'type': 0,
-    'activity-type': 2,
-    'message': '',
-    'payload': [
-        roadconstructions: [
-            roadconstruction: { <rc1> },
-            roadconstruction: { <rc2> },
-            roadconstruction: { <etc...> },
+    "type": 0,
+    "activity-type": 2,
+    "message": "",
+    "payload": [
+        "roadconstructions": [
+            "RoadConstruction": { <rc1> },
+            "RoadConstruction": { <rc2> },
+            "RoadConstruction": { <etc...> },
         ]
     ]
 }
@@ -226,10 +226,10 @@ Expected response:
 ### Set
 ```json
 {
-    'type': 3,
-    'payload': [
-        <target>: {
-            <id>,
+    "type": 3,
+    "payload": [
+        "<target>": {
+            "id": <id>,
             "property": "value", etc...
         }
     ]
@@ -239,11 +239,11 @@ Expected response:
 Expected response:
 ```json
 {
-    'type': 0,
-    'activity-type': 3,
-    'message': '',
-    'payload': [
-        <target>: {
+    "type": 0,
+    "activity-type": 3,
+    "message": "",
+    "payload": [
+        "<target>": {
             "id": <id>,
             "property": "value", etc...
         }
@@ -256,22 +256,23 @@ Where &lt;target&gt; = object type to act on
 ### Create
 ```json
 {
-    'type': 4,
-    'payload': [
-        <target>: <object>, etc...
-    ]
+    "type": 4,
+    "payload": {
+        "<target>": { <object> },
+        etc...
+    }
 }
 ```
 
 Expected response:
 ```json
 {
-    'type': 0,
-    'activity-type': 4,
-    'message': '',
-    'payload': [
-        <target>: { object }, etc...
-    ]
+    "type": 0,
+    "activity-type": 4,
+    "message": "",
+    "payload": {
+        "<target>": { object }, etc...
+    }
 }
 ```
 
@@ -282,26 +283,26 @@ the object data as specified below
 Zone
 ```json
 {
-        'name': 'Noord',
-        'x': 'hh-mm',
-        'y': 'hh-mm',
+        "name": "Noord",
+        "x": <x>,
+        "y": <y>,
 }
 ```
 
 School
 ```json
 {
-        'name': 'Fontys',
-        'dateStart': 'hh-mm',
-        'dateEnd': 'hh-mm',
+        "name": "Fontys",
+        "dateStart": "hh-mm",
+        "dateEnd": "hh-mm",
 }
 ```
 Road Construction
 ```json
 {
-        'name': 'Road Construction',
-        'dateStart': 'dd-mm-yyyy',
-        'dateEnd': 'dd-mm-yyyy',
+        "name": "Road Construction",
+        "dateStart": "dd-mm-yyyy",
+        "dateEnd": "dd-mm-yyyy",
 }
 ```
 
@@ -309,9 +310,9 @@ Road Construction
 ### Remove
 ```json
 {
-    'type': 5,
-    'payload': [
-        <target>: <id>, etc...
+    "type": 5,
+    "payload": [
+        "<target>": <id>, etc...
     ]
 }
 ```
@@ -319,11 +320,11 @@ Road Construction
 Expected response:
 ```json
 {
-    'type': 0,
-    'activity-type': 5,
-    'message': '',
-    'payload': [
-        <target>: <id>
+    "type": 0,
+    "activity-type": 5,
+    "message": "",
+    "payload": [
+        "<target>": <id>
     ]
 }
 ```

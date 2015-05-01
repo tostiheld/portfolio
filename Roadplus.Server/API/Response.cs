@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -10,18 +11,43 @@ namespace Roadplus.Server.API
     {
         [JsonProperty("type")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public ResponseType Type { get; private set; }
+        public ResponseType Type { get; set; }
 
         [JsonProperty("activity-type")]
         [JsonConverter(typeof(StringEnumConverter))]
         public ActivityType FromActivity { get; private set; }
 
         [JsonProperty("message")]
-        public string Message { get; private set; }
+        public string Message
+        { 
+            get
+            {
+                return message;
+            }
+            set
+            {
+                PayloadList = null;
+                message = value;
+            }
+        }
 
         [JsonProperty("payload")]
-        public object[] Payload { get; private set; }
+        public object[] Payload 
+        { 
+            get
+            {
+                if (PayloadList != null)
+                {
+                    return PayloadList.ToArray();
+                }
 
+                return null;
+            }
+        }
+
+
+        [JsonIgnore]
+        public List<object> PayloadList { get; set; }
         [JsonIgnore]
         public string DestinationAddress { get; private set; }
         [JsonIgnore]
@@ -29,52 +55,36 @@ namespace Roadplus.Server.API
         [JsonIgnore]
         public LinkType? BroadcastTo { get; private set; }
 
-        public Response(ResponseType type, ActivityType fromactivity, string message, string dest)
+        private string message;
+
+        public Response()
+            : this("")
+        { }
+
+        public Response(string dest)
+            : this(ActivityType.Unknown, dest)
+        { }
+
+        public Response(ActivityType fromactivity, string dest)
         {
-            Type = type;
-            FromActivity = fromactivity;
-            Message = message;
-            Payload = null;
-
-            DestinationAddress = dest;
-            Broadcast = false;
-            BroadcastTo = null;
-        }
-
-        public Response(ResponseType type, ActivityType fromactivity, string message, LinkType to)
-        {
-            Type = type;
-            FromActivity = fromactivity;
-            Message = message;
-            Payload = null;
-
-            DestinationAddress = null;
-            Broadcast = true;
-            BroadcastTo = to;
-        }
-
-        public Response(ResponseType type, ActivityType fromactivity, object[] payload, string dest)
-        {
-            Type = type;
+            Type = ResponseType.Acknoledge;
             FromActivity = fromactivity;
             Message = "";
-            Payload = payload;
-
             DestinationAddress = dest;
-            Broadcast = false;
-            BroadcastTo = null;
         }
 
-        public Response(ResponseType type, ActivityType fromactivity, object[] payload, LinkType to)
+        public void SetBroadcast(LinkType to)
         {
-            Type = type;
-            FromActivity = fromactivity;
-            Message = "";
-            Payload = payload;
-
-            DestinationAddress = null;
             Broadcast = true;
             BroadcastTo = to;
+            DestinationAddress = null;
+        }
+
+        public void UnsetBroadCast(string dest)
+        {
+            Broadcast = false;
+            BroadcastTo = null;
+            DestinationAddress = dest;
         }
 
         public string Format(IFormatHandler handler)

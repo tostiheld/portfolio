@@ -32,7 +32,9 @@ namespace Roadplus.Server.API
 
             if (handler.TryParse(e.FoundMessage, out newActivity))
             {
-                if (Validator.IsAllowed(newActivity))
+                if ((newActivity.Type == ActivityType.Identify &&
+                    newActivity.SourceType == LinkType.Unidentified ) ||
+                    Validator.IsAllowed(newActivity))
                 {
                     OnNewActivity(newActivity);
                 }
@@ -64,20 +66,20 @@ namespace Roadplus.Server.API
 
         private Response QuickFailure(string message, string address)
         {
-            return new Response(
-                ResponseType.Failure,
-                ActivityType.Unknown,
-                message,
+            Response response = new Response(
                 address);
+            response.Type = ResponseType.Failure;
+            response.Message = message;
+            return response;
         }
 
         private Response QuickInfo(string message, string address)
         {
-            return new Response(
-                ResponseType.Information,
-                ActivityType.Unknown,
-                message,
+            Response response = new Response(
                 address);
+            response.Type = ResponseType.Information;
+            response.Message = message;
+            return response;
         }
 
         private IFormatHandler GetHandler(string format)

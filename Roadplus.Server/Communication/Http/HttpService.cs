@@ -4,7 +4,7 @@ using System.Text;
 using System.Net;
 using System.Threading;
 
-namespace Roadplus.Server.Communication
+namespace Roadplus.Server.Communication.Http
 {
     public class HttpService
     {
@@ -34,7 +34,12 @@ namespace Roadplus.Server.Communication
                 endpoint.Address.ToString(),
                 endpoint.Port.ToString());
 
+            string secondprefix = String.Format(
+                "http://localhost:{0}/",
+                endpoint.Port.ToString());
+
             listener.Prefixes.Add(prefix);
+            listener.Prefixes.Add(secondprefix);
             root = httproot;
         }
 
@@ -51,11 +56,37 @@ namespace Roadplus.Server.Communication
                     {
                         ThreadPool.QueueUserWorkItem((c) =>
                         {
+                            // we're pretty sure this is a HttpListenerContext so no
+                            // type checking is needed
                             HttpListenerContext ctx = c as HttpListenerContext;
                             try
                             {
-                                string rstr = SendHttpResponse(ctx.Request);
-                                byte[] buf = Encoding.UTF8.GetBytes(rstr);
+                                string localpath = MakeLocalPath(ctx.Request);
+                                HttpResponse response;
+                                if (localpath != null)
+                                {
+                                    try
+                                    {
+                                        response = HttpResponse.FromLocalPath(localpath);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        if (ex is IOException ||
+                                            ex is UnauthorizedAccessException)
+                                        {
+                                            response = HttpResponse.FromMessage("IO error");
+                                        }
+
+                                        throw;
+                                    }
+                                }
+                                else
+                                {
+                                    response = HttpResponse.FromMessage("Not found");
+                                }
+
+                                byte[] buf = response.Content;
+                                ctx.Response.ContentType = response.ContentType;
                                 ctx.Response.ContentLength64 = buf.Length;
                                 ctx.Response.OutputStream.Write(buf, 0, buf.Length);
                             }
@@ -77,13 +108,13 @@ namespace Roadplus.Server.Communication
             });
         }
 
-        private string SendHttpResponse(HttpListenerRequest request)
+        private string MakeLocalPath(HttpListenerRequest request)
         {
             string url = request.RawUrl;
 
             if (url.Contains(".."))
             {
-                return "Illegal request";
+                return null;
             }
             else if (url == "/")
             {
@@ -95,17 +126,15 @@ namespace Roadplus.Server.Communication
                 url = "." + url;
             }
 
-            try
+            string path = Path.Combine(root, url);
+
+            if (File.Exists(path))
             {
-                string path = Path.Combine(root, url);
-                using (StreamReader sr = new StreamReader(path))
-                {
-                    return sr.ReadToEnd();
-                }
+                return path;
             }
-            catch (IOException)
+            else
             {
-                return "404 - not found";
+                return null;
             }
         }
 

@@ -37,7 +37,8 @@ namespace Roadplus.Server.Communication
 
         {
             searchTimer = new System.Timers.Timer(
-                TimeSpan.FromSeconds(interval).TotalMilliseconds);
+                TimeSpan.FromSeconds(interval)
+                        .TotalMilliseconds);
             searchTimer.Elapsed += searchTimer_Elapsed;
             searchTimer.Enabled = false;
             searchTimer.Start();
@@ -53,28 +54,34 @@ namespace Roadplus.Server.Communication
         private void searchTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             searchTimer.Enabled = false;
+            searchThread = new Thread(new ThreadStart(Search));
             searchThread.Start();
         }
 
         private void Exchange_NewActivity(object sender, NewActivityEventArgs e)
         {
-            if (e.NewActivity.Type == ActivityType.Get &&
-                e.NewActivity.Payload[0] is String &&
-                e.NewActivity.Payload[0].ToString() == "ports")
+            if (e.NewActivity.Type == ActivityType.Get)
             {
-                List<string> addresses = new List<string>();
-                foreach (Link l in Links)
+                foreach (KeyValuePair<Type, object> pair in e.NewActivity.Payload)
                 {
-                    addresses.Add(l.Address);
+                    if (pair.Key == typeof(String) &&
+                        pair.Value.ToString() == "ports")
+                    {
+                        Response response = new Response(
+                            ActivityType.Get,
+                            e.NewActivity.SourceAddress);
+
+                        List<string> addresses = new List<string>();
+                        foreach (Link l in Links)
+                        {
+                            response.PayloadList.Add(l.Address);
+                        }
+
+                        response.Type = ResponseType.Acknoledge;
+
+                        messageExchange.Post(response);
+                    }
                 }
-
-                Response response = new Response(
-                    ResponseType.Acknoledge,
-                    ActivityType.Get,
-                    addresses.ToArray(),
-                    e.NewActivity.SourceAddress);
-
-                messageExchange.Post(response);
             }
         }
 

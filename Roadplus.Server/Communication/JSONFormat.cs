@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using Roadplus.Server.API;
+using Roadplus.Server.Traffic;
 
 namespace Roadplus.Server.Communication
 {
@@ -19,6 +20,103 @@ namespace Roadplus.Server.Communication
             {
                 return "json";
             }
+        }
+
+        private Dictionary<Type, string> IdentifyTypes(string payloadjson)
+        {
+            IDictionary <string, JToken> jsondata = JObject.Parse(payloadjson);
+            Dictionary<Type, string> output = new Dictionary<Type, string>();
+
+            foreach (KeyValuePair<string, JToken> pair in jsondata)
+            {
+                Type targetType = Type.GetType(pair.Key);
+                if (targetType != null ||
+                    UtilityMethods.TryFindType(pair.Key, out targetType))
+                {
+                    output.Add(targetType, pair.Value.ToString());
+                }
+                else
+                {
+                    // TODO: bit of a hack, make better
+                    throw new JsonReaderException("Invalid type encountered");
+                }
+            }
+
+            return output;
+        }
+
+        public Dictionary<Type, object> ParseParameters(Dictionary<Type, string> payload, ActivityType activity)
+        {
+            Dictionary<Type, object> output = new Dictionary<Type, object>();
+
+            foreach (KeyValuePair<Type, string> pair in payload)
+            {
+                if (activity == ActivityType.Get ||
+                    activity == ActivityType.Remove)
+                {
+                    int tmp = 0;
+                    if (Int32.TryParse(pair.Value, out tmp))
+                    {
+                        output.Add(pair.Key, tmp);
+                    }
+                    else
+                    {
+                        output.Add(pair.Key, pair.Value.ToString());
+                    }
+                }
+                else if (activity == ActivityType.Identify)
+                {
+                    if (pair.Key == typeof(LinkType))
+                    {
+                        LinkType type = 
+                            JsonConvert.DeserializeObject<LinkType>(pair.Value);
+                        output.Add(pair.Key,
+                                   type);
+                    }
+                    else
+                    {
+                        // HACKS
+                        throw new JsonReaderException("Invalid type encountered while parsing identify activity");
+                    }
+                }
+                else if (activity == ActivityType.Create)
+                {
+                    if (pair.Key == typeof(Zone))
+                    {
+                        Zone zone =
+                            JsonConvert.DeserializeObject<Zone>(pair.Value);
+                        output.Add(pair.Key, zone);
+                    }
+                    else if (pair.Key == typeof(School))
+                    {
+                        School school =
+                            JsonConvert.DeserializeObject<School>(pair.Value);
+                        output.Add(pair.Key, school);
+                    }
+                    else if (pair.Key == typeof(RoadConstruction))
+                    {
+                        RoadConstruction rc =
+                            JsonConvert.DeserializeObject<RoadConstruction>(pair.Value);
+                        output.Add(pair.Key, rc);
+                    }
+                    else
+                    {
+                        // HACKS
+                        throw new JsonReaderException("Invalid type encountered while parsing create activity");
+                    }
+                }
+                else if (activity == ActivityType.Set)
+                {
+                    throw new NotImplementedException();
+                }
+                else
+                {
+                    // HACKS
+                    throw new JsonReaderException("Invalid activity type");
+                }
+            }
+
+            return output;
         }
 
         #region IFormatHandler implementation
@@ -34,38 +132,21 @@ namespace Roadplus.Server.Communication
                 ActivityType type = ActivityType.Unknown;
                 if (Enum.TryParse(json["type"].ToString(), out type))
                 {
-                    JObject payload = JObject.Parse(
+                    Dictionary<Type, string> payload = IdentifyTypes(
                         json["payload"].ToString());
 
-                    IList<string> keys = payload.Properties()
-                        .Select(p => p.Name)
-                        .ToList();
-
-                    List<Type> targetTypes = new List<Type>();
-                    List<object> parameters = new List<object>();
-                    foreach (string s in keys)
-                    {
-                        Type targetType = Type.GetType(s);
-                        if (targetType != null)
-                        {
-                            targetTypes.Add(targetType);
-
-                            // woahh im tired brb
-                            throw new NotImplementedException();
-                        }
-                    }
+                    Dictionary<Type, object> parameters = ParseParameters(
+                        payload, type);
 
                     result = new Activity(
                         type,
                         value.SourceAddress,
                         value.SourceType);
-                    result.Payload = parameters.ToArray();
-                    result.TargetTypes = targetTypes;
-
+                    result.Payload = parameters;
                     return true;
                 }
             }
-            catch (JsonReaderException)
+            catch (JsonReaderException ex)
             {
                 return false;
             }

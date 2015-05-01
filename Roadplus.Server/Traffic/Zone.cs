@@ -29,7 +29,7 @@ namespace Roadplus.Server.Traffic
 
         // USED BY PROTBUF-NET
         // DO NOT EXPOSE
-        private Zone() { }
+        public Zone() { }
 
         public Zone(Vertex startingPoint, int id)
         {
