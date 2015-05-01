@@ -1,7 +1,7 @@
-  static int Distances[100];
-  int avarage;
+  int Distances[100];
+  int average;
   int sum;
-  int i = 0;
+  float distance1;
 //voor serial
 char incomingByte = 0;
 String message;
