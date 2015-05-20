@@ -6,6 +6,8 @@ var Schools;
 var RoadConstructions;
 var Zones;
 var Console;
+var gui = require('nw.gui');
+var win = gui.Window.get();
 
 /**
  * set up the actions and global variables on the page
@@ -26,7 +28,23 @@ $(document).ready(function () {
     ViewHandler.Show("debug");
 
 
-
+    $(".os-close").click(function(e){
+       e.preventDefault();
+        win.close();
+    });    
+    $(".os-min").click(function(e){
+       e.preventDefault();
+        win.minimize();
+    });
+    $(".os-max").click(function(e){
+       e.preventDefault();
+        win.maximize();
+    });
+    $(".btn-fullscreen").click(function(e){
+       e.preventDefault();
+        win.enterFullscreen();
+    });
+    
     // assign event handler to the connect button
     $(".connect").click(function (e) {
         window.WebSocketC = new WebSocketClient(Settings.URI, window.Handler);

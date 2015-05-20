@@ -21,7 +21,7 @@ function WebSocketHandler(console) {
         var json = {};
         json.type = 1;
         json.payload = {};
-        json.payload.linktype = 1;
+        json.payload.LinkType = 1;
         //send json
         this.send(JSON.stringify(json));
 
@@ -84,9 +84,9 @@ function WebSocketHandler(console) {
         var json = {};
         json.type = 4;
         json.payload = {};
-        json.payload.zone = {};
-        json.payload.zone.x = x;
-        json.payload.zone.y = y;
+        json.payload.Zone = {};
+        json.payload.Zone.x = x;
+        json.payload.Zone.y = y;
         //send json
         this.send(JSON.stringify(json));
     };
@@ -95,7 +95,7 @@ function WebSocketHandler(console) {
         var json = {};
         json.type = 5;
         json.payload = {};
-        json.payload.zone = id;
+        json.payload.Zone = id;
         //send json
         this.send(JSON.stringify(json));
     };
@@ -107,11 +107,11 @@ function WebSocketHandler(console) {
         var json = {};
         json.type = 4;
         json.payload = {};
-        json.payload.school = {};
-        json.payload.school.Name = school.Name;
-        json.payload.school.zoneID = zoneID;
-        json.payload.school.dateStart = dateStart;
-        json.payload.school.dateEnd = dateEnd;
+        json.payload.School = {};
+        json.payload.School.Name = school.Name;
+        json.payload.School.zoneID = zoneID;
+        json.payload.School.dateStart = dateStart;
+        json.payload.School.dateEnd = dateEnd;
 
         //send json
         this.send(JSON.stringify(json));
@@ -121,7 +121,7 @@ function WebSocketHandler(console) {
         var json = {};
         json.type = 5;
         json.payload = {};
-        json.payload.school = id;
+        json.payload.School = id;
         //send json
         this.send(JSON.stringify(json));
     };
@@ -130,11 +130,11 @@ function WebSocketHandler(console) {
         var json = {};
         json.type = 4;
         json.payload = {};
-        json.payload.school = {};
-        json.payload.school.Name = school.Name;
-        json.payload.school.zoneID = zoneID;
-        json.payload.school.dateStart = dateStart;
-        json.payload.school.dateEnd = dateEnd;
+        json.payload.School = {};
+        json.payload.School.Name = school.Name;
+        json.payload.School.zoneID = zoneID;
+        json.payload.School.dateStart = dateStart;
+        json.payload.School.dateEnd = dateEnd;
 
         //send json
         this.send(JSON.stringify(json));
@@ -144,7 +144,7 @@ function WebSocketHandler(console) {
         var json = {};
         json.type = 5;
         json.payload = {};
-        json.payload.roadConstruction = id;
+        json.payload.RoadConstruction = id;
         //send json
         this.send(JSON.stringify(json));
     };
@@ -153,7 +153,7 @@ function WebSocketHandler(console) {
         var json = {};
         json.type = 3;
         json.payload = {};
-        json.payload.zone = id;
+        json.payload.Zone = id;
         json.payload.arduinoPort = portName;
         //send json
         this.send(JSON.stringify(json));
@@ -165,7 +165,7 @@ function WebSocketHandler(console) {
         var json = {};
         json.type = 5;
         json.payload = {};
-        json.payload.roadConstruction = id;
+        json.payload.RoadConstruction = id;
         //send json
         this.send(JSON.stringify(json));
 
