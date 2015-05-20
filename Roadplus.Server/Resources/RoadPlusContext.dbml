@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="main" Class="Main" BaseType="System.Data.Linq.DataContext" Provider="Sqlite" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="main.Edge" Member="Edge">
+    <Type Name="Edge">
+      <Column Name="EdgeId" Member="EdgeID" Storage="_edgeID" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EndVertex" Member="EndVertex" Storage="_endVertex" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="MaxSpeed" Member="MaxSpeed" Storage="_maxSpeed" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="StartVertex" Member="StartVertex" Storage="_startVertex" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="Weight" Member="Weight" Storage="_weight" Type="System.Single" DbType="REAL" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="ZoneId" Member="ZoneID" Storage="_zoneID" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="main.RoadConstruction" Member="RoadConstruction">
+    <Type Name="RoadConstruction">
+      <Column Name="DateEnd" Member="DateEnd" Storage="_dateEnd" Type="System.String" DbType="TEXT" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="DateStart" Member="DateStart" Storage="_dateStart" Type="System.String" DbType="TEXT" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="EdgeId" Member="EdgeID" Storage="_edgeID" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="RoadConstructionId" Member="RoadConstructionID" Storage="_roadConstructionID" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="main.School" Member="School">
+    <Type Name="School">
+      <Column Name="CloseTime" Member="CloseTime" Storage="_closeTime" Type="System.String" DbType="TEXT" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="OpenTime" Member="OpenTime" Storage="_openTime" Type="System.String" DbType="TEXT" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="SchoolId" Member="SchoolID" Storage="_schoolID" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="VertexId" Member="VertexID" Storage="_vertexID" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="ZoneId" Member="ZoneID" Storage="_zoneID" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="main.Vertex" Member="Vertex">
+    <Type Name="Vertex">
+      <Column Name="VertexId" Member="VertexID" Storage="_vertexID" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="X" Member="X" Storage="_x" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="Y" Member="Y" Storage="_y" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="ZoneId" Member="ZoneID" Storage="_zoneID" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="main.Zone" Member="Zone">
+    <Type Name="Zone">
+      <Column Name="RadarVector" Member="RadarVector" Storage="_radarVector" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="ZoneId" Member="ZoneID" Storage="_zoneID" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>
