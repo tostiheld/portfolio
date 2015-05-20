@@ -135,6 +135,7 @@ namespace Roadplus.Server.Communication
                     message = encoder.GetString(buffer);
                 }
                 testPort.Close();
+				testPort.Dispose();
 
                 if (message.Contains(OkString))
                 {
