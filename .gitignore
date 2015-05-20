@@ -197,3 +197,7 @@ FakesAssemblies/
 
 # Monodevelop files
 *.userprefs
+
+# Webkit distributions + cache
+ServerGUI/cache/
+ServerGUI/webkitbuilds
