@@ -37,7 +37,8 @@
   </Table>
   <Table Name="main.Zone" Member="Zone">
     <Type Name="Zone">
-      <Column Name="RadarVector" Member="RadarVector" Storage="_radarVector" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="RadarVertex" Member="RadarVertex" Storage="_radarVertex" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="RootVertex" Member="RootVertex" Storage="_rootVertex" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
       <Column Name="ZoneId" Member="ZoneID" Storage="_zoneID" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
     </Type>
   </Table>
