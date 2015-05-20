@@ -10,14 +10,14 @@ module.exports = function (grunt) {
                   "dist/css/ServerGUI.min.css",
                   "dist/css/vendor.css",
                   "dist/css/vendor.min.css"],
-            html: ["dist/index.tmp.html"],  // clean only tmp html files (used for watch)
-            css: ["dist/css/ServerGUI.css",  // clean only tmp css files (used for watch)
+            html: ["dist/index.tmp.html"], // clean only tmp html files (used for watch)
+            css: ["dist/css/ServerGUI.css", // clean only tmp css files (used for watch)
                   "dist/css/ServerGUI.min.css",
                   "dist/css/vendor.css",
                   "dist/css/vendor.min.css"],
-            js: ["dist/js/ServerGUI.js"]   // clean only js html files (used for watch)
+            js: ["dist/js/ServerGUI.js"] // clean only js html files (used for watch)
         },
-        includes: {    // Compiles all the partials into one html file
+        includes: { // Compiles all the partials into one html file
             files: {
                 src: ['src/index.html'],
                 dest: 'dist/index.tmp.html',
@@ -28,7 +28,7 @@ module.exports = function (grunt) {
                 }
             }
         },
-        concat: {   //concats files
+        concat: { //concats files
             options: {
                 separator: ';'
             },
@@ -130,9 +130,21 @@ module.exports = function (grunt) {
                 src: '*',
                 dest: 'dist/fonts/',
             },
+            images: {
+                expand: true,
+                cwd: 'src/assets/images/',
+                src: '*',
+                dest: 'dist/images/',
+            },
+            node: {
+                expand: true,
+                cwd: 'src/',
+                src: 'package.json',
+                dest: 'dist/',               
+            }
         },
         watch: { //watch, runs only the needed tasks for js/css or html
-                 // can be called with "grunt watch"
+            // can be called with "grunt watch"
             js: {
                 files: ['<%= jshint.files %>'],
                 tasks: ['jshint', 'concat:js', 'uglify', 'clean:js']
@@ -145,6 +157,14 @@ module.exports = function (grunt) {
                 files: ['src/index.html', 'src/partials/**/*.html'],
                 tasks: ['includes', 'htmlmin', 'clean:html']
             }
+        },
+        nodewebkit: {
+            options: {
+                platforms: ['win', 'osx'],
+                buildDir: './webkitbuilds', // Where the build version of my node-webkit app is saved 
+                version: '0.12.1'
+            },
+            src: ['./dist/**/*'] // Your node-webkit app 
         }
     });
 
@@ -159,10 +179,13 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-includes');
     grunt.loadNpmTasks('grunt-uncss');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-node-webkit-builder');
 
 
     //default task runs with "grunt"
     //while building use "grunt watch": it automatically recompiles the necessary things
-    grunt.registerTask('default', ['jshint', 'clean:all', 'concat:js', 'concat:css', 'cssmin:main', 'includes', 'uncss:dist', 'cssmin:vendor', 'uglify', 'htmlmin', 'concat:cssVendor', 'copy', 'clean:tmp']);
+    grunt.registerTask('default', ['jshint', 'clean:all', 'concat:js', 'concat:css', 'cssmin:main', 'includes', 'uncss:dist', 'cssmin:vendor', 'uglify', 'htmlmin', 'concat:cssVendor', 'copy', 'clean:tmp', 'nodewebkit']);
+    
+    grunt.registerTask('webkit', ['nodewebkit']);
 
 };
