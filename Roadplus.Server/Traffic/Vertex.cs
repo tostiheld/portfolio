@@ -1,22 +1,14 @@
 using System;
 using System.Collections.Generic;
-using ProtoBuf;
 
 namespace Roadplus.Server.Traffic
 {
-    [ProtoContract]
     public class Vertex
     {
         public event EventHandler<NewConnectionEventArgs> NewConnection;
 
-        [ProtoMember(1)]
         public Point Location { get; private set; }
-        [ProtoMember(2, AsReference=true)]
         public List<Edge> Edges { get; private set; }
-
-        // USED BY PROTOBUF-NET
-        // DO NOT EXPOSE
-        private Vertex() { }
 
         public Vertex(Point location)
         {

@@ -1,35 +1,20 @@
 using System;
 using System.Collections.Generic;
-using ProtoBuf;
 using Roadplus.Server.Communication;
 
 namespace Roadplus.Server.Traffic
 {
-    [ProtoContract]
     public class Zone
     {
-        [ProtoMember(5)]
         public int ID { get; private set; }
-        [ProtoMember(6)]
         public string Name { get; set; }
-        //[ProtoMember(7)]
         public List<School> Schools { get; private set; }
         public List<RoadConstruction> RoadConstructions { get; private set; }
-        //[ProtoMember(8)]
-        //public RoadCommunication Road { get; private set; }
 
-        [ProtoMember(1)]
         private Vertex root;
-        [ProtoMember(2)]
         private Vertex radarLocation;
-        [ProtoMember(3)]
         private List<Vertex> vertices;
-        [ProtoMember(4)]
         private List<Edge> edges;
-
-        // USED BY PROTBUF-NET
-        // DO NOT EXPOSE
-        public Zone() { }
 
         public Zone(Vertex startingPoint, int id)
         {

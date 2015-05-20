@@ -13,7 +13,7 @@ namespace Roadplus.Server
 
             ParseArguments(settings, args);
 
-            //Trace.Listeners.Clear();
+            Trace.Listeners.Clear();
 
             if (settings.LogToFile)
             {
@@ -23,7 +23,7 @@ namespace Roadplus.Server
                     new TextWriterTraceListener(
                         Path.Combine(settings.FileRoot, logfilename));
                 ftl.Name = "FileLogger";
-                ftl.TraceOutputOptions = TraceOptions.ThreadId | TraceOptions.DateTime;
+                ftl.TraceOutputOptions = TraceOptions.DateTime;
                 Trace.Listeners.Add(ftl);
             }
 
