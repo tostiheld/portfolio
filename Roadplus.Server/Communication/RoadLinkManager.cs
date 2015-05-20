@@ -89,6 +89,10 @@ namespace Roadplus.Server.Communication
         {
             searching = true;
 
+			// collect previous garbage too prevent
+			// 'too many files' exception
+			GC.Collect();
+
             // filter out ports we already have
             // TODO: can we optimise this?
             List<string> ports = new List<string>();
@@ -135,6 +139,7 @@ namespace Roadplus.Server.Communication
                     message = encoder.GetString(buffer);
                 }
                 testPort.Close();
+				// possible fix for mac's "too many files" exception
 				testPort.Dispose();
 
                 if (message.Contains(OkString))
