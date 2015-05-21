@@ -160,7 +160,7 @@ module.exports = function (grunt) {
         },
         nodewebkit: {
             options: {
-                platforms: ['win', 'osx','linux'],
+                platforms: ['win', 'osx'],
                 buildDir: './webkitbuilds', // Where the build version of my node-webkit app is saved 
                 version: '0.12.1'
             },
