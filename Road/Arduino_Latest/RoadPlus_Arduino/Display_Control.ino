@@ -1,3 +1,4 @@
+//checks for need of warning sign, if there is no need display only speed limit, else display both
 void DisplaySpeedLimit()
 {  
   if (warning)
@@ -23,15 +24,17 @@ void DisplaySpeedLimit()
   }
 }
 
+//converts a String into a Array and export this to the base code
 void GetSpeedLimit()
-{    
+{
+  //create a base bitmap, for control
   unsigned char complete[32] = {
     0x00, 0x00, 0x00, 0x00,  0x00, 0x00, 0x00, 0x00,
-    0xFF, 0xFF, 0xFF, 0xFF,  0xFF, 0xFF, 0xFF, 0xFF,
+    0x00, 0x00, 0x00, 0x00,  0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00,  0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00,  0x00, 0x00, 0x00, 0x00,    
   };
-
+  
   if (metaMessage == "Warning")
   {
     warning = true;
@@ -51,7 +54,7 @@ void GetSpeedLimit()
     Second = metaMessage.substring(1, 2);
 
   }
-
+  //if the display is needed to display a oneway sign, display the sign, else, display the correct speedlimit
   if (metaMessage == "1way")
   {
     Display(OneDirection);
