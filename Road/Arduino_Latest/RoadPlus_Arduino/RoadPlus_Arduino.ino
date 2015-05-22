@@ -12,8 +12,12 @@ boolean warning;
 boolean sign;
 boolean dist;
 boolean temp;
-String first;
-String second;
+
+int test = 10;
+int test2 = 0;
+
+String First;
+String Second;
 #include <Servo.h>
 
 //Define instances of Servo:
@@ -61,15 +65,8 @@ DallasTemperature sensors(&ourWire);
 
 
 unsigned char Display_Buffer[2];
-const unsigned char  Init_Display[1][32] =
-{
-  0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-  0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-  0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-  0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-};
 
-const unsigned char  signWarning[1][32] =
+const unsigned char  signWarning[32] =
 {
   0xfe, 0xfd, 0xfd, 0xfb, 0xfa, 0xf6, 0xf6, 0xee,
   0xee, 0xde, 0xde, 0xbf, 0xbe, 0x7e, 0x7f, 0x00,
@@ -77,7 +74,7 @@ const unsigned char  signWarning[1][32] =
   0x77, 0x7b, 0x7b, 0xfd, 0x7d, 0x7e, 0xfe, 0x00,
 };
 
-const unsigned char  OneDirection[1][32] =
+const unsigned char  OneDirection[32] =
 {
   0xf8, 0xe0, 0xe0, 0x80, 0x80, 0x00, 0x00, 0x0f,
   0x0f, 0x00, 0x00, 0x80, 0x80, 0xc0, 0xe0, 0xf8,
@@ -86,60 +83,60 @@ const unsigned char  OneDirection[1][32] =
 };
 
 
-unsigned char  sign0[1][16] =
+unsigned char  sign0[16] =
 {
   0xff, 0xff, 0x83, 0xbb, 0xbb, 0xbb, 0xbb, 0xbb,
   0xbb, 0xbb, 0xbb, 0xbb, 0xbb, 0x83, 0xff, 0xff,
 };
- unsigned char  sign1[1][16] =
+unsigned char  sign1[16] =
 {
   0xff, 0xff, 0xfb, 0xf3, 0xeb, 0xfb, 0xfb, 0xfb,
   0xfb, 0xfb, 0xfb, 0xfb, 0xfb, 0xfb, 0xff, 0xff,
 };
 
-const unsigned char  sign2[1][16] =
+const unsigned char  sign2[16] =
 {
   0xff, 0xff, 0xc1, 0xfd, 0xfd, 0xfd, 0xfd, 0xc1,
   0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xc1, 0xff, 0xff,
 };
 
-const unsigned char  sign3[1][16] =
+const unsigned char  sign3[16] =
 {
   0xff, 0xFF, 0xc1, 0xfd, 0xfd, 0xfd, 0xfd, 0xf1,
   0xf1, 0xfd, 0xfd, 0xfd, 0xfd, 0xc1, 0xff, 0xff,
 };
 
-const unsigned char  sign4[1][16] =
+const unsigned char  sign4[16] =
 {
   0xff, 0xff, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xc1,
   0xfd, 0xfd, 0xfd, 0xfd, 0xfd, 0xfd, 0xff, 0xff,
 };
 
-const unsigned char  sign5[1][16] =
+const unsigned char  sign5[16] =
 {
   0xff, 0xff, 0x83, 0xbf, 0xbf, 0xbf, 0xbf, 0x83,
   0xfb, 0xfb, 0xfb, 0xfb, 0xfb, 0x83, 0xff, 0xff,
 };
 
-const unsigned char  sign6[1][16] =
+const unsigned char  sign6[16] =
 {
   0xff, 0xff, 0xc1, 0xdf, 0xdf, 0xdf, 0xdf, 0xc1,
   0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xc1, 0xff, 0xff,
 };
 
-const unsigned char  sign7[1][16] =
+const unsigned char  sign7[16] =
 {
   0xff, 0xff, 0xc1, 0xfd, 0xfd, 0xfb, 0xfb, 0xf7,
   0xf7, 0xf7, 0xef, 0xef, 0xdf, 0xdf, 0xff, 0xff,
 };
 
-const unsigned char  sign8[1][16] =
+const unsigned char  sign8[16] =
 {
   0xff, 0xff, 0xc1, 0xdd, 0xdd, 0xdd, 0xdd, 0xc1,
   0xc1, 0xdd, 0xdd, 0xdd, 0xdd, 0xc1, 0xff, 0xff,
 };
 
-const unsigned char  sign9[1][16] =
+const unsigned char  sign9[16] =
 {
   0xff, 0xff, 0xc1, 0xdd, 0xdd, 0xdd, 0xdd, 0xc1,
   0xfd, 0xfd, 0xfd, 0xfd, 0xfd, 0xc1, 0xff, 0xff,
@@ -155,7 +152,6 @@ void setup()
   pinMode(LEDARRAY_DI, OUTPUT);
   pinMode(LEDARRAY_CLK, OUTPUT);
   pinMode(LEDARRAY_LAT, OUTPUT);
-  //Display(Init_Display);
   Serial.begin(19200);
   sensors.begin();
   Servo1.attach(servoPin1);
@@ -170,7 +166,6 @@ void setup()
 
 void loop()
 {
-
   GetMessage();
   if (sign || speedLimit != 0)
   {
@@ -185,59 +180,47 @@ void loop()
   {
     GetDistance();
   }
+
+
+  test2++;
+  if (test2 >= 20)
+  {
+    test2 = 0;
+    test++;
+    if (test > 100)
+    {
+      test = 0;
+    }
+  }
 }
 
 
 void DisplaySpeedLimit()
-{
-  GetSpeedLimit();
+{  
   if (warning)
   {
     timetillnext = millis();
     if (timetillnext - previousTime > 1000)
     {
       previousTime = timetillnext;
-      state = !state;
+      state = !state;      
     }
     if (state)
     {
       Display(signWarning);
     }
-    else if (!state)
+    else
     {
-
+      GetSpeedLimit();
     }
   }
-}
-
-void DisplaySpeed(const unsigned char dat[][16], const unsigned char dat2[][16])
-{
-  unsigned char i;
-
-  for ( i = 0 ; i < 16 ; i++ )
+  else
   {
-    digitalWrite(LEDARRAY_G, HIGH);
-
-    Display_Buffer[0] = dat[0][i];
-    Display_Buffer[1] = dat2[0][i];
-
-    Send(Display_Buffer[1]);
-    Send(Display_Buffer[0]);
-
-    digitalWrite(LEDARRAY_LAT, HIGH);
-    delayMicroseconds(1);
-
-    digitalWrite(LEDARRAY_LAT, LOW);
-    delayMicroseconds(1);
-
-    Scan_Line(i);
-
-    digitalWrite(LEDARRAY_G, LOW);
-
-    delayMicroseconds(100);
+    GetSpeedLimit();
   }
 }
-void Display(const unsigned char dat[][32])
+
+void Display(const unsigned char dat[32])
 {
   unsigned char i;
 
@@ -245,8 +228,8 @@ void Display(const unsigned char dat[][32])
   {
     digitalWrite(LEDARRAY_G, HIGH);
 
-    Display_Buffer[0] = dat[0][i];
-    Display_Buffer[1] = dat[0][i+ 16];
+    Display_Buffer[0] = dat[i];
+    Display_Buffer[1] = dat[i+ 16];
 
     Send(Display_Buffer[1]);
     Send(Display_Buffer[0]);
@@ -440,153 +423,207 @@ void GetMessage()
 }
 
 void GetSpeedLimit()
-{
-   
+{    
+  unsigned char complete[32] = {
+    0x00, 0x00, 0x00, 0x00,  0x00, 0x00, 0x00, 0x00,
+    0xFF, 0xFF, 0xFF, 0xFF,  0xFF, 0xFF, 0xFF, 0xFF,
+    0x00, 0x00, 0x00, 0x00,  0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,  0x00, 0x00, 0x00, 0x00,    
+  };
+
   if (metaMessage == "Warning")
   {
     warning = true;
   }
-  if (metaMessage == "NoWarning")  //verander variable naam
+  else if (metaMessage == "NoWarning")
   {
     warning = false;
   }
+  else if (metaMessage.length() <= 2)
+  {
+    String metaMessage = (String)test;
+    if (metaMessage.length() == 1)
+    {
+      metaMessage = "0" + metaMessage;
+    }
+
+    First = metaMessage.substring(0, 1);
+    Second = metaMessage.substring(1, 2);
+
+  }
+
   if (metaMessage == "1way")
   {
     Display(OneDirection);
   }
-  else if(metaMessage != "")
-  {
-    first = metaMessage.substring(0, 1);
-    second = metaMessage.substring(1, 1);
-    unsigned char toDisplay1[1][16];
-    unsigned char toDisplay2[1][16];
-    Serial.println(first);
-    if(metaMessage.substring(0, 1) == "0")
-    {       
-      for (int i = 0; i < 16; i++) {
-      toDisplay1[1][i] = sign0[1][i];
-     }
-    }
-    else if(first == "1")
+  else
+  { 
+    if (First == "0")
     {
-      for (int i = 0; i < 16; i++) {
-      toDisplay1[1][i] = sign1[1][i];
-     }
+      for (int i=0; i<16; i++)
+      {
+        complete[i] = sign0[i];
+      }
     }
-    else if(first == "2")
+    else if (First == "1")
     {
-      for (int i = 0; i < 16; i++) {
-      toDisplay1[1][i] = sign2[1][i];
-     }
+      for (int i=0; i<16; i++)
+      {
+        complete[i] = sign1[i];
+      }
     }
-    else if(first == "3")
+    else if (First == "2")
     {
-
-      for (int i = 0; i < 16; i++) {
-      toDisplay1[1][i] = sign3[1][i];
-     }
+      for (int i=0; i<16; i++)
+      {
+        complete[i] = sign2[i];
+      }
     }
-    else if(first == "4")
+    else if (First == "3")
     {
-      for (int i = 0; i < 16; i++) {
-      toDisplay1[1][i] = sign4[1][i];
-     }
+      for (int i=0; i<16; i++)
+      {
+        complete[i] = sign3[i];
+      }
     }
-    else if(first == "5")
+    else if (First == "4")
     {
-     for (int i = 0; i < 16; i++) {
-      toDisplay1[1][i] = sign5[1][i];
-     }
+      for (int i=0; i<16; i++)
+      {
+        complete[i] = sign4[i];
+      }
     }
-    else if(first == "6")
+    else if (First == "5")
     {
-      for (int i = 0; i < 16; i++) {
-      toDisplay1[1][i] = sign6[1][i];
-     }
+      for (int i=0; i<16; i++)
+      {
+        complete[i] = sign5[i];
+      }
     }
-    else if(first == "7")
+    else if (First == "6")
     {
-      for (int i = 0; i < 16; i++) {
-      toDisplay1[1][i] = sign7[1][i];
-     }
+      for (int i=0; i<16; i++)
+      {
+        complete[i] = sign6[i];
+      }
     }
-    else if(first == "8")
+    else if (First == "7")
     {
-      for (int i = 0; i < 16; i++) {
-      toDisplay1[1][i] = sign8[1][i];
-     }
+      for (int i=0; i<16; i++)
+      {
+        complete[i] = sign7[i];
+      }
     }
-    else if(first == "9")
+    else if (First == "8")
     {
-     for (int i = 0; i < 16; i++) {
-      toDisplay1[1][i] = sign9[1][i];
-     }
+      for (int i=0; i<16; i++)
+      {
+        complete[i] = sign8[i];
+      }
     }
-
-
-    if(second == "0")
+    else if (First == "9")
     {
-       for (int i = 0; i < 16; i++) {
-      toDisplay2[1][i] = sign0[1][i];
-    }
-    }
-    else if(second == "1")
-    {
-       for (int i = 0; i < 16; i++) {
-      toDisplay2[1][i] = sign1[1][i];
-    }
-    }
-    else if(second == "2")
-    {
-       for (int i = 0; i < 16; i++) {
-      toDisplay2[1][i] = sign2[1][i];
-    }
-    }
-    else if(second == "3")
-    {
-      for (int i = 0; i < 16; i++) {
-      toDisplay2[1][i] = sign3[1][i];
-    }
-    }
-    else if(second == "4")
-    {
-       for (int i = 0; i < 16; i++) {
-      toDisplay2[1][i] = sign4[1][i];
-    }
-    }
-    else if(second == "5")
-    {
-      for (int i = 0; i < 16; i++) {
-      toDisplay2[1][i] = sign5[1][i];
-    }
-    }
-    else if(second == "6")
-    {
-       for (int i = 0; i < 16; i++) {
-      toDisplay2[1][i] = sign6[1][i];
-    }
-    }
-    else if(second == "7")
-    {
-      for (int i = 0; i < 16; i++) {
-      toDisplay2[1][i] = sign7[1][i];
-    }
-    }
-    else if(second == "8")
-    {
-      for (int i = 0; i < 16; i++) {
-      toDisplay2[1][i] = sign8[1][i];
-    }
-    }
-    else if(second == "9")
-    {
-       for (int i = 0; i < 16; i++) {
-      toDisplay2[1][i] = sign9[1][i];
-    }
+      for (int i=0; i<16; i++)
+      {
+        complete[i] = sign9[i];
+      }
     }
 
-    DisplaySpeed(toDisplay1, toDisplay2);
-
+    if (Second == "0")
+    {
+      for (int i=0; i<16; i++)
+      {
+        complete[i + 16] = sign0[i];
+      }
+    }
+    else if (Second == "1")
+    {
+      for (int i=0; i<16; i++)
+      {
+        complete[i + 16] = sign1[i];
+      }
+    }
+    else if (Second == "2")
+    {
+      for (int i=0; i<16; i++)
+      {
+        complete[i + 16] = sign2[i];
+      }
+    }
+    else if (Second == "3")
+    {
+      for (int i=0; i<16; i++)
+      {
+        complete[i + 16] = sign3[i];
+      }
+    }
+    else if (Second == "4")
+    {
+      for (int i=0; i<16; i++)
+      {
+        complete[i + 16] = sign4[i];
+      }
+    }
+    else if (Second == "5")
+    {
+      for (int i=0; i<16; i++)
+      {
+        complete[i + 16] = sign5[i];
+      }
+    }
+    else if (Second == "6")
+    {
+      for (int i=0; i<16; i++)
+      {
+        complete[i + 16] = sign6[i];
+      }
+    }
+    else if (Second == "7")
+    {
+      for (int i=0; i<16; i++)
+      {
+        complete[i + 16] = sign7[i];
+      }
+    }
+    else if (Second == "8")
+    {
+      for (int i=0; i<16; i++)
+      {
+        complete[i + 16] = sign8[i];
+      }
+    }
+    else if (Second == "9")
+    {
+      for (int i=0; i<16; i++)
+      {
+        complete[i + 16] = sign9[i];
+      }
+    }
+    Display(complete);
   }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
