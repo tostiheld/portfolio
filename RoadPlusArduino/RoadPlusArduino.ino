@@ -1,6 +1,6 @@
   int Distances[100];
-  int average;
-  int sum;
+  float average = 1;
+  float sum;
   float distance1;
 //voor serial
 char incomingByte = 0;
@@ -267,7 +267,7 @@ void setup()
   pinMode(LEDARRAY_CLK, OUTPUT);
   pinMode(LEDARRAY_LAT, OUTPUT);
   //Display(Init_Display);
-  Serial.begin(38400);
+  Serial.begin(9600);
   sensors.begin();
   Servo1.attach(servoPin1);
   Servo2.attach(servoPin2);
@@ -296,6 +296,7 @@ void loop()
   if (dist)
   {
     GetDistance();
+
     dist = false;
   }
 }
