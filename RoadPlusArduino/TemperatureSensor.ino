@@ -4,6 +4,5 @@ void SendTemperature()
   double temperature = sensors.getTempCByIndex(0);
   String tempMessage = ">TEMP:" + (String)temperature + ":;";
   Serial.println(tempMessage);
-  meta = "";
 }
 

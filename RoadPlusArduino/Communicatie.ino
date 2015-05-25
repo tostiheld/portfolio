@@ -34,6 +34,7 @@ void GetMessage()
   {
     Serial.print(">ok:;");
   }
+  meta = "";
 }
 
 void GetSpeedLimit()
