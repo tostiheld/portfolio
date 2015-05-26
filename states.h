@@ -5,6 +5,8 @@
 #ifndef "states_h"
 #define "states_h"
 
+const uint8_t default_Speed = 60;
+
 /*
  * States
  * ======
@@ -29,14 +31,16 @@ typedef enum
 /*
  * Decide which state to use
  */
-States decide_State(Events event);
+void decide_State(Events event);
+
+States currentState;
 
 /*
  * Behaviours for different states
  */
+void behaviour_Error(void);
 void behaviour_Stop(void);
 void behaviour_Drive(void);
-void behaviour_DangerLeft(void);
-void behaviour_DangerRight(void);
+void behaviour_Danger(uint8_t distance);
 
 #endif

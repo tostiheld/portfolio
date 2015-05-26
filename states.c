@@ -1,49 +1,89 @@
+#include "RP6Lib.h"
 #include "states.h"
 #include "hardware.h"
 
-States decide_State(States lastState, Events event)
+void decide_State(States lastState, Events event)
 {
     switch (event)
     {
         case eNone:
-            return lastState;
+            currentState = lastState;
+            break;
         case eClap:
             if (lastState == sStop)
             {
-                return sDrive;
+                currentState = sDrive;
             }
             else if (lastState == sDrive)
             {
-                return sStop;
+                currentState = sStop;
             }
-            return sError;
+            else
+            {
+                currentState = sError;
+            }
+            break;
         case eObjectLeft:
-            return sDangerLeft;
+            currentState = sDangerLeft;
+            break;
         case eObjectRight:
-            return sDangerRight;
+            currentState = sDangerRight;
+            break;
         default:
-            return sError;
+            currentState = sError;
+            break;
     }
-    
-    return sError;
+}
+
+void behaviour_Error(void)
+{
+    ShowLCD("ERROR", "");
 }
 
 void behaviour_Stop(void)
 {
-    
+    if (isDriving())
+    {
+        stopMotors();
+    }
 }
 
 void behaviour_Drive(void)
 {
-    
+    if (!isDriving())
+    {
+        setPower(default_Speed, default_Speed);
+    }
 }
 
-void behaviour_DangerLeft(void)
+// TODO: add constant to hardware: max_Distance
+// TODO: add constant to hardware: min_Distance
+
+void behaviour_Danger(uint8_t distance)
 {
+    // how strong do we have to adjust?
+    float factor = distance / max_Distance
+    uint8_t speed = round((factor * default_Speed)) + default_Speed;
     
+    if (currentState == sDangerLeft)
+    {
+        setPower(speed, default_Speed);
+    }
+    else if (currentState == sDangerRight)
+    {
+        setPower(default_Speed, speed);
+    }
 }
 
-void behaviour_DangerRight(void)
+int round(float myfloat)
 {
-    
+  double integral;
+  float fraction = (float)modf(myfloat, &integral);
+ 
+  if (fraction >= 0.5)
+    integral += 1;
+  if (fraction <= -0.5)
+    integral -= 1;
+ 
+  return (int)integral;
 }
