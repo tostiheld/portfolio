@@ -1,6 +1,4 @@
-#include "RP6Lib.h"
 #include "states.h"
-#include "hardware.h"
 
 void decide_State(States lastState, Events event)
 {
