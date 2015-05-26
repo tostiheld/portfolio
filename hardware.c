@@ -1,6 +1,4 @@
 #include "hardware.h"
-#include "RP6ControlLib.h"
-#include "RP6Control_I2CMasterLib.h"
 
 void initHardware(void)
 {

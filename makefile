@@ -20,9 +20,11 @@ TARGET = main
 
 RP6_LIB_PATH= ./RP6Lib
 RP6_LIB_PATH_CONTROL= $(RP6_LIB_PATH)/RP6control
+RP6_LIB_PATH_I2C= $(RP6_LIB_PATH)/RP6control_I2CMasterLib
+RP6_LIB_PATH_BASE = $(RP6_LIB_PATH)/RP6base
 RP6_LIB_PATH_COMMON= $(RP6_LIB_PATH)/RP6common
 
-RP6_LIB_PATH_OTHERS= $(RP6_LIB_PATH_CONTROL) $(RP6_LIB_PATH_COMMON)
+RP6_LIB_PATH_OTHERS= $(RP6_LIB_PATH_CONTROL) $(RP6_LIB_PATH_COMMON) $(RP6_LIB_PATH_I2C) $(RP6_LIB_PATH_BASE)
 
 # List any extra directories to look for include files here.
 EXTRAINCDIRS = $(RP6_LIB_PATH) $(RP6_LIB_PATH_OTHERS)
@@ -31,6 +33,8 @@ EXTRAINCDIRS = $(RP6_LIB_PATH) $(RP6_LIB_PATH_OTHERS)
 #------------------------------------------------
 # Main Source file is _automatically_ added here:
 SRC = $(TARGET).c
+SRC += states.c
+SRC += hardware.c
 
 SRC += $(RP6_LIB_PATH_CONTROL)/RP6ControlLib.c
 SRC += $(RP6_LIB_PATH_COMMON)/RP6uart.c

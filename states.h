@@ -34,7 +34,7 @@ typedef enum
 /*
  * Decide which state to use
  */
-void decide_State(Events event);
+void decide_State(States currentState, Events event);
 
 void doBehaviours(void);
 
@@ -47,5 +47,7 @@ void behaviour_Error(void);
 void behaviour_Stop(void);
 void behaviour_Drive(void);
 void behaviour_Danger(uint8_t distance);
+
+uint8_t newRound(float myfloat);
 
 #endif

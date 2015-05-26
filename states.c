@@ -61,7 +61,7 @@ void doBehaviours(void)
 void behaviour_Error(void)
 {
     stopMotors();
-    ShowLCD("ERROR", "");
+    showScreenLCD("ERROR", "");
 }
 
 void behaviour_Stop(void)
@@ -69,6 +69,7 @@ void behaviour_Stop(void)
     if (isDriving())
     {
         stopMotors();
+        showScreenLCD("Stopped", "");
     }
 }
 
@@ -77,17 +78,17 @@ void behaviour_Drive(void)
     if (!isDriving())
     {
         setPower(default_Speed, default_Speed);
+        showScreenLCD("Driving", "");
     }
 }
 
 // TODO: add constant to hardware: max_Distance
-// TODO: add constant to hardware: min_Distance
 
 void behaviour_Danger(uint8_t distance)
 {
     // how strong do we have to adjust?
-    float factor = distance / max_Distance
-    uint8_t speed = round((factor * default_Speed)) + default_Speed;
+    float factor = distance / max_Distance;
+    uint8_t speed = newRound((factor * default_Speed)) + default_Speed;
     
     if (currentState == sDangerLeft)
     {
@@ -97,9 +98,11 @@ void behaviour_Danger(uint8_t distance)
     {
         setPower(default_Speed, speed);
     }
+    
+    showScreenLCD("Avoiding", "");
 }
 
-int round(float myfloat)
+uint8_t newRound(float myfloat)
 {
   double integral;
   float fraction = (float)modf(myfloat, &integral);
@@ -109,5 +112,5 @@ int round(float myfloat)
   if (fraction <= -0.5)
     integral -= 1;
  
-  return (int)integral;
+  return (uint8_t)integral;
 }
