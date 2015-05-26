@@ -36,6 +36,7 @@ uint8_t detectPeak(void){
     uint16_t tmp = getMicrophonePeak();
     if (tmp > 50)
     {
+        writeString_P("Peak\n\n");
         return true;
     }
     return false;
