@@ -2,11 +2,10 @@
 #define hardware_h
 
 #include "RP6ControlLib.h"
-#include "RP6RobotBaseLib.h"    
 #include "RP6I2CmasterTWI.h" 
-//#include "RP6Control_I2CMasterLib.h"
+#include "RP6Control_I2CMasterLib.h"
 
-const uint8_t max_Distance = 30;
+extern const uint8_t max_Distance;
 
 uint8_t leftDistance;
 uint8_t rightDistance;

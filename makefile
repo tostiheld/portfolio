@@ -38,8 +38,9 @@ SRC += hardware.c
 
 SRC += $(RP6_LIB_PATH_CONTROL)/RP6ControlLib.c
 SRC += $(RP6_LIB_PATH_COMMON)/RP6uart.c
+SRC += $(RP6_LIB_PATH_I2C)/RP6Control_I2CMasterLib.c
 #SRC += $(RP6_LIB_PATH_COMMON)/P6I2CslaveTWI.c
-#SRC += $(RP6_LIB_PATH_COMMON)/RP6I2CmasterTWI.c
+SRC += $(RP6_LIB_PATH_COMMON)/RP6I2CmasterTWI.c
 
 #This is where all details of the build are defined:
 include $(RP6_LIB_PATH_CONTROL)/makefile.control

@@ -1,5 +1,8 @@
 #include "hardware.h"
 
+const uint8_t max_Distance = 30;
+
+
 void initHardware(void)
 {
     initLCD();
@@ -11,26 +14,28 @@ void initHardware(void)
     mSleep(1000);
     
     dischargePeakDetector();
-    I2CTWI_initMaster(100);
-    powerON();
+    initI2C_RP6Lib();
     
     clearLCD();
 }
 
 uint8_t getDistance(uint8_t sensor) {
-    if (sensor == 2) {
-        readADC(ADC2) = leftDistanceRaw;    
-        leftDistance = 1/(0.4634*leftDistanceRaw-11.71)*1000;
+    if (sensor == 2)
+    {
+        leftDistance = 1/(0.4634*readADC(ADC2)-11.71)*1000;
+        return leftDistance;
+    } else if (sensor == 3)
+    {
+        rightDistance = 1/(0.4634*readADC(ADC3)-11.71)*1000;
+        return rightDistance;
     }
-    if (sensor == 3) {
-        readADC(ADC3) = rightDistanceRaw;
-        rightDistance = 1/(0.4634*rightDistanceRaw-11.71)*1000;
-    }
+    return -1;
 }
 
 uint8_t detectPeak(void){
     uint16_t tmp = getMicrophonePeak();
-    if (tmp > 50) 
+    if (tmp > 50)
+    {
         return true;
     }
     return false;
@@ -42,11 +47,11 @@ Events detect_Event(void)
     {
         return eClap;
     }
-    else if ((GetDistance(3) < 8) && (GetDistance(2) > GetDistance(3)))
+    else if ((getDistance(3) < 8) && (getDistance(2) > getDistance(3)))
     {
         return eObjectLeft;
     }
-    else if ((GetDistance(2) < 8) && (GetDistance(3) > GetDistance(2)))
+    else if ((getDistance(2) < 8) && (getDistance(3) > getDistance(2)))
     {
         return eObjectRight;
     }

@@ -1,8 +1,10 @@
-//#include "RP6ControlLib.h"
-#include "RP6RobotBaseLib.h"    
+#include "RP6ControlLib.h"
 #include "RP6I2CmasterTWI.h" 
 #include "states.h"
+//#include "RP6Control_I2CMasterLib.h"
 #include "hardware.h"
+
+const uint8_t default_Speed = 60;
 
 int main(void)
 {
@@ -12,7 +14,6 @@ int main(void)
 	while(true)
 	{
         task_I2CTWI();
-        task_RP6System();
         
 		Events currentEvent = detect_Event();
         decide_State(currentState, currentEvent);

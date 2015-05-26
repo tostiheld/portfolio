@@ -8,7 +8,7 @@
 #include "hardware.h"
 #include "RP6ControlLib.h"
 
-const uint8_t default_Speed = 60;
+extern const uint8_t default_Speed;
 
 /*
  * States
