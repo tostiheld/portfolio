@@ -95,7 +95,7 @@ void behaviour_Danger(uint8_t distance)
     uint8_t speed = newRound((factor * default_Speed)) + default_Speed;
     
     setCursorPosLCD(1, 3);
-    writeIntegerLenghtLCD(speed, DEC, 2);
+    writeIntegerLengthLCD(speed, DEC, 2);
     
     if (currentState == sDangerLeft)
     {
