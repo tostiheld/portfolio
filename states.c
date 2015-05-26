@@ -43,7 +43,7 @@ void decide_State(States lastState, Events event)
 
 void doBehaviours(void)
 {
-    setCursorPosLCD(1, 5);
+    setCursorPosLCD(1, 0);
     writeIntegerLengthLCD(currentState, DEC, 1);
     switch (currentState)
     {
@@ -93,6 +93,9 @@ void behaviour_Danger(uint8_t distance)
     // how strong do we have to adjust?
     float factor = distance / max_Distance;
     uint8_t speed = newRound((factor * default_Speed)) + default_Speed;
+    
+    setCursorPosLCD(1, 3);
+    writeIntegerLenghtLCD(speed, DEC, 2);
     
     if (currentState == sDangerLeft)
     {
