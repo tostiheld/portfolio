@@ -11,6 +11,8 @@ int main(void)
 	initRP6Control();
 	initHardware();
     
+    currentState = sStop;
+    
 	while(true)
 	{
         task_I2CTWI();
