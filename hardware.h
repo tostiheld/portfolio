@@ -6,6 +6,8 @@ uint8_t rightDistance;
 uint8_t leftSpeed;
 uint8_t rightSpeed;
 
+void initHardware(void);
+
 uint8_t getDistance(uint8_t sensor);
 
 uint8_t detectPeak(void);
