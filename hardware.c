@@ -24,3 +24,16 @@ uint8_t DetectPeak(){
 	}
 	return false;
 }
+
+Events detect_Event(void) {
+	if ((GetDistance(3) < 50) && (GetDistance(2) > GetDistance(3))) {
+		return eObjectLeft;
+	}
+	if ((GetDistance(2) < 50) && (GetDistance(3) > GetDistance(2))) {
+		return eObjectRight;
+	}
+	if (DetectPeak) {
+		return eClap;
+	}
+	return eNone;
+}
