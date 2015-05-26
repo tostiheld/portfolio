@@ -11,6 +11,7 @@
  * 
  * Definition of different program states
  * 
+ * sError: Something went wrong
  * sStop: Doing nothing, waiting for clap
  * sDrive: Driving, listening for clap, detecting objects
  * sDangerLeft: steering right until no object is detected
@@ -18,6 +19,7 @@
  */
 typedef enum
 {
+    sError,
     sStop,
     sDrive,
     sDangerLeft,
@@ -50,14 +52,14 @@ Events detect_Event(void);
 /*
  * Decide which state to use
  */
-States detect_State(Events event);
+States decide_State(Events event);
 
 /*
  * Behaviours for different states
  */
-void state_Stop(void);
-void state_Drive(void);
-void state_DangerLeft(void);
-void state_DangerRight(void);
+void behaviour_Stop(void);
+void behaviour_Drive(void);
+void behaviour_DangerLeft(void);
+void behaviour_DangerRight(void);
 
 #endif
