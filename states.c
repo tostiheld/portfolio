@@ -90,6 +90,12 @@ void behaviour_Drive(void)
 
 void behaviour_Danger(uint8_t distance)
 {
+    if (distance < 5 ||
+        distance > 30)
+    {
+        return;
+    }
+    
     // how strong do we have to adjust?
     float factor = distance / max_Distance;
     uint8_t speed = newRound((factor * default_Speed)) + default_Speed;
