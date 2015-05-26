@@ -11,6 +11,7 @@ uint8_t leftDistance;
 uint8_t rightDistance;
 uint8_t leftSpeed;
 uint8_t rightSpeed;
+uint8_t previousPeak;
 
 void initHardware(void);
 

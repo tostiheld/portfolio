@@ -34,25 +34,37 @@ uint8_t getDistance(uint8_t sensor) {
 
 uint8_t detectPeak(void){
     uint16_t tmp = getMicrophonePeak();
-    if (tmp > 50)
+    if (tmp > 100 && tmp > previousPeak)
     {
+		previousPeak = tmp;
         return true;
     }
+    previousPeak = tmp;
     return false;
 }
 
 Events detect_Event(void)
 {
+	getDistance(2);
+	getDistance(3);
     if (detectPeak())
     {
+		showScreenLCD("KLAP YO", "################");
         return eClap;
     }
-    else if ((getDistance(3) < 8) && (getDistance(2) > getDistance(3)))
+    
+    //else if ((getDistance(3) < 8) && (getDistance(2) > getDistance(3)))
+    //{
+    else if (leftDistance < 8 && leftDistance < rightDistance)
     {
+		showScreenLCD("Links", "################");
         return eObjectLeft;
     }
-    else if ((getDistance(2) < 8) && (getDistance(3) > getDistance(2)))
+    //else if ((getDistance(2) < 8) && (getDistance(3) > getDistance(2)))
+    //{
+    else if (rightDistance < 8 && rightDistance < leftDistance)
     {
+		showScreenLCD("Rechts iets", "################");
         return eObjectRight;
     }
     
