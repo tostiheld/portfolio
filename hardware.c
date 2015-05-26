@@ -13,6 +13,8 @@ void initHardware(void)
     mSleep(1000);
     
     dischargePeakDetector();
+    I2CTWI_initMaster(100);
+    powerON();
     
     clearLCD();
 }

@@ -36,6 +36,8 @@ typedef enum
  */
 void decide_State(Events event);
 
+void doBehaviours(void);
+
 States currentState;
 
 /*

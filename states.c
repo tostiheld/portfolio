@@ -33,8 +33,34 @@ void decide_State(States lastState, Events event)
     }
 }
 
+void doBehaviours(void)
+{
+    switch (currentState)
+    {
+        case sError:
+            behaviour_Error();
+            break;
+        case sStop:
+            behaviour_Stop();
+            break;
+        case sDrive:
+            behaviour_Drive();
+            break;
+        case sDangerLeft:
+            behaviour_Danger(leftDistance);
+            break;
+        case sDangerRight:
+            behaviour_Danger(rightDistance);
+            break;
+        default:
+            behaviour_Error();
+            
+    }
+}
+
 void behaviour_Error(void)
 {
+    stopMotors();
     ShowLCD("ERROR", "");
 }
 
