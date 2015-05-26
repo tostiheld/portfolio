@@ -1,6 +1,11 @@
 #ifndef hardware
 #define hardware
 
+uint8_t leftDistance;
+uint8_t rightDistance;
+uint8_t leftSpeed;
+uint8_t rightSpeed;
+
 uint8_t getDistance(uint8_t sensor);
 
 uint8_t detectPeak(void);
@@ -29,13 +34,9 @@ typedef enum
  * Detect an event using the hardware functions
  */
 Events detect_Event(void);
-
 uint8_t isDriving(void);
-
-void startMotors(void);
-
+void setPower(uint8_t left, uint8_t right);
 void stopMotors(void);
 
-void setPower(uint8_t left, uint8_t right);
 
 #endif
