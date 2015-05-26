@@ -37,6 +37,7 @@ uint8_t detectPeak(void){
     if (tmp > 100 && tmp > previousPeak)
     {
 		previousPeak = tmp;
+        writeString_P("Peak\n\n");
         return true;
     }
     previousPeak = tmp;

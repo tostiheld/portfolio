@@ -13,15 +13,11 @@ void decide_State(States lastState, Events event)
                 currentState = sDrive;
                 showScreenLCD("Drive", "");
             }
-            else if (lastState == sDrive)
+            else
             {
                 currentState = sStop;
                 showScreenLCD("Stop", "");
-            }
-            else
-            {
-                currentState = sError;
-                showScreenLCD("Error", "");
+                mSleep(1000);
             }
             break;
         case eObjectLeft:
@@ -47,6 +43,8 @@ void decide_State(States lastState, Events event)
 
 void doBehaviours(void)
 {
+    setCursorPosLCD(1, 5);
+    writeIntegerLengthLCD(currentState, DEC, 1);
     switch (currentState)
     {
         case sError:
@@ -85,10 +83,12 @@ void behaviour_Stop(void)
 
 void behaviour_Drive(void)
 {
-    if (!isDriving())
-    {
+    setCursorPosLCD(1, 0);
+    writeStringLCD("hoi");
+    //if (isDriving() != 1)
+    //{
         setPower(default_Speed, default_Speed);
-    }
+    //}
 }
 
 // TODO: add constant to hardware: max_Distance
