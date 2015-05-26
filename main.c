@@ -1,4 +1,5 @@
 #include "RP6ControlLib.h"
+#include "states.h"
 
 int main(void)
 {
