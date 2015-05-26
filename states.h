@@ -27,29 +27,6 @@ typedef enum
 } States;
 
 /*
- * Events
- * ======
- * 
- * Events that lead to state change
- * 
- * eNone: nothing to do
- * eClap: clap detected through mic
- * eObjectLeft: object left detected
- * eObjectLeft: object right detected
- */
-typedef enum
-{
-    eNone,
-    eClap,
-    eObjectLeft,
-    eObjectRight
-} Events;
-
-/*
- * Detect an event using the hardware functions
- */
-Events detect_Event(void);
-/*
  * Decide which state to use
  */
 States decide_State(Events event);

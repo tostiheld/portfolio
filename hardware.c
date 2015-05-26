@@ -1,8 +1,7 @@
 #include "hardware.h"
+#include "RP6ControlLib.h"
 
-#define 
-
-int GetDistance(int sensor) {
+uint8_t GetDistance(uint8_t sensor) {
 	/*
 		ADC5 	(1 << PINA5)
 		ADC4 	(1 << PINA4)
@@ -16,4 +15,12 @@ int GetDistance(int sensor) {
 	if (sensor == 3) {
 		return readADC(ADC3);
 	}
+}
+
+uint8_t DetectPeak(){
+	uint16_t tmp = getMicrophonePeak();
+	if (tmp > 50) 
+		return true;
+	}
+	return false;
 }
