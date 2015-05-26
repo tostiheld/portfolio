@@ -17,7 +17,7 @@ void decide_State(States lastState, Events event)
             {
                 currentState = sStop;
                 showScreenLCD("Stop", "");
-                mSleep(1000);
+                //mSleep(1000);
             }
             break;
         case eObjectLeft:
@@ -75,20 +75,15 @@ void behaviour_Error(void)
 
 void behaviour_Stop(void)
 {
-    if (isDriving())
-    {
-        stopMotors();
-    }
+	stopMotors();
 }
 
 void behaviour_Drive(void)
 {
-    setCursorPosLCD(1, 0);
-    writeStringLCD("hoi");
-    //if (isDriving() != 1)
-    //{
+    if (!isDriving())
+    {
         setPower(default_Speed, default_Speed);
-    //}
+    }
 }
 
 // TODO: add constant to hardware: max_Distance
