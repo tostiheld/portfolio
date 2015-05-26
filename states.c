@@ -11,24 +11,30 @@ void decide_State(States lastState, Events event)
             if (lastState == sStop)
             {
                 currentState = sDrive;
+                showScreenLCD("Drive", "");
             }
             else if (lastState == sDrive)
             {
                 currentState = sStop;
+                showScreenLCD("Stop", "");
             }
             else
             {
                 currentState = sError;
+                showScreenLCD("Error", "");
             }
             break;
         case eObjectLeft:
             currentState = sDangerLeft;
+            showScreenLCD("Avoid left", "");
             break;
         case eObjectRight:
             currentState = sDangerRight;
+            showScreenLCD("Avoid right", "");
             break;
         default:
             currentState = sError;
+            showScreenLCD("Error", "");
             break;
     }
 }
@@ -61,7 +67,6 @@ void doBehaviours(void)
 void behaviour_Error(void)
 {
     stopMotors();
-    showScreenLCD("ERROR", "");
 }
 
 void behaviour_Stop(void)
@@ -69,7 +74,6 @@ void behaviour_Stop(void)
     if (isDriving())
     {
         stopMotors();
-        showScreenLCD("Stopped", "");
     }
 }
 
@@ -78,7 +82,6 @@ void behaviour_Drive(void)
     if (!isDriving())
     {
         setPower(default_Speed, default_Speed);
-        showScreenLCD("Driving", "");
     }
 }
 
@@ -98,8 +101,6 @@ void behaviour_Danger(uint8_t distance)
     {
         setPower(default_Speed, speed);
     }
-    
-    showScreenLCD("Avoiding", "");
 }
 
 uint8_t newRound(float myfloat)
