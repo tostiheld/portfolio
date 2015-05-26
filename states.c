@@ -25,12 +25,18 @@ void decide_State(States lastState, Events event)
             }
             break;
         case eObjectLeft:
-            currentState = sDangerLeft;
-            showScreenLCD("Avoid left", "");
+            if (currentState == sDrive)
+            {
+                currentState = sDangerLeft;
+                showScreenLCD("Avoid left", "");
+            }
             break;
         case eObjectRight:
-            currentState = sDangerRight;
-            showScreenLCD("Avoid right", "");
+            if (currentState == sDrive)
+            {
+                currentState = sDangerRight;
+                showScreenLCD("Avoid right", "");
+            }
             break;
         default:
             currentState = sError;
