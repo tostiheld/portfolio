@@ -1,19 +1,15 @@
 #include "hardware.h"
 #include "RP6ControlLib.h"
+#include "RP6Control_I2CMasterLib.h"
 
 uint8_t getDistance(uint8_t sensor) {
-	/*
-		ADC5 	(1 << PINA5)
-		ADC4 	(1 << PINA4)
-		ADC3 	(1 << PINA3)
-		ADC2 	(1 << PINA2)
-	*/
-	
 	if (sensor == 2) {
-		readADC(ADC2) = leftDistance;	
+		readADC(ADC2) = leftDistanceRaw;	
+		leftDistance = 1/(0.4634*leftDistanceRaw-11.71)*1000;
 	}
 	if (sensor == 3) {
-		readADC(ADC3) = rightDistance;
+		readADC(ADC3) = rightDistanceRaw;
+		rightDistance = 1/(0.4634*rightDistanceRaw-11.71)*1000;
 	}
 }
 
@@ -26,10 +22,10 @@ uint8_t detectPeak(void){
 }
 
 Events detect_Event(void) {
-	if ((GetDistance(3) < 50) && (GetDistance(2) > GetDistance(3))) {
+	if ((GetDistance(3) < 8) && (GetDistance(2) > GetDistance(3))) {
 		return eObjectLeft;
 	}
-	if ((GetDistance(2) < 50) && (GetDistance(3) > GetDistance(2))) {
+	if ((GetDistance(2) < 8) && (GetDistance(3) > GetDistance(2))) {
 		return eObjectRight;
 	}
 	if (DetectPeak) {
@@ -44,7 +40,6 @@ uint8_t isDriving(void){
 	}
 	return false;
 }
-
 
 void setPower(uint8_t left, uint8_t right){
 	leftSpeed = left;
