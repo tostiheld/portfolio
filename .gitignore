@@ -14,3 +14,6 @@
 
 *.exe
 *.hex
+
+# ano temp directory
+.build_ano/
