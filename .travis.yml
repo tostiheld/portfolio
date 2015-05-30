@@ -3,6 +3,9 @@ language: cpp
 compiler:
  - gcc
 
+# required for arturo install
+sudo: required
+
 # install arturo build tool
 before_install:
   # grab arduino 1.6.1 - best supported by arturo
