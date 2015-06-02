@@ -2,76 +2,115 @@
 #include "RP6I2CmasterTWI.h" 
 #include "RP6Control_I2CMasterLib.h"
 
-uint8_t previousPeak;
 uint8_t peakThreshold = 50;
-uint8_t isDriving;
+uint8_t sensorMaxRange = 20;
+uint8_t baseSpeed = 80;
 
-void I2C_transmissionError(uint8_t errorState)
+uint8_t previousPeak;
+uint8_t isDriving;
+uint8_t sensorInRange;
+uint8_t sensorValue;
+
+typedef enum
 {
-	writeString_P("\nI2C ERROR - TWI STATE: 0x");
-	writeInteger(errorState, HEX);
-	writeChar('\n');
-}
+    eNothing,
+    eClap,
+    eObject
+} Event;
 
 /*
  * Detects a if a level is above a certain
  * threshold. Saves the current highest level in
- * previouspeak. Only detects a peak if currenttime
- * is greater than pause value.
+ * previouspeak.
  * Returns 1 if a peak is detected, 0 otherwise.
  */
-uint8_t detectPeak(void)
+uint8_t detectPeak(uint8_t level,
+                   uint8_t threshold,
+                   uint8_t *previouspeak)
 {
-    uint8_t level = getMicrophonePeak();
-    
-    if (level > peakThreshold &&
-        level > previousPeak)
+    if (level > threshold &&
+        level > *previouspeak)
     {
-        previousPeak = level;
+        *previouspeak = level;
     }
-    else if (previousPeak >= peakThreshold &&
-             level < peakThreshold)
+    else if (*previouspeak >= threshold &&
+             level < threshold)
     {
-        previousPeak = 0;
+        *previouspeak = 0;
         return true;
     }
 
     return false;
 }
 
-int detectClosestObject(void)
+/*
+ * Reads from all 4 distance sensors
+ */
+void readSensors(uint16_t* output)
 {
-    int readout[] = { 0, 0, 0, 0 };
-    readout[0] = readADC(ADC_5); // top left
-    readout[1] = readADC(ADC_2); // bottom left
-    readout[2] = readADC(ADC_4); // top right
-    readout[3] = readADC(ADC_3); // bottom right
+    output = { 0, 0, 0, 0};
+    output[0] = readADC(ADC_5); // top left
+    output[1] = readADC(ADC_2); // bottom left
+    output[2] = readADC(ADC_4); // top right
+    output[3] = readADC(ADC_3); // bottom right
+}
 
-    int dists[] = { 0, 0, 0, 0 };
-
+/*
+ * Calculates sensor values to distances in cm
+ */
+void calculateDistances(uint16_t* values,
+                        uint16_t* distances)
+{
+    if (values == NULL)
+    {
+        return;
+    }
+    
+    distances = { 0, 0, 0, 0 };
     for (int i = 0; i < 4; i++)
     {
-        dists[i] = 1/(0.4634*readout[i]-11.71)*1000;
-        if (dists[i] < 3 ||
-            dists[i] > 40)
+        distances[i] = 1 / (0.4634 * values[i] - 11.71) * 1000;
+        
+        // if we calculate an invalid value, set to upper
+        // bound
+        if (distances[i] < 3 ||
+            distances[i] > 40)
         {
-            dists[i] = 40;
+            distances[i] = 40;
         }
+    }
+}
+
+/*
+ * Returns which array member is in range
+ * actualvalue is the actual value of the array member
+ * Or -1 if all are out of range
+ * Or -100 if distances is NULL
+ */
+uint8_t whichIsInRange(uint16_t* distances,
+                       uint8_t range,
+                       uint8_t* actualvalue)
+{
+    if (distances == NULL)
+    {
+        return -100;
     }
     
     int smallest = 10000;
-    int which = 0;
+    uint8_t which = 0;
 
-    for (int i = 0; i < 4; i++)
+    for (uint8_t i = 0; i < 4; i++)
     {
-        if (dists[i] < smallest)
+        if (distances[i] < smallest)
         {
-            smallest = dists[i];
+            smallest = distances[i];
             which = i;
         }
     }
+
+    *actualvalue = smallest;
     
-    if (smallest > 20)
+    if (smallest > range)
     {
         return -1;
     }
@@ -79,11 +118,80 @@ int detectClosestObject(void)
     return which;
 }
 
+void avoidBehaviour(void)
+{
+    if (isDriving)
+    {
+        float acceleration = sensorValue / sensorMaxRange;
+        uint8_t adjustedspeed = sensorValue * baseSpeed
+        
+        switch (sensorInRange)
+        {
+            case 0: // top left
+            case 1: // bottom left
+                moveAtSpeed(baseSpeed + adjustedspeed,
+                            baseSpeed - adjustedspeed);
+            break;
+            case 2: // top right
+            case 3: // bottom right
+                moveAtSpeed(baseSpeed - adjustedspeed,
+                            baseSpeed + adjustedspeed);
+            break;
+            default:
+                // do nothing
+            break;
+        }
+    }
+}
+
+void moveBehaviour(void)
+{
+    isDriving = !isDriving;
+    if (isDriving)
+    {
+        setCursorPosLCD(0, 0);
+        writeStringLCD("driving");
+    }
+    else
+    {
+        setCursorPosLCD(0, 0);
+        writeStringLCD("stopped");
+    }
+    uint8_t speed = isDriving * baseSpeed;
+    moveAtSpeed(speed, speed);
+}
+
+Event detectEvents(void)
+{
+    if (detectPeak(getMicrophonePeak(),
+                   peakThreshold,
+                   &previousPeak))
+    {
+        return eClap;
+    }
+    else
+    {
+        int16_t raw[4];
+        readSensors(&raw);
+        uint16_t dists[4];
+        calculateDistances(&raw, &dists);
+        sensorInRange = whichIsInRange(dists,
+                                       sensorMaxRange,
+                                       &sensorValue);
+
+        if (sensorInRange >= 0)
+        {
+            return eObject;
+        }
+    }
+
+    return eNothing;
+}
+
 int main(void)
 {
 	initRP6Control();
     initI2C_RP6Lib();
-    I2C_setTransmissionErrorHandler(I2C_transmissionError);
     
     // Enable Watchdog for Interrupt requests:
 	I2CTWI_transmit3Bytes(I2C_RP6_BASE_ADR, 0, CMD_SET_WDT, true);
@@ -98,56 +206,20 @@ int main(void)
     
 	while(true)
 	{
-        if (detectPeak())
+        Event event = detectEvents();
+
+        switch (event)
         {
-            writeString_P("\n\nPeak\n");
-            isDriving = !isDriving;
-
-            setCursorPosLCD(1, 0);
-            if (isDriving)
-            {
-                writeStringLCD("drive   ");
-            }
-            else
-            {
-                writeStringLCD("stop   ");
-            }
-            
-            uint8_t speed = isDriving * 80;
-            writeInteger(speed, DEC);
-            moveAtSpeed(speed, speed);
+            case eClap:
+                moveBehaviour();
+            break;
+            case eObject:
+                avoidBehaviour();
+            break;
+            default:
+                // do nothing
+            break;
         }
-
-        int object = detectClosestObject();
-
-        if (getStopwatch2() > 100)
-        {
-            setStopwatch2(0);
-            setCursorPosLCD(0, 0);
-            
-            switch (object)
-            {
-                case 0:
-                    writeStringLCD("TopLeft    ");
-                    moveAtSpeed(isDriving*100, 0);
-                break;
-                case 1:
-                    writeStringLCD("BottomLeft ");
-                break;
-                case 2:
-                    writeStringLCD("TopRight   ");
-                    moveAtSpeed(0, isDriving*100);
-                break;
-                case 3:
-                    writeStringLCD("BottomRight");
-                break;
-                default:
-                    writeStringLCD("nuthin     ");
-					moveAtSpeed(isDriving*80, isDriving*80);
-                break;
-            }
-        }
-        //mSleep(500);
         
         task_checkINT0();
         task_I2CTWI();
