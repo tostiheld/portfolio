@@ -2,8 +2,8 @@
 #include "RP6I2CmasterTWI.h" 
 #include "RP6Control_I2CMasterLib.h"
 
-uint8_t peakThreshold = 50;
-uint8_t sensorMaxRange = 20;
+uint8_t peakThreshold = 100;
+uint8_t sensorMaxRange = 30;
 uint8_t baseSpeed = 80;
 
 uint8_t previousPeak;
@@ -46,7 +46,7 @@ uint8_t detectPeak(uint8_t level,
 /*
  * Reads from all 4 distance sensors
  */
-void readSensors(uint16_t* output)
+void readSensors(uint16_t output[])
 {
     if (output == NULL)
     {
@@ -62,8 +62,8 @@ void readSensors(uint16_t* output)
 /*
  * Calculates sensor values to distances in cm
  */
-void calculateDistances(uint16_t* values,
-                        uint16_t* distances)
+void calculateDistances(uint16_t values[],
+                        uint16_t distances[])
 {
     if (values == NULL ||
         distances == NULL)
@@ -91,7 +91,7 @@ void calculateDistances(uint16_t* values,
  * Or -1 if all are out of range
  * Or -100 if distances is NULL
  */
-uint8_t whichIsInRange(uint16_t* distances,
+uint8_t whichIsInRange(uint16_t distances[],
                        uint8_t range,
                        uint8_t* actualvalue)
 {
@@ -126,31 +126,25 @@ void avoidBehaviour(void)
 {
     if (isDriving)
     {
-        float acceleration = sensorValue / sensorMaxRange;
-        uint8_t adjustedspeed = sensorValue * baseSpeed;
+        //float acceleration = sensorValue / sensorMaxRange;
+        //uint8_t adjustedspeed = baseSpeed * (sensorValue / sensorMaxRange);
         
         switch (sensorInRange)
         {
             case 0: // top left
                 setCursorPosLCD(1, 0);
                 writeStringLCD("top left       ");
-            case 1: // bottom left
-                setCursorPosLCD(1, 0);
-                writeStringLCD("bottom left    ");
-                moveAtSpeed(baseSpeed + adjustedspeed,
-                            baseSpeed - adjustedspeed);
-            break;
+                moveAtSpeed(baseSpeed + (sensorMaxRange - sensorValue),
+                            baseSpeed - (sensorMaxRange - sensorValue));
+			break;
             case 2: // top right
                 setCursorPosLCD(1, 0);
                 writeStringLCD("top right      ");
-            case 3: // bottom right
-                setCursorPosLCD(1, 0);
-                writeStringLCD("bottom right   ");
-                moveAtSpeed(baseSpeed - adjustedspeed,
-                            baseSpeed + adjustedspeed);
+                moveAtSpeed(baseSpeed - (sensorMaxRange - sensorValue),
+                            baseSpeed + (sensorMaxRange - sensorValue));
             break;
             default:
-                // do nothing
+                moveAtSpeed(baseSpeed, baseSpeed);
             break;
         }
     }
@@ -184,10 +178,10 @@ Event detectEvents(void)
     else
     {
         uint16_t raw[] = { 0, 0, 0, 0 };
-        readSensors(&raw);
+        readSensors(raw);
         
         uint16_t dists[] = { 0, 0, 0, 0 };
-        calculateDistances(&raw, &dists);        
+        calculateDistances(raw, dists);        
         sensorInRange = whichIsInRange(dists,
                                        sensorMaxRange,
                                        &sensorValue);
@@ -215,7 +209,7 @@ int main(void)
     startStopwatch1();
     startStopwatch2();
 
-    showScreenLCD("", "");
+    showScreenLCD("stopped", "");
     
 	while(true)
 	{
