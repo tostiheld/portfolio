@@ -76,12 +76,14 @@ Events detect_Event(void)
     //{
     else if (leftDistance < 8 && leftDistance < rightDistance)
     {
+		writeString_P("Left object\n\n");
         return eObjectLeft;
     }
     //else if ((getDistance(2) < 8) && (getDistance(3) > getDistance(2)))
     //{
     else if (rightDistance < 8 && rightDistance < leftDistance)
     {
+		writeString_P("Right object\n\n");
         return eObjectRight;
     }
     
@@ -98,7 +100,7 @@ uint8_t isDriving(void){
 void setPower(uint8_t left, uint8_t right){
     leftSpeed = left;
     rightSpeed = right;
-    moveAtSpeed(20, 20);
+    moveAtSpeed(leftSpeed, rightSpeed);
 }
 
 void stopMotors(void){
