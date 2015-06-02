@@ -48,7 +48,6 @@ uint8_t detectPeak(uint8_t level,
  */
 void readSensors(uint16_t* output)
 {
-    output = malloc(sizeof(*output) * 4);
     if (output == NULL)
     {
         return;
@@ -66,13 +65,8 @@ void readSensors(uint16_t* output)
 void calculateDistances(uint16_t* values,
                         uint16_t* distances)
 {
-    if (values == NULL)
-    {
-        return;
-    }
-    
-    distances = malloc(sizeof(*distances) * 4);
-    if (distances == NULL)
+    if (values == NULL ||
+        distances == NULL)
     {
         return;
     }
@@ -138,12 +132,20 @@ void avoidBehaviour(void)
         switch (sensorInRange)
         {
             case 0: // top left
+                setCursorPosLCD(1, 0);
+                writeStringLCD("top left       ");
             case 1: // bottom left
+                setCursorPosLCD(1, 0);
+                writeStringLCD("bottom left    ");
                 moveAtSpeed(baseSpeed + adjustedspeed,
                             baseSpeed - adjustedspeed);
             break;
             case 2: // top right
+                setCursorPosLCD(1, 0);
+                writeStringLCD("top right      ");
             case 3: // bottom right
+                setCursorPosLCD(1, 0);
+                writeStringLCD("bottom right   ");
                 moveAtSpeed(baseSpeed - adjustedspeed,
                             baseSpeed + adjustedspeed);
             break;
@@ -181,14 +183,15 @@ Event detectEvents(void)
     }
     else
     {
-        int16_t raw[4];
+        uint16_t raw[] = { 0, 0, 0, 0 };
         readSensors(&raw);
-        uint16_t dists[4];
-        calculateDistances(&raw, &dists);
+        
+        uint16_t dists[] = { 0, 0, 0, 0 };
+        calculateDistances(&raw, &dists);        
         sensorInRange = whichIsInRange(dists,
                                        sensorMaxRange,
                                        &sensorValue);
-
+        
         if (sensorInRange >= 0)
         {
             return eObject;
