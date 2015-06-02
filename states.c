@@ -36,7 +36,7 @@ void decide_State(States lastState, Events event)
             break;
         default:
             currentState = sError;
-            showScreenLCD("Error", "");
+            showScreenLCD("Error", "Unknown event");
             break;
     }
 }
@@ -91,7 +91,7 @@ void behaviour_Drive(void)
 void behaviour_Danger(uint8_t distance)
 {
     if (distance < 5 ||
-        distance > 30)
+        distance > max_Distance)
     {
         return;
     }
@@ -101,7 +101,7 @@ void behaviour_Danger(uint8_t distance)
     uint8_t speed = newRound((factor * default_Speed)) + default_Speed;
     
     setCursorPosLCD(1, 3);
-    writeIntegerLenghtLCD(speed, DEC, 2);
+    writeIntegerLengthLCD(speed, DEC, 2);
     
     if (currentState == sDangerLeft)
     {

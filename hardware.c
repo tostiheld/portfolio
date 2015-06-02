@@ -44,7 +44,7 @@ uint8_t detectPeak(void){
 			previousPeak = tmp;
 			peakCounter = 0;
 		}
-		if (previousPeak > 50)
+		if (previousPeak > 200)
 		{				
 			writeString_P("Peak\n\n");
 			detected = 1;
