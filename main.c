@@ -48,7 +48,12 @@ uint8_t detectPeak(uint8_t level,
  */
 void readSensors(uint16_t* output)
 {
-    output = { 0, 0, 0, 0};
+    output = malloc(sizeof(*output) * 4);
+    if (output == NULL)
+    {
+        return;
+    }
+    
     output[0] = readADC(ADC_5); // top left
     output[1] = readADC(ADC_2); // bottom left
     output[2] = readADC(ADC_4); // top right
@@ -66,7 +71,12 @@ void calculateDistances(uint16_t* values,
         return;
     }
     
-    distances = { 0, 0, 0, 0 };
+    distances = malloc(sizeof(*distances) * 4);
+    if (distances == NULL)
+    {
+        return;
+    }
+    
     for (int i = 0; i < 4; i++)
     {
         distances[i] = 1 / (0.4634 * values[i] - 11.71) * 1000;
@@ -123,7 +133,7 @@ void avoidBehaviour(void)
     if (isDriving)
     {
         float acceleration = sensorValue / sensorMaxRange;
-        uint8_t adjustedspeed = sensorValue * baseSpeed
+        uint8_t adjustedspeed = sensorValue * baseSpeed;
         
         switch (sensorInRange)
         {
