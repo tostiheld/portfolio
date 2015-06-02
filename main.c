@@ -3,8 +3,7 @@
 #include "RP6Control_I2CMasterLib.h"
 
 uint8_t previousPeak;
-uint8_t peakThreshold = 230;
-uint8_t peakPause = 200;
+uint8_t peakThreshold = 50;
 uint8_t isDriving;
 
 void I2C_transmissionError(uint8_t errorState)
@@ -22,25 +21,22 @@ void I2C_transmissionError(uint8_t errorState)
  * Returns 1 if a peak is detected, 0 otherwise.
  */
 uint8_t detectPeak(void)
-{    
-    uint8_t isPeak = false;
+{
     uint8_t level = getMicrophonePeak();
     
-    if (previousPeak >= peakThreshold &&
-        level < peakThreshold)
-    {
-        previousPeak = 0;
-        isPeak = true;
-    }
-    else if (level > peakThreshold &&
-             level > previousPeak &&
-             getStopwatch1() > 200)
+    if (level > peakThreshold &&
+        level > previousPeak)
     {
         previousPeak = level;
-        setStopwatch1(0);
+    }
+    else if (previousPeak >= peakThreshold &&
+             level < peakThreshold)
+    {
+        previousPeak = 0;
+        return true;
     }
 
-    return isPeak;
+    return false;
 }
 
 int detectClosestObject(void)
