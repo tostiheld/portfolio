@@ -129,18 +129,21 @@ int main(void)
             {
                 case 0:
                     writeStringLCD("TopLeft    ");
+                    moveAtSpeed(isDriving*100, 0);
                 break;
                 case 1:
                     writeStringLCD("BottomLeft ");
                 break;
                 case 2:
                     writeStringLCD("TopRight   ");
+                    moveAtSpeed(0, isDriving*100);
                 break;
                 case 3:
                     writeStringLCD("BottomRight");
                 break;
                 default:
                     writeStringLCD("nuthin     ");
+					moveAtSpeed(isDriving*80, isDriving*80);
                 break;
             }
         }
