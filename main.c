@@ -1,6 +1,8 @@
 #include "RP6I2CmasterTWI.h"
 #include "behaviour.h"
 
+State currentState;
+
 int main(void)
 {
 	initRP6Control();
@@ -17,20 +19,20 @@ int main(void)
     
 	while(true)
 	{
-        /*Event event = detectEvents();
+        Event event = detectEvents(&currentState);
 
         switch (event)
         {
             case eClap:
-                moveBehaviour();
+                moveBehaviour(&currentState);
             break;
             case eObject:
-                avoidBehaviour();
+                avoidBehaviour(&currentState);
             break;
             default:
                 // do nothing
             break;
-        }*/
+        }
         
         task_checkINT0();
         task_I2CTWI();
