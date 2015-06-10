@@ -7,10 +7,6 @@ namespace Roadplus.Server.API
 {
     public abstract class Channel
     {
-        public event EventHandler<MessageFoundEventArgs> MessageFound;
-
-        public IFormatHandler MessageFormatter { get; private set; }
-
         protected ReadOnlyCollection<Link> Links 
         {
             get
@@ -20,64 +16,17 @@ namespace Roadplus.Server.API
         }
 
         private List<Link> links;
+        private CommandProcessor commandProcessor;
 
-        public Channel(
-            MessageExchange exchange,
-            IFormatHandler messageformatter)
+        public Channel(CommandProcessor commandprocessor)
         {
-            MessageFormatter = messageformatter;
+            if (commandprocessor == null)
+            {
+                throw new ArgumentNullException("commandprocessor");
+            }
+
+            commandProcessor = commandprocessor;
             links = new List<Link>();
-
-            exchange.NewResponse += Exchange_NewResponse;
-            exchange.NewActivity += Exchange_NewActivity;
-        }
-
-        // TODO: this method probably doesn't belong here.
-        private void Exchange_NewActivity(object sender, NewActivityEventArgs e)
-        {
-            if (e.NewActivity.Type == ActivityType.Identify)
-            {
-                Link targetLink = GetLinkAt(e.NewActivity.SourceAddress);
-                if (targetLink == null ||
-                    !e.NewActivity.TargetTypes.Contains(typeof(LinkType)))
-                {
-                    return;
-                }
-
-                LinkType linktype = (LinkType)e.NewActivity.Payload[typeof(LinkType)];
-                targetLink.Type = linktype;
-                Trace.WriteLine(
-                    "Link at " + targetLink.Address +
-                    " identified as " + linktype.ToString("G"));
-            }
-        }
-
-        private void Exchange_NewResponse(object sender, NewResponseEventArgs e)
-        {
-            Response response = e.NewResponse;
-            Link targetLink = GetLinkAt(response.DestinationAddress);
-            if (targetLink == null)
-            {
-                return;
-            }
-
-            if (!response.Broadcast)
-            {
-                targetLink.Send(
-                    MessageFormatter.Format(response));
-            }
-            else
-            {
-                if (response.BroadcastTo == null)
-                {
-                    Broadcast(response);
-                }
-                else
-                {
-                    Broadcast(response,
-                              response.BroadcastTo.Value);
-                }
-            }
         }
 
         private void Link_Disconnected(object sender, EventArgs e)
@@ -91,19 +40,7 @@ namespace Roadplus.Server.API
             }
         }
 
-        private Link GetLinkAt(string address)
-        {
-            foreach (Link l in links)
-            {
-                if (l.Address == address)
-                {
-                    return l;
-                }
-            }
-
-            return null;
-        }
-
+        /*
         private void Broadcast(Response response)
         {
             foreach (Link l in links)
@@ -121,7 +58,7 @@ namespace Roadplus.Server.API
                     l.Send(MessageFormatter.Format(response));
                 }
             }
-        }
+        }*/
 
         protected void NewLink(Link link)
         {
@@ -142,18 +79,8 @@ namespace Roadplus.Server.API
 
         public void Post(Link from, string data)
         {
-            if (MessageFound != null)
-            {
-                RawMessage newMessage = new RawMessage(
-                    from.Address,
-                    from.Type,
-                    MessageFormatter.MessageFormat,
-                    data);
-
-                MessageFoundEventArgs e = 
-                    new MessageFoundEventArgs(newMessage);
-                MessageFound(this, e);
-            }
+            IResponse response = commandProcessor.Process(data);
+            from.Send(response.ToString());
         }
 
         public void Start()
@@ -164,6 +91,7 @@ namespace Roadplus.Server.API
 
         public void Stop()
         {
+            /*
             Response shutdown = new Response();
             shutdown.Type = ResponseType.Information;
             shutdown.Message = "Channel closing";
@@ -177,7 +105,7 @@ namespace Roadplus.Server.API
             {
                 l.Send(message);
                 l.Stop();
-            }
+            }*/
 
             AtStop();
         }

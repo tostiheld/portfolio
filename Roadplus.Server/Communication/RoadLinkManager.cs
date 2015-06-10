@@ -12,13 +12,6 @@ namespace Roadplus.Server.Communication
 {
     public class RoadLinkManager : Channel
     {
-        private readonly string DiscoverString = 
-            PlainTextFormat.MessageStart + "discover" +
-            PlainTextFormat.MessageSplit + PlainTextFormat.MessageTerminator;
-
-        private readonly string OkString = 
-            PlainTextFormat.MessageStart + "ok" +
-            PlainTextFormat.MessageSplit + PlainTextFormat.MessageTerminator;
 
         private const int BufferSize = 64;
 
@@ -27,13 +20,10 @@ namespace Roadplus.Server.Communication
         private System.Timers.Timer searchTimer;
         private int baudRate;
 
-        private MessageExchange messageExchange;
-
-        public RoadLinkManager(MessageExchange exchange,
+        public RoadLinkManager(CommandProcessor commandprocessor,
                                int baudrate,
                                int interval)
-            : base(exchange,
-                   new PlainTextFormat())
+            : base(commandprocessor)
 
         {
             searchTimer = new System.Timers.Timer(
@@ -46,9 +36,6 @@ namespace Roadplus.Server.Communication
             searchThread = new Thread(new ThreadStart(Search));
             baudRate = baudrate;
             searching = false;
-
-            exchange.NewActivity += Exchange_NewActivity;
-            messageExchange = exchange;
         }
 
         private void searchTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -56,33 +43,6 @@ namespace Roadplus.Server.Communication
             searchTimer.Enabled = false;
             searchThread = new Thread(new ThreadStart(Search));
             searchThread.Start();
-        }
-
-        private void Exchange_NewActivity(object sender, NewActivityEventArgs e)
-        {
-            if (e.NewActivity.Type == ActivityType.Get)
-            {
-                foreach (KeyValuePair<Type, object> pair in e.NewActivity.Payload)
-                {
-                    if (pair.Key == typeof(String) &&
-                        pair.Value.ToString() == "ports")
-                    {
-                        Response response = new Response(
-                            ActivityType.Get,
-                            e.NewActivity.SourceAddress);
-
-                        List<string> addresses = new List<string>();
-                        foreach (Link l in Links)
-                        {
-                            response.PayloadList.Add(l.Address);
-                        }
-
-                        response.Type = ResponseType.Acknoledge;
-
-                        messageExchange.Post(response);
-                    }
-                }
-            }
         }
 
         private void Search()
@@ -119,7 +79,7 @@ namespace Roadplus.Server.Communication
         }
 
         private void DetectRoadAt(string port)
-        {
+        {/*
             try
             {
                 string message = "";
@@ -163,7 +123,7 @@ namespace Roadplus.Server.Communication
                 }
 
                 throw;
-            }
+            }*/
         }
 
         #region implemented abstract members of Channel

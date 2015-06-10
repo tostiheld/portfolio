@@ -7,14 +7,12 @@ using System.Collections.Generic;
 using Roadplus.Server.API;
 using Roadplus.Server.Communication;
 using Roadplus.Server.Communication.Http;
-using Roadplus.Server.Traffic;
+using Roadplus.Server.Data;
 
 namespace Roadplus.Server
 {
     public class RoadplusService
     {
-        private MessageExchange messageExchange;
-
         private WSSessionManager websocketService;
         private RoadLinkManager roadLinkService;
         private HttpService httpService;
@@ -41,41 +39,6 @@ namespace Roadplus.Server
                     settings.HttpPort),
                     settings.HttpRoot);
             }
-
-            ActivityValidator validator = new ActivityValidator();
-            validator.AllowActivity(LinkType.UI,
-                                    ActivityType.Get);
-            validator.AllowActivity(LinkType.UI,
-                                    ActivityType.Create);
-            validator.AllowActivity(LinkType.UI,
-                                    ActivityType.Remove);
-            validator.AllowActivity(LinkType.UI,
-                                    ActivityType.Set);
-
-            messageExchange = new MessageExchange(validator);
-
-            roadLinkService = new RoadLinkManager(
-                messageExchange,
-                settings.BaudRate,
-                settings.RoadDetectTimeOut);
-            AddChannel(roadLinkService);
-
-            websocketService = new WSSessionManager(
-                messageExchange,
-                new IPEndPoint(
-                settings.IP,
-                settings.Port));
-            AddChannel(websocketService);
-
-            EntityManager<Zone> zones = new EntityManager<Zone>(messageExchange);
-            EntityManager<School> scbools = new EntityManager<School>(messageExchange);
-            EntityManager<RoadConstruction> roads = new EntityManager<RoadConstruction>(messageExchange);
-        }
-
-        private void AddChannel(Channel channel)
-        {
-            channels.Add(channel);
-            messageExchange.Register(channel);
         }
 
         public void Start()

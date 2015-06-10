@@ -74,6 +74,7 @@ namespace Roadplus.Server.Communication
 
         private string FindMessages()
         {
+            /*
             int start = buffer.IndexOf(PlainTextFormat.MessageStart);
             if (start != -1)
             {
@@ -86,7 +87,7 @@ namespace Roadplus.Server.Communication
 
                     return msg;
                 }
-            }
+            }*/
 
             return null;
         }

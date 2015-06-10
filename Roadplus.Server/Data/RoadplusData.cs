@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
 using LinqToDB;
+
+using Roadplus.Server.API;
 
 namespace Roadplus.Server.Data
 {
@@ -8,7 +11,7 @@ namespace Roadplus.Server.Data
         public ITable<Vertex> Vertices
         { 
             get
-            { 
+            {
                 return GetTable<Vertex>();
             }
         }
@@ -45,7 +48,8 @@ namespace Roadplus.Server.Data
             }
         }
 
-        public RoadplusData() : base("RoadplusData")
+        public RoadplusData() 
+            : base("RoadplusData")
         { }
     }
 }

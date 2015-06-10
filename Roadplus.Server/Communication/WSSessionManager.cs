@@ -14,10 +14,8 @@ namespace Roadplus.Server.Communication
     {
         private WebSocketListener listener;
 
-        public WSSessionManager(MessageExchange exchange,
-                                IPEndPoint endpoint)
-            : base (exchange,
-                    new JSONFormat())
+        public WSSessionManager(IPEndPoint endpoint, CommandProcessorJson commandprocessor)
+            : base (commandprocessor)
         {
             listener = new WebSocketListener(endpoint);
             WebSocketFactoryRfc6455 standard = new WebSocketFactoryRfc6455(listener);
