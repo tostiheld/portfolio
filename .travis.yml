@@ -1,2 +1,5 @@
 language: csharp
 solution: roadplus.sln
+
+notifications:
+  email: false
