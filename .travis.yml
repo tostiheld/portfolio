@@ -3,6 +3,9 @@ language: cpp
 compiler:
  - gcc
 
+notifications:
+  email: false
+
 # required for arturo install
 sudo: required
 
