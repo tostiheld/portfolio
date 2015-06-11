@@ -257,7 +257,7 @@ returns:
     "command": "createEdgeSet",
     "zoneId": <parent_zone>,
     "edgeId": <edgeId>,
-    "startVertexId: <startVertexId>,
+    "startVertexId": <startVertexId>,
     "startVertexX": <startX>,
     "startVertexY": <startY>,
     "endVertexId": <endVertexId>,
