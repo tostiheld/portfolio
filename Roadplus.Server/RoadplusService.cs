@@ -8,6 +8,8 @@ using Roadplus.Server.API;
 using Roadplus.Server.Communication;
 using Roadplus.Server.Communication.Http;
 using Roadplus.Server.Data;
+using Roadplus.Server.Commands.Json;
+
 
 namespace Roadplus.Server
 {
@@ -39,6 +41,17 @@ namespace Roadplus.Server
                     settings.HttpPort),
                     settings.HttpRoot);
             }
+
+            CommandProcessorJson processorJson = new CommandProcessorJson();
+            processorJson.RegisteredCommands.Add(new CreateZoneCommand()); 
+
+            websocketService = new WSSessionManager(
+                new IPEndPoint(
+                    settings.IP,
+                    settings.Port),
+                processorJson);
+
+            channels.Add(websocketService);
         }
 
         public void Start()
