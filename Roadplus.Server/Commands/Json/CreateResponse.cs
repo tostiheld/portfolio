@@ -17,6 +17,11 @@ namespace Roadplus.Server.Commands.Json
 
         [JsonProperty("createdObject")]
         public object CreatedObject { get; set; }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }
 

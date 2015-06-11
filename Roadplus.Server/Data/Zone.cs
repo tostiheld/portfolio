@@ -1,10 +1,12 @@
 ﻿using System;
 using LinqToDB.Mapping;
+using Newtonsoft.Json;
+
 using System.Linq;
 
 namespace Roadplus.Server.Data
 {
-    [Table("Zone")]
+    [Table("Zone"), JsonObject]
     public class Zone
     {
         [PrimaryKey, Identity]
@@ -19,6 +21,7 @@ namespace Roadplus.Server.Data
         [Column("RadarVertex")]
         public int RadarVertexId { get; set; }
 
+        [JsonIgnore]
         public Vertex StartVertex
         {
             get
@@ -29,6 +32,7 @@ namespace Roadplus.Server.Data
             }
         }
 
+        [JsonIgnore]
         public Vertex RadarVertex
         {
             get

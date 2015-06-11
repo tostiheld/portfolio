@@ -79,6 +79,8 @@ namespace Roadplus.Server.API
 
         public void Post(Link from, string data)
         {
+            Trace.WriteLine(data);
+
             IResponse response = commandProcessor.Process(data);
             from.Send(response.ToString());
         }
