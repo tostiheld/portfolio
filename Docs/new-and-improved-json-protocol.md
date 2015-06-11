@@ -229,3 +229,39 @@ The syntax to request zones is as follows:
     "command": "requestRoadconstructions"
 }
 ```
+
+
+
+
+## EDGE SET 
+
+to create a new edge set:
+Note a vertex might already exist
+```json
+{
+    "id": <generated_id>,
+    "command": "createEdgeSet",
+    "zoneId": <parent_zone>,
+    "startVertexX": <startX>,
+    "startVertexY": <startY>,
+    "endVertexX": <endX>,
+    "endVertexY": <endY>,
+}
+```
+
+returns:
+
+```json
+{
+    "id": <generated_id>,
+    "command": "createEdgeSet",
+    "zoneId": <parent_zone>,
+    "edgeId": <edgeId>,
+    "startVertexId: <startVertexId>,
+    "startVertexX": <startX>,
+    "startVertexY": <startY>,
+    "endVertexId": <endVertexId>,
+    "endVertexX": <endX>,
+    "endVertexY": <endY>
+}
+```
