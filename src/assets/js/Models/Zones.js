@@ -76,7 +76,7 @@ var ZoneModel = function (zones) {
 
 
         var newRoadC = {
-            zoneID: $("select[name='zoneID']", formElement).val()
+            zoneID: $("select[name='zoneID']", formElement).val(),
             Name: $("input[name='roadcName']", formElement).val(),
             DateStart: $("input[name='dateStart']", formElement).val(),
             DateEnd: $("input[name='dateEnd']", formElement).val()
@@ -110,7 +110,7 @@ var ZoneModel = function (zones) {
 
         var newZone = {
             name: $("input[name='zoneName']", formElement).val()
-        }
+        };
 
         // Send to server
         window.Handler.addZone(newZone);
@@ -227,7 +227,7 @@ var ZoneModel = function (zones) {
 
     self.removeZone = function (zone) {
         self.zones.remove(zone);
-    }
+    };
 
     //
     // REMOVE ALL ZONES

@@ -96,7 +96,7 @@ function WebSocketHandler(console,testMode) {
         var dateEnd = school.DateEnd.replace(':', '-');
         //create json
         var json = {};
-        this.count++
+        this.count++;
         json.id = this.count;
         json.command = "createSchool";
         json.zoneId = zoneID;
