@@ -21,6 +21,9 @@ namespace Roadplus.Server.Data
         [Column("RadarVertex")]
         public int RadarVertexId { get; set; }
 
+        [Column("ArduinoPort")]
+        public string ArduinoPort { get; set; }
+
         [JsonIgnore]
         public Vertex StartVertex
         {

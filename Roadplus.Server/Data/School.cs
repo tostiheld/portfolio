@@ -22,6 +22,7 @@ namespace Roadplus.Server.Data
         [Column("CloseTime"), NotNull]
         public DateTime CloseTime { get; set; }
 
+        [Newtonsoft.Json.JsonIgnore]
         public Zone Parent
         {
             get
@@ -32,6 +33,7 @@ namespace Roadplus.Server.Data
             }
         }
 
+        [Newtonsoft.Json.JsonIgnore]
         public Vertex LocationVertex
         {
             get

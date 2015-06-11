@@ -43,7 +43,12 @@ namespace Roadplus.Server
             }
 
             CommandProcessorJson processorJson = new CommandProcessorJson();
-            processorJson.RegisteredCommands.Add(new CreateZoneCommand()); 
+            processorJson.RegisteredCommands.AddRange(
+            new ICommand[]
+            {
+                new CreateZoneCommand(),
+                new CreateSchoolCommand()
+            });
 
             websocketService = new WSSessionManager(
                 new IPEndPoint(

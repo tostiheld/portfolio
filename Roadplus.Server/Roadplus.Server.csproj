@@ -103,6 +103,7 @@
     <Compile Include="API\ResponseStop.cs" />
     <Compile Include="Commands\Json\CreateZoneCommand.cs" />
     <Compile Include="Commands\Json\CreateResponse.cs" />
+    <Compile Include="Commands\Json\CreateSchoolCommand.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -79,7 +79,7 @@ namespace Roadplus.Server.API
 
         public void Post(Link from, string data)
         {
-            Trace.WriteLine(data);
+            Trace.WriteLine("Received from " + from.Address + ": " + data);
 
             IResponse response = commandProcessor.Process(data);
             from.Send(response.ToString());
