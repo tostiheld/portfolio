@@ -6,9 +6,13 @@ var Schools;
 var RoadConstructions;
 var Zones;
 var Console;
+try {
 var gui = require('nw.gui');
 var win = gui.Window.get();
-
+}
+catch(e){
+    var gui = null,win = null;
+    }
 /**
  * set up the actions and global variables on the page
  */
@@ -27,6 +31,15 @@ $(document).ready(function () {
     ViewHandler.Add("simulation", $("#simulation"));
     ViewHandler.Show("debug");
 
+    
+    $('body').on("keypress",function(e){
+         if(e.ctrlKey && ( e.which === 4 )){
+            win.showDevTools(); 
+             console.log("showDevTools");
+         }else {
+            console.log(e.ctrlKey + " " + e.which);   
+         }
+    });
 
     $(".os-close").click(function(e){
        e.preventDefault();

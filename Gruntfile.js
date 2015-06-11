@@ -4,7 +4,7 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
         clean: {
             all: ["dist/"], //Clean whole folder
-            tmp: ["dist/js/ServerGUI.js", //clean only temporary files. This will be called at the end of all tasks
+            tmp: [ //clean only temporary files. This will be called at the end of all tasks
                   "dist/css/ServerGUI.css",
                   "dist/index.tmp.html",
                   "dist/css/ServerGUI.min.css",

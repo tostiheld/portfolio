@@ -15,6 +15,11 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-includes": "^0.5.1",
     "grunt-node-webkit-builder": "^1.0.2",
-    "grunt-uncss": "^0.4.2"
+    "grunt-uncss": "^0.4.2",
+    "mocha": "^2.2.5",
+    "should": "^6.0.3"
+  },
+  "dependencies": {
+    "ws": "^0.7.2"
   }
 }

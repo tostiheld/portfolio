@@ -1,4 +1,5 @@
 // assets/js/WebSocketClient.js
+var WebSocket = require('ws');
 
 function WebSocketClient(serverURI, handler) {
     this.STATE_DISCONNECTED = 0;
@@ -8,23 +9,28 @@ function WebSocketClient(serverURI, handler) {
 
     this.serverURI = serverURI;
     this.handler = handler;
-    this.ws = new WebSocket(serverURI);
+    this.ws = new WebSocket(serverURI, {
+        protocolVersion: 13,
+        origin: 'http://127.0.0.1',
+        userAgent: 'Webkit'
+    });
     this.handler.WebSocketC = this;
 
-    this.ws.onopen = function () {
+    this.ws.on('open', function open() {
         handler.onOpen();
-    };
-    this.ws.onmessage = function (e) {
-        handler.onMessage(e);
-    };
-    this.ws.onclose = function () {
+    });
+    this.ws.on('message', function message(data, flags) {
+        handler.onMessage(data);
+        console.log(data, flags);
+    });
+    this.ws.on('close', function close() {
         handler.onClose();
-    };
-    this.ws.onerror = function (e) {
+    });
+    this.ws.on('error', function error(e) {
         handler.onError(e);
-        console.log(e);
+        dl(e);
 
-    };
+    });
     this.send = function (message) {
         if (this.ws.readyState == this.STATE_CONNECTED) {
             this.handler.send(message);

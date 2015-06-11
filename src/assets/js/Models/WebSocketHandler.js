@@ -1,6 +1,8 @@
-function WebSocketHandler(console) {
+function WebSocketHandler(console,testMode) {
+    this.testMode = testMode | false;
     this.con = console;
     this.WebSocketC = null;
+    this.count = 0;
     //create some data
     this.Zones = new ZoneModel([new zone(new school(), new roadc()), new zone(new school(), new roadc())]);
     ko.applyBindings(this.Zones);
@@ -8,7 +10,9 @@ function WebSocketHandler(console) {
 
     this.send = function (message) {
         this.con.appendFromClient(message);
-        this.WebSocketC.ws.send(message);
+        this.WebSocketC.ws.send(message, function ack(error) {
+          dl(error);
+        });
     };
     this.onOpen = function () {
         //Hide connected and show disconnect button
@@ -16,24 +20,17 @@ function WebSocketHandler(console) {
         $(".disconnect").show();
         //Enable send message
         $("#send").removeClass("disabled");
-        // Send identification, so the server knows we are an UI 
-        //create json
-        var json = {};
-        json.type = 1;
-        json.payload = {};
-        json.payload.LinkType = 1;
-        //send json
-        this.send(JSON.stringify(json));
+ 
 
         //create some more data
         this.Zones.addZone(1, "testManual");
-        this.Zones.addZone(2, "test2Manual");
+//        this.Zones.addZone(2, "test2Manual");
 
         //ask for existing data
         //this.getData();
     };
     this.onMessage = function (e) {
-        var message = e.data;
+        var message = e;
         this.con.appendFromServer(message);
         var json;
         try {
@@ -43,17 +40,19 @@ function WebSocketHandler(console) {
         }
         //if ports
         var self = this;
-        if (json.payloadtype == "ports") {
+        if (json.payload.ports != "undefined") {
             self.Zones.availableArduinoPorts.removeAll();
             $.each(json.payload, function (key) {
                 self.Zones.availableArduinoPorts.push(this);
             });
-        } else if (json.payloadtype == "temperature") {
+        } else if (json.payload.temperature != "undefined") {
             var minT = -30;
             var maxT = 50;
             var tempT = json.payload[0] + -(minT);
             var percentT = tempT / (maxT + -(minT)) * 100;
             $(".temp").css("width", percenT + "%");
+        } else if (json.payload.School != "undefined") {
+           
         }
         dl("message type:" + json.payloadtype + ", Message: " + json.payload);
     };
@@ -64,38 +63,30 @@ function WebSocketHandler(console) {
         this.Zones.removeAll();
     };
     this.onError = function (e) {
-        var message = e.data;
+        var message = e;
         this.con.appendError(message);
     };
     this.onDisconnect = function () {
         this.Zones.removeAll();
     };
     this.addZone = function (newZone) {
-        var x = 0;
-        if (typeof newZone.X != "undefined") {
-            x = newZone.X;
-        }
-        var y = 0;
-        if (typeof newZone.Y != "undefined") {
-            y = newZone.Y;
-        }
-
         //create json
         var json = {};
-        json.type = 4;
-        json.payload = {};
-        json.payload.Zone = {};
-        json.payload.Zone.x = x;
-        json.payload.Zone.y = y;
+        this.count++;
+        json.id = this.count;
+        json.command = "createZone";
+        json.name = newZone.name;
+
         //send json
         this.send(JSON.stringify(json));
     };
     this.removeZone = function (id) {
         //create json
         var json = {};
-        json.type = 5;
-        json.payload = {};
-        json.payload.Zone = id;
+        this.count++;
+        json.id = this.count;
+        json.command = "removeZone";
+        json.zoneId = id;
         //send json
         this.send(JSON.stringify(json));
     };
@@ -105,13 +96,14 @@ function WebSocketHandler(console) {
         var dateEnd = school.DateEnd.replace(':', '-');
         //create json
         var json = {};
-        json.type = 4;
-        json.payload = {};
-        json.payload.School = {};
-        json.payload.School.Name = school.Name;
-        json.payload.School.zoneID = zoneID;
-        json.payload.School.dateStart = dateStart;
-        json.payload.School.dateEnd = dateEnd;
+        this.count++
+        json.id = this.count;
+        json.command = "createSchool";
+        json.zoneId = zoneID;
+        json.location = 0; //implement vertex id
+        json.openTime = dateStart;
+        json.closeTime = dateEnd;
+        
 
         //send json
         this.send(JSON.stringify(json));
@@ -119,22 +111,24 @@ function WebSocketHandler(console) {
     this.removeSchool = function (schoolId) {
         //create json
         var json = {};
-        json.type = 5;
-        json.payload = {};
-        json.payload.School = id;
+        this.count++;
+        json.id = this.count;
+        json.command = "removeSchool";
+        json.schoolId = schoolId;
         //send json
         this.send(JSON.stringify(json));
     };
     this.addRoadC = function (zoneID, roadc) {
         //create json
         var json = {};
-        json.type = 4;
-        json.payload = {};
-        json.payload.School = {};
-        json.payload.School.Name = school.Name;
-        json.payload.School.zoneID = zoneID;
-        json.payload.School.dateStart = dateStart;
-        json.payload.School.dateEnd = dateEnd;
+        this.count++;
+        json.id = this.count;
+        json.command = "createRoadConstruction";
+        json.zoneId = zoneID;
+        json.location = 0;
+        json.startDate = roadc.DateStart;
+        json.endDate = roadc.DateEnd;
+        
 
         //send json
         this.send(JSON.stringify(json));
@@ -142,19 +136,21 @@ function WebSocketHandler(console) {
     this.removeRoadC = function (roadConstructionId) {
         //create json
         var json = {};
-        json.type = 5;
-        json.payload = {};
-        json.payload.RoadConstruction = id;
+        this.count++;
+        json.id = this.count;
+        json.command = "removeRoadconstruction";
+        json.roadconstructionId = roadConstructionId;
         //send json
         this.send(JSON.stringify(json));
     };
     this.connectArduino = function (zoneID, portName) {
         //create json
         var json = {};
-        json.type = 3;
-        json.payload = {};
-        json.payload.Zone = id;
-        json.payload.arduinoPort = portName;
+        this.count++;
+//        json.id = this.count;
+//        json.command = "removeRoadconstruction";
+//        json.roadconstructionId = ;
+//        json.payload.arduinoPort = portName;
         //send json
         this.send(JSON.stringify(json));
     };

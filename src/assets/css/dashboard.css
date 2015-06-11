@@ -118,14 +118,14 @@ body {
 }
 
 nav.window {
-    -webkit-app-region: no-drag
+    -webkit-app-region: no-drag;
+    position:fixed;
 }
 
 nav.darwin {
-    position: absolute;
     width:100%;
     padding-left:15px;
-    background-color:#101010;
+    background-color:#222;
     top: 0px;
     padding: 2px;
 }
@@ -133,7 +133,6 @@ nav.darwin {
 .btn-os {
     float: left;
     margin: 0 6px 0 0;
-    background-color: #000;
     background-size: 77px 12px;
     background-image: url('../images/topbar_sprite.png');
     border-radius: 30px;

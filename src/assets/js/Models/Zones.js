@@ -11,7 +11,7 @@ var ZoneModel = function (zones) {
             Arduino: ko.observable(zone.Arduino),
             Schools: ko.observableArray(ko.utils.arrayMap(zone.Schools, function (school) {
                 return {
-                    ID: school.ID,
+                    zoneID: school.zoneID,
                     Name: school.Name,
                     DateStart: school.DateStart,
                     DateEnd: school.DateEnd
@@ -40,12 +40,15 @@ var ZoneModel = function (zones) {
     //
     self.UIaddSchool = function (formElement) {
 
-        //add School
-        self.addSchool($("select[name='zoneID']", formElement).val(),
-            $("input[name='schoolID']", formElement).val(),
-            $("input[name='schoolName']", formElement).val(),
-            $("input[name='dateStart']", formElement).val(),
-            $("input[name='dateEnd']", formElement).val());
+        var newSchool = {
+            zoneID: $("select[name='zoneID']", formElement).val(),
+            Name: $("input[name='schoolName']", formElement).val(),
+            DateStart: $("input[name='dateStart']", formElement).val(),
+            DateEnd: $("input[name='dateEnd']", formElement).val()
+        };
+
+        //send School to Server
+        window.Handler.addSchool(newSchool.zoneID, newSchool);
 
         //empty form
         clearForm(formElement);
@@ -57,20 +60,13 @@ var ZoneModel = function (zones) {
     //
     // ADD SCHOOL
     //
-    self.addSchool = function (zoneID, id, name, dateStart, dateEnd) {
+    self.addSchool = function (newSchool) {
         //find zone
-        var zone = self.findZoneByID(zoneID);
+        var zone = self.findZoneByID(newSchool.zoneID);
 
-        var newSchool = {
-            ID: id,
-            Name: name,
-            DateStart: dateStart,
-            DateEnd: dateEnd
-        };
         //add school to zone
         zone.Schools.push(newSchool);
-        //send to server
-        window.Handler.addSchool(zoneID, newSchool);
+
     };
 
     //
@@ -78,12 +74,16 @@ var ZoneModel = function (zones) {
     //
     self.UIaddRoadC = function (formElement) {
 
-        //add School
-        self.addRoadC($("select[name='zoneID']", formElement).val(),
-            $("input[name='roadcID']", formElement).val(),
-            $("input[name='roadcName']", formElement).val(),
-            $("input[name='dateStart']", formElement).val(),
-            $("input[name='dateEnd']", formElement).val());
+
+        var newRoadC = {
+            zoneID: $("select[name='zoneID']", formElement).val()
+            Name: $("input[name='roadcName']", formElement).val(),
+            DateStart: $("input[name='dateStart']", formElement).val(),
+            DateEnd: $("input[name='dateEnd']", formElement).val()
+        };
+
+        //send to server
+        window.Handler.addRoadC(zoneID, newRoadC);
 
         //empty form
         clearForm(formElement);
@@ -95,31 +95,91 @@ var ZoneModel = function (zones) {
     //
     // ADD School
     //
-    self.addRoadC = function (zoneID, id, name, dateStart, dateEnd) {
+    self.addRoadC = function (newRoadC) {
         //find zone
-        var zone = self.findZoneByID(zoneID);
-        var newRoadC = {
-            ID: id,
-            Name: name,
-            DateStart: dateStart,
-            DateEnd: dateEnd
-        };
+        var zone = self.findZoneByID(newRoadC.zoneID);
+
         //add school to zone
         zone.RoadConstructions.push(newRoadC);
-        //send to server
-        window.Handler.addRoadC(zoneID, newRoadC);
     };
 
     //
     // ADD ZONE FROM GUI
     //
     self.UIaddZone = function (formElement) {
-        //add zone to zones
-        self.addZone($("input[name='zoneID']", formElement).val(), $("input[name='zoneName']", formElement).val());
+
+        var newZone = {
+            name: $("input[name='zoneName']", formElement).val()
+        }
+
+        // Send to server
+        window.Handler.addZone(newZone);
 
         //empty form
         clearForm(formElement);
 
+        //close popup
+        $(".modal.in").modal('hide');
+    };
+
+    //
+    // ADD ZONE
+    //
+    self.addZone = function (newZone) {
+
+        //Needed for KO
+        var newZoneKO = {
+            ID: newZone.id,
+            Name: ko.observable(newZone.name),
+            Schools: ko.observableArray(),
+            RoadConstructions: ko.observableArray(),
+            Vertexes: ko.observableArray(),
+            Edges: ko.observableArray(),
+            Arduino: ko.observable("")
+        };
+
+        // Add to zones list
+        self.zones.push(newZoneKO);
+
+    };
+    
+    //
+    // ADD EDGE
+    //
+    self.addEdge = function (newEdge) {
+
+        //find zone
+        var zone = self.findZoneByID(newEdge.zoneID);
+
+        //add school to zone
+        zone.Edges.push(newEdge);
+
+    };
+    
+        
+    //
+    // ADD VERTEX
+    //
+    self.addVertex = function (newVertex) {
+
+        //find zone
+        var zone = self.findZoneByID(newVertex.zoneID);
+
+        //add school to zone
+        zone.Vertexes.push(newVertex);
+
+    };
+
+
+    //
+    // ADD ZONE FROM GUI
+    //
+    self.UIaddArduino = function (formElement) {
+        // Send to server
+        window.Handler.connectArduino($("input[name='id']", formElement).val(), $("select[name='arduinoPort']", formElement).val());
+
+        //empty form
+        clearForm(formElement);
         //close popup
         $(".modal.in").modal('hide');
     };
@@ -138,40 +198,7 @@ var ZoneModel = function (zones) {
         self.zones()[index].Arduino(arduinoPort);
 
         //self.zones.push(self.zones()[index]);
-        // Send to server
-        window.Handler.connectArduino(zoneID, arduinoPort);
-    };
 
-
-    //
-    // ADD ZONE FROM GUI
-    //
-    self.UIaddArduino = function (formElement) {
-        //add zone to zones
-        self.addArduino($("input[name='id']", formElement).val(), $("select[name='arduinoPort']", formElement).val());
-        //empty form
-        clearForm(formElement);
-        //close popup
-        $(".modal.in").modal('hide');
-    };
-
-    //
-    // ADD ZONE
-    //
-    self.addZone = function (id, name) {
-        var newZone = {
-            ID: id,
-            Name: ko.observable(name),
-            Schools: ko.observableArray(),
-            RoadConstructions: ko.observableArray(),
-            Vertexes: ko.observableArray(),
-            Edges: ko.observableArray(),
-            Arduino: ko.observable("")
-        };
-        // Add to zones list
-        self.zones.push(newZone);
-        // Send to server
-        window.Handler.addZone(newZone);
     };
 
     //
@@ -194,11 +221,13 @@ var ZoneModel = function (zones) {
     // REMOVE ZONE FROM UI
     //
     self.UIremoveZone = function (zone) {
-        self.zones.remove(zone);
-
         //send to server
         window.Handler.removeZone(zone.ID);
     };
+
+    self.removeZone = function (zone) {
+        self.zones.remove(zone);
+    }
 
     //
     // REMOVE ALL ZONES
@@ -212,12 +241,17 @@ var ZoneModel = function (zones) {
     // REMOVE SCHOOL FROM UI
     //
     self.UIremoveSchool = function (school) {
+        //send to server
+        window.Handler.removeSchool(school.ID);
+    };
+
+    //
+    // REMOVE SCHOOL FROM UI
+    //
+    self.removeSchool = function (school) {
         $.each(self.zones(), function () {
             this.Schools.remove(school);
         });
-
-        //send to server
-        window.Handler.removeSchool(school.ID);
     };
 
     //
@@ -228,6 +262,14 @@ var ZoneModel = function (zones) {
             this.RoadConstructions.remove(roadc);
         });
 
+        //send to server
+        window.Handler.removeZone(roadc.ID);
+    };
+
+    //
+    // REMOVE ROADCONSTRUCTION FROM UI
+    //
+    self.removeRoadC = function (roadc) {
         //send to server
         window.Handler.removeZone(roadc.ID);
     };
