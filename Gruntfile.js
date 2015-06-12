@@ -33,7 +33,7 @@ module.exports = function (grunt) {
                 separator: ';'
             },
             js: { //concat all javascript files 
-                src: ['src/assets/js/**/*.js'],
+                src: ['src/assets/js/*.js','src/assets/js/Models/*.js','src/assets/js/Controllers/*.js'],
                 dest: 'dist/js/<%= pkg.name %>.js'
             },
             css: { //concat all main css files

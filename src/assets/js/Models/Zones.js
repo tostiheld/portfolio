@@ -8,7 +8,7 @@ var ZoneModel = function (zones) {
         return {
             ID: zone.ID,
             Name: ko.observable(zone.Name),
-            Arduino: ko.observable(zone.Arduino),
+            Arduino: ko.observable(zone.arduinoPort),
             Schools: ko.observableArray(ko.utils.arrayMap(zone.Schools, function (school) {
                 return {
                     zoneID: school.zoneID,
@@ -26,7 +26,9 @@ var ZoneModel = function (zones) {
                 };
             })),
             Vertexes: ko.observableArray(zone.Vertexes),
-            Edges: ko.observableArray(zone.Edges)
+            Edges: ko.observableArray(zone.Edges),
+            StartVertex: ko.observable(zone.startVertex),
+            RadarVertex: ko.observable(zone.radarVertex),
         };
     }));
 
@@ -135,12 +137,31 @@ var ZoneModel = function (zones) {
             RoadConstructions: ko.observableArray(),
             Vertexes: ko.observableArray(),
             Edges: ko.observableArray(),
-            Arduino: ko.observable("")
+            StartVertex: ko.observable(newZone.startVertex),
+            RadarVertex: ko.observable(newZone.radarVertex),
+            Arduino: ko.observable(newZone.arduinoPort)
         };
 
         // Add to zones list
         self.zones.push(newZoneKO);
 
+    };
+    
+    //
+    // ADD EDGE FROM GUI
+    //
+    self.UIaddEdge = function (data) {
+
+        console.log(data);
+        var newEdgeSet = {
+            startVertexX: data[0],
+            startVertexY: data[1],
+            endVertexX: data[2],
+            endVertexY: data[3]
+        };
+
+        //send edgeSet to Server
+        window.Handler.addEdgeSet(1, newEdgeSet);
     };
     
     //
@@ -302,5 +323,8 @@ var zone = function (school, roadc) {
     this.RoadConstructions = [roadc, roadc];
     this.Vertexes = [];
     this.Edges = [];
+    this.Arduino = "";
+    this.StartVertex = 1;
+    this.RadarVertex = 1;
     this.Arduino = "";
 };
