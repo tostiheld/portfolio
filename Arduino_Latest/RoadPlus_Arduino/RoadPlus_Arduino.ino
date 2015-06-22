@@ -1,21 +1,23 @@
+#include <Servo.h>
+
 
 //voor serial
 char incomingByte = 0;
 String message;
 String metaMessage;
-int speedLimit = 0;
 String meta;
-long timetillnext;
-long previousTime;
+
+
+//Define States:
 boolean state;
 boolean warning;
+boolean oneWay;
 boolean sign;
-boolean dist;
-boolean temp;
+boolean sonarOn;
 
-String First;
-String Second;
-#include <Servo.h>
+//Define Global Variables:
+int density;    //number 1-10, depending on how busy the road is
+
 
 //Define instances of Servo:
 Servo Servo1;
@@ -28,17 +30,6 @@ const int trigPin2 = A4;
 const int echoPin2 = A3;
 const int servoPin1 = A2;
 const int servoPin2 = A5;
-
-//set constants:
-const int timeOutPulseRead = 15000;
-const int MaxDistance = 200.0;
-const int MinDistance = 2.0;
-const int offsetServo1 = 20;
-const int offsetServo2 = 20;
-
-//Define Variables:
-int Positie = 55;
-boolean Richting;
 
 //voor temperatuur
 #include <OneWire.h>
@@ -61,8 +52,9 @@ DallasTemperature sensors(&ourWire);
 #define LEDARRAY_LAT 9
 
 
-unsigned char Display_Buffer[2];
+//Define Sign Bitmaps:
 
+//Warning Sign:
 const unsigned char  signWarning[32] =
 {
   0xfe, 0xfd, 0xfd, 0xfb, 0xfa, 0xf6, 0xf6, 0xee,
@@ -71,6 +63,7 @@ const unsigned char  signWarning[32] =
   0x77, 0x7b, 0x7b, 0xfd, 0x7d, 0x7e, 0xfe, 0x00,
 };
 
+//One Way Street:
 const unsigned char  OneDirection[32] =
 {
   0xf8, 0xe0, 0xe0, 0x80, 0x80, 0x00, 0x00, 0x0f,
@@ -79,60 +72,61 @@ const unsigned char  OneDirection[32] =
   0xf0, 0x00, 0x00, 0x01, 0x01, 0x03, 0x07, 0x1f,
 };
 
-
-unsigned char  sign0[16] =
+//The Number 0:
+const unsigned char  sign0[16] =
 {
   0xff, 0xff, 0x83, 0xbb, 0xbb, 0xbb, 0xbb, 0xbb,
   0xbb, 0xbb, 0xbb, 0xbb, 0xbb, 0x83, 0xff, 0xff,
 };
-unsigned char  sign1[16] =
+//The Number 1:
+const unsigned char  sign1[16] =
 {
   0xff, 0xff, 0xfb, 0xf3, 0xeb, 0xfb, 0xfb, 0xfb,
   0xfb, 0xfb, 0xfb, 0xfb, 0xfb, 0xfb, 0xff, 0xff,
 };
-
+//The Number 2:
 const unsigned char  sign2[16] =
 {
   0xff, 0xff, 0xc1, 0xfd, 0xfd, 0xfd, 0xfd, 0xc1,
   0xdf, 0xdf, 0xdf, 0xdf, 0xdf, 0xc1, 0xff, 0xff,
 };
-
+//The Number 3:
 const unsigned char  sign3[16] =
 {
   0xff, 0xFF, 0xc1, 0xfd, 0xfd, 0xfd, 0xfd, 0xf1,
   0xf1, 0xfd, 0xfd, 0xfd, 0xfd, 0xc1, 0xff, 0xff,
 };
-
+//The Number 4:
 const unsigned char  sign4[16] =
 {
   0xff, 0xff, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xc1,
   0xfd, 0xfd, 0xfd, 0xfd, 0xfd, 0xfd, 0xff, 0xff,
 };
-
+//The Number 5:
 const unsigned char  sign5[16] =
 {
   0xff, 0xff, 0x83, 0xbf, 0xbf, 0xbf, 0xbf, 0x83,
   0xfb, 0xfb, 0xfb, 0xfb, 0xfb, 0x83, 0xff, 0xff,
 };
-
+//The Number 6:
 const unsigned char  sign6[16] =
 {
   0xff, 0xff, 0xc1, 0xdf, 0xdf, 0xdf, 0xdf, 0xc1,
   0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xc1, 0xff, 0xff,
 };
-
+//The Number 7:
 const unsigned char  sign7[16] =
 {
   0xff, 0xff, 0xc1, 0xfd, 0xfd, 0xfb, 0xfb, 0xf7,
   0xf7, 0xf7, 0xef, 0xef, 0xdf, 0xdf, 0xff, 0xff,
 };
-
+//The Number 8:
 const unsigned char  sign8[16] =
 {
   0xff, 0xff, 0xc1, 0xdd, 0xdd, 0xdd, 0xdd, 0xc1,
   0xc1, 0xdd, 0xdd, 0xdd, 0xdd, 0xc1, 0xff, 0xff,
 };
-
+//The Number 9:
 const unsigned char  sign9[16] =
 {
   0xff, 0xff, 0xc1, 0xdd, 0xdd, 0xdd, 0xdd, 0xc1,
@@ -141,6 +135,7 @@ const unsigned char  sign9[16] =
 
 void setup()
 {
+  //Set Pinmode For Display Pins:
   pinMode(LEDARRAY_D, OUTPUT);
   pinMode(LEDARRAY_C, OUTPUT);
   pinMode(LEDARRAY_B, OUTPUT);
@@ -149,35 +144,43 @@ void setup()
   pinMode(LEDARRAY_DI, OUTPUT);
   pinMode(LEDARRAY_CLK, OUTPUT);
   pinMode(LEDARRAY_LAT, OUTPUT);
-  Serial.begin(19200);
-  sensors.begin();
-  Servo1.attach(servoPin1);
-  Servo2.attach(servoPin2);
-
-  //set pinmode for all pins:
+  
+  //Set Pinmode for Ultrasonic Pins:
   pinMode(trigPin1, OUTPUT);
   pinMode(echoPin1, INPUT);
   pinMode(trigPin2, OUTPUT);
   pinMode(echoPin2, INPUT);
+  
+  //attach Servo To Pins:   
+  Servo1.attach(servoPin1);
+  Servo2.attach(servoPin2);
+  
+  //start Reading Sensor Data:
+  sensors.begin();
+  
+  //open Serial Connection:
+  Serial.begin(19200);
 }
 
 void loop()
 {
   GetMessage();
-  if (sign || speedLimit != 0)
+  if (sign)
   {
     DisplaySpeedLimit();
   }
-  if (temp)
+  else
   {
-    SendTemperature();
-    temp = false;
+    delayMicroseconds(102);
   }
-  if (dist)
+  if (sonarOn)
   {
-    GetDistance();
+    GetDensity();
   }
 }
+
+
+
 
 
 

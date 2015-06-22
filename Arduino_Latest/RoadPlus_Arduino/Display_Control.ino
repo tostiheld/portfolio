@@ -1,12 +1,16 @@
+//set Variables:
+String First;
+String Second;
+long previousTime;
+
 //checks for need of warning sign, if there is no need display only speed limit, else display both
 void DisplaySpeedLimit()
 {  
   if (warning)
   {
-    timetillnext = millis();
-    if (timetillnext - previousTime > 1000)
+    if (millis() - previousTime > 1000)
     {
-      previousTime = timetillnext;
+      previousTime = millis();
       state = !state;      
     }
     if (state)
@@ -20,6 +24,11 @@ void DisplaySpeedLimit()
   }
   else
   {
+    if (oneWay)
+    {
+      Display(OneDirection);
+    }
+    
     GetSpeedLimit();
   }
 }
@@ -34,7 +43,7 @@ void GetSpeedLimit()
     0x00, 0x00, 0x00, 0x00,  0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00,  0x00, 0x00, 0x00, 0x00,    
   };
-  
+
   if (metaMessage == "Warning")
   {
     warning = true;
@@ -43,13 +52,12 @@ void GetSpeedLimit()
   {
     warning = false;
   }
-  else if (metaMessage.length() <= 2)
+  else if (metaMessage.length() <= 2 && metaMessage.length() > 0 && meta.indexOf("15") != -1)
   {
     if (metaMessage.length() == 1)
     {
       metaMessage = "0" + metaMessage;
     }
-
     First = metaMessage.substring(0, 1);
     Second = metaMessage.substring(1, 2);
 
@@ -57,9 +65,13 @@ void GetSpeedLimit()
   //if the display is needed to display a oneway sign, display the sign, else, display the correct speedlimit
   if (metaMessage == "1way")
   {
-    Display(OneDirection);
+    oneWay = true;
   }
-  else
+  else if (metaMessage == "No1way")
+  {
+    oneWay = false;
+  }
+  else if (!oneWay)
   { 
     if (First == "0")
     {
@@ -206,3 +218,8 @@ void GetSpeedLimit()
   }
 
 }
+
+
+
+
+

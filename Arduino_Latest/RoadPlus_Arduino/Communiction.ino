@@ -18,20 +18,55 @@ void GetMessage()
     }
     message = "";
   }
-  if (meta == "SIGN")
+
+  if (meta == "12")
   {
-    sign = true;
+    if (metaMessage == "On")
+    {
+      sonarOn = true;
+    }
+    else if(metaMessage == "Off")
+    {
+      sonarOn = false;
+    }
+    else if(metaMessage == "Read")
+    {
+      Serial.print(">Dens:");
+      Serial.print(density);
+      Serial.println(":;");      
+    }
+    meta = "";
   }
-  if (meta == "DIST")
+  if (meta == "13")
   {
-    dist = true;
+
   }
-  if (meta == "TEMP")
+  if (meta == "14")
   {
-    temp = true;
+    SendTemperature();
+    meta = "";
   }
-  if (meta == "discover")
+  if (meta == "11")
   {
-    Serial.print(">ok:;");
+    Serial.println(">ok:;");
+    meta = "";
+  }
+  if (meta == "15")
+  {
+    if (metaMessage == "Off")
+    {
+      sign = false;
+    }
+    else
+    {
+      sign = true;
+    }
+
   }
 }
+
+
+
+
+
+

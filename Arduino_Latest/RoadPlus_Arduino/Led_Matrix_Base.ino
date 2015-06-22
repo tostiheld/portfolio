@@ -1,3 +1,5 @@
+unsigned char Display_Buffer[2];
+
 void Display(const unsigned char dat[32])
 {
   unsigned char i;
