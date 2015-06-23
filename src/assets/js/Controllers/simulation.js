@@ -6,7 +6,9 @@ var lines = [];
 var selectRadius = 20;
 var activeVertex;
 var activeEdge;
-var modus = 'select';
+var mode = "road";
+var sx;
+var sy;
 
 AN.initialize = function () {
     cv = $("#canvas")[0];
@@ -16,9 +18,11 @@ AN.initialize = function () {
 };
 
 AN.handleClick = function (e) {
-    if (modus == "road") {
-        x = AN.getCursorPosition(e)[0] - this.offsetLeft;
-        y = AN.getCursorPosition(e)[1] - this.offsetTop;
+    if (mode == "road") {
+        var curTop = findPos(cv);
+        //fix scroll
+        x = Math.round(AN.getCursorPosition(e)[0]*sx - curTop[0]);
+        y = Math.round(AN.getCursorPosition(e)[1]*sy - curTop[1]);
 
         if (clicks === 0) {
             clicks++;
@@ -30,7 +34,7 @@ AN.handleClick = function (e) {
         } else if (clicks == 1) {
             AN.drawLine(x, y, true);
         }
-    }else if(modus == "selectEdge"){
+    }else if(mode == "selectEdge"){
         if(activeEdge){
             cv.attr("edge",activeEdge.id);
         }else {
@@ -40,8 +44,9 @@ AN.handleClick = function (e) {
 };
 
 AN.handleMove = function (e) {
-    x = AN.getCursorPosition(e)[0] - this.offsetLeft;
-    y = AN.getCursorPosition(e)[1] - this.offsetTop;
+    var curTop = findPos(cv);
+    x = Math.round(AN.getCursorPosition(e)[0]*sx - curTop[0]);
+    y = Math.round(AN.getCursorPosition(e)[1]*sy - curTop[1]);
     var zone = window.Handler.Zones.findZoneByID($(".canvas_zoneID").val());
     var activeVertexNow = false;
     var activeEdgeNow = false;
@@ -224,3 +229,19 @@ AN.dotLineLength = function(x, y, x0, y0, x1, y1, o) {
     return Math.abs(a * x + b * y + c) / Math.sqrt(a * a + b * b);
   }
 };
+
+function findPos(obj) {
+	var curleft = curtop = 0;
+	if (obj.offsetParent) {
+	do {
+			curleft += obj.offsetLeft;
+			curtop += obj.offsetTop;
+
+		} while (obj = obj.offsetParent);
+    }
+    
+    sx = canvas.canvas.width / canvas.canvas.offsetWidth;
+    sy = canvas.canvas.height / canvas.canvas.offsetHeight;
+    
+	return [curleft*sx,curtop*sy];
+}

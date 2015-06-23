@@ -86,7 +86,19 @@ $(document).ready(function () {
        window.AN.redrawLines(); 
     });
 
-
+    $("#newSchoolForm select").change(function(){
+        alert($(this).val());
+        $("#canvas").appendTo("#newSchoolForm");
+        $(".canvas_zoneID").val($(this).val()).trigger("change");
+        window.mode = "select";
+    });
+    
+    $('#newSchoolModal').on('hidden.bs.modal', function () {
+        $("#canvas").appendTo(".canvas");
+        window.mode = "road";
+    });
+    
+    
     //
     // HANDLE KEY EVENTS OF CONSOLE
     //
