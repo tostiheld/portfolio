@@ -7,12 +7,12 @@ var RoadConstructions;
 var Zones;
 var Console;
 try {
-var gui = require('nw.gui');
-var win = gui.Window.get();
+    var gui = require('nw.gui');
+    var win = gui.Window.get();
 }
 catch(e){
     var gui = null,win = null;
-    }
+}
 /**
  * set up the actions and global variables on the page
  */
@@ -88,13 +88,6 @@ $(document).ready(function () {
     //
     $('.console_io').bind('keyup', function (e) {
         Console.handleKeyEvents(e, this);
-    });
-
-    //
-    // LOAD CANVAS
-    //
-    $(document).ready(function(){
-       window.AN.initialize(); 
     });
 
 

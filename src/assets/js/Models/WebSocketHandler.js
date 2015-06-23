@@ -20,7 +20,7 @@ function WebSocketHandler(console, testMode) {
         $(".disconnect").show();
         //Enable send message
         $("#send").removeClass("disabled");
-
+        window.AN.initialize(); 
 
         //create some more data
         //this.Zones.addZone(1, "testManual");
@@ -32,37 +32,8 @@ function WebSocketHandler(console, testMode) {
     this.onMessage = function (e) {
         var message = e;
         this.con.appendFromServer(message);
-        var json;
-        try {
-            json = JSON.parse(message);
-        } catch (ev) {
-            console.log("this is no json");
-        }
-        //if ports
-        var self = this;
-        if (json.payload.ports != "undefined") {
-            self.Zones.availableArduinoPorts.removeAll();
-            $.each(json.payload, function (key) {
-                self.Zones.availableArduinoPorts.push(this);
-            });
-        } else if (json.payload.temperature != "undefined") {
-            var minT = -30;
-            var maxT = 50;
-            var tempT = json.payload[0] + -(minT);
-            var percentT = tempT / (maxT + -(minT)) * 100;
-            $(".temp").css("width", percenT + "%");
-        } else if (json.command == "createZone") {
-            var newZone = {
-                id: json.zoneId,
-                name: json.name,
-                startVertex: json.startVertex,
-                radarVertex: json.radarVertex,
-                arduinoPort: json.arduinoPort
-            };
-            Zones.addZone(newZone);
-
-        }
-        dl("message type:" + json.payloadtype + ", Message: " + json.payload);
+        parser(json, self);
+        dl("message type:" + json.command);
     };
     this.onClose = function () {
         $(".connect").show();
@@ -185,22 +156,22 @@ function WebSocketHandler(console, testMode) {
         dl('Get All Zones');
         //create json
         var json = {};
-        json.type = 5;
-        json.payload = {};
-        json.payload.RoadConstruction = id;
+        this.count++;
+        json.id = this.count;
+        json.command = "requestZones";
         //send json
         this.send(JSON.stringify(json));
 
 
 
-        dl('Get Com Ports');
-        //create json
-        json = {};
-        json.type = 5;
-        json.payload = {};
-        json.payload.roadConstruction = id;
-        //send json
-        this.send(JSON.stringify(json));
+//        dl('Get Com Ports');
+//        //create json
+//        json = {};
+//        json.type = 5;
+//        json.payload = {};
+//        json.payload.roadConstruction = id;
+//        //send json
+//        this.send(JSON.stringify(json));
 
     };
 }

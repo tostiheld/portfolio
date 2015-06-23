@@ -91,7 +91,6 @@ AN.drawLine = function (x, y, click) {
         lines.push([lastClick[0], lastClick[1], x, y]);
         window.Handler.Zones.UIaddEdge([lastClick[0], lastClick[1], x, y]);
         clicks = 0;
-        console.log(lines);
     }
 };
 
