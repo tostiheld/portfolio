@@ -14,11 +14,11 @@ namespace Roadplus.Server.API
             }
         }
 
-        public int ID
+        public string Command
         {
             get
             {
-                return -1;
+                return "server-closing";
             }
             set{ }
         }

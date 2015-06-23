@@ -9,9 +9,9 @@ namespace Roadplus.Server.API
         public ResponseFailure()
         { }
 
-        public ResponseFailure(int id, string message)
+        public ResponseFailure(string command, string message)
         {
-            ID = id;
+            Command = command;
             ErrorMessage = message;
         }
 
@@ -21,8 +21,8 @@ namespace Roadplus.Server.API
         [JsonProperty("error-message")]
         public string ErrorMessage { get; set; }
 
-        [JsonProperty("id")]
-        public int ID { get; set; }
+        [JsonProperty("command")]
+        public string Command { get; set; }
 
         public override string ToString()
         {

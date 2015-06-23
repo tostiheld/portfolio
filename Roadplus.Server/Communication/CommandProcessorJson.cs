@@ -9,7 +9,6 @@ namespace Roadplus.Server.Communication
     public class CommandProcessorJson : CommandProcessor
     {
         public const string CommandKey = "command";
-        public const string IDKey = "id";
 
         public override IResponse Process(string command)
         {
@@ -23,8 +22,7 @@ namespace Roadplus.Server.Communication
                 }
             }
 
-            int id = Convert.ToInt32(o[IDKey]);
-            return new ResponseFailure(id, "Command not found");
+            return new ResponseFailure(o[CommandKey].ToString(), "Command not found");
         }
     }
 }

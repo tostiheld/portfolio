@@ -17,7 +17,6 @@ namespace Roadplus.Server.Commands.Json
         public IResponse Execute(string payload)
         {
             JObject json = JsonConvert.DeserializeObject<JObject>(payload);
-            int requestId = Convert.ToInt32(json["id"]);
             int zoneId = Convert.ToInt32(json["zoneId"]);
             int location = Convert.ToInt32(json["location"]);
 
@@ -25,13 +24,13 @@ namespace Roadplus.Server.Commands.Json
             if (!data.Zones.Any<Zone>(z => z.ZoneId == zoneId))
             {
                 return new ResponseFailure(
-                    requestId,
+                    Name,
                     "Specified zone does not exist");
             }
             else if (!data.Vertices.Any<Vertex>(v => v.VertexId == location))
             {
                 return new ResponseFailure(
-                    requestId,
+                    Name,
                     "Specified vertex does not exist");
             }
 

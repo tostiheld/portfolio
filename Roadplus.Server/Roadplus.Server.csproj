@@ -106,6 +106,8 @@
     <Compile Include="Commands\Json\CreateSchoolCommand.cs" />
     <Compile Include="Commands\Json\GetZonesCommand.cs" />
     <Compile Include="Commands\Json\GetResponse.cs" />
+    <Compile Include="Commands\Json\EdgeSetCommand.cs" />
+    <Compile Include="Commands\Json\EdgeSetResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
