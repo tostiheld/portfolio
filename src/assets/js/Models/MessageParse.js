@@ -1,4 +1,5 @@
-var parser = function (json, self) {
+var parser = function (message, self) {
+    var json;
     try {
         json = JSON.parse(message);
     } catch (ev) {
@@ -10,8 +11,8 @@ var parser = function (json, self) {
             var newZone = {
                 id: json.zoneId,
                 name: json.name,
-                startVertex: json.startVertex,
-                radarVertex: json.radarVertex,
+                startVertexId: json.startVertexId,
+                radarVertexId: json.radarVertexId,
                 arduinoPort: json.arduinoPort
             };
             self.Zones.addZone(newZone);
@@ -20,6 +21,7 @@ var parser = function (json, self) {
             var newSchool = {
                 zoneID: json.zoneId,
                 Name: json.name,
+                VertexId: json.location,
                 DateStart: json.dateStart,
                 DateEnd: json.dateEnd
             };
@@ -29,19 +31,52 @@ var parser = function (json, self) {
             var newRoadConstruction = {
                 zoneID: json.zoneId,
                 Name: json.name,
+                VertexId: json.location,
                 DateStart: json.dateStart,
                 DateEnd: json.dateEnd
             };
             self.Zones.addRoadConstruction(newRoadConstruction);
             break;
-        case "createVertex":
+        case "createvertex":
             var newVertex = {
                 zoneID: json.zoneId,
                 Name: json.name,
                 DateStart: json.dateStart,
                 DateEnd: json.dateEnd
             };
-            self.Zones.addRoadConstruction(newRoadConstruction);
+            self.Zones.addVertex(newVertex);
+            break;
+        case "createedgeset":
+//            var newVertex = {
+//                zoneID: json.zoneId,
+//                Name: json.name,
+//                DateStart: json.dateStart,
+//                DateEnd: json.dateEnd
+//            };
+//            self.Zones.addRoadConstruction(newRoadConstruction);
+//            break;
+        case "removezone":
+            break;
+        case "removeschool":
+            break;
+        case "removeroadconstruction":
+            break;
+        case "removevertex":
+            break;
+        case "removeedge":
+            break;
+        case "requestzones":
+            json.requestedObjects.forEach(function(element, index){
+                var newZone = {
+                    id: element.ZoneId,
+                    name: element.Name,
+                    startVertexId: element.StartVertexId,
+                    radarVertexId: element.RadarVertexId,
+                    arduinoPort: element.ArduinoPort
+                };
+                console.log(element);
+                self.Zones.addZone(newZone);
+            });
             break;
     }
 };

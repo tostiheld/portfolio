@@ -27,13 +27,12 @@ function WebSocketHandler(console, testMode) {
         //        this.Zones.addZone(2, "test2Manual");
 
         //ask for existing data
-        //this.getData();
+        this.getData();
     };
     this.onMessage = function (e) {
         var message = e;
         this.con.appendFromServer(message);
-        parser(json, self);
-        dl("message type:" + json.command);
+        parser(message, this);
     };
     this.onClose = function () {
         $(".connect").show();
