@@ -19,22 +19,17 @@ void DisplaySpeedLimit()
     }
     else
     {
-      GetSpeedLimit();
+      UpdateSign();
     }
   }
   else
-  {
-    if (oneWay)
-    {
-      Display(OneDirection);
-    }
-    
-    GetSpeedLimit();
+  {    
+    UpdateSign();
   }
 }
 
 //converts a String into a Array and export this to the base code
-void GetSpeedLimit()
+void UpdateSign()
 {
   //create a base bitmap, for control
   unsigned char complete[32] = {
@@ -44,15 +39,24 @@ void GetSpeedLimit()
     0x00, 0x00, 0x00, 0x00,  0x00, 0x00, 0x00, 0x00,    
   };
 
-  if (metaMessage == "Warning")
+  if (metaMessage == "Warning" && meta.indexOf("15") != -1)
   {
     warning = true;
   }
-  else if (metaMessage == "NoWarning")
+  else if (metaMessage == "NoWarning" && meta.indexOf("15") != -1)
   {
     warning = false;
   }
-  else if (metaMessage.length() <= 2 && metaMessage.length() > 0 && meta.indexOf("15") != -1)
+  else if (metaMessage == "1way" && meta.indexOf("15") != -1)
+  {
+    oneWay = true;
+  }
+  else if (metaMessage == "No1way" && meta.indexOf("15") != -1)
+  {
+    oneWay = false;
+  }
+  
+  else if ((metaMessage.length() == 2 || metaMessage.length() == 1) && meta.indexOf("15") != -1)
   {
     if (metaMessage.length() == 1)
     {
@@ -63,16 +67,13 @@ void GetSpeedLimit()
 
   }
   //if the display is needed to display a oneway sign, display the sign, else, display the correct speedlimit
-  if (metaMessage == "1way")
-  {
-    oneWay = true;
-  }
-  else if (metaMessage == "No1way")
-  {
-    oneWay = false;
-  }
-  else if (!oneWay)
+
+  if (oneWay)
   { 
+    Display(OneDirection);
+  }
+  else
+  {  
     if (First == "0")
     {
       for (int i=0; i<16; i++)
@@ -216,7 +217,6 @@ void GetSpeedLimit()
     }
     Display(complete);
   }
-
 }
 
 
