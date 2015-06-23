@@ -65,7 +65,9 @@ namespace Roadplus.Server.Commands.Json
             {
                     ZoneId = zoneId,
                     StartVertexId = startVertexId,
-                    EndVertexId = endVertexId
+                    EndVertexId = endVertexId,
+                    Weight = 0.0,
+                    MaxSpeed = 0
             };
 
             int edgeId = Convert.ToInt32(
