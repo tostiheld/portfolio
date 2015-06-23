@@ -7,7 +7,7 @@ SoftwareSerial portOne(10, 11);
 char incomingByte = 0;
 String bericht;
 
-char byteToSend;
+byte byteToSend;
 void setup()
 {
   Wire.begin(42);                // join i2c bus with address #8
@@ -19,11 +19,7 @@ void setup()
 
 void loop()
 {
-  // By default, the last intialized port is listening.
-  // when you want to listen on a port, explicitly select it:
   portOne.listen();
-  // while there is data coming in, read it
-  // and send to the hardware serial port:
   while (portOne.available() > 0) {
     byteToSend = portOne.read();
     Serial.println(byteToSend);
@@ -37,7 +33,7 @@ void loop()
 // this function is registered as an event, see setup()
 void requestEvent()
 {
-  if (byteToSend < 100 || byteToSend > 0)
+  if (byteToSend <= 100 || byteToSend > 0)
   {
     Wire.write(byteToSend); // respond with message of 6 bytes
   }

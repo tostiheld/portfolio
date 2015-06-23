@@ -1,0 +1,9 @@
+C:\Users\Lenovo\Desktop\FONTYS werk\PRC21\DemoWeek15\DemoWeek15\bin\Debug\DemoWeek15.exe.config
+C:\Users\Lenovo\Desktop\FONTYS werk\PRC21\DemoWeek15\DemoWeek15\obj\Debug\DemoWeek15.csprojResolveAssemblyReference.cache
+C:\Users\Lenovo\Desktop\FONTYS werk\PRC21\DemoWeek15\DemoWeek15\obj\Debug\DemoWeek15.Form1.resources
+C:\Users\Lenovo\Desktop\FONTYS werk\PRC21\DemoWeek15\DemoWeek15\obj\Debug\DemoWeek15.Properties.Resources.resources
+C:\Users\Lenovo\Desktop\FONTYS werk\PRC21\DemoWeek15\DemoWeek15\obj\Debug\DemoWeek15.csproj.GenerateResource.Cache
+C:\Users\Lenovo\Desktop\FONTYS werk\PRC21\DemoWeek15\DemoWeek15\bin\Debug\DemoWeek15.exe
+C:\Users\Lenovo\Desktop\FONTYS werk\PRC21\DemoWeek15\DemoWeek15\bin\Debug\DemoWeek15.pdb
+C:\Users\Lenovo\Desktop\FONTYS werk\PRC21\DemoWeek15\DemoWeek15\obj\Debug\DemoWeek15.exe
+C:\Users\Lenovo\Desktop\FONTYS werk\PRC21\DemoWeek15\DemoWeek15\obj\Debug\DemoWeek15.pdb
