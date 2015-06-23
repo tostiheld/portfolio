@@ -9,7 +9,7 @@ namespace Roadplus.Server.Commands.Json
 {
     public class GetSchoolsCommand : ICommand
     {
-        public string Name { get { return "requestZones"; } }
+        public string Name { get { return "requestSchools"; } }
 
         public IResponse Execute(string payload)
         {
