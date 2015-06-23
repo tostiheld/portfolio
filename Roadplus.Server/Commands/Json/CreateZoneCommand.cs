@@ -50,11 +50,10 @@ namespace Roadplus.Server.Commands.Json
 
             Zone createdZone = data.Zones.First<Zone>(
                 z => z.ZoneId == newZoneId);
-
-            int id = Convert.ToInt32(json["id"]);
+            
             CreateResponse response = new CreateResponse()
             {
-                ID = id,
+                Command = Name,
                 CreatedObject = createdZone
             };
 

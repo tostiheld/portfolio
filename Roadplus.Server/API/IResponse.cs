@@ -5,7 +5,7 @@ namespace Roadplus.Server.API
     public interface IResponse
     {
         string ResponseString { get; }
-        int ID { get; set; }
+        string Command { get; set; }
     }
 }
 

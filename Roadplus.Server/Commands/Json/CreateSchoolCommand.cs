@@ -53,7 +53,7 @@ namespace Roadplus.Server.Commands.Json
 
             CreateResponse response = new CreateResponse()
             {
-                ID = requestId,
+                Command = Name,
                 CreatedObject = newSchool
             };
 

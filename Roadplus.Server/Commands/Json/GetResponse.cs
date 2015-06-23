@@ -9,8 +9,8 @@ namespace Roadplus.Server.Commands.Json
     [JsonObject]
     public class GetResponse : IResponse
     {
-        [JsonProperty("id")]
-        public int ID { get; set; }
+        [JsonProperty("command")]
+        public string Command { get; set; }
 
         [JsonProperty("response")]
         public string ResponseString { get { return "OK"; } }

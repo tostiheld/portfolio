@@ -9,24 +9,25 @@ namespace Roadplus.Server.Commands.Json
 {
     public class GetZonesCommand : ICommand
     {
-        public IResponse Execute(string payload)
-        {
-            RoadplusData data = new RoadplusData();
-
-            Zone[] zones = data.Zones.ToList().ToArray();
-
-            GetResponse response = new GetResponse();
-            response.RequestedObjects = zones;
-
-            return response;
-        }
-
         public string Name
         {
             get
             {
                 return "requestZones";
             }
+        }
+
+        public IResponse Execute(string payload)
+        {
+            RoadplusData data = new RoadplusData();
+
+            Zone[] zones = data.Zones.ToList().ToArray();
+
+            return new GetResponse()
+            {
+                Command = Name,
+                RequestedObjects = zones
+            };
         }
     }
 }
