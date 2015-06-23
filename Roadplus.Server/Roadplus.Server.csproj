@@ -104,6 +104,8 @@
     <Compile Include="Commands\Json\CreateZoneCommand.cs" />
     <Compile Include="Commands\Json\CreateResponse.cs" />
     <Compile Include="Commands\Json\CreateSchoolCommand.cs" />
+    <Compile Include="Commands\Json\GetZonesCommand.cs" />
+    <Compile Include="Commands\Json\GetResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

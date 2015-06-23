@@ -18,7 +18,6 @@ namespace Roadplus.Server.Communication
         private bool searching;
         private Thread searchThread;
         private System.Timers.Timer searchTimer;
-        private int baudRate;
 
         public RoadLinkManager(CommandProcessor commandprocessor,
                                int baudrate,
@@ -34,7 +33,6 @@ namespace Roadplus.Server.Communication
             searchTimer.Start();
 
             searchThread = new Thread(new ThreadStart(Search));
-            baudRate = baudrate;
             searching = false;
         }
 
