@@ -34,7 +34,7 @@ SRC = $(TARGET).c
 
 SRC += $(RP6_LIB_PATH)/RP6base/RP6RobotBaseLib.c
 SRC += $(RP6_LIB_PATH)/RP6common/RP6uart.c
-SRC += $(RP6_LIB_PATH)/RP6common/RP6I2CslaveTWI.c
-#SRC += $(RP6_LIB_PATH)/RP6common/RP6I2CmasterTWI.c
+#SRC += $(RP6_LIB_PATH)/RP6common/RP6I2CslaveTWI.c
+SRC += $(RP6_LIB_PATH)/RP6common/RP6I2CmasterTWI.c
 
 include $(RP6_LIB_PATH_BASE)/makefile.base
