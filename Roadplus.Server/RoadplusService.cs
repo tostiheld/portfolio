@@ -42,6 +42,11 @@ namespace Roadplus.Server
                     settings.HttpRoot);
             }
 
+            roadLinkService = new RoadLinkManager(
+                new CommandProcessorText(),
+                settings.BaudRate,
+                settings.RoadDetectTimeOut);
+
             CommandProcessorJson processorJson = new CommandProcessorJson();
             processorJson.RegisteredCommands.AddRange(
             new ICommand[]
@@ -57,7 +62,10 @@ namespace Roadplus.Server
 
                 new RemoveZoneCommand(),
                 new RemoveSchoolCommand(),
-                new RemoveRoadConstructionCommand()
+                new RemoveRoadConstructionCommand(),
+
+                new ConnectRoadToZoneCommand(roadLinkService),
+                new GetConnectedRoadsCommand(roadLinkService)
             });
 
             websocketService = new WSSessionManager(

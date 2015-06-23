@@ -115,6 +115,11 @@
     <Compile Include="Commands\Json\RemoveRoadConstructionCommand.cs" />
     <Compile Include="Commands\Json\GetSchoolsCommand.cs" />
     <Compile Include="Commands\Json\GetRoadconstructionsCommand.cs" />
+    <Compile Include="Commands\Json\ConnectRoadToZoneCommand.cs" />
+    <Compile Include="Commands\Json\GetConnectedRoadsCommand.cs" />
+    <Compile Include="Commands\Json\GetRoadsResponse.cs" />
+    <Compile Include="Commands\Json\ConnectRoadToZoneResponse.cs" />
+    <Compile Include="Communication\CommandProcessorText.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

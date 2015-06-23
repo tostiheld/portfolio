@@ -12,6 +12,7 @@ namespace Roadplus.Server.Communication
 {
     public class RoadLinkManager : Channel
     {
+        public List<string> ConnectedPorts { get; private set; }
 
         private const int BufferSize = 64;
 

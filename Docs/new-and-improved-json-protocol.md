@@ -265,3 +265,37 @@ returns:
     "endVertexY": <endY>
 }
 ```
+
+## Connect real road to zone
+```json
+{
+    "command": "connectRoad",
+    "zoneId": <parent_zone>,
+    "roadPort": <roadportstring>
+}
+```
+
+expected response:
+```json
+{
+    "response": "OK",
+    "zoneId": <received_zone_id>,
+    "roadPort": <assigned_port>
+}
+```
+
+## Get available roads to connect to
+```json
+{
+    "command": "getRoads"
+}
+```
+
+expected response:
+```json
+{
+    "response": "OK",
+    "ports": [ <array_of_strings> ]
+}
+```
+
