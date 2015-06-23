@@ -46,15 +46,12 @@ namespace Roadplus.Server.Commands.Json
             newZone.ZoneId = newZoneId;
             newZone.StartVertexId = startVertexId;
 
-            data.InsertOrReplace<Zone>(newZone);
-
-            Zone createdZone = data.Zones.First<Zone>(
-                z => z.ZoneId == newZoneId);
+            data.Update<Zone>(newZone);
             
             CreateResponse response = new CreateResponse()
             {
                 Command = Name,
-                CreatedObject = createdZone
+                CreatedObject = newZone
             };
 
             return response;
