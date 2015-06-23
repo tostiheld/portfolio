@@ -50,7 +50,7 @@ var ZoneModel = function (zones) {
         };
 
         //send School to Server
-        window.Handler.addSchool(newSchool.zoneID, newSchool);
+        window.Handler.MessageStringify.addSchool(newSchool.zoneID, newSchool);
 
         //empty form
         clearForm(formElement);
@@ -85,7 +85,7 @@ var ZoneModel = function (zones) {
         };
 
         //send to server
-        window.Handler.addRoadC(newRoadC.zoneID, newRoadC);
+        window.Handler.MessageStringify.addRoadC(newRoadC.zoneID, newRoadC);
 
         //empty form
         clearForm(formElement);
@@ -115,7 +115,7 @@ var ZoneModel = function (zones) {
         };
 
         // Send to server
-        window.Handler.addZone(newZone);
+        window.Handler.MessageStringify.addZone(newZone);
 
         //empty form
         clearForm(formElement);
@@ -161,7 +161,7 @@ var ZoneModel = function (zones) {
         };
 
         //send edgeSet to Server
-        window.Handler.addEdgeSet($(".canvas_zoneID").val(), newEdgeSet);
+        window.Handler.MessageStringify.addEdgeSet($(".canvas_zoneID").val(), newEdgeSet);
     };
     
     //
@@ -197,7 +197,7 @@ var ZoneModel = function (zones) {
     //
     self.UIaddArduino = function (formElement) {
         // Send to server
-        window.Handler.connectArduino($("input[name='id']", formElement).val(), $("select[name='arduinoPort']", formElement).val());
+        window.Handler.MessageStringify.connectArduino($("input[name='id']", formElement).val(), $("select[name='arduinoPort']", formElement).val());
 
         //empty form
         clearForm(formElement);
@@ -242,7 +242,7 @@ var ZoneModel = function (zones) {
     //
     self.UIremoveZone = function (zone) {
         //send to server
-        window.Handler.removeZone(zone.ID);
+        window.Handler.MessageStringify.removeZone(zone.ID);
     };
 
     self.removeZone = function (zoneId) {
@@ -263,7 +263,7 @@ var ZoneModel = function (zones) {
     //
     self.UIremoveSchool = function (school) {
         //send to server
-        window.Handler.removeSchool(school.ID);
+        window.Handler.MessageStringify.removeSchool(school.ID);
     };
 
     //
@@ -284,7 +284,7 @@ var ZoneModel = function (zones) {
         });
 
         //send to server
-        window.Handler.removeZone(roadc.ID);
+        window.Handler.MessageStringify.removeZone(roadc.ID);
     };
 
     //
@@ -292,7 +292,7 @@ var ZoneModel = function (zones) {
     //
     self.removeRoadC = function (roadc) {
         //send to server
-        window.Handler.removeZone(roadc.ID);
+        window.Handler.MessageStringify.removeZone(roadc.ID);
     };
 };
 

@@ -87,7 +87,6 @@ $(document).ready(function () {
     });
 
 
-
     //
     // HANDLE KEY EVENTS OF CONSOLE
     //
