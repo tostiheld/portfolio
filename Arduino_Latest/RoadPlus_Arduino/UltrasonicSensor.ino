@@ -44,7 +44,7 @@ void GetDensity()
   
   //turn the servo`s to the appropiate direction:
   Servo1.write(Positie + offsetServo1);
-  Servo2.write(Positie + offsetServo2);
+//  Servo2.write(Positie + offsetServo2);
 
 
   //Measure Distance Sensor 1
@@ -71,6 +71,7 @@ void GetDensity()
       if (timesRead1 == 5)
       {
         countObjects++;
+        timesRead1 = 0;
       }     
     }
     else
@@ -87,6 +88,7 @@ void GetDensity()
       if (timesRead2 == 5)
       {
         countObjects++;
+        timesRead2 = 0;
       }     
     }
     else
