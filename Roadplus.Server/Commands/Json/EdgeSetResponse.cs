@@ -27,6 +27,11 @@ namespace Roadplus.Server.Commands.Json
 
         [JsonProperty("endVertex")]
         public Vertex EndVertex { get; set; }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }
 
