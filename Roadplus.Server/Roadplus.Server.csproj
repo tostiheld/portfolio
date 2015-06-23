@@ -114,6 +114,7 @@
     <Compile Include="Commands\Json\RemoveSchoolCommand.cs" />
     <Compile Include="Commands\Json\RemoveRoadConstructionCommand.cs" />
     <Compile Include="Commands\Json\GetSchoolsCommand.cs" />
+    <Compile Include="Commands\Json\GetRoadconstructionsCommand.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

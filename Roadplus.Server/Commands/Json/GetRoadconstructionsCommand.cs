@@ -7,15 +7,15 @@ using System.Collections.Generic;
 
 namespace Roadplus.Server.Commands.Json
 {
-    public class GetSchoolsCommand : ICommand
+    public class GetRoadconstructionsCommand : ICommand
     {
-        public string Name { get { return "requestZones"; } }
+        public string Name { get { return "requestRoadconstructions"; } }
 
         public IResponse Execute(string payload)
         {
             RoadplusData data = new RoadplusData();
 
-            School[] zones = data.Schools.ToList().ToArray();
+            RoadConstruction[] zones = data.RoadConstructions.ToList().ToArray();
 
             return new GetResponse()
             {
