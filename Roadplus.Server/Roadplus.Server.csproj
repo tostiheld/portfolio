@@ -110,6 +110,7 @@
     <Compile Include="Commands\Json\EdgeSetResponse.cs" />
     <Compile Include="Commands\Json\RemoveZoneCommand.cs" />
     <Compile Include="Commands\Json\RemoveResponse.cs" />
+    <Compile Include="Commands\Json\CreateRoadConstructionCommand.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

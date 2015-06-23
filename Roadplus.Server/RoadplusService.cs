@@ -50,7 +50,8 @@ namespace Roadplus.Server
                 new CreateSchoolCommand(),
                 new GetZonesCommand(),
                 new EdgeSetCommand(),
-                new RemoveZoneCommand()
+                new RemoveZoneCommand(),
+                new CreateRoadConstructionCommand()
             });
 
             websocketService = new WSSessionManager(

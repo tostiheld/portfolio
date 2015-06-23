@@ -1,10 +1,11 @@
 ﻿using System;
 using LinqToDB.Mapping;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Roadplus.Server.Data
 {
-    [Table("RoadConstruction")]
+    [Table("RoadConstruction"), JsonObject]
     public class RoadConstruction
     {
         [PrimaryKey, Identity]
@@ -22,6 +23,7 @@ namespace Roadplus.Server.Data
         [Column("DateEnd"), NotNull]
         public DateTime DateEnd { get; set; }
 
+        [JsonIgnore]
         public Zone Parent
         {
             get
@@ -32,6 +34,7 @@ namespace Roadplus.Server.Data
             }
         }
 
+        [JsonIgnore]
         public Edge LocationEdge
         {
             get
