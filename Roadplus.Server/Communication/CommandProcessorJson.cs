@@ -14,7 +14,7 @@ namespace Roadplus.Server.Communication
 
         public override IResponse Process(string command)
         {
-            JObject o;
+            JObject o = null;
 
             try
             {

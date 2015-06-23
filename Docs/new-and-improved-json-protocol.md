@@ -295,7 +295,7 @@ expected response:
 ```json
 {
     "response": "OK",
-    "ports": [ <array_of_strings> ]
+    "ports": [ <array_of_stringsq> ]
 }
 ```
 
