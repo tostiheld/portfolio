@@ -112,6 +112,7 @@
     <Compile Include="Commands\Json\RemoveResponse.cs" />
     <Compile Include="Commands\Json\CreateRoadConstructionCommand.cs" />
     <Compile Include="Commands\Json\RemoveSchoolCommand.cs" />
+    <Compile Include="Commands\Json\RemoveRoadConstructionCommand.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
