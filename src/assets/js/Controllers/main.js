@@ -80,6 +80,11 @@ $(document).ready(function () {
         window.commandIndex = Console.getLocalCommands().length + 1;
         e.preventDefault();
     });
+    
+    
+    $(".canvas_zoneID").change(function(e){
+       window.AN.redrawLines(); 
+    });
 
 
 

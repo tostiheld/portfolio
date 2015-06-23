@@ -35,7 +35,7 @@ var parser = function (message, self) {
                 DateStart: json.dateStart,
                 DateEnd: json.dateEnd
             };
-            self.Zones.addRoadConstruction(newRoadConstruction);
+            self.Zones.addRoadC(newRoadConstruction);
             break;
         case "createvertex":
             var newVertex = {
@@ -47,15 +47,23 @@ var parser = function (message, self) {
             self.Zones.addVertex(newVertex);
             break;
         case "createedgeset":
-//            var newVertex = {
-//                zoneID: json.zoneId,
-//                Name: json.name,
-//                DateStart: json.dateStart,
-//                DateEnd: json.dateEnd
-//            };
-//            self.Zones.addRoadConstruction(newRoadConstruction);
-//            break;
+            var newVertex2 = json.startVertex;
+            self.Zones.addVertex(newVertex2);
+            
+            var newVertex3 = json.endVertex;
+            self.Zones.addVertex(newVertex3);
+            
+            var newEdge = json.createdEdge;
+            newEdge.startX = newVertex2.X;
+            newEdge.startY = newVertex2.Y;
+            newEdge.endX = newVertex3.X;
+            newEdge.endY = newVertex3.Y;
+            self.Zones.addEdge(newEdge);
+            window.AN.redrawLines();
+            
+            break;
         case "removezone":
+            self.Zones.removeZone(json.removedObject);
             break;
         case "removeschool":
             break;
@@ -74,7 +82,6 @@ var parser = function (message, self) {
                     radarVertexId: element.RadarVertexId,
                     arduinoPort: element.ArduinoPort
                 };
-                console.log(element);
                 self.Zones.addZone(newZone);
             });
             break;

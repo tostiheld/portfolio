@@ -22,10 +22,6 @@ function WebSocketHandler(console, testMode) {
         $("#send").removeClass("disabled");
         window.AN.initialize(); 
 
-        //create some more data
-        //this.Zones.addZone(1, "testManual");
-        //        this.Zones.addZone(2, "test2Manual");
-
         //ask for existing data
         this.getData();
     };

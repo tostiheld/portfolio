@@ -85,7 +85,7 @@ var ZoneModel = function (zones) {
         };
 
         //send to server
-        window.Handler.addRoadC(zoneID, newRoadC);
+        window.Handler.addRoadC(newRoadC.zoneID, newRoadC);
 
         //empty form
         clearForm(formElement);
@@ -161,7 +161,7 @@ var ZoneModel = function (zones) {
         };
 
         //send edgeSet to Server
-        window.Handler.addEdgeSet(1, newEdgeSet);
+        window.Handler.addEdgeSet($(".canvas_zoneID").val(), newEdgeSet);
     };
     
     //
@@ -170,7 +170,7 @@ var ZoneModel = function (zones) {
     self.addEdge = function (newEdge) {
 
         //find zone
-        var zone = self.findZoneByID(newEdge.zoneID);
+        var zone = self.findZoneByID(newEdge.ZoneId);
 
         //add school to zone
         zone.Edges.push(newEdge);
@@ -184,7 +184,7 @@ var ZoneModel = function (zones) {
     self.addVertex = function (newVertex) {
 
         //find zone
-        var zone = self.findZoneByID(newVertex.zoneID);
+        var zone = self.findZoneByID(newVertex.ZoneId);
 
         //add school to zone
         zone.Vertexes.push(newVertex);
@@ -230,7 +230,6 @@ var ZoneModel = function (zones) {
         ko.utils.arrayFirst(self.zones(), function (tzone) {
             if (tzone.ID == zoneID) {
                 zone = tzone;
-                console.log(zone);
             }
         });
         return zone;
@@ -246,7 +245,8 @@ var ZoneModel = function (zones) {
         window.Handler.removeZone(zone.ID);
     };
 
-    self.removeZone = function (zone) {
+    self.removeZone = function (zoneId) {
+        var zone = self.findZoneByID(zoneId);
         self.zones.remove(zone);
     };
 

@@ -12,7 +12,6 @@ AN.initialize = function () {
     canvas = cv.getContext("2d");
     cv.addEventListener('click', AN.handleClick, false);
     cv.addEventListener('mousemove', AN.handleMove, false);
-
 };
 
 AN.handleClick = function (e) {
@@ -41,21 +40,21 @@ AN.handleMove = function (e) {
         AN.drawLine(x, y, false);
     }
     var activeNow = false;
-    $.each(lines, function (index, value) {
-        if (Math.sqrt((value[0] - x) * (value[0] - x) + (value[1] - y) * (value[1] - y)) < selectRadius) {
-            AN.drawActive(value[0], value[1]);
-            active = [value[0], value[1]];
+    var zone = window.Handler.Zones.findZoneByID($(".canvas_zoneID").val());
+    $.each(zone.Edges(), function (index, value) {
+        if (Math.sqrt((value.startX - x) * (value.startX - x) + (value.startY - y) * (value.startY - y)) < selectRadius) {
+            AN.drawActive(value.startX, value.startY);
+            active = [value.startX, value.startY];
             activeNow = true;
-        } else if (Math.sqrt((value[2] - x) * (value[2] - x) + (value[3] - y) * (value[3] - y)) < selectRadius) {
-            AN.drawActive(value[2], value[3]);
-            active = [value[2], value[3]];
+        } else if (Math.sqrt((value.endX - x) * (value.endX - x) + (value.endY - y) * (value.endY - y)) < selectRadius) {
+            AN.drawActive(value.endX, value.endY);
+            active = [value.endX, value.endY];
             activeNow = true;
         }
     });
     if (!activeNow && active) {
         AN.redrawLines();
         active = false;
-
     }
 };
 
@@ -88,9 +87,10 @@ AN.drawLine = function (x, y, click) {
 
 
     if (click) {
-        lines.push([lastClick[0], lastClick[1], x, y]);
+        //lines.push([lastClick[0], lastClick[1], x, y]);
         window.Handler.Zones.UIaddEdge([lastClick[0], lastClick[1], x, y]);
         clicks = 0;
+        AN.redrawLines();
     }
 };
 
@@ -108,7 +108,6 @@ AN.drawLineNow = function (x1, y1, x2, y2) {
     canvas.stroke();
     canvas.closePath();
 
-
     canvas.beginPath();
     canvas.moveTo(x1, y1);
     canvas.lineTo(x2, y2);
@@ -122,8 +121,9 @@ AN.drawLineNow = function (x1, y1, x2, y2) {
 
 AN.redrawLines = function () {
     canvas.clearRect(0, 0, cv.width, cv.height);
-    $.each(lines, function (index, value) {
-        AN.drawLineNow(value[0], value[1], value[2], value[3]);
+    var zone = window.Handler.Zones.findZoneByID($(".canvas_zoneID").val());
+    $.each(zone.Edges(), function (index, value) {
+        AN.drawLineNow(value.startX, value.startY, value.endX, value.endY);
     });
 };
 
