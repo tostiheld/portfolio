@@ -1,38 +1,45 @@
-// Wire Slave Sender
-// by Nicholas Zambetti <http://www.zambetti.com>
-
-// Demonstrates use of the Wire library
-// Sends data as an I2C/TWI slave device
-// Refer to the "Wire Master Reader" example for use with this
-
-// Created 29 March 2006
-
-// This example code is in the public domain.
-
 
 #include <Wire.h>
+#include <SoftwareSerial.h>
+// software serial #1: TX = digital pin 10, RX = digital pin 11
+SoftwareSerial portOne(10, 11);
 
-  byte byteToSend;
+char incomingByte = 0;
+String bericht;
+
+char byteToSend;
 void setup()
 {
   Wire.begin(42);                // join i2c bus with address #8
   Wire.onRequest(requestEvent); // register event
-  Serial.begin(9600);
+  Serial.begin(38400);
+  // Start each software serial port
+  portOne.begin(38400);
 }
 
 void loop()
 {
-  delay(100);
+  // By default, the last intialized port is listening.
+  // when you want to listen on a port, explicitly select it:
+  portOne.listen();
+  // while there is data coming in, read it
+  // and send to the hardware serial port:
+  while (portOne.available() > 0) {
+    byteToSend = portOne.read();
+    Serial.println(byteToSend);
+  }
+
+  delay(500);
+
 }
 
 // function that executes whenever data is requested by master
 // this function is registered as an event, see setup()
 void requestEvent()
 {
- byteToSend = Serial.read();
-  if(byteToSend < 100 || byteToSend > 0)
+  if (byteToSend < 100 || byteToSend > 0)
   {
-  Wire.write(byteToSend); // respond with message of 6 bytes
+    Wire.write(byteToSend); // respond with message of 6 bytes
   }
   // as expected by master
 }

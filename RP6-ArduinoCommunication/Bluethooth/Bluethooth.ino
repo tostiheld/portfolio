@@ -4,12 +4,9 @@ SoftwareSerial portOne(10,11);
 
 char incomingByte = 0;
 String bericht;
-const int led = 13;
 
 void setup() {
-Serial.begin(38400);
-pinMode(led, OUTPUT);
-  // Start each software serial port
+Serial.begin(38400); // Start each software serial port
   portOne.begin(38400);
 }
 
