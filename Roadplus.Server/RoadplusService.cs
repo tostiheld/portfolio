@@ -21,8 +21,6 @@ namespace Roadplus.Server
 
         private List<Channel> channels;
 
-        private string fileRoot;
-
         public RoadplusService(Settings settings)
         {
             if (settings == null)
@@ -31,7 +29,6 @@ namespace Roadplus.Server
             }
 
             channels = new List<Channel>();
-            fileRoot = settings.FileRoot;
 
             if (settings.EnableHttp)
             {

@@ -41,7 +41,7 @@ namespace Roadplus.Server.Communication
                 return new ResponseFailure(
                     o[CommandKey].ToString(), "Internal server error");
             }
-            catch (MySqlException ex)
+            catch (MySqlException)
             {
                 return new ResponseFailure(
                     o[CommandKey].ToString(), "Error communicating with database");
