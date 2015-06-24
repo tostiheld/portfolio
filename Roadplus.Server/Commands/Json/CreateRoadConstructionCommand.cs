@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -40,6 +41,17 @@ namespace Roadplus.Server.Commands.Json
                 return new ResponseFailure(Name, "Parse error");
             }
 
+            RoadplusData data = new RoadplusData();
+
+            if (!data.Zones.Any(z => z.ZoneId == zoneId))
+            {
+                return new ResponseFailure(Name, "Zone does not exist");
+            }
+            else if (!data.Edges.Any(e => e.EdgeId == locationId))
+            {
+                return new ResponseFailure(Name, "Edge does not exist");
+            }
+
             RoadConstruction newRC = new RoadConstruction()
             {
                     ZoneId = zoneId,
@@ -47,8 +59,6 @@ namespace Roadplus.Server.Commands.Json
                     DateStart = startDate,
                     DateEnd = endDate
             };
-
-            RoadplusData data = new RoadplusData();
 
             int id = Convert.ToInt32(
                 data.InsertWithIdentity<RoadConstruction>(newRC));

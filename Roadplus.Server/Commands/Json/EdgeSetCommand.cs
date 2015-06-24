@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+
 using Roadplus.Server.API;
 using Roadplus.Server.Data;
 
@@ -36,6 +38,15 @@ namespace Roadplus.Server.Commands.Json
                     "Int32 Parse error");
             }
 
+            RoadplusData data = new RoadplusData();
+
+            if (!data.Zones.Any(z => z.ZoneId == zoneId))
+            {
+                return new ResponseFailure(
+                    Name,
+                    "Zone does not exist");
+            }
+
             Vertex startVertex = new Vertex()
             {
                     ZoneId = zoneId,
@@ -49,8 +60,6 @@ namespace Roadplus.Server.Commands.Json
                     X = endVertexX,
                     Y = endVertexY
             };
-
-            RoadplusData data = new RoadplusData();
 
             int startVertexId = Convert.ToInt32(
                 data.InsertWithIdentity<Vertex>(startVertex));
