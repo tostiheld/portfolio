@@ -30,9 +30,6 @@ namespace Roadplus.Server.Commands.Json
             { }
         }
 
-        [JsonProperty("zoneId")]
-        public int ZoneId { get; set; }
-
         [JsonProperty("vertices")]
         public Vertex[] Vertices { get; set; }
 
