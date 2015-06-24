@@ -12,6 +12,11 @@ namespace Roadplus.Server.API
 
         public Link(Channel parent)
         {
+            if (parent == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             Parent = parent;
             Type = LinkType.Unidentified;
         }

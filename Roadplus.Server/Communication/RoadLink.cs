@@ -31,8 +31,7 @@ namespace Roadplus.Server.Communication
         public RoadLink(Channel parent, SerialPort port)
             : base(parent)
         {
-            if (parent == null ||
-                port == null)
+            if (port == null)
             {
                 throw new ArgumentNullException();
             }

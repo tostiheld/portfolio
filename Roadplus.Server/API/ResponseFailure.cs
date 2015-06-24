@@ -11,6 +11,12 @@ namespace Roadplus.Server.API
 
         public ResponseFailure(string command, string message)
         {
+            if (command == null ||
+                message == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             Command = command;
             ErrorMessage = message;
         }
