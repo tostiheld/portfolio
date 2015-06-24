@@ -116,12 +116,9 @@ var parser = function (message, self) {
             });
             break;
         case "requestmap":
-            
-            
             json.vertices.forEach(function(element, index){
                 self.Zones.addVertex(element);
             });
-            
             
             json.edges.forEach(function(element, index){
                 var startVertex = self.Zones.findVertexByID(element.StartVertexId);

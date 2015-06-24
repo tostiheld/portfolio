@@ -4,7 +4,7 @@ function WebSocketHandler(console, testMode) {
     this.WebSocketC = null;
     this.MessageStringify = new MessageStringify(this);
     //create some data
-    this.Zones = new ZoneModel([new zone(new school(), new roadc()), new zone(new school(), new roadc())]);
+    this.Zones = new ZoneModel();
     ko.applyBindings(this.Zones);
 
 
@@ -34,7 +34,10 @@ function WebSocketHandler(console, testMode) {
         $(".connect").show();
         $(".disconnect").hide();
         $("#send").addClass("disabled");
+        //remove all zones
         this.Zones.removeAll();
+        //redraw lines in canvas so they are removed
+        AN.redrawLines();
     };
     this.onError = function (e) {
         var message = e;
