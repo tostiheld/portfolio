@@ -33,7 +33,7 @@ void loop()
 // this function is registered as an event, see setup()
 void requestEvent()
 {
-  if (byteToSend <= 100 || byteToSend > 0)
+   if (byteToSend <= 100 || byteToSend > 0)
   {
     Wire.write(byteToSend); // respond with message of 6 bytes
   }

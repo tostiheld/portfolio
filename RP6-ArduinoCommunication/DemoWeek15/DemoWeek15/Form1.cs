@@ -16,16 +16,12 @@ namespace DemoWeek15
     public partial class Form1 : Form
     {
         private SerialPort serialPort;
-        private MessageBuilder messageBuilder;
-        private String messageBeginMarker = "#";
-        private const String messageEndMarker = "%";
         private int btnCount = 0;
         public Form1()
         {
             InitializeComponent();
             serialPort = new SerialPort();
             serialPort.BaudRate = 38400;
-            messageBuilder = new MessageBuilder(messageBeginMarker, messageEndMarker);
             btnMaxSpeed.Enabled = false;
         }
 
@@ -55,10 +51,20 @@ namespace DemoWeek15
 
                     serialPort.Write(buffer, 0, 1);
                 }
-                catch (Exception exception) // Not very nice to catch Exception...but for now it's good enough.
+                catch (ArgumentException ex) // Not very nice to catch Exception...but for now it's good enough.
                 {
-                    Debug.WriteLine("Could not write to serial port: " + exception.Message);
+                    Debug.WriteLine("Could not write to serial port: " + ex.Message);
                     return false;
+                }
+                catch (InvalidOperationException ex)
+                {
+                    Debug.WriteLine("Could not write to serial port: " + ex.Message);
+                    return false;
+                }
+                catch (TimeoutException ex)
+                {
+                    Debug.WriteLine("Could not write to serial port: " + ex.Message);
+
                 }
 
                 return true;
@@ -66,30 +72,6 @@ namespace DemoWeek15
             return false;
         }
 
-        private bool SendMessage(String message)
-        {
-            if (serialPort.IsOpen)
-            {
-                try
-                {
-                    byte[] toSend = System.Text.Encoding.ASCII.GetBytes(message);
-                    serialPort.Write(toSend, 0, toSend.Length);
-                    return true;
-                }
-                catch (Exception exception) // Not very nice to catch Exception...but for now it's good enough.
-                {
-                    Debug.WriteLine("Could not write to serial port: " + exception.Message);
-                }
-            }
-            return false;
-        }
-
-
-        private void ClearAllMessageData()
-        {
-
-            messageBuilder.Clear();
-        }
 
         private void UpdateUserInterface()
         {
@@ -143,7 +125,6 @@ namespace DemoWeek15
                     serialPort.Open();
                     if (serialPort.IsOpen && btnCount < 1)
                     {
-                        ClearAllMessageData();
                         serialPort.DiscardInBuffer();
                         serialPort.DiscardOutBuffer();
 
@@ -173,23 +154,6 @@ namespace DemoWeek15
             serialPortSelectionBox.Text = serialPortSelectionBox.Text.ToUpper();
         }
 
-        private void readMessageTimer_Tick(object sender, EventArgs e)
-        {
-            if (serialPort.IsOpen
-                && serialPort.BytesToRead > 0)
-            {
-                try
-                {
-                    String dataFromSocket = serialPort.ReadExisting();
-                    messageBuilder.Append(dataFromSocket);
- 
-                }
-                catch (Exception exception) // Not very nice to catch Exception...but for now it's good enough.
-                {
-                    Debug.WriteLine("Could not read from serial port: " + exception.Message);
-                }
-            }
-        }
 
     }
 }
