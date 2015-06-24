@@ -7,7 +7,7 @@ namespace Roadplus.Server.API
 {
     public abstract class Channel
     {
-        protected ReadOnlyCollection<Link> Links 
+        public ReadOnlyCollection<Link> Links 
         {
             get
             {

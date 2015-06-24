@@ -24,9 +24,16 @@ namespace Roadplus.Server.Commands.Json
 
         public IResponse Execute(string payload)
         {
+            List<string> ports = new List<string>();
+
+            foreach (Link l in Source.Links)
+            {
+                ports.Add(l.Address);
+            }
+
             return new GetRoadsResponse()
             {
-                Ports = Source.ConnectedPorts.ToArray()
+                Ports = ports.ToArray()
             };
         }
     }

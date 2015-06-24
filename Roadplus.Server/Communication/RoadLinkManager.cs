@@ -12,13 +12,14 @@ namespace Roadplus.Server.Communication
 {
     public class RoadLinkManager : Channel
     {
-        public List<string> ConnectedPorts { get; private set; }
+        private const string DiscoverString = ">11:;";
+        private const string OkString       = ">ok:;";
+        private const int    BufferSize     = 32;
 
-        private const int BufferSize = 64;
-
-        private bool searching;
-        private Thread searchThread;
-        private System.Timers.Timer searchTimer;
+        private Thread discoverThread;
+        private bool startDiscovering;
+        private int baudRate;
+        private int discoverInterval;
 
         public RoadLinkManager(CommandProcessor commandprocessor,
                                int baudrate,
@@ -26,86 +27,70 @@ namespace Roadplus.Server.Communication
             : base(commandprocessor)
 
         {
-            searchTimer = new System.Timers.Timer(
-                TimeSpan.FromSeconds(interval)
-                        .TotalMilliseconds);
-            searchTimer.Elapsed += searchTimer_Elapsed;
-            searchTimer.Enabled = false;
-            searchTimer.Start();
-
-            searchThread = new Thread(new ThreadStart(Search));
-            searching = false;
+            baudRate = baudrate;
+            discoverInterval = interval;
         }
 
-        private void searchTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private void Discover()
         {
-            searchTimer.Enabled = false;
-            searchThread = new Thread(new ThreadStart(Search));
-            searchThread.Start();
-        }
-
-        private void Search()
-        {
-            searching = true;
-
-			// collect previous garbage too prevent
-			// 'too many files' exception
-			GC.Collect();
-
-            // filter out ports we already have
-            // TODO: can we optimise this?
-            List<string> ports = new List<string>();
-            foreach (string s in SerialPort.GetPortNames())
+            EventWaitHandle waithandler = new EventWaitHandle(
+                    false, 
+                    EventResetMode.AutoReset,
+                    Guid.NewGuid().ToString());
+            
+            while (startDiscovering)
             {
-                foreach (Link l in Links)
+                // possible fix for OSX's toomanyfilesexception
+                GC.Collect();
+
+                string[] ports = SerialPort.GetPortNames();
+
+                foreach (string p in ports)
                 {
-                    if (s == l.Address)
+                    using (SerialPort sp = new SerialPort(p, baudRate))
                     {
-                        continue;
+                        if (DetectRoadAt(sp))
+                        {
+                            RoadLink rl = new RoadLink(this, sp);
+                            NewLink(rl);
+                        }
                     }
                 }
 
-                ports.Add(s);
+                // discover at interval to reduce cpu usage
+                waithandler.WaitOne(TimeSpan.FromSeconds(discoverInterval));
             }
-
-            foreach (string s in ports)
-            {
-                DetectRoadAt(s);
-            }
-
-            searchTimer.Enabled = true;
-            searching = false;
         }
 
-        private void DetectRoadAt(string port)
-        {/*
+        private bool DetectRoadAt(SerialPort port)
+        {
             try
             {
                 string message = "";
                 SerialPort testPort = new SerialPort(port, baudRate);
                 testPort.Open();
+
                 // give the serial device 3 seconds to wake up
                 Thread.Sleep(3000);
                 testPort.Write(DiscoverString);
+
                 // give the device a few milliseconds to reply
                 Thread.Sleep(100);
                 if (testPort.BytesToRead > 0)
                 {
                     byte[] buffer = new byte[BufferSize];
                     testPort.Read(buffer, 0, buffer.Length);
-
                     ASCIIEncoding encoder = new ASCIIEncoding();
                     message = encoder.GetString(buffer);
                 }
                 testPort.Close();
-				// possible fix for mac's "too many files" exception
-				testPort.Dispose();
 
                 if (message.Contains(OkString))
                 {
-                    RoadLink newLink = new RoadLink(this, testPort);
-                    NewLink(newLink);
+                    return true;
                 }
+
+                return false;
             }
             catch (Exception ex)
             {
@@ -118,32 +103,24 @@ namespace Roadplus.Server.Communication
                     // this means the port is not suitable 
                     // so it is safe to ignore these 
                     // exceptions now
-                    return;
+                    return false;
                 }
-
                 throw;
-            }*/
+            }
         }
-
-        #region implemented abstract members of Channel
 
         protected override void AtStart()
         {
-            searchThread.Start();
+            discoverThread = new Thread(new ThreadStart(Discover));
+            startDiscovering = true;
+            discoverThread.Start();
         }
 
         protected override void AtStop()
         {
-            searchTimer.Stop();
-            if (searching)
-            {
-                Trace.WriteLine(
-                    "Finishing serial discover in progress, hang on a few seconds...");
-                searchThread.Join();
-            }
+            startDiscovering = false;
+            discoverThread.Join();
         }
-
-        #endregion
     }
 }
 

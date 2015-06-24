@@ -8,6 +8,7 @@ using LinqToDB;
 using Roadplus.Server.API;
 using Roadplus.Server.Communication;
 using Roadplus.Server.Data;
+using System.Collections.Generic;
 
 namespace Roadplus.Server.Commands.Json
 {
@@ -41,7 +42,13 @@ namespace Roadplus.Server.Commands.Json
                 return new ResponseFailure(Name, "Parse error");
             }
 
-            if (!Source.ConnectedPorts.Contains(o[PortNameKey].ToString()))
+            List<string> ports = new List<string>();
+            foreach (Link l in Source.Links)
+            {
+                ports.Add(l.Address);
+            }
+
+            if (!ports.Contains(o[PortNameKey].ToString()))
             {
                 return new ResponseFailure(Name, "Port not available");
             }
