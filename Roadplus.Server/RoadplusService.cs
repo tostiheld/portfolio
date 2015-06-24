@@ -67,7 +67,9 @@ namespace Roadplus.Server
                 new RemoveRoadConstructionCommand(),
 
                 new ConnectRoadToZoneCommand(roadLinkService),
-                new GetConnectedRoadsCommand(roadLinkService)
+                new GetConnectedRoadsCommand(roadLinkService),
+
+                new GetMapCommand()
             });
 
             websocketService = new WSSessionManager(

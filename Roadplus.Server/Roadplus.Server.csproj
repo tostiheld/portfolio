@@ -120,6 +120,8 @@
     <Compile Include="Commands\Json\GetRoadsResponse.cs" />
     <Compile Include="Commands\Json\ConnectRoadToZoneResponse.cs" />
     <Compile Include="Communication\CommandProcessorText.cs" />
+    <Compile Include="Commands\Json\GetMapCommand.cs" />
+    <Compile Include="Commands\Json\GetMapResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

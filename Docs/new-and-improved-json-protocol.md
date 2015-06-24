@@ -295,7 +295,26 @@ expected response:
 ```json
 {
     "response": "OK",
-    "ports": [ <array_of_stringsq> ]
+    "command": "getRoads"
+    "ports": [ <array_of_strings> ]
 }
 ```
 
+## Get map of a zone
+```json
+{
+    "command": "requestMap",
+    "zoneId": <target_zone>
+}
+```
+
+expected response
+```json
+{
+    "response": "OK",
+    "command": "requestMap",
+    "zoneId": <targeted_zone_id>
+    "vertices": [ <array_of_vertices> ],
+    "edges": [ <array_of_edges> ]
+}
+```
