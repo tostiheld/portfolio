@@ -79,25 +79,24 @@ $(document).ready(function () {
         $('#input .text_io').val('');
         window.commandIndex = Console.getLocalCommands().length + 1;
         e.preventDefault();
-    });
-    
+    });  
     
     $(".canvas_zoneID").change(function(e){
-       window.AN.redrawLines(); 
+        window.AN.redrawLines(); 
+        window.activeVertexClicked = false;
     });
 
     $("#newSchoolForm select").change(function(){
         alert($(this).val());
         $("#canvas").appendTo("#newSchoolForm");
         $(".canvas_zoneID").val($(this).val()).trigger("change");
-        window.mode = "select";
+        window.mode = "selectVertex";
     });
     
     $('#newSchoolModal').on('hidden.bs.modal', function () {
         $("#canvas").appendTo(".canvas");
         window.mode = "road";
     });
-    
     
     //
     // HANDLE KEY EVENTS OF CONSOLE

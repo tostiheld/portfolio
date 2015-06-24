@@ -64,7 +64,9 @@ pre {
     margin: 0px;
     border: 0px;
 }
-
+#canvas {
+    max-width:100%;    
+}
 .msg {
     margin: 10px 0px;
 }

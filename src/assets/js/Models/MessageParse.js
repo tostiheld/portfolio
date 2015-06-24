@@ -10,10 +10,10 @@ var parser = function (message, self) {
         case "createzone":
             var newZone = {
                 id: json.zoneId,
-                name: json.name,
-                startVertexId: json.startVertexId,
-                radarVertexId: json.radarVertexId,
-                arduinoPort: json.arduinoPort
+                name: json.Name,
+                startVertexId: json.StartVertexId,
+                radarVertexId: json.RadarVertexId,
+                arduinoPort: json.ArduinoPort
             };
             self.Zones.addZone(newZone);
             break;

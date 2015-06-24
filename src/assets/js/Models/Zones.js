@@ -1,6 +1,6 @@
 var ZoneModel = function (zones) {
     var self = this;
-
+    zones = null;
     //
     // LOAD ZONES ARRAY FROM CONSTRUCTOR TO OBSERVABLE ARRAY
     //
@@ -46,7 +46,8 @@ var ZoneModel = function (zones) {
             zoneID: $("select[name='zoneID']", formElement).val(),
             Name: $("input[name='schoolName']", formElement).val(),
             DateStart: $("input[name='dateStart']", formElement).val(),
-            DateEnd: $("input[name='dateEnd']", formElement).val()
+            DateEnd: $("input[name='dateEnd']", formElement).val(),
+            location: $("input[name='schoolVertexId']", formElement).val(),
         };
 
         //send School to Server

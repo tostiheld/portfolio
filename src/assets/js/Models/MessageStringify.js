@@ -36,7 +36,7 @@ var MessageStringify = function(self){
         var json = {};
         json.command = "createSchool";
         json.zoneId = zoneID;
-        json.location = 0; //implement vertex id
+        json.location = school.location; //implement vertex id
         json.openTime = school.DateStart;
         json.closeTime = school.DateEnd;
 
