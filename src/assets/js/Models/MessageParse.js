@@ -19,11 +19,12 @@ var parser = function (message, self) {
             break;
         case "createschool":
             var newSchool = {
-                zoneID: json.zoneId,
+                schoolId: SchoolId,
+                zoneID: json.ZoneId,
                 Name: json.name,
-                VertexId: json.location,
-                DateStart: json.dateStart,
-                DateEnd: json.dateEnd
+                VertexId: json.VertexId,
+                DateStart: json.OpenTime,
+                DateEnd: json.CloseTime
             };
             self.Zones.addSchool(newSchool);
             break;
