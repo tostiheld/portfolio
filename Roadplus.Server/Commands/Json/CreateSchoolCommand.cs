@@ -11,18 +11,6 @@ using System.Globalization;
 
 namespace Roadplus.Server.Commands.Json
 {
-//    ```json
-//    {
-//        "id": <generated_id>,
-//        "command": "createSchool",
-//        "name": <name>,
-//        "zoneId": <parent_zone>,
-//        "location": <vertex_id>,
-//        "openTime": "<preferred_open_time>",
-//        "closeTime": "<preferred_close_time>"
-//    }
-//    ```
-
     public class CreateSchoolCommand : ICommand
     {
         public string Name { get { return "createSchool"; } }
@@ -42,13 +30,13 @@ namespace Roadplus.Server.Commands.Json
             DateTime openTime;
             DateTime closeTime;
 
-            if (!Int32.TryParse(o[ZoneIdKey], out zoneId) ||
-                !Int32.TryParse(o[LocationKey], out locationId) ||
+            if (!Int32.TryParse(o[ZoneIdKey].ToString(), out zoneId) ||
+                !Int32.TryParse(o[LocationKey].ToString(), out locationId) ||
                 !DateTime.TryParseExact(
-                    o[OpenTimeKey], "HH:mm", CultureInfo.InvariantCulture, 
+                    o[OpenTimeKey].ToString(), "HH:mm", CultureInfo.InvariantCulture, 
                     DateTimeStyles.None, out openTime) ||
                 !DateTime.TryParseExact(
-                    o[CloseTimekey], "HH:mm", CultureInfo.InvariantCulture,
+                    o[CloseTimekey].ToString(), "HH:mm", CultureInfo.InvariantCulture,
                     DateTimeStyles.None, out closeTime))
             {
                 return new ResponseFailure(Name, "Parse error");
@@ -64,7 +52,7 @@ namespace Roadplus.Server.Commands.Json
 
             School newSchool = new School()
             {
-                Name = o[NameKey],
+                Name = o[NameKey].ToString(),
                 ZoneId = zoneId,
                 VertexId = locationId,
                 OpenTime = openTime,
