@@ -47,6 +47,8 @@ namespace Roadplus.Server
                 settings.BaudRate,
                 settings.RoadDetectTimeOut);
 
+            channels.Add(roadLinkService);
+
             CommandProcessorJson processorJson = new CommandProcessorJson();
             processorJson.RegisteredCommands.AddRange(
             new ICommand[]

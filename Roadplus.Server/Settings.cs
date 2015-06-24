@@ -24,7 +24,7 @@ namespace Roadplus.Server
             EnableHttp = true;
             LogToFile = false;
             HttpPort = 8080;
-            BaudRate = 38400;
+            BaudRate = 19200;
             FileRoot = Path.GetDirectoryName(
                 Assembly.GetExecutingAssembly().Location);
             HttpRoot = Path.Combine(FileRoot, "www/");

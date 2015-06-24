@@ -11,6 +11,8 @@ namespace Roadplus.Server.Communication
     public class RoadLink : Link
     {
         private const int BufferSize = 32;
+        private const string MessageStart = ">";
+        private const string MessageEnd   = ";";
 
         public override string Address
         {
@@ -22,31 +24,33 @@ namespace Roadplus.Server.Communication
 
         private SerialPort Port;
         private string buffer;
-        private bool startReceiving;
-        private bool receiving;
+
         private Thread receiveThread;
+        private bool startReceiving;
 
         public RoadLink(Channel parent, SerialPort port)
             : base(parent)
         {
-            receiveThread = new Thread(new ThreadStart(Receive));
-            Port = port;
-            port.DataReceived += Port_DataReceived;
-            startReceiving = false;
-        }
-
-        private void Port_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            if (startReceiving)
+            if (parent == null ||
+                port == null)
             {
-                receiveThread.Start();
+                throw new ArgumentNullException();
             }
+
+            Port = port;
         }
 
         private void Receive()
         {
-            receiving = true;
-            if (Port.IsOpen)
+            Port.Open();
+
+            EventWaitHandle waithandler = new EventWaitHandle(
+                false, 
+                EventResetMode.AutoReset,
+                Guid.NewGuid().ToString());
+
+            while (Port.IsOpen &&
+                   startReceiving)
             {
                 while (Port.BytesToRead > 0)
                 {
@@ -63,22 +67,19 @@ namespace Roadplus.Server.Communication
                         Parent.Post(this, found);
                     }
                 }
+
+                waithandler.WaitOne(1);
             }
-            else
-            {
-                receiving = false;
-                Stop();
-            }
-            receiving = false;
+
+            Port.Close();
         }
 
         private string FindMessages()
         {
-            /*
-            int start = buffer.IndexOf(PlainTextFormat.MessageStart);
+            int start = buffer.IndexOf(MessageStart);
             if (start != -1)
             {
-                int end = buffer.IndexOf(PlainTextFormat.MessageTerminator);
+                int end = buffer.IndexOf(MessageEnd);
                 if (end != -1)
                 {
                     string msg = buffer.Substring(
@@ -87,12 +88,10 @@ namespace Roadplus.Server.Communication
 
                     return msg;
                 }
-            }*/
+            }
 
             return null;
         }
-
-        #region implemented abstract members of Link
 
         public override void Send(string data)
         {
@@ -109,23 +108,23 @@ namespace Roadplus.Server.Communication
         public override void Start()
         {
             buffer = "";
-            Port.Open();
             startReceiving = true;
+            receiveThread = new Thread(new ThreadStart(Receive));
+            receiveThread.Start();
         }
 
         public override void Stop()
         {
-            if (receiving)
+            startReceiving = false;
+            receiveThread.Join();
+
+            if (Port.IsOpen)
             {
-                receiveThread.Join();
+                Port.Close();
             }
 
-            startReceiving = false;
-            Port.Close();
             OnDisconnected();
         }
-
-        #endregion
     }
 }
 

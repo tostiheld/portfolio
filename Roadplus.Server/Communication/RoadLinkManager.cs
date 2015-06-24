@@ -67,23 +67,22 @@ namespace Roadplus.Server.Communication
             try
             {
                 string message = "";
-                SerialPort testPort = new SerialPort(port, baudRate);
-                testPort.Open();
+                port.Open();
 
                 // give the serial device 3 seconds to wake up
                 Thread.Sleep(3000);
-                testPort.Write(DiscoverString);
+                port.Write(DiscoverString);
 
                 // give the device a few milliseconds to reply
                 Thread.Sleep(100);
-                if (testPort.BytesToRead > 0)
+                if (port.BytesToRead > 0)
                 {
                     byte[] buffer = new byte[BufferSize];
-                    testPort.Read(buffer, 0, buffer.Length);
+                    port.Read(buffer, 0, buffer.Length);
                     ASCIIEncoding encoder = new ASCIIEncoding();
                     message = encoder.GetString(buffer);
                 }
-                testPort.Close();
+                port.Close();
 
                 if (message.Contains(OkString))
                 {
