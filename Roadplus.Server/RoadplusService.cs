@@ -44,6 +44,7 @@ namespace Roadplus.Server
 
             roadLinkService = new RoadLinkManager(
                 new CommandProcessorText(),
+                new TextFormatter(),
                 settings.BaudRate,
                 settings.RoadDetectTimeOut);
 
@@ -76,7 +77,8 @@ namespace Roadplus.Server
                 new IPEndPoint(
                     settings.IP,
                     settings.Port),
-                processorJson);
+                processorJson,
+                new JsonFormatter());
 
             channels.Add(websocketService);
         }

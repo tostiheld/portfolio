@@ -92,7 +92,7 @@ namespace Roadplus.Server.Communication
             return null;
         }
 
-        public override void Send(string data)
+        protected override void DoSend(string data)
         {
             if (Port.IsOpen)
             {

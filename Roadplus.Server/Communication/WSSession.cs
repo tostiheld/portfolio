@@ -47,7 +47,7 @@ namespace Roadplus.Server.Communication
 
         #region implemented abstract members of Link
 
-        public override void Send(string data)
+        protected override void DoSend(string data)
         {
             if (webSocket.IsConnected)
             {

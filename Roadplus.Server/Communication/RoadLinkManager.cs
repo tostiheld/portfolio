@@ -22,9 +22,10 @@ namespace Roadplus.Server.Communication
         private int discoverInterval;
 
         public RoadLinkManager(CommandProcessor commandprocessor,
+                               IFormatter formatter,
                                int baudrate,
                                int interval)
-            : base(commandprocessor)
+            : base(commandprocessor, formatter)
 
         {
             baudRate = baudrate;

@@ -29,7 +29,13 @@ namespace Roadplus.Server.API
             }
         }
 
-        public abstract void Send(string data);
+        public void Send(IResponse response)
+        {
+            string data = Parent.Formatter.Format(response);
+            DoSend(data);
+        }
+
+        protected abstract void DoSend(string data);
         public abstract void Start();
         public abstract void Stop();
     }

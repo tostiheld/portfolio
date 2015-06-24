@@ -122,6 +122,9 @@
     <Compile Include="Communication\CommandProcessorText.cs" />
     <Compile Include="Commands\Json\GetMapCommand.cs" />
     <Compile Include="Commands\Json\GetMapResponse.cs" />
+    <Compile Include="API\IFormatter.cs" />
+    <Compile Include="Communication\JsonFormatter.cs" />
+    <Compile Include="Communication\TextFormatter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

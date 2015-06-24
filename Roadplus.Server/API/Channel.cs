@@ -15,17 +15,21 @@ namespace Roadplus.Server.API
             }
         }
 
+        public IFormatter Formatter { get; private set; }
+
         private List<Link> links;
         private CommandProcessor commandProcessor;
 
-        public Channel(CommandProcessor commandprocessor)
+        public Channel(CommandProcessor commandprocessor, IFormatter formatter)
         {
-            if (commandprocessor == null)
+            if (commandprocessor == null ||
+                formatter == null)
             {
-                throw new ArgumentNullException("commandprocessor");
+                throw new ArgumentNullException();
             }
 
             commandProcessor = commandprocessor;
+            Formatter = formatter;
             links = new List<Link>();
         }
 
@@ -85,7 +89,7 @@ namespace Roadplus.Server.API
             Trace.WriteLine("Received from " + from.Address + ": " + data);
 
             IResponse response = commandProcessor.Process(data);
-            from.Send(response.ToString());
+            from.Send(response);
         }
 
         public void Start()

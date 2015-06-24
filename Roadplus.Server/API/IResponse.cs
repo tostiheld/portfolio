@@ -6,7 +6,6 @@ namespace Roadplus.Server.API
     {
         string ResponseString { get; }
         string Command { get; set; }
-        string ToString();
     }
 }
 
