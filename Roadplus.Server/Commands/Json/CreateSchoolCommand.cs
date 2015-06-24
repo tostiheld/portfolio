@@ -37,11 +37,11 @@ namespace Roadplus.Server.Commands.Json
 
             DateTime openTime = DateTime.ParseExact(
                                     json["openTime"].ToString(),
-                                    "hh:mm",
+                                    "HH:mm",
                                     CultureInfo.InvariantCulture);
             DateTime closeTime = DateTime.ParseExact(
                                      json["closeTime"].ToString(),
-                                     "hh:mm",
+                                     "HH:mm",
                                      CultureInfo.InvariantCulture);
 
             School newSchool = new School()
