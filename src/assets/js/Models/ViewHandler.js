@@ -24,6 +24,9 @@ function Views() {
         this.ViewsList.some(function (view) {
             if (view.Name == name) {
                 view.Show();
+                if(name == "simulation"){
+                    AN.redrawLines();    
+                }
                 return true;
             }
         });

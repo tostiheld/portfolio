@@ -11,10 +11,14 @@ var ZoneModel = function (zones) {
             Arduino: ko.observable(zone.arduinoPort),
             Schools: ko.observableArray(ko.utils.arrayMap(zone.Schools, function (school) {
                 return {
+                    ID: school.ID,
                     zoneID: school.zoneID,
                     Name: school.Name,
                     DateStart: school.DateStart,
-                    DateEnd: school.DateEnd
+                    DateEnd: school.DateEnd,
+                    VertexId: school.VertexId,
+                    DateStart: school.OpenTime,
+                    DateEnd: school.CloseTime
                 };
             })),
             RoadConstructions: ko.observableArray(ko.utils.arrayMap(zone.RoadConstructions, function (roadc) {
@@ -82,7 +86,8 @@ var ZoneModel = function (zones) {
             zoneID: $("select[name='zoneID']", formElement).val(),
             Name: $("input[name='roadcName']", formElement).val(),
             DateStart: $("input[name='dateStart']", formElement).val(),
-            DateEnd: $("input[name='dateEnd']", formElement).val()
+            DateEnd: $("input[name='dateEnd']", formElement).val(),
+            location: $("input[name='roadConstructionEdgeId']", formElement).val()
         };
 
         //send to server
@@ -235,7 +240,37 @@ var ZoneModel = function (zones) {
         });
         return zone;
     };
+    
+    
+    //
+    // FIND School BY ID
+    //
+    self.findSchoolByID = function (schoolID) {
+        var school;
+        ko.utils.arrayFirst(self.zones(), function (tzone) {
+            ko.utils.arrayFirst(tzone.Schools(), function (tschool) {
+                if(tschool.ID == schoolID){
+                    school = tschool;
+                }
+            });
+        });
+        return school;
+    };
 
+    //
+    // FIND Vertex BY ID
+    //
+    self.findVertexByID = function (vertexID) {
+        var vertex;
+        ko.utils.arrayFirst(self.zones(), function (tzone) {
+            ko.utils.arrayFirst(tzone.Vertexes(), function (tvertex) {
+                if(tvertex.VertexId == vertexID){
+                    vertex = tvertex;
+                }
+            });
+        });
+        return vertex;
+    };
 
 
     //
@@ -270,7 +305,9 @@ var ZoneModel = function (zones) {
     //
     // REMOVE SCHOOL FROM UI
     //
-    self.removeSchool = function (school) {
+    self.removeSchool = function (schoolId) {
+        var school = self.findSchoolByID(schoolId);
+        console.log(school);
         $.each(self.zones(), function () {
             this.Schools.remove(school);
         });
@@ -291,9 +328,12 @@ var ZoneModel = function (zones) {
     //
     // REMOVE ROADCONSTRUCTION FROM UI
     //
-    self.removeRoadC = function (roadc) {
-        //send to server
-        window.Handler.MessageStringify.removeZone(roadc.ID);
+    self.removeRoadC = function (roadConstructionId) {
+        var roadConstruction = self.findRoadConstructionByID(roadConstructionId);
+        console.log(roadConstruction);
+        $.each(self.zones(), function () {
+            this.Schools.remove(roadConstruction);
+        });
     };
 };
 

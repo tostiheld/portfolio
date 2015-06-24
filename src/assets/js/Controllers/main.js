@@ -87,15 +87,29 @@ $(document).ready(function () {
     });
 
     $("#newSchoolForm select").change(function(){
-        alert($(this).val());
         $("#canvas").appendTo("#newSchoolForm");
         $(".canvas_zoneID").val($(this).val()).trigger("change");
         window.mode = "selectVertex";
+    });
+
+    $("#newRoadConstructionForm select").change(function(){
+        $("#canvas").appendTo("#newRoadConstructionForm");
+        $(".canvas_zoneID").val($(this).val()).trigger("change");
+        window.mode = "selectEdge";
     });
     
     $('#newSchoolModal').on('hidden.bs.modal', function () {
         $("#canvas").appendTo(".canvas");
         window.mode = "road";
+        window.activeVertexClicked = false;
+        AN.redrawLines();
+    });
+    
+    $('#newRoadConstructionModal').on('hidden.bs.modal', function () {
+        $("#canvas").appendTo(".canvas");
+        window.mode = "road";
+        window.activeVertexClicked = false;
+        AN.redrawLines();
     });
     
     //

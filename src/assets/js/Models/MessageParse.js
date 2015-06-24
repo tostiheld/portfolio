@@ -19,22 +19,24 @@ var parser = function (message, self) {
             break;
         case "createschool":
             var newSchool = {
-                schoolId: SchoolId,
-                zoneID: json.ZoneId,
-                Name: json.name,
-                VertexId: json.VertexId,
-                DateStart: json.OpenTime,
-                DateEnd: json.CloseTime
+                ID: json.createdObject.SchoolId,
+                zoneID: json.createdObject.ZoneId,
+                Name: json.createdObject.Name,
+                VertexId: json.createdObject.VertexId,
+                DateStart: json.createdObject.OpenTime,
+                DateEnd: json.createdObject.CloseTime
             };
             self.Zones.addSchool(newSchool);
+            console.log(newSchool);
             break;
         case "createroadconstruction":
             var newRoadConstruction = {
-                zoneID: json.zoneId,
-                Name: json.name,
-                VertexId: json.location,
-                DateStart: json.dateStart,
-                DateEnd: json.dateEnd
+                ID: json.createdObject.SchoolId,
+                zoneID: json.createdObject.ZoneId,
+                Name: json.createdObject.Name,
+                VertexId: json.createdObject.VertexId,
+                DateStart: json.createdObject.DateStart,
+                DateEnd: json.createdObject.DateEnd
             };
             self.Zones.addRoadC(newRoadConstruction);
             break;
@@ -61,14 +63,15 @@ var parser = function (message, self) {
             newEdge.endY = newVertex3.Y;
             self.Zones.addEdge(newEdge);
             window.AN.redrawLines();
-            
             break;
         case "removezone":
             self.Zones.removeZone(json.removedObject);
             break;
         case "removeschool":
-            break;
+            self.Zones.removeSchool(json.removedObject);
+            break;        
         case "removeroadconstruction":
+            self.Zones.removeRoadC(json.removedObject);
             break;
         case "removevertex":
             break;
@@ -86,6 +89,38 @@ var parser = function (message, self) {
                 self.Zones.addZone(newZone);
             });
             break;
+        case "requestschools":
+            json.requestedObjects.forEach(function(element, index){
+                var newSchool = {
+                    ID: element.SchoolId,
+                    zoneID: element.ZoneId,
+                    Name: element.Name,
+                    VertexId: element.VertexId,
+                    DateStart: element.OpenTime,
+                    DateEnd: element.CloseTime
+                };
+                self.Zones.addSchool(newSchool);
+            });
+            break;
+        case "requestmap":
+            
+            
+            json.vertices.forEach(function(element, index){
+                self.Zones.addVertex(element);
+            });
+            
+            
+            json.edges.forEach(function(element, index){
+                var startVertex = self.Zones.findVertexByID(element.StartVertexId);
+                element.startX = startVertex.X;
+                element.startY = startVertex.Y;
+                var endVertex = self.Zones.findVertexByID(element.EndVertexId);
+                element.endX = endVertex.X;
+                element.endY = endVertex.Y;
+                
+                
+                self.Zones.addEdge(element);
+            });
     }
 };
 

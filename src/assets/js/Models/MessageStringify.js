@@ -58,7 +58,7 @@ var MessageStringify = function(self){
         var json = {};
         json.command = "createRoadConstruction";
         json.zoneId = zoneID;
-        json.location = 0;
+        json.location = roadc.location;
         json.startDate = roadc.DateStart;
         json.endDate = roadc.DateEnd;
 
@@ -103,6 +103,13 @@ var MessageStringify = function(self){
         //send json
         self.send(JSON.stringify(json));
 
+        json.command = "getRoads";
+        //send json
+        self.send(JSON.stringify(json));
+
+        json.command = "requestMap";
+        //send json
+        self.send(JSON.stringify(json));
 
         //        dl('Get Com Ports');
         //        //create json

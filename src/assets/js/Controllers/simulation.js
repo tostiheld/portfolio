@@ -7,6 +7,7 @@ var selectRadius = 20;
 var activeVertex;
 var activeVertexClicked;
 var activeEdge;
+var activeEdgeClicked;
 var mode = "road";
 var sx;
 var sy;
@@ -36,10 +37,19 @@ AN.handleClick = function (e) {
         }
     }else if(mode == "selectEdge"){
         if(activeEdge){
-            $("#canvas").attr("edge",activeEdge.id);
+            $("#canvas").attr("edge",activeEdge.EdgeId);
+            activeEdgeClicked = activeEdge;
         }else {
             $("#canvas").attr("edge","");
+            activeEdgeClicked = false;
         }
+        if(activeEdgeClicked){
+            $(".roadConstructionEdgeId").val(activeEdgeClicked.EdgeId);
+        }else {
+            $(".roadConstructionEdgeId").val("");
+        }
+        AN.redrawLines();
+        
     }else if(mode == "selectVertex"){
         if (activeVertex) {
             x = activeVertex.X;
@@ -51,7 +61,7 @@ AN.handleClick = function (e) {
         if(activeVertexClicked){
             $(".schoolVertexId").val(activeVertexClicked.vertexId);
         }else {
-            $(".schoolVertexId").attr("");
+            $(".schoolVertexId").val("");
         }
         AN.redrawLines();
     }
@@ -119,7 +129,7 @@ AN.getCursorPosition = function (e) {
 //        console.log("pageX:" + y);
 //    } else {
         x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-        y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop + $("#newSchoolModal").scrollTop();
+        y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop + $("#newSchoolModal").scrollTop() + $("#newRoadConstructionModal").scrollTop();
 //    }
 
     return [x, y];
@@ -138,7 +148,7 @@ AN.drawLine = function (x, y, click) {
     AN.drawLineNow(lastClick[0], lastClick[1], x, y);
 
 
-    if (click) {
+    if (click && $(".canvas_zoneID").val() != "") {
         window.Handler.Zones.UIaddEdge([lastClick[0], lastClick[1], x, y]);
         clicks = 0;
         AN.redrawLines();
@@ -180,6 +190,9 @@ AN.redrawLines = function () {
     if(activeVertexClicked){
         AN.drawActiveVertex(activeVertexClicked.X,activeVertexClicked.Y);
     }
+    if(activeEdgeClicked){
+        AN.drawActiveEdge(activeEdgeClicked);
+    }
 };
 
 AN.drawActiveVertex = function (x, y) {
@@ -193,6 +206,8 @@ AN.drawActiveVertex = function (x, y) {
     canvas.closePath();
 };
 AN.drawActiveEdge = function (edge) {
+    console.log("edge");
+    console.log(edge);
     canvas.beginPath();
     canvas.moveTo(edge.startX, edge.startY);
     canvas.setLineDash([0, 0]);
