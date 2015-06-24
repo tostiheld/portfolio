@@ -95,11 +95,24 @@ var parser = function (message, self) {
                     ID: element.SchoolId,
                     zoneID: element.ZoneId,
                     Name: element.Name,
-                    VertexId: element.VertexId,
+                    EdgeId: element.EdgeId,
+                    DateStart: element.DateStart,
+                    DateEnd: element.DateEnd
+                };
+                self.Zones.addSchool(newSchool);
+            });
+            break;
+        case "requestroadconstructions":
+            json.requestedObjects.forEach(function(element, index){
+                var newRoadConstruction = {
+                    ID: element.RoadConstructionId,
+                    zoneID: element.ZoneId,
+                    Name: element.Name,
+                    EdgeId: element.EdgeId,
                     DateStart: element.OpenTime,
                     DateEnd: element.CloseTime
                 };
-                self.Zones.addSchool(newSchool);
+                self.Zones.addRoadC(newRoadConstruction);
             });
             break;
         case "requestmap":

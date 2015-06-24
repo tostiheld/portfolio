@@ -181,9 +181,18 @@ AN.drawLineNow = function (x1, y1, x2, y2) {
 
 };
 
+
+
 AN.redrawLines = function () {
     canvas.clearRect(0, 0, cv.width, cv.height);
     var zone = window.Handler.Zones.findZoneByID($(".canvas_zoneID").val());
+    
+    //Handle Hover of Edge
+    $.each(zone.RoadConstructions(), function (index, value) {
+        AN.drawRoadConstruction(value);
+    });
+    
+    
     $.each(zone.Edges(), function (index, value) {
         AN.drawLineNow(value.startX, value.startY, value.endX, value.endY);
     });
@@ -194,6 +203,24 @@ AN.redrawLines = function () {
         AN.drawActiveEdge(activeEdgeClicked);
     }
 };
+
+
+AN.drawRoadConstruction = function (roadConstruction) {
+
+    var edge = window.Handler.Zones.findEdgeByID(roadConstruction.EdgeId);
+    console.log(edge);
+    
+    canvas.beginPath();
+    canvas.moveTo(edge.startX, edge.startY);
+    canvas.setLineDash([0, 0]);
+    canvas.lineTo(edge.endX, edge.endY);
+    canvas.lineWidth = 22;
+    canvas.strokeStyle = '#FFA500';
+    canvas.stroke();
+    canvas.closePath();
+
+};
+
 
 AN.drawActiveVertex = function (x, y) {
     canvas.beginPath();

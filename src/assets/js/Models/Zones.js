@@ -272,6 +272,20 @@ var ZoneModel = function (zones) {
         return vertex;
     };
 
+    //
+    // FIND Edge BY ID
+    //
+    self.findEdgeByID = function (edgeID) {
+        var edge;
+        ko.utils.arrayFirst(self.zones(), function (tzone) {
+            ko.utils.arrayFirst(tzone.Edges(), function (tedge) {
+                if(tedge.EdgeId == edgeID){
+                    edge = tedge;
+                }
+            });
+        });
+        return edge;
+    };
 
     //
     // REMOVE ZONE FROM UI

@@ -1,22 +1,19 @@
 <div id="simulation" class="view">
     <h1>Simulation</h1>
-<div class="form-group">
-                        <label class="col-xs-3 control-label">Zone:</label>
-                        <div class="col-xs-5">
-                            <select class="canvas_zoneID" required>
-                                <option value="" selected>Select a zone!</option>
-                                <!-- ko foreach: zones -->
-                                <option data-bind='value: ID, text: Name'></option>
-                                <!-- /ko -->
-                            </select>
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Zone:</label>
+        <div class="col-xs-5">
+            <select class="canvas_zoneID" required>
+                <option value="" selected>Select a zone!</option>
+                <!-- ko foreach: zones -->
+                <option data-bind='value: ID, text: Name'></option>
+                <!-- /ko -->
+            </select>
 
-                        </div>
-                    </div>
-    <div class="canvas">
-    <canvas id="canvas" width="800" height="525" style="border:1px solid black;"></canvas>
+        </div>
     </div>
-    <a href="#" class="btn btn-default" onclick="javascript:modus='road'">Straight road</a>
-    <script>
-        
-    </script>
+    <div class="canvas">
+        <canvas id="canvas" width="800" height="525" style="border:1px solid black;"></canvas>
+    </div>
+
 </div>

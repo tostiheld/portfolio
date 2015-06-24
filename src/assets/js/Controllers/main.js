@@ -103,6 +103,7 @@ $(document).ready(function () {
         window.mode = "road";
         window.activeVertexClicked = false;
         AN.redrawLines();
+        activeVertexClicked = false;
     });
     
     $('#newRoadConstructionModal').on('hidden.bs.modal', function () {
@@ -110,6 +111,7 @@ $(document).ready(function () {
         window.mode = "road";
         window.activeVertexClicked = false;
         AN.redrawLines();
+        activeEdgeClicked = false;
     });
     
     //
