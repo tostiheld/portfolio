@@ -62,7 +62,10 @@ namespace Roadplus.Server.API
 
         protected void NewLink(Link link)
         {
-            foreach (Link l in links)
+            // clone to be able to edit original list
+            List<Link> temp = new List<Link>(links);
+
+            foreach (Link l in temp)
             {
                 if (l.Address == link.Address)
                 {
