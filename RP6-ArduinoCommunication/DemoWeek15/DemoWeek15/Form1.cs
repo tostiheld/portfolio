@@ -51,7 +51,7 @@ namespace DemoWeek15
 
                     serialPort.Write(buffer, 0, 1);
                 }
-                catch (ArgumentException ex) // Not very nice to catch Exception...but for now it's good enough.
+                catch (ArgumentException ex) 
                 {
                     Debug.WriteLine("Could not write to serial port: " + ex.Message);
                     return false;
