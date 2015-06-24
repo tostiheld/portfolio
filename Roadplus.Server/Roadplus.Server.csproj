@@ -81,15 +81,12 @@
     <Compile Include="Communication\RoadLink.cs" />
     <Compile Include="Communication\WSSessionManager.cs" />
     <Compile Include="Communication\RoadLinkManager.cs" />
-    <Compile Include="Utilities\TimeRange.cs" />
-    <Compile Include="Utilities\Point.cs" />
     <Compile Include="Communication\Http\HttpService.cs" />
     <Compile Include="RoadplusService.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="API\Channel.cs" />
     <Compile Include="API\Link.cs" />
     <Compile Include="API\LinkType.cs" />
-    <Compile Include="Utilities\UtilityMethods.cs" />
     <Compile Include="Data\Edge.cs" />
     <Compile Include="Data\RoadConstruction.cs" />
     <Compile Include="Data\RoadplusData.cs" />
