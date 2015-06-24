@@ -95,13 +95,13 @@ var MessageStringify = function(self){
         //send json
         self.send(JSON.stringify(json));
 
-        json.command = "requestSchools";
-        //send json
-        self.send(JSON.stringify(json));
-
-        json.command = "requestRoadConstructions";
-        //send json
-        self.send(JSON.stringify(json));
+//        json.command = "requestSchools";
+//        //send json
+//        self.send(JSON.stringify(json));
+//
+//        json.command = "requestRoadConstructions";
+//        //send json
+//        self.send(JSON.stringify(json));
 
 
         //        dl('Get Com Ports');
