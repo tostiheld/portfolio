@@ -1,9 +1,8 @@
 //set constants:
-const int timeOutPulseRead = 15000;
+const int timeOutPulseRead = 5000;
 const int MaxDistance = 100.0;
 const int MinDistance = 15.0;
 const int offsetServo1 = 20;
-const int offsetServo2 = 20;
 
 //set variables:
 float lastobject1;
@@ -19,11 +18,11 @@ void GetDensity()
   //turn servo motors:
   if (Richting) 
   {
-    Positie += 1;
+    Positie += 3;
   }
   else 
   {
-    Positie -= 1;
+    Positie -= 3;
   }
   
   //if the servo is at the start, invert direction and adjust data for easier reading:
@@ -44,7 +43,6 @@ void GetDensity()
   
   //turn the servo`s to the appropiate direction:
   Servo1.write(Positie + offsetServo1);
-//  Servo2.write(Positie + offsetServo2);
 
 
   //Measure Distance Sensor 1
@@ -98,6 +96,7 @@ void GetDensity()
     }
   }
 }
+
 
 
 

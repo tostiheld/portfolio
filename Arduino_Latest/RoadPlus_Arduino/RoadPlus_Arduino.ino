@@ -21,7 +21,6 @@ int density;    //number 1-10, depending on how busy the road is
 
 //Define instances of Servo:
 Servo Servo1;
-Servo Servo2;
 
 //Define Pins:
 const int trigPin1 = A0;
@@ -29,7 +28,6 @@ const int echoPin1 = A1;
 const int trigPin2 = A4;
 const int echoPin2 = A3;
 const int servoPin1 = A2;
-const int servoPin2 = A5;
 
 //voor temperatuur
 #include <OneWire.h>
@@ -153,7 +151,6 @@ void setup()
   
   //attach Servo To Pins:   
   Servo1.attach(servoPin1);
-  Servo2.attach(servoPin2);
   
   //start Reading Sensor Data:
   sensors.begin();
@@ -178,6 +175,7 @@ void loop()
     GetDensity();
   }
 }
+
 
 
 

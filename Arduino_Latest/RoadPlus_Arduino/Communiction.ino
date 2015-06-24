@@ -16,6 +16,7 @@ void GetMessage()
     {
       metaMessage = metaMessage.substring(0, metaMessage.indexOf(':'));
     }
+    Serial.print(">Message:Recieved;");
     message = "";
   }
 
@@ -41,16 +42,20 @@ void GetMessage()
   {
 
   }
+  //Send temperature to pc
   if (meta == "14")
   {
-    SendTemperature();
+    SendTemperature(); 
     meta = "";
   }
+  //Discovery echo
   if (meta == "11")
   {
+
     Serial.println(">ok:;");
     meta = "";
   }
+  //turn the sign On or Off
   if (meta == "15")
   {
     if (metaMessage == "Off")
@@ -59,11 +64,11 @@ void GetMessage()
     }
     else
     {
-      sign = true;
+      sign = true;      
     }
-
   }
 }
+
 
 
 
