@@ -10,6 +10,9 @@ namespace Roadplus.Server.Data
         [PrimaryKey, Identity]
         public int SchoolId { get; set; }
 
+        [Column("Name"), NotNull]
+        public string Name { get; set; }
+
         [Column("ZoneId"), NotNull]
         public int ZoneId { get; set; }
 

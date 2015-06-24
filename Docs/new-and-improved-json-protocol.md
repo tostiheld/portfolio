@@ -72,6 +72,7 @@ The syntax to create a school is as follows:
 {
     "id": <generated_id>,
     "command": "createSchool",
+    "name": <name>,
     "zoneId": <parent_zone>,
     "location": <vertex_id>,
     "openTime": "<preferred_open_time>",

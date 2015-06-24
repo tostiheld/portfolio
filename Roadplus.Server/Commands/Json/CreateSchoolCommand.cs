@@ -11,59 +11,76 @@ using System.Globalization;
 
 namespace Roadplus.Server.Commands.Json
 {
+//    ```json
+//    {
+//        "id": <generated_id>,
+//        "command": "createSchool",
+//        "name": <name>,
+//        "zoneId": <parent_zone>,
+//        "location": <vertex_id>,
+//        "openTime": "<preferred_open_time>",
+//        "closeTime": "<preferred_close_time>"
+//    }
+//    ```
+
     public class CreateSchoolCommand : ICommand
     {
         public string Name { get { return "createSchool"; } }
 
+        private const string NameKey = "name";
+        private const string ZoneIdKey = "zoneId";
+        private const string LocationKey = "location";
+        private const string OpenTimeKey = "openTime";
+        private const string CloseTimekey = "closeTime";
+
         public IResponse Execute(string payload)
         {
-            JObject json = JsonConvert.DeserializeObject<JObject>(payload);
-            int zoneId = Convert.ToInt32(json["zoneId"]);
-            int location = Convert.ToInt32(json["location"]);
+            JObject o = JsonConvert.DeserializeObject<JObject>(payload);
+
+            int zoneId;
+            int locationId;
+            DateTime openTime;
+            DateTime closeTime;
+
+            if (!Int32.TryParse(o[ZoneIdKey], out zoneId) ||
+                !Int32.TryParse(o[LocationKey], out locationId) ||
+                !DateTime.TryParseExact(
+                    o[OpenTimeKey], "HH:mm", CultureInfo.InvariantCulture, 
+                    DateTimeStyles.None, out openTime) ||
+                !DateTime.TryParseExact(
+                    o[CloseTimekey], "HH:mm", CultureInfo.InvariantCulture,
+                    DateTimeStyles.None, out closeTime))
+            {
+                return new ResponseFailure(Name, "Parse error");
+            }
 
             RoadplusData data = new RoadplusData();
-            if (!data.Zones.Any<Zone>(z => z.ZoneId == zoneId))
-            {
-                return new ResponseFailure(
-                    Name,
-                    "Specified zone does not exist");
-            }
-            else if (!data.Vertices.Any<Vertex>(v => v.VertexId == location))
-            {
-                return new ResponseFailure(
-                    Name,
-                    "Specified vertex does not exist");
-            }
 
-            DateTime openTime = DateTime.ParseExact(
-                                    json["openTime"].ToString(),
-                                    "HH:mm",
-                                    CultureInfo.InvariantCulture);
-            DateTime closeTime = DateTime.ParseExact(
-                                     json["closeTime"].ToString(),
-                                     "HH:mm",
-                                     CultureInfo.InvariantCulture);
+            if (!data.Vertices.Any(v => v.VertexId == locationId) ||
+                !data.Zones.Any(z => z.ZoneId == zoneId))
+            {
+                return new ResponseFailure(Name, "Nonexisting parent");
+            }
 
             School newSchool = new School()
             {
+                Name = o[NameKey],
                 ZoneId = zoneId,
-                VertexId = location,
+                VertexId = locationId,
                 OpenTime = openTime,
                 CloseTime = closeTime
             };
 
-            int schoolId = Convert.ToInt32(
+            int id = Convert.ToInt32(
                 data.InsertWithIdentity<School>(newSchool));
 
-            newSchool.SchoolId = schoolId;
+            newSchool.SchoolId = id;
 
-            CreateResponse response = new CreateResponse()
+            return new CreateResponse()
             {
                 Command = Name,
                 CreatedObject = newSchool
             };
-
-            return response;
         }
     }
 }
