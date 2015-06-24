@@ -93,22 +93,6 @@ namespace Roadplus.Server.API
 
         public void Stop()
         {
-            /*
-            Response shutdown = new Response();
-            shutdown.Type = ResponseType.Information;
-            shutdown.Message = "Channel closing";
-
-            // TODO: which formatter to use? - response's own or channel's?
-            string message = MessageFormatter.Format(shutdown);
-
-            // clone so we can modify
-            List<Link> temp = new List<Link>(links);
-            foreach (Link l in temp)
-            {
-                l.Send(message);
-                l.Stop();
-            }*/
-
             AtStop();
         }
 
