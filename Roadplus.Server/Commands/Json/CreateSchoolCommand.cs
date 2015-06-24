@@ -7,6 +7,7 @@ using LinqToDB;
 
 using Roadplus.Server.API;
 using Roadplus.Server.Data;
+using System.Globalization;
 
 namespace Roadplus.Server.Commands.Json
 {
@@ -34,8 +35,14 @@ namespace Roadplus.Server.Commands.Json
                     "Specified vertex does not exist");
             }
 
-            DateTime openTime = Convert.ToDateTime(json["openTime"]);
-            DateTime closeTime = Convert.ToDateTime(json["closeTime"]);
+            DateTime openTime = DateTime.ParseExact(
+                                    json["openTime"].ToString(),
+                                    "hh:mm",
+                                    CultureInfo.InvariantCulture);
+            DateTime closeTime = DateTime.ParseExact(
+                                     json["closeTime"].ToString(),
+                                     "hh:mm",
+                                     CultureInfo.InvariantCulture);
 
             School newSchool = new School()
             {
