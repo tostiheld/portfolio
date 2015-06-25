@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 
 using LinqToDB;
 
-namespace Roadplus.Server.Commands.Json
+namespace Roadplus.Server.Messages.Json
 {
     public class EdgeSetCommand : ICommand
     {

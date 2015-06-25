@@ -4,7 +4,7 @@ using Roadplus.Server.API;
 using Roadplus.Server.Communication;
 using System.Collections.Generic;
 
-namespace Roadplus.Server.Commands.Json
+namespace Roadplus.Server.Messages.Json
 {
     public class GetConnectedRoadsCommand : ICommand
     {

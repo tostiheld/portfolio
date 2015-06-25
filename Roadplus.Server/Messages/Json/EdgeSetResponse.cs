@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using Roadplus.Server.API;
 using Roadplus.Server.Data;
 
-namespace Roadplus.Server.Commands.Json
+namespace Roadplus.Server.Messages.Json
 {
     [JsonObject]
     public class EdgeSetResponse : IResponse

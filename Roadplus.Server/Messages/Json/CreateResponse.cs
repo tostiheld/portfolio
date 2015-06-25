@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 using Roadplus.Server.API;
 
-namespace Roadplus.Server.Commands.Json
+namespace Roadplus.Server.Messages.Json
 {
     [JsonObject]
     public class CreateResponse : IResponse

@@ -8,7 +8,7 @@ using Roadplus.Server.API;
 using Roadplus.Server.Communication;
 using Roadplus.Server.Communication.Http;
 using Roadplus.Server.Data;
-using Roadplus.Server.Commands.Json;
+using Roadplus.Server.Messages.Json;
 
 
 namespace Roadplus.Server

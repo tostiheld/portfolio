@@ -8,7 +8,7 @@ using LinqToDB;
 using Roadplus.Server.API;
 using Roadplus.Server.Data;
 
-namespace Roadplus.Server.Commands.Json
+namespace Roadplus.Server.Messages.Json
 {
     public class RemoveRoadConstructionCommand : ICommand
     {

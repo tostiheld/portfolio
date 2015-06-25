@@ -12,6 +12,11 @@ namespace Roadplus.Server.Communication
         {
             return JsonConvert.SerializeObject(toformat);
         }
+
+        public string Format(IRequest toformat)
+        {
+            return JsonConvert.SerializeObject(toformat);
+        }
     }
 }
 

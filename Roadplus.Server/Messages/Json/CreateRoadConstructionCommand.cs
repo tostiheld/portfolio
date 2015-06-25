@@ -9,7 +9,7 @@ using Roadplus.Server.API;
 using Roadplus.Server.Data;
 using System.Globalization;
 
-namespace Roadplus.Server.Commands.Json
+namespace Roadplus.Server.Messages.Json
 {
     public class CreateRoadConstructionCommand : ICommand
     { 

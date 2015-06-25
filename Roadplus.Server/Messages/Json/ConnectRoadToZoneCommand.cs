@@ -10,7 +10,7 @@ using Roadplus.Server.Communication;
 using Roadplus.Server.Data;
 using System.Collections.Generic;
 
-namespace Roadplus.Server.Commands.Json
+namespace Roadplus.Server.Messages.Json
 {
     public class ConnectRoadToZoneCommand : ICommand
     {

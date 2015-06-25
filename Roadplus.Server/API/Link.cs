@@ -35,6 +35,12 @@ namespace Roadplus.Server.API
             DoSend(data);
         }
 
+        public void Send(IRequest request)
+        {
+            string data = Parent.Formatter.Format(request);
+            DoSend(data);
+        }
+
         protected abstract void DoSend(string data);
         public abstract void Start();
         public abstract void Stop();

@@ -5,17 +5,17 @@ using Roadplus.Server.API;
 using Roadplus.Server.Data;
 using System.Collections.Generic;
 
-namespace Roadplus.Server.Commands.Json
+namespace Roadplus.Server.Messages.Json
 {
-    public class GetRoadconstructionsCommand : ICommand
+    public class GetZonesCommand : ICommand
     {
-        public string Name { get { return "requestRoadconstructions"; } }
+        public string Name { get { return "requestZones"; } }
 
         public IResponse Execute(string payload)
         {
             RoadplusData data = new RoadplusData();
 
-            RoadConstruction[] zones = data.RoadConstructions.ToList().ToArray();
+            Zone[] zones = data.Zones.ToList().ToArray();
 
             return new GetResponse()
             {

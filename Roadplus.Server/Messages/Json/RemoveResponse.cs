@@ -4,7 +4,7 @@ using Roadplus.Server.API;
 
 using Newtonsoft.Json;
 
-namespace Roadplus.Server.Commands.Json
+namespace Roadplus.Server.Messages.Json
 {
     [JsonObject]
     public class RemoveResponse : IResponse

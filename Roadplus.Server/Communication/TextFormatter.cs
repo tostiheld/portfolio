@@ -10,6 +10,19 @@ namespace Roadplus.Server.Communication
         {
             throw new NotImplementedException();
         }
+
+        public string Format(IRequest toformat)
+        {
+            string request = String.Format(">{0}:", toformat.Command);
+
+            foreach (string s in toformat.Payload)
+            {
+                request += s + ":";
+            }
+            request += ";";
+
+            return request;
+        }
     }
 }
 

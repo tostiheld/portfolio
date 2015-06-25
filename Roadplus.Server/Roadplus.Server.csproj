@@ -98,30 +98,34 @@
     <Compile Include="Communication\CommandProcessorJson.cs" />
     <Compile Include="API\ResponseFailure.cs" />
     <Compile Include="API\IResponse.cs" />
-    <Compile Include="Commands\Json\CreateZoneCommand.cs" />
-    <Compile Include="Commands\Json\CreateResponse.cs" />
-    <Compile Include="Commands\Json\CreateSchoolCommand.cs" />
-    <Compile Include="Commands\Json\GetZonesCommand.cs" />
-    <Compile Include="Commands\Json\GetResponse.cs" />
-    <Compile Include="Commands\Json\EdgeSetCommand.cs" />
-    <Compile Include="Commands\Json\EdgeSetResponse.cs" />
-    <Compile Include="Commands\Json\RemoveZoneCommand.cs" />
-    <Compile Include="Commands\Json\RemoveResponse.cs" />
-    <Compile Include="Commands\Json\CreateRoadConstructionCommand.cs" />
-    <Compile Include="Commands\Json\RemoveSchoolCommand.cs" />
-    <Compile Include="Commands\Json\RemoveRoadConstructionCommand.cs" />
-    <Compile Include="Commands\Json\GetSchoolsCommand.cs" />
-    <Compile Include="Commands\Json\GetRoadconstructionsCommand.cs" />
-    <Compile Include="Commands\Json\ConnectRoadToZoneCommand.cs" />
-    <Compile Include="Commands\Json\GetConnectedRoadsCommand.cs" />
-    <Compile Include="Commands\Json\GetRoadsResponse.cs" />
-    <Compile Include="Commands\Json\ConnectRoadToZoneResponse.cs" />
     <Compile Include="Communication\CommandProcessorText.cs" />
-    <Compile Include="Commands\Json\GetMapCommand.cs" />
-    <Compile Include="Commands\Json\GetMapResponse.cs" />
     <Compile Include="API\IFormatter.cs" />
     <Compile Include="Communication\JsonFormatter.cs" />
     <Compile Include="Communication\TextFormatter.cs" />
+    <Compile Include="ZoneChecker.cs" />
+    <Compile Include="API\IRequest.cs" />
+    <Compile Include="Messages\Json\CreateZoneCommand.cs" />
+    <Compile Include="Messages\Json\CreateResponse.cs" />
+    <Compile Include="Messages\Json\CreateSchoolCommand.cs" />
+    <Compile Include="Messages\Json\GetZonesCommand.cs" />
+    <Compile Include="Messages\Json\GetResponse.cs" />
+    <Compile Include="Messages\Json\EdgeSetCommand.cs" />
+    <Compile Include="Messages\Json\EdgeSetResponse.cs" />
+    <Compile Include="Messages\Json\RemoveZoneCommand.cs" />
+    <Compile Include="Messages\Json\RemoveResponse.cs" />
+    <Compile Include="Messages\Json\CreateRoadConstructionCommand.cs" />
+    <Compile Include="Messages\Json\RemoveSchoolCommand.cs" />
+    <Compile Include="Messages\Json\RemoveRoadConstructionCommand.cs" />
+    <Compile Include="Messages\Json\GetSchoolsCommand.cs" />
+    <Compile Include="Messages\Json\GetRoadconstructionsCommand.cs" />
+    <Compile Include="Messages\Json\ConnectRoadToZoneCommand.cs" />
+    <Compile Include="Messages\Json\GetConnectedRoadsCommand.cs" />
+    <Compile Include="Messages\Json\GetRoadsResponse.cs" />
+    <Compile Include="Messages\Json\ConnectRoadToZoneResponse.cs" />
+    <Compile Include="Messages\Json\GetMapCommand.cs" />
+    <Compile Include="Messages\Json\GetMapResponse.cs" />
+    <Compile Include="Messages\Text\TemperatureRequest.cs" />
+    <Compile Include="Messages\Text\TrafficDensityRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -131,6 +135,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Folder Include="Commands\Json\" />
+    <Folder Include="Messages\Json\" />
+    <Folder Include="Messages\Text\" />
   </ItemGroup>
 </Project>

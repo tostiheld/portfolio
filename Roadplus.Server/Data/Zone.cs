@@ -24,6 +24,12 @@ namespace Roadplus.Server.Data
         [Column("ArduinoPort")]
         public string ArduinoPort { get; set; }
 
+        [Column("CurrentTemp")]
+        public double CurrentTemp { get; set; }
+
+        [Column("TrafficDensity")]
+        public int TrafficDensity { get; set; }
+
         [JsonIgnore]
         public Vertex StartVertex
         {
