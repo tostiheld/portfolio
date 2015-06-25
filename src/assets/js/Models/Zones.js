@@ -210,7 +210,7 @@ var ZoneModel = function (zones) {
         self.zones()[index].RadarVertex($("input[name='portVertexId']", formElement).val());
         self.zones()[index].Arduino($("select[name='arduinoPort']", formElement).val());
         
-        
+        AN.redrawLines();
         //empty form
         clearForm(formElement);
         //close popup
