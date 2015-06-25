@@ -51,20 +51,27 @@ namespace Roadplus.Server.Communication
             while (Port.IsOpen &&
                    startReceiving)
             {
-                while (Port.BytesToRead > 0)
+                try
                 {
-                    byte[] bytes = new byte[BufferSize];
-                    Port.Read(bytes, 0, BufferSize);
-
-                    ASCIIEncoding encoder = new ASCIIEncoding();
-                    string message = encoder.GetString(bytes);
-                    buffer += message;
-
-                    string found = FindMessages();
-                    if (found != null)
+                    while (Port.BytesToRead > 0)
                     {
-                        Parent.Post(this, found);
+                        byte[] bytes = new byte[BufferSize];
+                        Port.Read(bytes, 0, BufferSize);
+
+                        ASCIIEncoding encoder = new ASCIIEncoding();
+                        string message = encoder.GetString(bytes);
+                        buffer += message;
+
+                        string found = FindMessages();
+                        if (found != null)
+                        {
+                            Parent.Post(this, found);
+                        }
                     }
+                }
+                catch (IOException)
+                {
+                    break;
                 }
 
                 waithandler.WaitOne(1);
@@ -100,7 +107,15 @@ namespace Roadplus.Server.Communication
             }
             else
             {
-                Stop();
+                try
+                {
+                    Port.Open();
+                    Port.Write(data);
+                }
+                catch (IOException)
+                {
+                    Stop();
+                }
             }
         }
 

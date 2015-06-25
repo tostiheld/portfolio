@@ -29,11 +29,6 @@ namespace Roadplus.Server.API
 
         [JsonProperty("command")]
         public string Command { get; set; }
-
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this);
-        }
     }
 }
 

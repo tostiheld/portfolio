@@ -31,12 +31,22 @@ namespace Roadplus.Server.API
 
         public void Send(IResponse response)
         {
+            if (response == null)
+            {
+                return;
+            }
+
             string data = Parent.Formatter.Format(response);
             DoSend(data);
         }
 
         public void Send(IRequest request)
         {
+            if (request == null)
+            {
+                return;
+            }
+
             string data = Parent.Formatter.Format(request);
             DoSend(data);
         }

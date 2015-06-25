@@ -14,7 +14,7 @@ namespace Roadplus.Server.Communication
     {
         private const string DiscoverString = ">11:;";
         private const string OkString       = ">ok:;";
-        private const int    BufferSize     = 32;
+        private const int    BufferSize     = 64;
 
         private Thread discoverThread;
         private bool startDiscovering;
@@ -48,13 +48,17 @@ namespace Roadplus.Server.Communication
 
                 foreach (string p in ports)
                 {
-                    using (SerialPort sp = new SerialPort(p, baudRate))
+                    SerialPort sp = new SerialPort(p, baudRate);
+                    if (DetectRoadAt(sp))
                     {
-                        if (DetectRoadAt(sp))
-                        {
-                            RoadLink rl = new RoadLink(this, sp);
-                            NewLink(rl);
-                        }
+                        RoadLink rl = new RoadLink(this, sp);
+                        NewLink(rl);
+                        ZoneChecker checker = new ZoneChecker(rl, 5);
+                    }
+                    else
+                    {
+                        sp.Close();
+                        sp.Dispose();
                     }
                 }
 
@@ -98,7 +102,8 @@ namespace Roadplus.Server.Communication
                     ex is ArgumentOutOfRangeException ||
                     ex is ArgumentException ||
                     ex is IOException ||
-                    ex is InvalidOperationException)
+                    ex is InvalidOperationException ||
+                    ex is TimeoutException)
                 {
                     // this means the port is not suitable 
                     // so it is safe to ignore these 

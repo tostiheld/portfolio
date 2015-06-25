@@ -66,13 +66,22 @@ namespace Roadplus.Server.Messages.Json
 
             target.ArduinoPort = o[PortNameKey].ToString();
 
-            data.Update<Zone>(target);
+            // don't do this for now
+            //data.Update<Zone>(target);
 
-            return new ConnectRoadToZoneResponse()
+            Link link = Source.GetLinkByAddress(o[PortNameKey].ToString());
+            if (link is RoadLink)
             {
-                ZoneId = id,
-                RoadPort = o[PortNameKey].ToString()
-            };
+                RoadLink rlink = link as RoadLink;
+                ZoneChecker checker = new ZoneChecker(rlink, 5);
+                return new ConnectRoadToZoneResponse()
+                {
+                    ZoneId = id,
+                    RoadPort = o[PortNameKey].ToString()
+                };
+            }
+
+            return new ResponseFailure(Name, "port not found or connected");
         }
 
     }

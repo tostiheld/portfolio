@@ -84,6 +84,19 @@ namespace Roadplus.Server.API
                 "New link at " + link.Address);
         }
 
+        public Link GetLinkByAddress(string address)
+        {
+            foreach (Link l in links)
+            {
+                if (l.Address == address)
+                {
+                    return l;
+                }
+            }
+
+            return null;
+        }
+
         public void Post(Link from, string data)
         {
             Trace.WriteLine("Received from " + from.Address + ": " + data);

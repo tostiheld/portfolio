@@ -126,6 +126,9 @@
     <Compile Include="Messages\Json\GetMapResponse.cs" />
     <Compile Include="Messages\Text\TemperatureRequest.cs" />
     <Compile Include="Messages\Text\TrafficDensityRequest.cs" />
+    <Compile Include="Messages\Text\TemperatureMessage.cs" />
+    <Compile Include="Messages\Text\DistanceSensorOnCommand.cs" />
+    <Compile Include="Messages\Text\DensityMessage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

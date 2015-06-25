@@ -8,7 +8,8 @@ namespace Roadplus.Server.Communication
     {
         public string Format(IResponse toformat)
         {
-            throw new NotImplementedException();
+            return "";
+            //throw new NotImplementedException();
         }
 
         public string Format(IRequest toformat)

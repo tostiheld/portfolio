@@ -9,7 +9,7 @@ using Roadplus.Server.Communication;
 using Roadplus.Server.Communication.Http;
 using Roadplus.Server.Data;
 using Roadplus.Server.Messages.Json;
-
+using Roadplus.Server.Messages.Text;
 
 namespace Roadplus.Server
 {
@@ -39,8 +39,16 @@ namespace Roadplus.Server
                     settings.HttpRoot);
             }
 
+            CommandProcessorText processorText = new CommandProcessorText();
+            processorText.RegisteredCommands.AddRange(
+            new ICommand[]
+            {
+                new TemperatureMessage(),
+                new DensityMessage()
+            });
+
             roadLinkService = new RoadLinkManager(
-                new CommandProcessorText(),
+                processorText,
                 new TextFormatter(),
                 settings.BaudRate,
                 settings.RoadDetectTimeOut);

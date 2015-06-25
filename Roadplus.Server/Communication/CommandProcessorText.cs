@@ -25,6 +25,11 @@ namespace Roadplus.Server.Communication
                 args += s + ":";
             }
 
+            if (first == "message")
+            {
+                return null;
+            }
+
             try
             {
                 foreach (ICommand c in RegisteredCommands)

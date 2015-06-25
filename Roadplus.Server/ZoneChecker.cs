@@ -27,6 +27,8 @@ namespace Roadplus.Server
 
         void CheckTimer_Elapsed (object sender, ElapsedEventArgs e)
         {
+            Connection.Send(new DistanceSensorOnCommand());
+            System.Threading.Thread.Sleep(1000);
             Connection.Send(new TemperatureRequest());
             Connection.Send(new TrafficDensityRequest());
         }
