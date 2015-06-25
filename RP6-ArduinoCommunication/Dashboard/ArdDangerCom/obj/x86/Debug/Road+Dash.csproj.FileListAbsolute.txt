@@ -1,0 +1,20 @@
+C:\Users\stijnbuurman\Documents\GitHub\roadplus\Dashboard\ArdDangerCom\bin\Debug\Road+Dash.exe.config
+C:\Users\stijnbuurman\Documents\GitHub\roadplus\Dashboard\ArdDangerCom\bin\Debug\web\test.html
+C:\Users\stijnbuurman\Documents\GitHub\roadplus\Dashboard\ArdDangerCom\bin\Debug\Road+Dash.exe
+C:\Users\stijnbuurman\Documents\GitHub\roadplus\Dashboard\ArdDangerCom\bin\Debug\Road+Dash.pdb
+C:\Users\stijnbuurman\Documents\GitHub\roadplus\Dashboard\ArdDangerCom\obj\x86\Debug\Road+Dash.csprojResolveAssemblyReference.cache
+C:\Users\stijnbuurman\Documents\GitHub\roadplus\Dashboard\ArdDangerCom\obj\x86\Debug\Domotica.RoadDashMainForm.resources
+C:\Users\stijnbuurman\Documents\GitHub\roadplus\Dashboard\ArdDangerCom\obj\x86\Debug\Domotica.Properties.Resources.resources
+C:\Users\stijnbuurman\Documents\GitHub\roadplus\Dashboard\ArdDangerCom\obj\x86\Debug\Road+Dash.csproj.GenerateResource.Cache
+C:\Users\stijnbuurman\Documents\GitHub\roadplus\Dashboard\ArdDangerCom\obj\x86\Debug\Road+Dash.exe
+C:\Users\stijnbuurman\Documents\GitHub\roadplus\Dashboard\ArdDangerCom\obj\x86\Debug\Road+Dash.pdb
+C:\Users\Lenovo\Desktop\FONTYS werk\RoadPlus\roadplus-embedded\RP6-ArduinoCommunication\Dashboard\ArdDangerCom\bin\Debug\Road+Dash.exe.config
+C:\Users\Lenovo\Desktop\FONTYS werk\RoadPlus\roadplus-embedded\RP6-ArduinoCommunication\Dashboard\ArdDangerCom\obj\x86\Debug\Road+Dash.exe
+C:\Users\Lenovo\Desktop\FONTYS werk\RoadPlus\roadplus-embedded\RP6-ArduinoCommunication\Dashboard\ArdDangerCom\obj\x86\Debug\Road+Dash.pdb
+C:\Users\Lenovo\Desktop\FONTYS werk\RoadPlus\roadplus-embedded\RP6-ArduinoCommunication\Dashboard\ArdDangerCom\bin\Debug\web\test.html
+C:\Users\Lenovo\Desktop\FONTYS werk\RoadPlus\roadplus-embedded\RP6-ArduinoCommunication\Dashboard\ArdDangerCom\bin\Debug\Road+Dash.exe
+C:\Users\Lenovo\Desktop\FONTYS werk\RoadPlus\roadplus-embedded\RP6-ArduinoCommunication\Dashboard\ArdDangerCom\bin\Debug\Road+Dash.pdb
+C:\Users\Lenovo\Desktop\FONTYS werk\RoadPlus\roadplus-embedded\RP6-ArduinoCommunication\Dashboard\ArdDangerCom\obj\x86\Debug\Road+Dash.csprojResolveAssemblyReference.cache
+C:\Users\Lenovo\Desktop\FONTYS werk\RoadPlus\roadplus-embedded\RP6-ArduinoCommunication\Dashboard\ArdDangerCom\obj\x86\Debug\Domotica.RoadDashMainForm.resources
+C:\Users\Lenovo\Desktop\FONTYS werk\RoadPlus\roadplus-embedded\RP6-ArduinoCommunication\Dashboard\ArdDangerCom\obj\x86\Debug\Domotica.Properties.Resources.resources
+C:\Users\Lenovo\Desktop\FONTYS werk\RoadPlus\roadplus-embedded\RP6-ArduinoCommunication\Dashboard\ArdDangerCom\obj\x86\Debug\Road+Dash.csproj.GenerateResource.Cache

@@ -1,0 +1,415 @@
+﻿<html>
+
+<head>
+    <title>Road+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link href='http://fonts.googleapis.com/css?family=Expletus+Sans' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.6.1/less.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            console.log("start");
+            less.refreshStyles();
+            var setSpeed = function (speed) {
+                console.log(speed);
+                if (speed != 0 && speed != null) {
+                    speed++;
+                }
+                $('.radial-progress').attr('data-progress', speed);
+            }
+            setTimeout(setSpeed, 200);
+            
+
+            // Read more here: https://medium.com/@andsens/radial-progress-indicator-using-css-a917b80c43f9
+
+            
+            var getSpeed = function () {
+                console.log("test");
+                // do some stuff...
+                // no need to recall the function (it's an interval, it'll loop forever)
+                $.get("http://10.211.55.3:8085/", { fetch: "speed" }).done(function (data) {
+                    console.log(data);
+                    $("#speed").text(data['speed']);
+                    setSpeed(data['speed']);
+                    $(".speedAllowed").text("Max: " + data['speedAllowed'] + " Km/H");
+                    if (data['speed'] > data['speedAllowed'] + 5) {
+                        $(".speedAlert").html("You drive too fast!").css("color", "red");
+                    }
+                    else if (data['speed'] < data['speedAllowed'] - 5) {
+                        $(".speedAlert").html("You may drive faster!").css("color", "orange");
+                    }
+                    else {
+                        //$(".speedAlert").html("You drive the correct speed").css("color","green");
+                    }
+
+                    if (data['warning'] != "") {
+                        $("#alert").html(data['warning']).fadeTo(0, 100).fadeOut(3000, 0);
+                    }
+                })
+            }
+            function abortTimer() { // to be called when you want to stop the timer
+                clearInterval(tid);
+            }
+            setInterval(getSpeed, 500);
+
+           
+            
+
+        });
+    </script>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "expletus sans";
+        }
+
+        header {
+            background-color: #536dfe;
+            padding-bottom: 1em;
+            padding-top:1em;
+            width: 100%;
+            font-size: 1.5em;
+        }
+
+        h1 {
+            color: white;
+            font-family: "expletus sans";
+            text-align: center;
+        }
+
+        .speedArea {
+            font-size:30px;
+        }
+        .speedAlert {
+            position:absolute;
+            left:100px;
+            top:250px;
+            width:500px;
+            text-align:center;
+            font-size:25px;
+            z-index:15;
+        }
+    </style>
+    <style type="text/less">
+        @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic);
+body {
+    background-color:#555;
+}
+.radial-progress {
+	@circle-size: 500px;
+	@circle-background: #222;
+	@circle-color: #2C4762;
+	@inset-size: 460px;
+	@inset-color: #555;
+	@transition-length: 1s;
+	@shadow: 6px 6px 10px rgba(0,0,0,0.2);
+	@percentage-color: #fff;
+	@percentage-font-size: 30px;
+	@percentage-text-width: 150px;
+    -webkit-transform: rotate(240deg);
+	width:  @circle-size;
+	height: @circle-size;
+    margin:100px;
+	background-color: @circle-background;
+	border-radius: 50%;
+ 
+	.circle {
+		.mask, .fill, .shadow, .cutoff {
+			width:    @circle-size;
+			height:   @circle-size;
+			position: absolute;
+			border-radius: 50%;
+		}
+		.shadow {
+			box-shadow: @shadow inset;
+		}
+		.mask, .fill, .cutoff {
+			-webkit-backface-visibility: hidden;
+            
+			transition: -webkit-transform @transition-length;
+			transition: -ms-transform @transition-length;
+			transition: transform @transition-length;
+			border-radius: 50%;
+		}
+
+		.mask, .cutoff {
+			clip: rect(0px, @circle-size, @circle-size, @circle-size/2);
+			.fill {
+				clip: rect(0px, @circle-size/2, @circle-size, 0px);
+				background-color: @circle-color;
+			}
+		}
+
+        .cutoff {
+            background-color:#555;
+            clip: rect(0px, 500px, 500px, 350px);
+transform: rotate(-150deg);
+z-index:100;
+margin-left: -2px;
+margin-top: -1px;
+        }
+
+	}
+	.inset {
+		width:       @inset-size;
+		height:      @inset-size;
+		position:    absolute;
+		margin-left: (@circle-size - @inset-size)/2;
+		margin-top:  (@circle-size - @inset-size)/2;
+        -webkit-transform: rotate(-240deg);
+
+		background-color: @inset-color;
+		border-radius: 50%;
+		box-shadow: @shadow;
+		.percentage {
+			height:   @percentage-font-size*2.5;
+			width:    @percentage-text-width;
+			overflow: hidden;
+
+			position: absolute;
+			top:      (@inset-size - @percentage-font-size) / 2;
+			left:     (@inset-size - @percentage-text-width) / 2;
+
+			line-height: 1;
+			.numbers {
+				margin-top: -@percentage-font-size;
+				transition: width @transition-length;
+				span {
+					width:          @percentage-text-width;
+					display:        inline-block;
+					vertical-align: top;
+					text-align:     center;
+					font-weight:    800;
+					font-size:      @percentage-font-size;
+					font-family:    "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+					color:          @percentage-color;
+				}
+			}
+            .speedAllowed {
+                position:absolute; 
+                top: @percentage-font-size;
+                width:100%;
+                background-color:#555;
+                height:@percentage-font-size*2;
+                font-size:18px;
+                text-align:center;
+                color:white;
+            }
+		}
+	}
+
+	@i: 0;
+	@increment: 180deg / 150;
+	.loop (@i) when (@i <= 150) {
+		&[data-progress="@{i}"] {
+			.circle {
+				.mask.full, .fill {
+					-webkit-transform: rotate(5+(@increment * @i/1.5));
+					-ms-transform: rotate(5+(@increment * @i/1.5));
+					transform: rotate(5+(@increment * @i/1.5));
+				}	
+				.fill.fix {
+					-webkit-transform: rotate(5+(@increment * (@i/1.5) * 2));
+					-ms-transform: rotate(5+(@increment * (@i/1.5) * 2));
+					transform: rotate(5+(@increment * (@i/1.5) * 2));
+				}
+			}
+			.inset .percentage .numbers {
+			    //+ @i/40 for fixing the strange missing at each 40 km/hs
+				width: (@i + @i/40) * @percentage-text-width + @percentage-text-width;
+			}
+		}
+		.loop(@i + 1);
+	}
+	.loop(@i);
+}
+    </style>
+</head>
+
+<body>
+
+    <div class="speedAlert">
+        
+    </div>
+    <div id="alert"></div>
+    <div class="radial-progress" data-progress="0">
+        <div class="circle">
+            <div class="mask full">
+                <div class="fill"></div>
+            </div>
+            <div class="mask half">
+                <div class="fill"></div>
+                <div class="fill fix"></div>
+            </div>
+            <div class="cutoff"></div>
+            <div class="shadow"></div>
+        </div>
+        <div class="inset">
+            <div class="percentage">
+                <div class="numbers">
+                    <span>-</span>
+                    <span>0 Km/H</span>
+                    <span>1 Km/H</span>
+                    <span>2 Km/H</span>
+                    <span>3 Km/H</span>
+                    <span>4 Km/H</span>
+                    <span>5 Km/H</span>
+                    <span>6 Km/H</span>
+                    <span>7 Km/H</span>
+                    <span>8 Km/H</span>
+                    <span>9 Km/H</span>
+                    <span>10 Km/H</span>
+                    <span>11 Km/H</span>
+                    <span>12 Km/H</span>
+                    <span>13 Km/H</span>
+                    <span>14 Km/H</span>
+                    <span>15 Km/H</span>
+                    <span>16 Km/H</span>
+                    <span>17 Km/H</span>
+                    <span>18 Km/H</span>
+                    <span>19 Km/H</span>
+                    <span>20 Km/H</span>
+                    <span>21 Km/H</span>
+                    <span>22 Km/H</span>
+                    <span>23 Km/H</span>
+                    <span>24 Km/H</span>
+                    <span>25 Km/H</span>
+                    <span>26 Km/H</span>
+                    <span>27 Km/H</span>
+                    <span>28 Km/H</span>
+                    <span>29 Km/H</span>
+                    <span>30 Km/H</span>
+                    <span>31 Km/H</span>
+                    <span>32 Km/H</span>
+                    <span>33 Km/H</span>
+                    <span>34 Km/H</span>
+                    <span>35 Km/H</span>
+                    <span>36 Km/H</span>
+                    <span>37 Km/H</span>
+                    <span>38 Km/H</span>
+                    <span>39 Km/H</span>
+                    <span>40 Km/H</span>
+                    <span>41 Km/H</span>
+                    <span>42 Km/H</span>
+                    <span>43 Km/H</span>
+                    <span>44 Km/H</span>
+                    <span>45 Km/H</span>
+                    <span>46 Km/H</span>
+                    <span>47 Km/H</span>
+                    <span>48 Km/H</span>
+                    <span>49 Km/H</span>
+                    <span>50 Km/H</span>
+                    <span>51 Km/H</span>
+                    <span>52 Km/H</span>
+                    <span>53 Km/H</span>
+                    <span>54 Km/H</span>
+                    <span>55 Km/H</span>
+                    <span>56 Km/H</span>
+                    <span>57 Km/H</span>
+                    <span>58 Km/H</span>
+                    <span>59 Km/H</span>
+                    <span>60 Km/H</span>
+                    <span>61 Km/H</span>
+                    <span>62 Km/H</span>
+                    <span>63 Km/H</span>
+                    <span>64 Km/H</span>
+                    <span>65 Km/H</span>
+                    <span>66 Km/H</span>
+                    <span>67 Km/H</span>
+                    <span>68 Km/H</span>
+                    <span>69 Km/H</span>
+                    <span>70 Km/H</span>
+                    <span>71 Km/H</span>
+                    <span>72 Km/H</span>
+                    <span>73 Km/H</span>
+                    <span>74 Km/H</span>
+                    <span>75 Km/H</span>
+                    <span>76 Km/H</span>
+                    <span>77 Km/H</span>
+                    <span>78 Km/H</span>
+                    <span>79 Km/H</span>
+                    <span>80 Km/H</span>
+                    <span>81 Km/H</span>
+                    <span>82 Km/H</span>
+                    <span>83 Km/H</span>
+                    <span>84 Km/H</span>
+                    <span>85 Km/H</span>
+                    <span>86 Km/H</span>
+                    <span>87 Km/H</span>
+                    <span>88 Km/H</span>
+                    <span>89 Km/H</span>
+                    <span>90 Km/H</span>
+                    <span>91 Km/H</span>
+                    <span>92 Km/H</span>
+                    <span>93 Km/H</span>
+                    <span>94 Km/H</span>
+                    <span>95 Km/H</span>
+                    <span>96 Km/H</span>
+                    <span>97 Km/H</span>
+                    <span>98 Km/H</span>
+                    <span>99 Km/H</span>
+                    <span>100 Km/H</span>
+                    <span>101 Km/H</span>
+                    <span>102 Km/H</span>
+                    <span>103 Km/H</span>
+                    <span>104 Km/H</span>
+                    <span>105 Km/H</span>
+                    <span>106 Km/H</span>
+                    <span>107 Km/H</span>
+                    <span>108 Km/H</span>
+                    <span>109 Km/H</span>
+                    <span>110 Km/H</span>
+                    <span>111 Km/H</span>
+                    <span>112 Km/H</span>
+                    <span>113 Km/H</span>
+                    <span>114 Km/H</span>
+                    <span>115 Km/H</span>
+                    <span>116 Km/H</span>
+                    <span>117 Km/H</span>
+                    <span>118 Km/H</span>
+                    <span>119 Km/H</span>
+                    <span>120 Km/H</span>
+                    <span>121 Km/H</span>
+                    <span>122 Km/H</span>
+                    <span>123 Km/H</span>
+                    <span>124 Km/H</span>
+                    <span>125 Km/H</span>
+                    <span>126 Km/H</span>
+                    <span>127 Km/H</span>
+                    <span>128 Km/H</span>
+                    <span>129 Km/H</span>
+                    <span>130 Km/H</span>
+                    <span>131 Km/H</span>
+                    <span>132 Km/H</span>
+                    <span>133 Km/H</span>
+                    <span>134 Km/H</span>
+                    <span>135 Km/H</span>
+                    <span>136 Km/H</span>
+                    <span>137 Km/H</span>
+                    <span>138 Km/H</span>
+                    <span>139 Km/H</span>
+                    <span>140 Km/H</span>
+                    <span>141 Km/H</span>
+                    <span>142 Km/H</span>
+                    <span>143 Km/H</span>
+                    <span>144 Km/H</span>
+                    <span>145 Km/H</span>
+                    <span>146 Km/H</span>
+                    <span>147 Km/H</span>
+                    <span>148 Km/H</span>
+                    <span>149 Km/H</span>
+                    <span>150 Km/H</span>
+                </div>
+                <div class="speedAllowed"></div>
+
+            </div>
+        </div></div>
+</body>
+
+</html>

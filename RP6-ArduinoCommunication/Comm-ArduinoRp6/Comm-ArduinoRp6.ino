@@ -11,7 +11,8 @@ byte byteToSend;
 void setup()
 {
   Wire.begin(42);                // join i2c bus with address #8
-  Wire.onRequest(requestEvent); // register event
+  Wire.onRequest(requestEvent); 
+   Wire.onReceive(receiveEvent);// register event
   Serial.begin(38400);
   // Start each software serial port
   portOne.begin(38400);
@@ -38,4 +39,15 @@ void requestEvent()
     Wire.write(byteToSend); // respond with message of 6 bytes
   }
   // as expected by master
+}
+
+void receiveEvent(int howMany)
+{
+  while (1 < Wire.available()) // loop through all but the last
+  {
+    char c = Wire.read(); // receive byte as a character
+    Serial.println(c);         // print the character
+  }
+  int x = Wire.read();    // receive byte as an integer
+  Serial.println(x);
 }
