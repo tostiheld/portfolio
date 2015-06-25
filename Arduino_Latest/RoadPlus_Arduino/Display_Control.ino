@@ -144,6 +144,13 @@ void UpdateSign()
         complete[i] = sign9[i];
       }
     }
+    else
+    {  
+      Serial.print(">Sign:InvalidParameterSpeed:;");
+      sign = false;
+      meta = "";
+      metaMessage = "";  
+    }
 
     if (Second == "0")
     {
@@ -214,6 +221,13 @@ void UpdateSign()
       {
         complete[i + 16] = sign9[i];
       }
+    }
+    else
+    {  
+      Serial.print(">Error:InvalidParameterSign:;");
+      sign = false;
+      meta = "";
+      metaMessage = "";
     }
     Display(complete);
   }

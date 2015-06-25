@@ -35,6 +35,7 @@ const int servoPin1 = A2;
 #define ONE_WIRE_BUS 11
 OneWire ourWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&ourWire);
+DeviceAddress Thermometer;
 
 //voor led matrix
 #include <Arduino.h>
@@ -149,14 +150,17 @@ void setup()
   pinMode(trigPin2, OUTPUT);
   pinMode(echoPin2, INPUT);
   
+  //open Serial Connection:
+  Serial.begin(19200);
+  
   //attach Servo To Pins:   
   Servo1.attach(servoPin1);
   
   //start Reading Sensor Data:
   sensors.begin();
-  
-  //open Serial Connection:
-  Serial.begin(19200);
+  sensors.getDeviceCount(); 
+  if (!sensors.getAddress(Thermometer, 0)) Serial.println("Unable to find address for Device 0");   
+  sensors.setResolution(Thermometer, 10);
 }
 
 void loop()
@@ -171,7 +175,7 @@ void loop()
     delayMicroseconds(102);
   }
   if (sonarOn)
-  {
+  {    
     GetDensity();
   }
 }

@@ -1,7 +1,7 @@
 //set constants:
-const int timeOutPulseRead = 5000;
-const int MaxDistance = 100.0;
-const int MinDistance = 15.0;
+const int timeOutPulseRead = 15000;
+const int MaxDistance = 40;
+const int MinDistance = 5;
 const int offsetServo1 = 20;
 
 //set variables:
@@ -11,8 +11,32 @@ int timesRead1;
 int timesRead2;
 int countObjects;
 int Positie = 55;
+
 boolean Richting;
 
+void TestConnection()
+{
+  float distance = 0;
+  int error = 0;
+  while(distance == 0 && error < 10)
+  {
+    delayMicroseconds(100);
+    digitalWrite(trigPin1, HIGH);
+    delayMicroseconds(100);
+    digitalWrite(trigPin1, LOW);
+    distance = (pulseIn(echoPin1, HIGH, 100000) / 2) / 29.1;    
+    error++;
+  }
+  if (error > 8)
+  {
+     Serial.print(">Ultrasonic:ErrorNotConnected:;");
+     sonarOn = false;
+  }
+  else
+  {
+    sonarOn = true;
+  }
+}
 void GetDensity()
 {
   //turn servo motors:
@@ -45,18 +69,12 @@ void GetDensity()
   Servo1.write(Positie + offsetServo1);
 
 
-  //Measure Distance Sensor 1
+  //Measure Distance Sensor
   digitalWrite(trigPin1, HIGH);
   delayMicroseconds(100);
   digitalWrite(trigPin1, LOW);
   float distance1 = (pulseIn(echoPin1, HIGH, timeOutPulseRead) / 2) / 29.1;
 
-  //Measure Distance Sensor 2
-  digitalWrite(trigPin2, HIGH);
-  delayMicroseconds(100);
-  digitalWrite(trigPin2, LOW);
-  float distance2 = (pulseIn(echoPin2, HIGH, timeOutPulseRead) / 2) / 29.1;
-  
   //wait if the message is recieved fast
   while ((stopwatch + 20) > millis());
   
@@ -66,33 +84,15 @@ void GetDensity()
     if (lastobject1 + 0.25 > distance1 &&  lastobject1 - 0.25 < distance1)
     {
       timesRead1++;
-      if (timesRead1 == 5)
+      if (timesRead1 == 3)
       {
         countObjects++;
-        timesRead1 = 0;
       }     
     }
     else
     {
       lastobject1 = distance1;
       timesRead1 = 0;
-    }
-  }
-  if (distance2 > MinDistance && distance2 < MaxDistance)
-  {
-    if (lastobject2 + 0.25 > distance2 &&  lastobject2 - 0.25 < distance2)
-    {
-      timesRead2++;
-      if (timesRead2 == 5)
-      {
-        countObjects++;
-        timesRead2 = 0;
-      }     
-    }
-    else
-    {
-      lastobject2 = distance2;
-      timesRead2 = 0;
     }
   }
 }

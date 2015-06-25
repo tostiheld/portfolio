@@ -15,8 +15,8 @@ void GetMessage()
     if (metaMessage.indexOf(':') > -1)
     {
       metaMessage = metaMessage.substring(0, metaMessage.indexOf(':'));
-    }
-    Serial.print(">Message:Recieved;");
+    }    
+    Serial.print(">Message:Received:;"); 
     message = "";
   }
 
@@ -24,7 +24,9 @@ void GetMessage()
   {
     if (metaMessage == "On")
     {
-      sonarOn = true;
+      TestConnection();      
+      meta = "";
+      metaMessage = "";
     }
     else if(metaMessage == "Off")
     {
@@ -32,9 +34,17 @@ void GetMessage()
     }
     else if(metaMessage == "Read")
     {
-      Serial.print(">Dens:");
-      Serial.print(density);
-      Serial.println(":;");      
+      if(sonarOn)
+      {
+        Serial.print(">Dens:");
+        Serial.print(density);
+        Serial.print(":;");
+      }
+      else
+      {
+        Serial.print(">Dens:ErrorSonarOff:;");
+      }
+          
     }
     meta = "";
   }
@@ -51,15 +61,19 @@ void GetMessage()
   //Discovery echo
   if (meta == "11")
   {
-
-    Serial.println(">ok:;");
+    Serial.print(">ok:;");
+    meta = "";
+  }
+  if (meta == "Discover")
+  {
+    Serial.print(">ok:;");
     meta = "";
   }
   //turn the sign On or Off
   if (meta == "15")
   {
     if (metaMessage == "Off")
-    {
+    { 
       sign = false;
     }
     else
