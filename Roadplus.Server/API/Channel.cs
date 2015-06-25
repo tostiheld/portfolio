@@ -44,25 +44,21 @@ namespace Roadplus.Server.API
             }
         }
 
-        /*
-        private void Broadcast(Response response)
+        private void Broadcast(IResponse response)
         {
             foreach (Link l in links)
             {
-                l.Send(MessageFormatter.Format(response));
+                l.Send(response);
             }
         }
 
-        private void Broadcast(Response response, LinkType destination)
+        private void Broadcast(IRequest request)
         {
             foreach (Link l in links)
             {
-                if (l.Type == destination)
-                {
-                    l.Send(MessageFormatter.Format(response));
-                }
+                l.Send(request);
             }
-        }*/
+        }
 
         protected void NewLink(Link link)
         {
