@@ -10,11 +10,6 @@ namespace Roadplus.Server.Communication.Http
 {
     public class HttpResponse
     {
-        private const string OkResponse = "HTTP/1.1 200 OK\r\n" +
-                                          "Content-Type: {0}\r\n" +
-                                          "Access-Control-Allow-Origin: *\r\n" +
-                                          "Content-Length: {1}\r\n\r\n";
-
         public int ContentLength 
         { 
             get
@@ -44,32 +39,6 @@ namespace Roadplus.Server.Communication.Http
             string extension = ".txt";
             byte[] content = Encoding.UTF8.GetBytes("Road+ HTTP service\n\n" + message);
             return new HttpResponse(content, extension);
-        }
-
-        public string Header()
-        {
-            return String.Format(
-                OkResponse,
-                ContentType,
-                ContentLength.ToString());
-        }
-
-        public byte[] ToByteArray()
-        {
-            byte[] header = Encoding.UTF8.GetBytes(Header());
-            byte[] response = new byte[header.Length + Content.Length];
-            Array.Copy(
-                header, 
-                response, 
-                header.Length);
-            Array.Copy(
-                Content, 
-                0,
-                response,
-                header.Length, 
-                Content.Length);
-
-            return response;
         }
     }
 }

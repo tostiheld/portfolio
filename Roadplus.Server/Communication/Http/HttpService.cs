@@ -88,6 +88,7 @@ namespace Roadplus.Server.Communication.Http
                                 byte[] buf = response.Content;
                                 ctx.Response.ContentType = response.ContentType;
                                 ctx.Response.ContentLength64 = buf.Length;
+                                ctx.Response.AppendHeader("Access-Control-Allow-Origin", "*");
                                 ctx.Response.OutputStream.Write(buf, 0, buf.Length);
                             }
                             catch 
