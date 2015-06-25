@@ -12,7 +12,7 @@ var parser = function (message, self) {
                 id: json.createdObject.zoneId,
                 name: json.createdObject.Name,
                 startVertexId: json.createdObject.StartVertexId,
-                radarVertexId: json.createdObject.RadarVertexId,
+                RadarVertex: json.createdObject.RadarVertexId,
                 arduinoPort: json.createdObject.ArduinoPort
             };
             self.Zones.addZone(newZone);
@@ -83,7 +83,7 @@ var parser = function (message, self) {
                     id: element.ZoneId,
                     name: element.Name,
                     startVertexId: element.StartVertexId,
-                    radarVertexId: element.RadarVertexId,
+                    RadarVertex: element.RadarVertexId,
                     arduinoPort: element.ArduinoPort
                 };
                 self.Zones.addZone(newZone);

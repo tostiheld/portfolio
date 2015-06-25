@@ -143,8 +143,8 @@ var ZoneModel = function (zones) {
             RoadConstructions: ko.observableArray(),
             Vertexes: ko.observableArray(),
             Edges: ko.observableArray(),
-            StartVertex: ko.observable(newZone.startVertex),
-            RadarVertex: ko.observable(newZone.radarVertex),
+            StartVertex: ko.observable(newZone.startVertexId),
+            RadarVertex: ko.observable(newZone.RadarVertex),
             Arduino: ko.observable(newZone.arduinoPort)
         };
 
@@ -206,8 +206,9 @@ var ZoneModel = function (zones) {
         window.Handler.MessageStringify.connectArduino($("input[name='id']", formElement).val(), $("select[name='arduinoPort']", formElement).val(),$("input[name='portVertexId']", formElement).val());
         
         var zone = self.findZoneByID($("input[name='id']", formElement).val());
-        zone.RadarVertex = $("input[name='portVertexId']", formElement).val();
-        zone.Arduino = $("select[name='arduinoPort']", formElement).val();
+        var index = self.zones.indexOf(zone);
+        self.zones()[index].RadarVertex($("input[name='portVertexId']", formElement).val());
+        self.zones()[index].Arduino($("select[name='arduinoPort']", formElement).val());
         
         
         //empty form

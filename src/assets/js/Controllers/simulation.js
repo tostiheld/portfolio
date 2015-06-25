@@ -259,10 +259,17 @@ AN.redrawLines = function () {
     if (activeVertexClicked) {
         AN.drawActiveVertex(activeVertexClicked.X, activeVertexClicked.Y);
     }
+    console.log(zone);
+    if(zone.RadarVertex() > 0){
+        console.log("radarVertex: " + zone.RadarVertex());
+        AN.drawRadar(zone.RadarVertex());
+    }
+    
     //DRAW ACTIVE EDGE
     if (activeEdgeClicked) {
         AN.drawActiveEdge(activeEdgeClicked);
     }
+    
 };
 
 //DRAW ROADCONSTRUCTION
@@ -293,6 +300,22 @@ AN.drawSchool = function (school) {
     canvas.beginPath();
     canvas.arc(vertex.X, vertex.Y, selectRadius*1.5, 0, 2 * Math.PI, false);
     canvas.fillStyle = '#E82C0C';
+    canvas.lineWidth = 5;
+    canvas.fill();
+    canvas.closePath();
+
+};
+
+//DRAW SCHOOL
+AN.drawRadar = function (radarVertex) {
+
+    var vertex = window.Handler.Zones.findVertexByID(radarVertex);
+    console.log("radarVertex:");
+    console.log(vertex);
+
+    canvas.beginPath();
+    canvas.arc(vertex.X, vertex.Y, selectRadius*1.5, 0, 2 * Math.PI, false);
+    canvas.fillStyle = 'rgba(94, 94, 96, 0.6)';
     canvas.lineWidth = 5;
     canvas.fill();
     canvas.closePath();
