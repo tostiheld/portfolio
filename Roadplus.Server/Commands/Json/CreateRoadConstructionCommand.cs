@@ -15,6 +15,7 @@ namespace Roadplus.Server.Commands.Json
     { 
         public string Name { get { return "createRoadconstruction"; } }
 
+        private const string NameKey = "name";
         private const string ZoneIdKey = "zoneId";
         private const string LocationKey = "location";
         private const string StartDateKey = "startDate";
@@ -54,6 +55,7 @@ namespace Roadplus.Server.Commands.Json
 
             RoadConstruction newRC = new RoadConstruction()
             {
+                    Name = o[NameKey].ToString(),
                     ZoneId = zoneId,
                     EdgeId = locationId,
                     DateStart = startDate,

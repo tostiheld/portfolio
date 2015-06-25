@@ -11,6 +11,9 @@ namespace Roadplus.Server.Data
         [PrimaryKey, Identity]
         public int RoadConstructionId { get; set; }
 
+        [Column("Name"), NotNull]
+        public string Name { get; set; }
+
         [Column("ZoneId"), NotNull]
         public int ZoneId { get; set; }
 
