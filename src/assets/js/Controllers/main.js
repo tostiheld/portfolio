@@ -114,6 +114,10 @@ $(document).ready(function () {
         activeEdgeClicked = false;
     });
     
+    $('#newSchoolModal').on('shown.bs.modal', function (e) {
+        $("select").trigger("change");
+    })
+    
     //
     // HANDLE KEY EVENTS OF CONSOLE
     //
