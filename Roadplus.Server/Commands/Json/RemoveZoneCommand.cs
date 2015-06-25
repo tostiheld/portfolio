@@ -28,6 +28,10 @@ namespace Roadplus.Server.Commands.Json
 
             RoadplusData data = new RoadplusData();
 
+            data.Schools.Where(
+                s => s.ZoneId == id).Delete();
+            data.RoadConstructions.Where(
+                rc => rc.ZoneId == id).Delete();
             data.Edges.Where(
                 e => e.ZoneId == id).Delete();
             data.Vertices.Where(
