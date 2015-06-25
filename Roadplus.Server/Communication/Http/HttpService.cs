@@ -82,7 +82,7 @@ namespace Roadplus.Server.Communication.Http
                                 }
                                 else
                                 {
-                                    response = HttpResponse.FromMessage("Not found");
+                                    response = HttpResponse.FromMessage("ERROR 404: Not found");
                                 }
 
                                 byte[] buf = response.Content;

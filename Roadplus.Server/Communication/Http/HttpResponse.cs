@@ -12,6 +12,7 @@ namespace Roadplus.Server.Communication.Http
     {
         private const string OkResponse = "HTTP/1.1 200 OK\r\n" +
                                           "Content-Type: {0}\r\n" +
+                                          "Access-Control-Allow-Origin: *\r\n" +
                                           "Content-Length: {1}\r\n\r\n";
 
         public int ContentLength 
@@ -41,7 +42,7 @@ namespace Roadplus.Server.Communication.Http
         public static HttpResponse FromMessage(string message)
         {
             string extension = ".txt";
-            byte[] content = Encoding.UTF8.GetBytes(message);
+            byte[] content = Encoding.UTF8.GetBytes("Road+ HTTP service\n\n" + message);
             return new HttpResponse(content, extension);
         }
 
