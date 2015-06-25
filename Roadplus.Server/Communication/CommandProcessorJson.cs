@@ -41,10 +41,19 @@ namespace Roadplus.Server.Communication
                 return new ResponseFailure(
                     o[CommandKey].ToString(), "Internal server error");
             }
-            catch (MySqlException)
+            catch (MySqlException ex)
             {
                 return new ResponseFailure(
-                    o[CommandKey].ToString(), "Error communicating with database");
+                    o[CommandKey].ToString(), "Error communicating with database " + ex.ErrorCode);
+            }
+            catch (NullReferenceException)
+            {
+                // if a key is not found we get a nullreferenceexception
+                return new ResponseFailure("unknown", "invalid JSON");
+            }
+            catch (Exception)
+            {
+                return new ResponseFailure("unknown", "general exception");
             }
         }
     }
