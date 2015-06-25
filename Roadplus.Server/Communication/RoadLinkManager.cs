@@ -48,12 +48,19 @@ namespace Roadplus.Server.Communication
 
                 foreach (string p in ports)
                 {
+                    foreach (Link l in Links)
+                    {
+                        if (p == l.Address)
+                        {
+                            continue;
+                        }
+                    }
+
                     SerialPort sp = new SerialPort(p, baudRate);
                     if (DetectRoadAt(sp))
                     {
                         RoadLink rl = new RoadLink(this, sp);
                         NewLink(rl);
-                        ZoneChecker checker = new ZoneChecker(rl, 10);
                     }
                     else
                     {

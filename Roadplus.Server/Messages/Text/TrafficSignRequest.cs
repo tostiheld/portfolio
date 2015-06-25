@@ -1,11 +1,23 @@
 ﻿using System;
 
+using Roadplus.Server.API;
+
 namespace Roadplus.Server.Messages.Text
 {
-    public class TrafficSignRequest
+    public class TrafficSignRequest : IRequest
     {
-        public TrafficSignRequest()
+        public string Command
         {
+            get
+            {
+                return "15";
+            }
+        }
+
+        public string[] Payload
+        {
+            get;
+            set;
         }
     }
 }

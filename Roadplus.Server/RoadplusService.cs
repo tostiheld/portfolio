@@ -15,6 +15,8 @@ namespace Roadplus.Server
 {
     public class RoadplusService
     {
+        public ZoneChecker Checker { get; set; }
+
         private WSSessionManager websocketService;
         private RoadLinkManager roadLinkService;
         private HttpService httpService;
@@ -45,19 +47,18 @@ namespace Roadplus.Server
                     settings.HttpRoot);
             }
 
-            CommandProcessorText processorText = new CommandProcessorText();
-            processorText.RegisteredCommands.AddRange(
-            new ICommand[]
-            {
-                new TemperatureMessage(Path.Combine(settings.HttpRoot, "data.json")),
-                    new DensityMessage(Path.Combine(settings.HttpRoot, "data.json"))
-            });
-
             roadLinkService = new RoadLinkManager(
-                processorText,
+                new CommandProcessorText(),
                 new TextFormatter(),
                 settings.BaudRate,
                 settings.RoadDetectTimeOut);
+
+            roadLinkService.CommandProcessor.RegisteredCommands.AddRange(
+            new ICommand[]
+            {
+                new TemperatureMessage(Path.Combine(settings.HttpRoot, "data.json")),
+                    new DensityMessage(Path.Combine(settings.HttpRoot, "data.json"), roadLinkService)
+            }); 
 
             channels.Add(roadLinkService);
 
@@ -78,7 +79,7 @@ namespace Roadplus.Server
                 new RemoveSchoolCommand(),
                 new RemoveRoadConstructionCommand(),
 
-                new ConnectRoadToZoneCommand(roadLinkService),
+                new ConnectRoadToZoneCommand(roadLinkService, this),
                 new GetConnectedRoadsCommand(roadLinkService),
 
                 new GetMapCommand()

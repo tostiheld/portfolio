@@ -21,15 +21,18 @@ namespace Roadplus.Server.Messages.Json
         private const string VertexIdKey = "vertexId";
 
         private RoadLinkManager Source;
+        private RoadplusService Service;
 
-        public ConnectRoadToZoneCommand(RoadLinkManager source)
+        public ConnectRoadToZoneCommand(RoadLinkManager source, RoadplusService service)
         {
-            if (source == null)
+            if (source == null ||
+                service == null)
             {
                 throw new ArgumentNullException();
             }
 
             Source = source;
+            Service = service;
         }
 
         public IResponse Execute(string payload)
@@ -76,7 +79,7 @@ namespace Roadplus.Server.Messages.Json
             if (link is RoadLink)
             {
                 RoadLink rlink = link as RoadLink;
-                ZoneChecker checker = new ZoneChecker(rlink, 5);
+                Service.Checker = new ZoneChecker(rlink, 5);
                 return new ConnectRoadToZoneResponse()
                 {
                     ZoneId = id,

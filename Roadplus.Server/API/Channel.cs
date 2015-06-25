@@ -17,8 +17,9 @@ namespace Roadplus.Server.API
 
         public IFormatter Formatter { get; private set; }
 
+        public CommandProcessor CommandProcessor { get; private set; }
+
         private List<Link> links;
-        private CommandProcessor commandProcessor;
 
         public Channel(CommandProcessor commandprocessor, IFormatter formatter)
         {
@@ -28,7 +29,7 @@ namespace Roadplus.Server.API
                 throw new ArgumentNullException();
             }
 
-            commandProcessor = commandprocessor;
+            CommandProcessor = commandprocessor;
             Formatter = formatter;
             links = new List<Link>();
         }
@@ -44,7 +45,7 @@ namespace Roadplus.Server.API
             }
         }
 
-        private void Broadcast(IResponse response)
+        public void Broadcast(IResponse response)
         {
             foreach (Link l in links)
             {
@@ -52,7 +53,7 @@ namespace Roadplus.Server.API
             }
         }
 
-        private void Broadcast(IRequest request)
+        public void Broadcast(IRequest request)
         {
             foreach (Link l in links)
             {
@@ -97,7 +98,7 @@ namespace Roadplus.Server.API
         {
             Trace.WriteLine("Received from " + from.Address + ": " + data);
 
-            IResponse response = commandProcessor.Process(data);
+            IResponse response = CommandProcessor.Process(data);
             from.Send(response);
         }
 

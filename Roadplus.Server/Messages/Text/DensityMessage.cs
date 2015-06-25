@@ -5,16 +5,25 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using Roadplus.Server.API;
+using Roadplus.Server.Communication;
 
 namespace Roadplus.Server.Messages.Text
 {
     public class DensityMessage : ICommand
     {
         private string JsonLocation;
+        private RoadLinkManager Roads;
 
-        public DensityMessage(string jsonlocation)
+        public DensityMessage(string jsonlocation, RoadLinkManager roads)
         {
+            if (jsonlocation == null ||
+                roads == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             JsonLocation = jsonlocation;
+            Roads = roads;
         }
 
         public IResponse Execute(string payload)
@@ -32,12 +41,22 @@ namespace Roadplus.Server.Messages.Text
                 }
 
                 JToken temp;
-                int maxSpeed = 100;
+                int MaxSpeed = 99;
+                string warning = "NoWarning";
+                TrafficSignRequest request = new TrafficSignRequest();
+                TrafficSignRequest warningrequest = new TrafficSignRequest();
 
                 if (density > 40)
                 {
-                    maxSpeed = 30;
+                    MaxSpeed = 30;
+                    warning = "Warning";
                 }
+
+                request.Payload = new string[]{ MaxSpeed.ToString() };
+                warningrequest.Payload = new string[]{ warning };
+
+                Roads.Broadcast(request);
+                Roads.Broadcast(warningrequest);
 
                 if (File.Exists(JsonLocation))
                 {
@@ -54,7 +73,7 @@ namespace Roadplus.Server.Messages.Text
                     json.Remove("maxspeed");
                 }
 
-                json.Add(new JProperty("maxspeed", maxSpeed));
+                json.Add(new JProperty("maxspeed", MaxSpeed));
                 File.WriteAllText(JsonLocation, json.ToString());
                 return null;
             }

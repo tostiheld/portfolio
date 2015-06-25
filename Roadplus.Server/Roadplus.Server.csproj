@@ -131,6 +131,7 @@
     <Compile Include="Messages\Text\TemperatureMessage.cs" />
     <Compile Include="Messages\Text\DistanceSensorOnCommand.cs" />
     <Compile Include="Messages\Text\DensityMessage.cs" />
+    <Compile Include="Messages\Text\TrafficSignRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
