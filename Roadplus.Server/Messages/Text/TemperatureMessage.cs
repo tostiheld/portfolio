@@ -63,8 +63,6 @@ namespace Roadplus.Server.Messages.Text
                 Console.WriteLine("Error while writing JSON: " + ex.Message);
                 return null;
             }
-
-            return null;
         }
 
     }

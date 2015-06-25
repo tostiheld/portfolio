@@ -9,7 +9,7 @@ namespace Roadplus.Server
     {
         public static void Main(string[] args)
         {
-            Settings settings = new Settings();
+            Settings settings = LoadSettings("settings.xml");
 
             ParseArguments(settings, args);
 
@@ -45,6 +45,25 @@ namespace Roadplus.Server
             Console.ReadKey();
         }
 
+        private static Settings LoadSettings(string settingslocation)
+        {
+            try
+            {
+                return Settings.Load(settingslocation);
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Invalid configuration");
+                return null;
+            }
+            catch (FileNotFoundException)
+            {
+                Settings newSettings = Settings.GetDefault();
+                newSettings.Save(settingslocation);
+                return newSettings;
+            }
+        }
+
         private static void ParseArguments(Settings settings, string[] args)
         {
             try
@@ -69,7 +88,7 @@ namespace Roadplus.Server
                             {
                                 throw new ArgumentException("Invalid IP");
                             }
-                            settings.IP = temp;
+                            settings.IP = ip;
                             break;
                         case "-wsport":
                             int wsport = Convert.ToInt32(args[i + 1]);

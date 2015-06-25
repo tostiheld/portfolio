@@ -32,6 +32,7 @@ namespace Roadplus.Server
                 Directory.CreateDirectory(settings.HttpRoot);
             }
 
+            IPAddress ip = IPAddress.Parse(settings.IP);
 
             channels = new List<Channel>();
 
@@ -39,7 +40,7 @@ namespace Roadplus.Server
             {
                 httpService = new HttpService(
                     new IPEndPoint(
-                    settings.IP,
+                    ip,
                     settings.HttpPort),
                     settings.HttpRoot);
             }
@@ -49,7 +50,7 @@ namespace Roadplus.Server
             new ICommand[]
             {
                 new TemperatureMessage(Path.Combine(settings.HttpRoot, "data.json")),
-                new DensityMessage()
+                    new DensityMessage(Path.Combine(settings.HttpRoot, "data.json"))
             });
 
             roadLinkService = new RoadLinkManager(
@@ -85,7 +86,7 @@ namespace Roadplus.Server
 
             websocketService = new WSSessionManager(
                 new IPEndPoint(
-                    settings.IP,
+                    ip,
                     settings.Port),
                 processorJson,
                 new JsonFormatter());

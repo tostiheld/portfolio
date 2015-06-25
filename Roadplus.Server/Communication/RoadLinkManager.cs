@@ -53,7 +53,7 @@ namespace Roadplus.Server.Communication
                     {
                         RoadLink rl = new RoadLink(this, sp);
                         NewLink(rl);
-                        ZoneChecker checker = new ZoneChecker(rl, 5);
+                        ZoneChecker checker = new ZoneChecker(rl, 10);
                     }
                     else
                     {
