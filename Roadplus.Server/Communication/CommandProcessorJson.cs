@@ -49,7 +49,7 @@ namespace Roadplus.Server.Communication
             catch (NullReferenceException)
             {
                 // if a key is not found we get a nullreferenceexception
-                return new ResponseFailure("unknown", "invalid JSON");
+                return new ResponseFailure("unknown", "JSON parse error");
             }
             catch (Exception)
             {
