@@ -31,7 +31,8 @@ EXTRAINCDIRS = $(RP6_LIB_PATH) $(RP6_LIB_PATH_OTHERS)
 #------------------------------------------------
 # Main Source file is _automatically_ added here:
 SRC = $(TARGET).c
-
+SRC += i2c.c
+SRC += driving.c
 SRC += $(RP6_LIB_PATH)/RP6base/RP6RobotBaseLib.c
 SRC += $(RP6_LIB_PATH)/RP6common/RP6uart.c
 #SRC += $(RP6_LIB_PATH)/RP6common/RP6I2CslaveTWI.c
