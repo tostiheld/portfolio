@@ -204,7 +204,12 @@ var ZoneModel = function (zones) {
     self.UIaddArduino = function (formElement) {
         // Send to server
         window.Handler.MessageStringify.connectArduino($("input[name='id']", formElement).val(), $("select[name='arduinoPort']", formElement).val(),$("input[name='portVertexId']", formElement).val());
-
+        
+        var zone = self.findZoneByID($("input[name='id']", formElement).val());
+        zone.RadarVertex = $("input[name='portVertexId']", formElement).val();
+        zone.Arduino = $("select[name='arduinoPort']", formElement).val();
+        
+        
         //empty form
         clearForm(formElement);
         //close popup
