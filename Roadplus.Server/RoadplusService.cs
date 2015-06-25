@@ -27,6 +27,11 @@ namespace Roadplus.Server
             {
                 throw new ArgumentNullException("settings");
             }
+            else if (!Directory.Exists(settings.HttpRoot))
+            {
+                Directory.CreateDirectory(settings.HttpRoot);
+            }
+
 
             channels = new List<Channel>();
 
@@ -43,7 +48,7 @@ namespace Roadplus.Server
             processorText.RegisteredCommands.AddRange(
             new ICommand[]
             {
-                new TemperatureMessage(),
+                new TemperatureMessage(Path.Combine(settings.HttpRoot, "data.json")),
                 new DensityMessage()
             });
 
