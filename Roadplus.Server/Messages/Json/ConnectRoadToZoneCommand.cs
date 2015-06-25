@@ -18,6 +18,7 @@ namespace Roadplus.Server.Messages.Json
 
         private const string ZoneIdKey = "zoneId";
         private const string PortNameKey = "roadPort";
+        private const string VertexIdKey = "vertexId";
 
         private RoadLinkManager Source;
 
@@ -36,8 +37,10 @@ namespace Roadplus.Server.Messages.Json
             JObject o = JsonConvert.DeserializeObject<JObject>(payload);
 
             int id;
+            int vertexId;
 
-            if (!Int32.TryParse(o[ZoneIdKey].ToString(), out id))
+            if (!Int32.TryParse(o[ZoneIdKey].ToString(), out id) ||
+                !Int32.TryParse(o[VertexIdKey].ToString(), out vertexId))
             {
                 return new ResponseFailure(Name, "Parse error");
             }
@@ -65,9 +68,9 @@ namespace Roadplus.Server.Messages.Json
             }
 
             target.ArduinoPort = o[PortNameKey].ToString();
+            target.RadarVertexId = vertexId;
 
-            // don't do this for now
-            //data.Update<Zone>(target);
+            data.Update<Zone>(target);
 
             Link link = Source.GetLinkByAddress(o[PortNameKey].ToString());
             if (link is RoadLink)
