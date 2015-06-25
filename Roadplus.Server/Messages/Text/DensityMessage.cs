@@ -23,6 +23,22 @@ namespace Roadplus.Server.Messages.Text
 
             try
             {
+                int density;
+                string strDensity = payload.Split(new char[] {':'}, StringSplitOptions.RemoveEmptyEntries)[0];
+
+                if (!Int32.TryParse(strDensity, out density))
+                {
+                    return null;
+                }
+
+                JToken temp;
+                int maxSpeed = 100;
+
+                if (density > 40)
+                {
+                    maxSpeed = 30;
+                }
+
                 if (File.Exists(JsonLocation))
                 {
                     json = JsonConvert.DeserializeObject<JObject>(
@@ -33,21 +49,12 @@ namespace Roadplus.Server.Messages.Text
                     json = new JObject();
                 }
 
-                JToken temp;
-                int density;
-                string strDensity = payload.Split(new char[] {':'}, StringSplitOptions.RemoveEmptyEntries)[0];
-
-                if (!Int32.TryParse(strDensity, out density))
+                if (json.TryGetValue("maxspeed", out temp))
                 {
-                    return null;
+                    json.Remove("maxspeed");
                 }
 
-                if (json.TryGetValue("density", out temp))
-                {
-                    json.Remove("density");
-                }
-
-                json.Add(new JProperty("density", density));
+                json.Add(new JProperty("maxspeed", maxSpeed));
                 File.WriteAllText(JsonLocation, json.ToString());
                 return null;
             }
