@@ -1,6 +1,7 @@
 void SendTemperature()
 {
-  double temperature = sensors.getTempC(Thermometer);
+  sensors.requestTemperatures();
+  float temperature = sensors.getTempCByIndex(0);
     if (temperature > -0.01 && temperature < 0.01)
   {
     Serial.print(">Sensor:Error_NotConnected;");

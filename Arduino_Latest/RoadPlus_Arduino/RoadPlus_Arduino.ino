@@ -160,7 +160,7 @@ void setup()
   sensors.begin();
   sensors.getDeviceCount(); 
   if (!sensors.getAddress(Thermometer, 0)) Serial.println("Unable to find address for Device 0");   
-  sensors.setResolution(Thermometer, 10);
+  sensors.setResolution(Thermometer, 9);
 }
 
 void loop()
