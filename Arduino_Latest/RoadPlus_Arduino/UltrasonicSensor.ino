@@ -1,5 +1,5 @@
 //set constants:
-const int timeOutPulseRead = 15000;
+//const int timeOutPulseRead = 15000;
 const int MaxDistance = 40;
 const int MinDistance = 5;
 const int offsetServo1 = 20;

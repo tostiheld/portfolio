@@ -176,7 +176,7 @@ void loop()
   }
   if (sonarOn)
   {    
-    GetDensity();
+    getDensity();
   }
 }
 

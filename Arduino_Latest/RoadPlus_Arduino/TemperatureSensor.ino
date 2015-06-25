@@ -8,8 +8,12 @@ void SendTemperature()
   }
   else
   {
-    String tempMessage = ">TEMP:" + (String)(temperature) + ":;";
-    Serial.print(tempMessage);
+    char tempStr[10];
+    dtostrf(temperature, 5, 2, tempStr);
+    
+    Serial.print(">TEMP:");
+    Serial.print(tempStr);
+    Serial.print(":;");
   }
   meta = "";
 }
