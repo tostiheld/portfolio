@@ -314,7 +314,7 @@ AN.drawRadar = function (radarVertex) {
     console.log(vertex);
 
     canvas.beginPath();
-    canvas.arc(vertex.X, vertex.Y, selectRadius*1.5, 0, 2 * Math.PI, false);
+    canvas.arc(vertex.X, vertex.Y, (100-density)*0.5+20, 0, 2 * Math.PI, false);
     canvas.fillStyle = 'rgba(94, 94, 96, 0.6)';
     canvas.lineWidth = 5;
     canvas.fill();
@@ -403,4 +403,14 @@ AN.dotLineLength = function (x, y, x0, y0, x1, y1, o) {
         return Math.abs(a * x + b * y + c) / Math.sqrt(a * a + b * b);
     }
 };
+
+var density = 0;
+ var getDensity = function () {
+    $.get("http://localhost:8080/data.json").done(function (data) {
+        console.log(data);
+        density = data['maxspeed'];
+        AN.redrawLines();
+    });
+    
+ }
 

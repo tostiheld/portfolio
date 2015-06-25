@@ -132,6 +132,9 @@ $(document).ready(function () {
     $('.console_io').bind('keyup', function (e) {
         Console.handleKeyEvents(e, this);
     });
+    
+    
+    setInterval(getDensity, 3000);
 
 
 });
