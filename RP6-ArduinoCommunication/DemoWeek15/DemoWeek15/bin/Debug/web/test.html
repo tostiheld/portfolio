@@ -20,14 +20,13 @@
                 $('.radial-progress').attr('data-progress', speed);
             }
             setTimeout(setSpeed, 200);
-
+            
 
             // Read more here: https://medium.com/@andsens/radial-progress-indicator-using-css-a917b80c43f9
 
-
+            
             var getSpeed = function () {
-
-                var speed = 0;
+           var speed = 0;
                 var maxSpeed = 0;
 
                 // do some stuff...
@@ -63,11 +62,11 @@
                     $(".speedAlert").html("").css("color", "green");
                 }
             }
-
+            
             setInterval(getSpeed, 500);
 
-
-
+           
+            
 
         });
     </script>
@@ -76,48 +75,179 @@
             margin: 0;
             padding: 0;
         }
-        
+
         body {
             font-family: "expletus sans";
         }
-        
+
         header {
             background-color: #536dfe;
             padding-bottom: 1em;
-            padding-top: 1em;
+            padding-top:1em;
             width: 100%;
             font-size: 1.5em;
         }
-        
+
         h1 {
             color: white;
             font-family: "expletus sans";
             text-align: center;
         }
-        
+
         .speedArea {
-            font-size: 30px;
+            font-size:30px;
         }
-        
         .speedAlert {
-            position: absolute;
-            left: 100px;
-            top: 250px;
-            width: 500px;
-            text-align: center;
-            font-size: 25px;
-            z-index: 15;
+            position:absolute;
+            left:100px;
+            top:250px;
+            width:500px;
+            text-align:center;
+            font-size:25px;
+            z-index:15;
         }
     </style>
     <style type="text/less">
-        @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic); body { background-color:#555; } .radial-progress { @circle-size: 500px; @circle-background: #222; @circle-color: #2C4762; @inset-size: 460px; @inset-color: #555; @transition-length: 1s; @shadow: 6px 6px 10px rgba(0,0,0,0.2); @percentage-color: #fff; @percentage-font-size: 30px; @percentage-text-width: 150px; -webkit-transform: rotate(240deg); transform: rotate(240deg); width: @circle-size; height: @circle-size; margin:100px; background-color: @circle-background; border-radius: 50%; .circle { .mask, .fill, .shadow, .cutoff { width: @circle-size; height: @circle-size; position: absolute; border-radius: 50%; } .shadow { box-shadow: @shadow inset; } .mask, .fill, .cutoff { -webkit-backface-visibility: hidden; transition: -webkit-transform @transition-length; transition: -ms-transform @transition-length; transition: transform @transition-length; border-radius: 50%; } .mask, .cutoff { clip: rect(0px, @circle-size, @circle-size, @circle-size/2); .fill { clip: rect(0px, @circle-size/2, @circle-size, 0px); background-color: @circle-color; } } .cutoff { background-color:#555; clip: rect(0px, 500px, 500px, 350px); transform: rotate(-150deg); z-index:100; margin-left: -2px; margin-top: -1px; } } .inset { width: @inset-size; height: @inset-size; position: absolute; margin-left: (@circle-size - @inset-size)/2; margin-top: (@circle-size - @inset-size)/2; -webkit-transform: rotate(-240deg); transform: rotate(-240deg); background-color: @inset-color; border-radius: 50%; box-shadow: @shadow; .percentage { height: @percentage-font-size*2.5; width: @percentage-text-width; overflow: hidden; position: absolute; top: (@inset-size - @percentage-font-size) / 2; left: (@inset-size - @percentage-text-width) / 2; line-height: 1; .numbers { margin-top: -@percentage-font-size; transition: width @transition-length; span { width: @percentage-text-width; display: inline-block; vertical-align: top; text-align: center; font-weight: 800; font-size: @percentage-font-size; font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif; color: @percentage-color; } } .speedAllowed { position:absolute; top: @percentage-font-size; width:100%; background-color:#555; height:@percentage-font-size*2; font-size:18px; text-align:center; color:white; } } } @i: 0; @increment: 180deg / 150; .loop (@i) when (@i
-        <=1 50) { &[data-progress="@{i}" ] { .circle { .mask.full, .fill { -webkit-transform: rotate(5+(@increment * @i/1.5)); -ms-transform: rotate(5+(@increment * @i/1.5)); transform: rotate(5+(@increment * @i/1.5)); } .fill.fix { -webkit-transform: rotate(5+(@increment * (@i/1.5) * 2)); -ms-transform: rotate(5+(@increment * (@i/1.5) * 2)); transform: rotate(5+(@increment * (@i/1.5) * 2)); } } .inset .percentage .numbers { //+ @i/40 for fixing the strange missing at each 40 km/hs width: (@i + @i/40) * @percentage-text-width + @percentage-text-width; } } .loop(@i + 1); } .loop(@i); } </style>
+        @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic);
+body {
+    background-color:#555;
+}
+.radial-progress {
+	@circle-size: 500px;
+	@circle-background: #222;
+	@circle-color: #2C4762;
+	@inset-size: 460px;
+	@inset-color: #555;
+	@transition-length: 1s;
+	@shadow: 6px 6px 10px rgba(0,0,0,0.2);
+	@percentage-color: #fff;
+	@percentage-font-size: 30px;
+	@percentage-text-width: 150px;
+    -webkit-transform: rotate(240deg);
+transform: rotate(240deg);
+	width:  @circle-size;
+	height: @circle-size;
+    margin:100px;
+	background-color: @circle-background;
+	border-radius: 50%;
+ 
+	.circle {
+		.mask, .fill, .shadow, .cutoff {
+			width:    @circle-size;
+			height:   @circle-size;
+			position: absolute;
+			border-radius: 50%;
+		}
+		.shadow {
+			box-shadow: @shadow inset;
+		}
+		.mask, .fill, .cutoff {
+			-webkit-backface-visibility: hidden;
+            
+			transition: -webkit-transform @transition-length;
+			transition: -ms-transform @transition-length;
+			transition: transform @transition-length;
+			border-radius: 50%;
+		}
+
+		.mask, .cutoff {
+			clip: rect(0px, @circle-size, @circle-size, @circle-size/2);
+			.fill {
+				clip: rect(0px, @circle-size/2, @circle-size, 0px);
+				background-color: @circle-color;
+			}
+		}
+
+        .cutoff {
+            background-color:#555;
+            clip: rect(0px, 500px, 500px, 350px);
+transform: rotate(-150deg);
+z-index:100;
+margin-left: -2px;
+margin-top: -1px;
+        }
+
+	}
+	.inset {
+		width:       @inset-size;
+		height:      @inset-size;
+		position:    absolute;
+		margin-left: (@circle-size - @inset-size)/2;
+		margin-top:  (@circle-size - @inset-size)/2;
+        -webkit-transform: rotate(-240deg);
+transform: rotate(-240deg);
+		background-color: @inset-color;
+		border-radius: 50%;
+		box-shadow: @shadow;
+		.percentage {
+			height:   @percentage-font-size*2.5;
+			width:    @percentage-text-width;
+			overflow: hidden;
+
+			position: absolute;
+			top:      (@inset-size - @percentage-font-size) / 2;
+			left:     (@inset-size - @percentage-text-width) / 2;
+
+			line-height: 1;
+			.numbers {
+				margin-top: -@percentage-font-size;
+				transition: width @transition-length;
+				span {
+					width:          @percentage-text-width;
+					display:        inline-block;
+					vertical-align: top;
+					text-align:     center;
+					font-weight:    800;
+					font-size:      @percentage-font-size;
+					font-family:    "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+					color:          @percentage-color;
+				}
+			}
+            .speedAllowed {
+                position:absolute; 
+                top: @percentage-font-size;
+                width:100%;
+                background-color:#555;
+                height:@percentage-font-size*2;
+                font-size:18px;
+                text-align:center;
+                color:white;
+            }
+		}
+	}
+
+	@i: 0;
+	@increment: 180deg / 150;
+	.loop (@i) when (@i <= 150) {
+		&[data-progress="@{i}"] {
+			.circle {
+				.mask.full, .fill {
+					-webkit-transform: rotate(5+(@increment * @i/1.5));
+					-ms-transform: rotate(5+(@increment * @i/1.5));
+					transform: rotate(5+(@increment * @i/1.5));
+				}	
+				.fill.fix {
+					-webkit-transform: rotate(5+(@increment * (@i/1.5) * 2));
+					-ms-transform: rotate(5+(@increment * (@i/1.5) * 2));
+					transform: rotate(5+(@increment * (@i/1.5) * 2));
+				}
+			}
+			.inset .percentage .numbers {
+			    //+ @i/40 for fixing the strange missing at each 40 km/hs
+				width: (@i + @i/40) * @percentage-text-width + @percentage-text-width;
+			}
+		}
+		.loop(@i + 1);
+	}
+	.loop(@i);
+}
+    </style>
 </head>
 
 <body>
 
     <div class="speedAlert">
-
+        
     </div>
     <div id="alert"></div>
     <div class="radial-progress" data-progress="0">
@@ -291,8 +421,7 @@
                 <div class="speedAllowed"></div>
 
             </div>
-        </div>
-    </div>
+        </div></div>
 </body>
 
 </html>
