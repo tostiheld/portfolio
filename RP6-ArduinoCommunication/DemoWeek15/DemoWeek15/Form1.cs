@@ -34,7 +34,7 @@ namespace DemoWeek15
         void CreateServer()
         {
             HttpListener listener = new HttpListener();
-            listener.Prefixes.Add("http://145.93.58.182:8085/");
+            listener.Prefixes.Add("http://localhost:8085/");
             listener.Start();
 
             new Thread(
@@ -212,8 +212,7 @@ namespace DemoWeek15
 
         private void FillSerialPortSelectionBoxWithAvailablePorts()
         {
-            String[] ports = SerialPort.GetPortNames();
-            Array.Sort(ports);
+			String[] ports = SerialPort.GetPortNames();
 
             serialPortSelectionBox.Items.Clear();
             foreach (String port in ports)
@@ -275,15 +274,14 @@ namespace DemoWeek15
 
         private void readMessageTimer_Tick(object sender, EventArgs e)
         {
+			
             if (serialPort.IsOpen
                 && serialPort.BytesToRead > 0)
             {
-                    String dataFromSocket = serialPort.ReadExisting();
-                    
-                    if (dataFromSocket != "")
-                     {
-                        MessageReceived(dataFromSocket);
-                     }
+                    //String dataFromSocket = serialPort.ReadExisting();
+				int data = serialPort.ReadByte();
+					
+				LblSpeed.Text = data.ToString ();
               }               
          }
 
