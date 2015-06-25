@@ -59,6 +59,7 @@ var MessageStringify = function(self){
         var json = {};
         json.command = "createRoadConstruction";
         json.zoneId = zoneID;
+        json.name = roadc.Name;
         json.location = roadc.location;
         json.startDate = roadc.DateStart;
         json.endDate = roadc.DateEnd;
@@ -77,12 +78,13 @@ var MessageStringify = function(self){
         self.send(JSON.stringify(json));
     };
 
-    this.connectArduino = function (zoneID, portName) {
+    this.connectArduino = function (zoneID, portName, vertexId) {
         //create json
         var json = {};
-        //        json.command = "removeRoadconstruction";
-        //        json.roadconstructionId = ;
-        //        json.payload.arduinoPort = portName;
+        json.command = "connectRoad";
+        json.zoneId = zoneID;
+        json.roadPort = portName;
+        json.vertexId = vertexId;
         //send json
         self.send(JSON.stringify(json));
     };

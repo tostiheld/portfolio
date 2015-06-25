@@ -203,7 +203,7 @@ var ZoneModel = function (zones) {
     //
     self.UIaddArduino = function (formElement) {
         // Send to server
-        window.Handler.MessageStringify.connectArduino($("input[name='id']", formElement).val(), $("select[name='arduinoPort']", formElement).val());
+        window.Handler.MessageStringify.connectArduino($("input[name='id']", formElement).val(), $("select[name='arduinoPort']", formElement).val(),$("input[name='portVertexId']", formElement).val());
 
         //empty form
         clearForm(formElement);
@@ -336,7 +336,7 @@ var ZoneModel = function (zones) {
         });
 
         //send to server
-        window.Handler.MessageStringify.removeZone(roadc.ID);
+        window.Handler.MessageStringify.removeRoadC(roadc.ID);
     };
 
     //

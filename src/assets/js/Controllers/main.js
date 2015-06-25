@@ -114,6 +114,14 @@ $(document).ready(function () {
         activeEdgeClicked = false;
     });
     
+    $('#portsModal').on('hidden.bs.modal', function () {
+        $("#canvas").appendTo(".canvas");
+        window.mode = "road";
+        window.activeVertexClicked = false;
+        AN.redrawLines();
+        activeEdgeClicked = false;
+    });
+    
     $('#newSchoolModal').on('shown.bs.modal', function (e) {
         $("select").trigger("change");
     })
@@ -129,9 +137,15 @@ $(document).ready(function () {
 });
 
 function selectPort(zone) {
-    window.Handler.send(">GET:ports:;");
+    var json = {};
+    json.command = "getRoads";
+    //send json
+    window.Handler.send(JSON.stringify(json));
     $('#portsModal').modal('show');
     $('#portsModal input[name="id"]').val(zone.ID);
+    $(".canvas_zoneID").val(zone.ID).trigger("change");
+    $("#canvas").appendTo("#portsForm");
+    window.mode = "selectVertex";
 }
 
 //This is a custom method to log messages.

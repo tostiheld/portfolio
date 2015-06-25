@@ -9,11 +9,11 @@ var parser = function (message, self) {
     switch(json.command.toLowerCase()) {
         case "createzone":
             var newZone = {
-                id: json.zoneId,
-                name: json.Name,
-                startVertexId: json.StartVertexId,
-                radarVertexId: json.RadarVertexId,
-                arduinoPort: json.ArduinoPort
+                id: json.createdObject.zoneId,
+                name: json.createdObject.Name,
+                startVertexId: json.createdObject.StartVertexId,
+                radarVertexId: json.createdObject.RadarVertexId,
+                arduinoPort: json.createdObject.ArduinoPort
             };
             self.Zones.addZone(newZone);
             break;
@@ -31,7 +31,7 @@ var parser = function (message, self) {
             break;
         case "createroadconstruction":
             var newRoadConstruction = {
-                ID: json.createdObject.SchoolId,
+                ID: json.createdObject.RoadConstructionId,
                 zoneID: json.createdObject.ZoneId,
                 Name: json.createdObject.Name,
                 VertexId: json.createdObject.VertexId,
@@ -95,9 +95,9 @@ var parser = function (message, self) {
                     ID: element.SchoolId,
                     zoneID: element.ZoneId,
                     Name: element.Name,
-                    EdgeId: element.EdgeId,
-                    DateStart: element.DateStart,
-                    DateEnd: element.DateEnd
+                    VertexId: element.VertexId,
+                    DateStart: element.OpenTime,
+                    DateEnd: element.CloseTime
                 };
                 self.Zones.addSchool(newSchool);
             });
@@ -109,8 +109,8 @@ var parser = function (message, self) {
                     zoneID: element.ZoneId,
                     Name: element.Name,
                     EdgeId: element.EdgeId,
-                    DateStart: element.OpenTime,
-                    DateEnd: element.CloseTime
+                    DateStart: element.DateStart,
+                    DateEnd: element.DateEnd
                 };
                 self.Zones.addRoadC(newRoadConstruction);
             });
@@ -131,6 +131,13 @@ var parser = function (message, self) {
                 
                 self.Zones.addEdge(element);
             });
+            break;
+        case "getroads":
+            self.Zones.availableArduinoPorts.removeAll();
+            json.ports.forEach(function(element, index){
+                self.Zones.availableArduinoPorts.push(element);
+            });
+            break;
     }
 };
 

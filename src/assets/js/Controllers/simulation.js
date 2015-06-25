@@ -73,9 +73,9 @@ AN.handleClick = function (e) {
         //VERTEX IS CLICKED --> ADD VERTEX ID TO HIDDEN INPUT FIELD
         //SO IT WILL BE SUBMITTED
         if (activeVertexClicked) {
-            $(".schoolVertexId").val(activeVertexClicked.vertexId);
+            $(".schoolVertexId, .portVertexId").val(activeVertexClicked.vertexId);
         } else {
-            $(".schoolVertexId").val("");
+            $(".schoolVertexId, .portVertexId").val("");
         }
         
         //REDRAW LINES SO VERTEX IS VISUALLY SELECTED
@@ -245,6 +245,11 @@ AN.redrawLines = function () {
     $.each(zone.RoadConstructions(), function (index, value) {
         AN.drawRoadConstruction(value);
     });
+    
+    //DRAW ROADCONSTRUCTION, ORANGE BACKGROUND
+    $.each(zone.Schools(), function (index, value) {
+        AN.drawSchool(value);
+    });
 
     //DRAW EDGES
     $.each(zone.Edges(), function (index, value) {
@@ -274,6 +279,22 @@ AN.drawRoadConstruction = function (roadConstruction) {
     canvas.lineWidth = 28;
     canvas.strokeStyle = '#FFA500';
     canvas.stroke();
+    canvas.closePath();
+
+};
+
+//DRAW SCHOOL
+AN.drawSchool = function (school) {
+
+    var vertex = window.Handler.Zones.findVertexByID(school.VertexId);
+    console.log("school:");
+    console.log(school);
+
+    canvas.beginPath();
+    canvas.arc(vertex.X, vertex.Y, selectRadius*1.5, 0, 2 * Math.PI, false);
+    canvas.fillStyle = '#E82C0C';
+    canvas.lineWidth = 5;
+    canvas.fill();
     canvas.closePath();
 
 };
