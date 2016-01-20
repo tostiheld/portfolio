@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<font>
+  <info face="Octin Stencil Rg" size="60" bold="0" italic="0" charset="" unicode="1" stretchH="100" smooth="1" aa="1" padding="3,3,3,3" spacing="0,0" outline="0"/>
+  <common lineHeight="61" base="48" scaleW="300" scaleH="45" pages="1" packed="0" alphaChnl="1" redChnl="0" greenChnl="0" blueChnl="0"/>
+  <pages>
+    <page id="0" file="octin-stencil-60_0.png" />
+  </pages>
+  <chars count="10">
+    <char id="48" x="0" y="0" width="30" height="41" xoffset="-1" yoffset="10" xadvance="28" page="0" chnl="15" />
+    <char id="49" x="262" y="0" width="20" height="41" xoffset="-1" yoffset="10" xadvance="17" page="0" chnl="15" />
+    <char id="50" x="60" y="0" width="29" height="41" xoffset="-1" yoffset="10" xadvance="27" page="0" chnl="15" />
+    <char id="51" x="89" y="0" width="29" height="41" xoffset="-1" yoffset="10" xadvance="27" page="0" chnl="15" />
+    <char id="52" x="30" y="0" width="30" height="41" xoffset="-2" yoffset="10" xadvance="26" page="0" chnl="15" />
+    <char id="53" x="118" y="0" width="29" height="41" xoffset="-1" yoffset="10" xadvance="27" page="0" chnl="15" />
+    <char id="54" x="147" y="0" width="29" height="41" xoffset="-1" yoffset="10" xadvance="27" page="0" chnl="15" />
+    <char id="55" x="234" y="0" width="28" height="41" xoffset="-2" yoffset="10" xadvance="24" page="0" chnl="15" />
+    <char id="56" x="176" y="0" width="29" height="41" xoffset="-1" yoffset="10" xadvance="27" page="0" chnl="15" />
+    <char id="57" x="205" y="0" width="29" height="41" xoffset="-1" yoffset="10" xadvance="27" page="0" chnl="15" />
+  </chars>
+  <kernings count="6">
+    <kerning first="55" second="52" amount="-4" />
+    <kerning first="49" second="55" amount="-4" />
+    <kerning first="49" second="53" amount="-3" />
+    <kerning first="49" second="52" amount="-3" />
+    <kerning first="49" second="50" amount="-2" />
+    <kerning first="49" second="49" amount="-2" />
+  </kernings>
+</font>
