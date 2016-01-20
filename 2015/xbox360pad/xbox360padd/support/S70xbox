@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# httpd service
+
+start() {
+	echo "Starting xbox360padd"
+	start-stop-daemon -S -q -p /var/run/xbox360padd.pid \
+		--exec /usr/bin/xbox360padd
+}
+
+stop() {
+	echo "Stopping xbox360padd"
+	start-stop-daemon -K -q -p /var/run/xbox360padd.pid
+	[ $? = 0 ] && echo "succes" || echo "failed"
+}
+
+restart() {
+	stop
+	start
+}
+
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  restart|reload)
+	restart
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
