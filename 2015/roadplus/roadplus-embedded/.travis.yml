@@ -1,0 +1,21 @@
+# let's fool travis a bit. haha!
+language: cpp
+compiler:
+ - gcc
+
+notifications:
+  email: false
+
+# required for arturo install
+sudo: required
+
+# install arturo build tool
+before_install:
+  # grab arduino 1.6.1 - best supported by arturo
+  - wget http://downloads.arduino.cc/arduino-1.6.1-linux64.tar.xz
+  - tar xf arduino-1.6.1-linux64.tar.xz
+  - git clone -b master https://github.com/scottdarch/Arturo.git
+  - cd Arturo && sudo make install && cd ..
+
+script:
+ - ./build.sh

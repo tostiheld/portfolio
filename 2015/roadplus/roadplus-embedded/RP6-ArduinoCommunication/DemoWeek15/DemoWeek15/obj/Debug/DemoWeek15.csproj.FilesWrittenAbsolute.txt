@@ -1,0 +1,8 @@
+/Users/stijnbuurman/Repositories/roadplus-embedded/RP6-ArduinoCommunication/DemoWeek15/DemoWeek15/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/stijnbuurman/Repositories/roadplus-embedded/RP6-ArduinoCommunication/DemoWeek15/DemoWeek15/obj/Debug/DemoWeek15.Form1.resources
+/Users/stijnbuurman/Repositories/roadplus-embedded/RP6-ArduinoCommunication/DemoWeek15/DemoWeek15/obj/Debug/DemoWeek15.Properties.Resources.resources
+/Users/stijnbuurman/Repositories/roadplus-embedded/RP6-ArduinoCommunication/DemoWeek15/DemoWeek15/bin/Debug/DemoWeek15.exe.config
+/Users/stijnbuurman/Repositories/roadplus-embedded/RP6-ArduinoCommunication/DemoWeek15/DemoWeek15/bin/Debug/DemoWeek15.exe.mdb
+/Users/stijnbuurman/Repositories/roadplus-embedded/RP6-ArduinoCommunication/DemoWeek15/DemoWeek15/bin/Debug/DemoWeek15.exe
+/Users/stijnbuurman/Repositories/roadplus-embedded/RP6-ArduinoCommunication/DemoWeek15/DemoWeek15/obj/Debug/DemoWeek15.exe
+/Users/stijnbuurman/Repositories/roadplus-embedded/RP6-ArduinoCommunication/DemoWeek15/DemoWeek15/obj/Debug/DemoWeek15.exe.mdb

@@ -1,0 +1,19 @@
+# avr-gcc (and normal gcc) temp files
+
+*.*~
+
+*.o
+*.lss
+*.lst
+*.map
+*.sym
+*.swp
+*.elf
+
+.dep
+
+*.exe
+*.hex
+
+# ano temp directory
+.build_ano/

@@ -1,0 +1,18 @@
+D:\github projects\t22-RoadPlus\roadplus\Road\Arduino C# Display\ArduinoRead\ArduinoRead\bin\Debug\ArduinoRead.exe.config
+D:\github projects\t22-RoadPlus\roadplus\Road\Arduino C# Display\ArduinoRead\ArduinoRead\bin\Debug\ArduinoRead.exe
+D:\github projects\t22-RoadPlus\roadplus\Road\Arduino C# Display\ArduinoRead\ArduinoRead\bin\Debug\ArduinoRead.pdb
+D:\github projects\t22-RoadPlus\roadplus\Road\Arduino C# Display\ArduinoRead\ArduinoRead\obj\Debug\ArduinoRead.csprojResolveAssemblyReference.cache
+D:\github projects\t22-RoadPlus\roadplus\Road\Arduino C# Display\ArduinoRead\ArduinoRead\obj\Debug\ArduinoRead.Form1.resources
+D:\github projects\t22-RoadPlus\roadplus\Road\Arduino C# Display\ArduinoRead\ArduinoRead\obj\Debug\ArduinoRead.Properties.Resources.resources
+D:\github projects\t22-RoadPlus\roadplus\Road\Arduino C# Display\ArduinoRead\ArduinoRead\obj\Debug\ArduinoRead.csproj.GenerateResource.Cache
+D:\github projects\t22-RoadPlus\roadplus\Road\Arduino C# Display\ArduinoRead\ArduinoRead\obj\Debug\ArduinoRead.exe
+D:\github projects\t22-RoadPlus\roadplus\Road\Arduino C# Display\ArduinoRead\ArduinoRead\obj\Debug\ArduinoRead.pdb
+C:\Users\Wout\Desktop\Arduino C# Display\ArduinoRead\ArduinoRead\bin\Debug\ArduinoRead.exe.config
+C:\Users\Wout\Desktop\Arduino C# Display\ArduinoRead\ArduinoRead\obj\Debug\ArduinoRead.exe
+C:\Users\Wout\Desktop\Arduino C# Display\ArduinoRead\ArduinoRead\obj\Debug\ArduinoRead.pdb
+C:\Users\Wout\Desktop\Arduino C# Display\ArduinoRead\ArduinoRead\bin\Debug\ArduinoRead.exe
+C:\Users\Wout\Desktop\Arduino C# Display\ArduinoRead\ArduinoRead\bin\Debug\ArduinoRead.pdb
+C:\Users\Wout\Desktop\Arduino C# Display\ArduinoRead\ArduinoRead\obj\Debug\ArduinoRead.csprojResolveAssemblyReference.cache
+C:\Users\Wout\Desktop\Arduino C# Display\ArduinoRead\ArduinoRead\obj\Debug\ArduinoRead.Form1.resources
+C:\Users\Wout\Desktop\Arduino C# Display\ArduinoRead\ArduinoRead\obj\Debug\ArduinoRead.Properties.Resources.resources
+C:\Users\Wout\Desktop\Arduino C# Display\ArduinoRead\ArduinoRead\obj\Debug\ArduinoRead.csproj.GenerateResource.Cache
