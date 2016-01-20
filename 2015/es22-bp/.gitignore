@@ -1,0 +1,14 @@
+*.*~
+
+*.o
+*.lss
+*.lst
+*.map
+*.sym
+*.swp
+*.elf
+
+.dep
+
+*.exe
+*.hex
