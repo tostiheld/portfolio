@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="RoadPlusContext">
+  <DataContextMoniker Name="/Main" />
+  <nestedChildShapes>
+    <classShape Id="84ed00ca-d1b6-4312-abbe-db53f08ac1c7" absoluteBounds="4.125, 0.75, 2, 1.9631982421875">
+      <DataClassMoniker Name="/Main/Edge" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ab834f90-1ea3-4767-afea-da4e4d797b0a" absoluteBounds="4.1400000000000006, 1.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="89f6ee40-8eb0-4cb2-b6fd-d3e842af3b56" absoluteBounds="6.5, 0.75, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/Main/RoadConstruction" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fc41fb0e-675c-4352-955f-26abfb0fb133" absoluteBounds="6.5150000000000006, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="efc11267-8dde-407d-adb9-65daa52eb813" absoluteBounds="0.625, 4.125, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/Main/School" />
+      <nestedChildShapes>
+        <elementListCompartment Id="07c35edc-d606-4090-9eb1-cd95a2253830" absoluteBounds="0.63999999999999968, 4.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d6ecc510-ef07-44b7-ae6b-a6d1ce0cfeb6" absoluteBounds="3.125, 4.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/Main/Vertex" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6532c82a-0ebe-41cc-afc2-fa3b9d241252" absoluteBounds="3.1400000000000006, 4.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ea7b8e50-fc42-4269-9697-9794cd0f0e83" absoluteBounds="0.75, 0.75, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/Main/Zone" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a6d54b27-c2b0-4f84-8397-243e7e347590" absoluteBounds="0.76499999999999968, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 0.751065379957933); (3.12606537995793 : 0.375); (6.1263612283153 : 0.375); (6.5013612283153 : 0.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/Main/Zone/Zone_RoadConstruction" />
+      <nodes>
+        <classShapeMoniker Id="ea7b8e50-fc42-4269-9697-9794cd0f0e83" />
+        <classShapeMoniker Id="89f6ee40-8eb0-4cb2-b6fd-d3e842af3b56" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 1.04166666666667); (4.125 : 1.04166666666667)]" fixedFrom="Caller" fixedTo="Algorithm">
+      <AssociationMoniker Name="/Main/Zone/Zone_Edge" />
+      <nodes>
+        <classShapeMoniker Id="ea7b8e50-fc42-4269-9697-9794cd0f0e83" />
+        <classShapeMoniker Id="84ed00ca-d1b6-4312-abbe-db53f08ac1c7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.00688135451399 : 2.1362939453125); (2.00688135451399 : 3.875); (3.32274567290329 : 3.875); (3.32274567290329 : 4.25)]" fixedFrom="Caller" fixedTo="Caller">
+      <AssociationMoniker Name="/Main/Zone/Zone_Vertex" />
+      <nodes>
+        <classShapeMoniker Id="ea7b8e50-fc42-4269-9697-9794cd0f0e83" />
+        <classShapeMoniker Id="d6ecc510-ef07-44b7-ae6b-a6d1ce0cfeb6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(0.828131120687827 : 2.1362939453125); (0.828131120687827 : 4.125)]" fixedFrom="Algorithm" fixedTo="Caller">
+      <AssociationMoniker Name="/Main/Zone/Zone_School" />
+      <nodes>
+        <classShapeMoniker Id="ea7b8e50-fc42-4269-9697-9794cd0f0e83" />
+        <classShapeMoniker Id="efc11267-8dde-407d-adb9-65daa52eb813" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.29107614005928 : 2.1362939453125); (2.29107614005928 : 3.625); (3.61458333333333 : 3.625); (3.61458333333333 : 4.25)]" fixedFrom="Caller" fixedTo="Caller">
+      <AssociationMoniker Name="/Main/Zone/Zone_Vertex1" />
+      <nodes>
+        <classShapeMoniker Id="ea7b8e50-fc42-4269-9697-9794cd0f0e83" />
+        <classShapeMoniker Id="d6ecc510-ef07-44b7-ae6b-a6d1ce0cfeb6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.60588407609377 : 2.1362939453125); (2.60588407609377 : 3.25); (3.87165652828525 : 3.25); (3.87165652828525 : 4.25)]" manuallyRouted="true" fixedFrom="Caller" fixedTo="Caller">
+      <AssociationMoniker Name="/Main/Zone/Zone_Vertex2" />
+      <nodes>
+        <classShapeMoniker Id="ea7b8e50-fc42-4269-9697-9794cd0f0e83" />
+        <classShapeMoniker Id="d6ecc510-ef07-44b7-ae6b-a6d1ce0cfeb6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.625 : 5.49644653320312); (3.125 : 5.49644653320312)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/Main/School/School_Vertex" />
+      <nodes>
+        <classShapeMoniker Id="efc11267-8dde-407d-adb9-65daa52eb813" />
+        <classShapeMoniker Id="d6ecc510-ef07-44b7-ae6b-a6d1ce0cfeb6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.5 : 1.63544840494792); (6.125 : 1.63544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/Main/RoadConstruction/RoadConstruction_Edge" />
+      <nodes>
+        <classShapeMoniker Id="89f6ee40-8eb0-4cb2-b6fd-d3e842af3b56" />
+        <classShapeMoniker Id="84ed00ca-d1b6-4312-abbe-db53f08ac1c7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.625 : 2.7131982421875); (4.625 : 4.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/Main/Edge/Edge_Vertex" />
+      <nodes>
+        <classShapeMoniker Id="84ed00ca-d1b6-4312-abbe-db53f08ac1c7" />
+        <classShapeMoniker Id="d6ecc510-ef07-44b7-ae6b-a6d1ce0cfeb6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.9375 : 2.7131982421875); (4.9375 : 4.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/Main/Edge/Edge_Vertex1" />
+      <nodes>
+        <classShapeMoniker Id="84ed00ca-d1b6-4312-abbe-db53f08ac1c7" />
+        <classShapeMoniker Id="d6ecc510-ef07-44b7-ae6b-a6d1ce0cfeb6" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
