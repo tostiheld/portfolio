@@ -1,0 +1,19 @@
+{
+    "name": "ServerGUI",
+    "version": "0.5.0",
+    "main": "index.html",
+    "window": {
+        "toolbar": false,
+        "frame": false,
+        "min_width": 960,
+        "min_height": 620,
+        "width": 1300,
+        "height": 800,
+        "resizable": true,
+        "show": true,
+        "position": "center"
+    },
+    "webkit": {
+        "plugin": true
+    }
+}

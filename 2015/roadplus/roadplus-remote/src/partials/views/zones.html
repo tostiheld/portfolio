@@ -1,0 +1,38 @@
+<div id="zones" class="view">
+    <h1>Zones</h1>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">All Zones
+            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#newZoneModal" style="float:right;margin-top: -4px;"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
+        </div>
+
+        <!-- Table -->
+        <table class="table" id="zoneTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Schools</th>
+                    <th>Road Constructions</th>
+                    <th>Vertexen</th>
+                    <th>Edges</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: zones">
+                <tr>
+                    <td data-bind='text: ID'></td>
+                    <td data-bind='text: Name'></td>
+                    <td data-bind='text: Schools().length'></td>
+                    <td data-bind='text: RoadConstructions().length'></td>
+                    <td data-bind='text: Vertexes().length'></td>
+                    <td data-bind='text: Edges().length'></td>
+                    <td><span data-bind="click: $root.UIremoveZone" class="remove glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        <span data-bind="click: window.selectPort.bind('ID'), css: { 'active' : Arduino }" class="addArduino glyphicon glyphicon-king" aria-hidden="true"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
