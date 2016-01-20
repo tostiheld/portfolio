@@ -1,6 +1,0 @@
-#!/bin/bash
-
-PATH=$PATH:/home/thomas/source/school/el32-buildroot/output/host/usr/bin/
-echo $PATH
-make clean
-make libxbox360pad-arm.so
